@@ -7,6 +7,30 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="ui attached stackable menu">
+  <div class="ui container">
+    <a class="item">
+      <i class="home icon"></i> 首页
+    </a>
+<!-- <a class="item">
+  <i class="grid layout icon"></i> Browse
+</a> -->
+    <a class="item">
+      <i class="mail icon"></i> 通知消息
+    </a>
+    <div class="ui simple dropdown item">
+      更多操作
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item"><i class="edit icon"></i> 个人资料</a>
+        <a class="item"><i class="settings icon"></i> 系统设置</a>
+      </div>
+    </div>
+    <div class="right item">
+      <div class="ui input"><input placeholder="Search..." type="text" /></div>
+    </div>
+  </div>
+</div>
 
 <%= yield %>
 
