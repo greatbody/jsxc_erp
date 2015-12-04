@@ -1,0 +1,50 @@
+<div class="ui segment">
+  <%= form_for(@student, url: intentions_path, method: :post, html: { class: "ui form" }) do |f| %>
+  <div class="field">
+    <%= f.label :name, "姓名" %>
+    <%= f.text_field :name, { placeholder: '请输入姓名' } %>
+  </div>
+  <div class="field">
+    <%= f.label :phone, "手机号" %>
+    <%= f.text_field :phone, { placeholder: '请输入11位手机号码' } %>
+  </div>
+  <div class="grouped fields">
+    <label>性别</label>
+    <% [['unknown', '未知'], ['female', '女'], ['male', '男']].reverse.each do |sex_item| %>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <% if sex_item.first == @student.sex || (sex_item.first == 1 && @student.sex == 'male' )%>
+        <input name="student[sex]" checked="checked" type="radio" id="student_sex_<%= sex_item.first %>" value="<%= sex_item.first %>" />
+        <label for="student_sex"><%= sex_item.last %></label>
+        <% else %>
+        <input name="student[sex]" type="radio" id="student_sex_<%= sex_item.first %>" value="<%= sex_item.first %>" />
+        <label for="student_sex"><%= sex_item.last %></label>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :id_card, "身份证号" %>
+    <%= f.text_field :id_card, { placeholder: '请输入身份证号' } %>
+  </div>
+  <div class="field">
+    <%= f.label :address, "联系地址" %>
+    <%= f.text_field :address, { placeholder: '联系地址' } %>
+  </div>
+  <div class="field">
+    <%= f.label :unit, "单位" %>
+    <%= f.text_field :unit, { placeholder: '单位' } %>
+  </div>
+  <div class="field">
+    <%= f.fields_for :intention do |pf| %>
+      <%= pf.label :source, "意向来源" %>
+      <%= pf.text_field :source, { placeholder: '请输入意向来源' } %>
+    <% end %>
+  </div>
+  <div class="div-btn">
+    <%= f.submit "保存意向", class: "ui primary button" %>
+  </div>
+  <% end %>
+
+</div>

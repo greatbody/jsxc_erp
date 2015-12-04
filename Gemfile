@@ -29,6 +29,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-passenger'
+  gem 'rails_admin', '~> 0.6.0'
 end
 
 group :test do
