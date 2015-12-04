@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204020718) do
+ActiveRecord::Schema.define(version: 20151204154854) do
 
   create_table "contact_logs", force: :cascade do |t|
     t.text     "contact_log",     limit: 65535
@@ -38,12 +38,12 @@ ActiveRecord::Schema.define(version: 20151204020718) do
   create_table "students", force: :cascade do |t|
     t.string   "phone",      limit: 255
     t.string   "name",       limit: 255
-    t.integer  "sex",        limit: 4
+    t.integer  "sex",        limit: 4,   default: 1
     t.string   "id_card",    limit: 255
     t.string   "address",    limit: 255
     t.string   "unit",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "users", force: :cascade do |t|
