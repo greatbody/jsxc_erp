@@ -11,7 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203090511) do
+ActiveRecord::Schema.define(version: 20151203155123) do
+
+  create_table "contact_logs", force: :cascade do |t|
+    t.text     "contact_log",     limit: 65535
+    t.integer  "contact_type",    limit: 4
+    t.integer  "current_status",  limit: 4
+    t.integer  "need_contact",    limit: 4
+    t.date     "next_contact_at"
+    t.integer  "student_id",      limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "contact_logs", ["student_id"], name: "index_contact_logs_on_student_id", using: :btree
+
+  create_table "intentions", force: :cascade do |t|
+    t.string   "source",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "student_id", limit: 4
+  end
+
+  add_index "intentions", ["student_id"], name: "index_intentions_on_student_id", using: :btree
+
+  create_table "students", force: :cascade do |t|
+    t.string   "phone",      limit: 255
+    t.string   "name",       limit: 255
+    t.integer  "sex",        limit: 4
+    t.string   "id_card",    limit: 255
+    t.string   "address",    limit: 255
+    t.string   "unit",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "phone",               limit: 255, default: "", null: false
@@ -29,4 +62,6 @@ ActiveRecord::Schema.define(version: 20151203090511) do
 
   add_index "users", ["phone"], name: "index_users_on_phone", unique: true, using: :btree
 
+  add_foreign_key "contact_logs", "students"
+  add_foreign_key "intentions", "students"
 end
