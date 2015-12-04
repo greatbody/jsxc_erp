@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203155123) do
+ActiveRecord::Schema.define(version: 20151204020718) do
 
   create_table "contact_logs", force: :cascade do |t|
     t.text     "contact_log",     limit: 65535
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20151203155123) do
     t.string   "last_sign_in_ip",     limit: 255
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+    t.string   "name",                limit: 255
   end
 
   add_index "users", ["phone"], name: "index_users_on_phone", unique: true, using: :btree
