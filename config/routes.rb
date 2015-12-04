@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  unless Rails.env == 'development'
-    mount RailsAdmin::Engine => '/20150612', as: 'rails_admin'
-  end
   devise_for :users
   root 'welcome#index'
 
