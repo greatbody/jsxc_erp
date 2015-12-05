@@ -1,6 +1,7 @@
 class IntentionsController < ApplicationController
   before_action :authenticate_user!
   def index
+    @intentions = Intention.all
   end
 
   def new
@@ -12,7 +13,7 @@ class IntentionsController < ApplicationController
     @student = Student.new(params_of_student)
     if @student.save
       respond_to do |format|
-        format.html { redirect_to root_path, notice: "Account created successfully." }
+        format.html { redirect_to intentions_path, notice: "Account created successfully." }
       end
     end
   end
