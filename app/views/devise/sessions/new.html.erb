@@ -1,3 +1,4 @@
+<% content_for :title, "登陆ERP" %>
 <div class="ui segment">
   <h2>登陆系统</h2>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -27,14 +28,11 @@
                 </div>
               </div>
             <% end -%>
-            <%= f.submit "Log in", { class: 'ui blue submit button' } %>
+            <%= f.submit "登陆", { class: 'ui blue submit button' } %>
           </div>
         </div>
       </div>
     </div>
   <% end %>
 </div>
-
-
-
 <%= render "devise/shared/links" %>
