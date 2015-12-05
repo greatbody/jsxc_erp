@@ -4,7 +4,7 @@ class IntentionsController < ApplicationController
   end
 
   def new
-    @student = Student.new
+    @student = current_user.students.build
     @student.build_intention
   end
 
@@ -25,7 +25,7 @@ class IntentionsController < ApplicationController
 
   private
   def params_of_student
-    params.require(:student).permit(:name, :sex, :phone, intention_attributes: [:source])
+    params.require(:student).permit(:name, :sex, :phone, :id_card, :address, :unit, intention_attributes: [:source])
   end
 
 end
