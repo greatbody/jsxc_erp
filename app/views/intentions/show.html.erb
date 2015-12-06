@@ -1,2 +1,39 @@
-<h1>Intentions#show</h1>
-<p>Find me in app/views/intentions/show.html.erb</p>
+<% content_for :title, "[#{@intention.student.name}]的学车意向 - 极速学车ERP系统" %>
+<div class="intention intention-detail">
+  <div class="padding-container">
+    <div class="ui raised text segment">
+      <div class="ui three column middle aligned very relaxed stackable grid">
+        <div class="column">
+          姓名：<%= @student.name %>
+        </div>
+        <div class="column">
+          性别：<%= t("sexs.#{@student.sex}") %>
+        </div>
+        <div class="column">
+          年龄：未实现功能
+        </div>
+      </div>
+      <div class="ui three column middle aligned very relaxed stackable grid">
+        <div class="column">
+          手机：<%= @student.phone %>
+        </div>
+        <div class="column">
+          身份证：<%= @student.id_card %>
+        </div>
+        <div class="column">
+          联系地址：<%= @student.address %>
+        </div>
+      </div>
+      <div class="ui three column middle aligned very relaxed stackable grid">
+        <div class="column">
+          单位：<%= @student.unit %>
+        </div>
+        <div class="column">
+          对接人：<%= @intention.user.name %>
+        </div>
+        <div class="column">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

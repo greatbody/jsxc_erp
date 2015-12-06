@@ -19,6 +19,9 @@ class IntentionsController < ApplicationController
   end
 
   def show
+    id = params[:id].to_i
+    @intention = Intention.find(id)
+    @student = @intention.student
   end
 
   def edit
