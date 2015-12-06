@@ -2,4 +2,10 @@ zh-CN:
   sexs:
     male: '汉子'
     female: '妹子'
-    unknown: '未知'
+    unknown: '鬼知道'
+  contact_types:
+    intent: '意向'
+    trylearn: '免费试学'
+    sign_up: '报名'
+    suggestion: '建议'
+    complaint: '投诉'
