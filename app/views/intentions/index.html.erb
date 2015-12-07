@@ -3,7 +3,9 @@
   <% @intentions.each do |intention| %>
   <div class="ui very raised text container segment intention-block">
     <div class="title">
+      <%= link_to intention_path(intention) do %>
       <h1 class="left"><%= intention.student.name %></h1>
+      <% end %>
       <span class="right"><%= t("sexs.#{intention.student.sex}") %></span>
     </div>
 
