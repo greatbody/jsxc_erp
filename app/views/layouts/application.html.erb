@@ -2,8 +2,8 @@
 <html>
 <head>
   <title><%= yield(:title) %></title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -24,6 +24,15 @@
       <div class="menu">
         <a class="item"><i class="edit icon"></i> 个人资料</a>
         <a class="item"><i class="settings icon"></i> 系统设置</a>
+        <% if user_signed_in? %>
+          <%= link_to(destroy_user_session_path, :method => :delete, class: 'item') do %>
+          <i class="sign out icon"></i> 退出登录
+          <% end %>
+        <% else %>
+          <%= link_to(new_user_session_path, class: 'item') do %>
+          <i class="sign in icon"></i> 登录
+          <% end %>
+        <% end %>
       </div>
     </div>
     <div class="right item">
