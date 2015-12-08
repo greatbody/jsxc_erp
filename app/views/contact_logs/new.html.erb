@@ -1,0 +1,49 @@
+<% content_for :title, "新的跟踪" %>
+<link rel="stylesheet" href="/assets/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/assets/datetimepicker/themes/classic.date.css" id="theme_date">
+<div class="ui segment">
+  <%= form_for(@contact_log, url: contact_logs_path, method: :post, html: { class: "ui form" }) do |f| %>
+
+  <div class="field">
+    <%= f.label :student, "学员" %>
+    <%= f.select :student, options_from_collection_for_select(Student.all, :id, :name, @contact_log.student.nil? ? 0 : @contact_log.student.id ), {}, class: "ui search selection dropdown" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_type, "联系类型" %>
+    <%= f.select :contact_type, options_for_select(ContactLog.contact_types_for_select, @contact_log.contact_type), {}, class: "ui dropdown" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_status, "当前状态" %>
+    <%= f.select :current_status, options_for_select(ContactLog.current_status_for_select, @contact_log.current_status), {}, class: "ui dropdown" %>
+  </div>
+
+  <div class="field">
+    <div class="ui toggle checkbox">
+      <%= f.check_box :need_contact %>
+      <%= f.label :need_contact, "需要联系" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :next_contact_at, "联系日期" %>
+    <%= f.text_field :next_contact_at, class: 'datepicker' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_log, "联系记录" %>
+    <%= f.text_area :contact_log, rows: 10, value: @contact_log.contact_log %>
+  </div>
+
+  <div class="div-btn">
+    <%= f.submit "保存联系记录", class: "ui primary button" %>
+  </div>
+  <% end %>
+
+</div>
+<script type="text/javascript">
+  $('.dropdown').dropdown();
+  $('.ui.checkbox').checkbox();
+  $('.datepicker').pickadate();
+</script>

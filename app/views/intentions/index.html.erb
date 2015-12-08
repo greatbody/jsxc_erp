@@ -1,2 +1,78 @@
-<h1>Intentions#index</h1>
-<p>Find me in app/views/intentions/index.html.erb</p>
+<% content_for :title, "意向列表 - 极速学车ERP系统" %>
+<div class="intention">
+  <div class="ui segment">
+    <button class="ui primary button all">全部</button>
+    <button class="ui basic button untouched">未联系</button>
+    <button class="ui basic button contacting">联系中</button>
+    <button class="ui basic button signed_up">已报名</button>
+  </div>
+  <div id="content-list">
+    <% @intentions.each do |intention| %>
+    <div class="ui very raised text container segment intention-block">
+      <div class="title">
+        <%= link_to intention_path(intention) do %>
+        <h1 class="left"><%= intention.student.name %></h1>
+        <% end %>
+        <span class="right"><%= t("sexs.#{intention.student.sex}") %></span>
+      </div>
+
+      <div class="relative">
+        <div class="ui two column middle aligned very relaxed stackable grid">
+          <div class="column">
+            <div>
+              电话：<%= intention.student.phone %>
+            </div>
+            <div>
+              联系地址：<%= intention.student.address %>
+            </div>
+            <div>
+              当前进度：<%= "#{'还没开始'}" %>
+            </div>
+          </div>
+          <div class="ui vertical divider">+</div>
+          <div class="center aligned column">
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.all').on('click', function() {
+    getIntentionByType('all', this);
+  });
+
+  $('.untouched').on('click', function() {
+    getIntentionByType('wait_call', this);
+  });
+
+  $('.contacting').on('click', function() {
+    getIntentionByType('contacting', this);
+  });
+
+  $('.signed_up').on('click', function() {
+    getIntentionByType('signed_up', this);
+  });
+</script>
+<script type="text/javascript">
+  function getIntentionByType(intentionType, btn) {
+    $.post('/intentions/get_intention_list', {
+      'current_status': intentionType
+    }).success(function(data) {
+      if (data.length > 0) {
+        $('#content-list').html(data);
+      } else {
+        $('#content-list').html('error');
+      }
+    }).error(function(data) {
+      $('#content-list').html('error');
+    });
+    $('.primary').each(function() {
+      $(this).removeClass('primary');
+      $(this).addClass('basic');
+    });
+    $(btn).removeClass('basic');
+    $(btn).addClass('primary');
+  }
+</script>

@@ -15,10 +15,6 @@ zh-CN:
       - :day
   time:
     am: '上午'
-    formats:
-      default: "%Y年%b%d日 %A %H:%M:%S %Z"
-      long: "%Y年%b%d日 %H:%M %Z"
-      short: "%b%d日 %H:%M"
     pm: '下午'
   datetime:
     distance_in_words:
@@ -49,6 +45,7 @@ zh-CN:
       object_not_found: '对象未找到'
       model_not_found: '表未找到'
       noaction: '没有执行操作'
+      successful: '保存成功'
     table_headers:
       model_name: '表名'
       last_used: '上次访问'
@@ -110,6 +107,10 @@ zh-CN:
         menu: '历史索引'
         breadcrumb: '历史索引'
         title: '历史索引'
+      history_show:
+        menu: '历史'
+        breadcrumb: '历史'
+        title: "%{model_label} 对象 '%{object_label}' 的历史"
       dashboard:
         title: "网站控制台"
         breadcrumb: "主面板索引"
@@ -128,5 +129,5 @@ zh-CN:
       student:
         unauthenticated: "继续操作前请注册或者登录."
     sessions:
-      admin:
+      user:
         signed_in: '已登录'

@@ -1,0 +1,26 @@
+@mixin sub-text {
+  font-size: 14px;
+  color: $sub-text-color;
+}
+
+@mixin error {
+  color: $red;
+  display: block;
+}
+
+@mixin price {
+  color: $orange;
+  font-size: 23px;
+}
+
+@mixin avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+
+@mixin line-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

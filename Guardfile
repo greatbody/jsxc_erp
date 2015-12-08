@@ -18,7 +18,7 @@
 guard 'livereload' do
   extensions = {
     css: :css,
-    scss: :css,
+    scss: :scss,
     sass: :css,
     js: :js,
     coffee: :js,

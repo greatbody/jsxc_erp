@@ -1,0 +1,13 @@
+<% next_contact_date = @intention.next_contact_at %>
+<% if next_contact_date.nil? %>
+<span class="padded-tag">请尽快联系</span>
+<% else %>
+  <% if next_contact_date < Time.now.to_date then %>
+  <span style="color: red;"><%= next_contact_date.to_s(:db) %></span>
+  <span class="padded-tag red">快联系啊</span>
+  <% elsif next_contact_date == Time.now.to_date then %>
+  <span style="color: green;"><%= next_contact_date.to_s(:db) %></span>
+  <% else %>
+  <%= next_contact_date.to_s(:db) %>
+  <% end %>
+<% end %>

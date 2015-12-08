@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require semantic
+//= require picker
+//= require picker.date
 //= require_tree .

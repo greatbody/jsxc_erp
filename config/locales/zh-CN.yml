@@ -1,0 +1,17 @@
+zh-CN:
+  sexs:
+    male: '汉子'
+    female: '妹子'
+    unknown: '鬼知道'
+  contact_types:
+    intent: '意向'
+    trylearn: '免费试学'
+    sign_up: '报名'
+    suggestion: '建议'
+    complaint: '投诉'
+  current_status:
+    wait_call: '待联系'
+    contacting: '联系中'
+    booking: '预约试学'
+    wait_pay: '等待付款'
+    signed_up: '已报名'

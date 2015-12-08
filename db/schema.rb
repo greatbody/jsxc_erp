@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204154854) do
+ActiveRecord::Schema.define(version: 20151208145043) do
 
   create_table "contact_logs", force: :cascade do |t|
     t.text     "contact_log",     limit: 65535
@@ -22,18 +22,24 @@ ActiveRecord::Schema.define(version: 20151204154854) do
     t.integer  "student_id",      limit: 4
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "user_id",         limit: 4
   end
 
   add_index "contact_logs", ["student_id"], name: "index_contact_logs_on_student_id", using: :btree
+  add_index "contact_logs", ["user_id"], name: "index_contact_logs_on_user_id", using: :btree
 
   create_table "intentions", force: :cascade do |t|
-    t.string   "source",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "student_id", limit: 4
+    t.string   "source",          limit: 255
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "student_id",      limit: 4
+    t.integer  "user_id",         limit: 4
+    t.integer  "current_status",  limit: 4,   default: 0
+    t.date     "next_contact_at"
   end
 
   add_index "intentions", ["student_id"], name: "index_intentions_on_student_id", using: :btree
+  add_index "intentions", ["user_id"], name: "index_intentions_on_user_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "phone",      limit: 255
@@ -44,7 +50,10 @@ ActiveRecord::Schema.define(version: 20151204154854) do
     t.string   "unit",       limit: 255
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "user_id",    limit: 4
   end
+
+  add_index "students", ["user_id"], name: "index_students_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "phone",               limit: 255, default: "", null: false
@@ -59,10 +68,16 @@ ActiveRecord::Schema.define(version: 20151204154854) do
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.string   "name",                limit: 255
+    t.integer  "intention_id",        limit: 4
   end
 
+  add_index "users", ["intention_id"], name: "index_users_on_intention_id", using: :btree
   add_index "users", ["phone"], name: "index_users_on_phone", unique: true, using: :btree
 
   add_foreign_key "contact_logs", "students"
+  add_foreign_key "contact_logs", "users"
   add_foreign_key "intentions", "students"
+  add_foreign_key "intentions", "users"
+  add_foreign_key "students", "users"
+  add_foreign_key "users", "intentions"
 end
