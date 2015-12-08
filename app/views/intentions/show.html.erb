@@ -15,7 +15,7 @@
       </div>
       <div class="ui three column middle aligned very relaxed stackable grid">
         <div class="column">
-          手机：<%= @student.phone %>
+          手机：<%= PhoneExt.format_phone(@student.phone) %>
         </div>
         <div class="column">
           身份证：<%= @student.id_card %>
@@ -32,6 +32,7 @@
           对接人：<%= @intention.user.name %>
         </div>
         <div class="column">
+          下次联系：<%= render partial: 'show_next_contact_date' %>
         </div>
       </div>
     </div>
@@ -44,6 +45,7 @@
           <col style="width: 100px;" />
           <col style="width: 130px;" />
           <col style="width: 130px;" />
+          <col style="width: 130px;" />
           <col />
         </colgroup>
         <thead>
@@ -51,24 +53,47 @@
             <th>日期</th>
             <th>处理人</th>
             <th>类型</th>
+            <th>下次联系</th>
             <th>详情</th>
           </tr>
         </thead>
         <tbody>
+          <% @contact_logs.each do |contact_log| %>
+          <%
+            created_at_date = contact_log.created_at.to_date
+            next_contact_at = contact_log.next_contact_at
+          %>
           <tr>
             <td>
-              2015-11-11
+              <%= created_at_date.to_s(:db) %>
             </td>
-            <td>孙瑞</td>
-            <td>投诉</td>
             <td>
-              <i class="chevron down icon" style="border: solid 1px #ccc;width: 30px;height: 20px;cursor: pointer;float: right;"></i><p style="white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;width: 500px">为什么现在还不给我们安排考试？我们都等了这么了。为什么现在还不给我们安排考试？我们都等了这么久了为什么现在还不给我们安排考试？我们都等了这么久了为什么现在还不给我们安排考试？我们都等了这么久了</p>
+              <%= contact_log.user.name %>
+            </td>
+            <td>
+              <%= I18n.t("contact_types.#{contact_log.contact_type}") %>
+            </td>
+            <% if next_contact_at == 0 then %>
+              <td>不需要</td>
+            <% else %>
+              <% if next_contact_at.nil? %>
+              <td>-</td>
+              <% else %>
+              <td><%= next_contact_at.to_date.to_s(:db) %></td>
+              <% end %>
+            <% end %>
+            <td>
+              <i class="chevron down icon" style="border: solid 1px #ccc;width: 30px;height: 20px;cursor: pointer;float: right;"></i>
+              <p style="white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;width: 500px">
+              <%= contact_log.contact_log %>
+              </p>
             </td>
           </tr>
+          <% end %>
         </tbody>
         <tfoot>
           <tr>
-            <th colspan="4">
+            <th colspan="5">
               <div class="ui right floated pagination menu">
                 <a class="icon item">
                   <i class="left chevron icon"></i>
