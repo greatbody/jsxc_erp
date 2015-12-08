@@ -1,4 +1,5 @@
 class IntentionsController < ApplicationController
+  require 'phone_ext'
   before_action :authenticate_user!
   def index
     @intentions = Intention.all
@@ -22,6 +23,7 @@ class IntentionsController < ApplicationController
     id = params[:id].to_i
     @intention = Intention.find(id)
     @student = @intention.student
+    @contact_logs = @student.contact_logs.order(created_at: :desc)
   end
 
   def edit
