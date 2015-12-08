@@ -2,7 +2,7 @@ class IntentionsController < ApplicationController
   require 'phone_ext'
   before_action :authenticate_user!
   def index
-    @intentions = Intention.all
+    @intentions = Intention.all.order(next_contact_at: :desc)
   end
 
   def new
