@@ -12,6 +12,26 @@
   &.intention-detail {
     .padding-container {
       padding: 10px;
+
+      .padded-tag {
+        padding: 3px;
+        border: solid 1px #ccc;
+        border-radius: 5px;
+        color: #FFF;
+        background-color: #469DF6;
+
+        &.red {
+          background-color: red;
+        }
+
+        &.blue {
+          background-color: $blue;
+        }
+
+        &.green {
+          background-color: $green;
+        }
+      }
     }
   }
 }
