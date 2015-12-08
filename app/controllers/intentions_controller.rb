@@ -40,6 +40,7 @@ class IntentionsController < ApplicationController
     when 'signed_up'
       @intentions = Intention.signed_up
     end
+    @intentions = @intentions.order(next_contact_at: :desc)
     render '_index_intention_list', layout: false
   end
 
