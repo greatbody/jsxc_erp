@@ -54,3 +54,5 @@ gem 'paperclip'
 gem 'kaminari'
 
 gem 'semantic-ui-sass'
+
+gem 'rails_admin', '~> 0.6.0'
