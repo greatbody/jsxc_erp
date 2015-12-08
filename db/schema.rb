@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206054701) do
+ActiveRecord::Schema.define(version: 20151208134224) do
 
   create_table "contact_logs", force: :cascade do |t|
     t.text     "contact_log",     limit: 65535
@@ -29,11 +29,12 @@ ActiveRecord::Schema.define(version: 20151206054701) do
   add_index "contact_logs", ["user_id"], name: "index_contact_logs_on_user_id", using: :btree
 
   create_table "intentions", force: :cascade do |t|
-    t.string   "source",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "student_id", limit: 4
-    t.integer  "user_id",    limit: 4
+    t.string   "source",         limit: 255
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "student_id",     limit: 4
+    t.integer  "user_id",        limit: 4
+    t.integer  "current_status", limit: 4,   default: 0
   end
 
   add_index "intentions", ["student_id"], name: "index_intentions_on_student_id", using: :btree
