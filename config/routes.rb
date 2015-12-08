@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
   resources :contact_logs
 
-  resources :intentions
+  resources :intentions do
+    collection do
+      post 'get_intention_list' => :get_intention_list
+    end
+  end
 
   resources :students
 
