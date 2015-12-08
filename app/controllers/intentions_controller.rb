@@ -11,7 +11,8 @@ class IntentionsController < ApplicationController
   end
 
   def create
-    @student = Student.new(params_of_student)
+    @student = current_user.students.build(params_of_student)
+    @student.intention.user = @student.user
     if @student.save
       respond_to do |format|
         format.html { redirect_to intentions_path, notice: "Account created successfully." }
@@ -24,6 +25,22 @@ class IntentionsController < ApplicationController
     @intention = Intention.find(id)
     @student = @intention.student
     @contact_logs = @student.contact_logs.order(created_at: :desc)
+  end
+
+  def get_intention_list
+    current_status = params[:current_status]
+    @intentions = Intention.all
+    case current_status.downcase
+    when 'all'
+      @intentions = Intention.all
+    when 'wait_call'
+      @intentions = Intention.wait_call
+    when 'contacting'
+      @intentions = Intention.contacting
+    when 'signed_up'
+      @intentions = Intention.signed_up
+    end
+    render '_index_intention_list', layout: false
   end
 
   def edit
