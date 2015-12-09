@@ -46,6 +46,58 @@
   <div class="div-btn">
     <%= f.submit "保存意向", class: "ui primary button" %>
   </div>
+  <div class="ui error message">
+  </div>
   <% end %>
 
 </div>
+<script type="text/javascript">
+  $('.ui.form')
+    .form({
+      fields: {
+        name: {
+          identifier: 'student_name',
+          rules: [{
+            type: 'empty',
+            prompt: '请输入姓名'
+          }]
+        },
+        phone: {
+          identifier: 'student_phone',
+          rules: [{
+            type: 'exactLength[11]',
+            prompt: '请输入11位手机号码'
+          }]
+        },
+        id_card: {
+          identifier: 'student_id_card',
+          optional: true,
+          rules: [{
+            type: 'exactLength[18]',
+            prompt: '请输入18位身份证号码'
+          }]
+        },
+        student_intention_source: {
+          identifier: 'student_intention_attributes_source',
+          rules: [{
+            type: 'maxLength[255]',
+            prompt: '超出限定长度，只允许输入255个字符！'
+          }]
+        },
+        address: {
+          identifier: 'student_address',
+          rules: [{
+            type: 'maxLength[255]',
+            prompt: '超出限定长度，只允许输入255个字符！'
+          }]
+        },
+        unit: {
+          identifier: 'student_unit',
+          rules: [{
+            type: 'maxLength[255]',
+            prompt: '超出限定长度，只允许输入255个字符！'
+          }]
+        }
+      }
+    });
+</script>
