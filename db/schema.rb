@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208145043) do
+ActiveRecord::Schema.define(version: 20151209050044) do
 
   create_table "contact_logs", force: :cascade do |t|
     t.text     "contact_log",     limit: 65535
@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(version: 20151208145043) do
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.integer  "student_id",      limit: 4
-    t.integer  "user_id",         limit: 4
     t.integer  "current_status",  limit: 4,   default: 0
     t.date     "next_contact_at"
+    t.integer  "user_id",         limit: 4
   end
 
   add_index "intentions", ["student_id"], name: "index_intentions_on_student_id", using: :btree
@@ -68,10 +68,8 @@ ActiveRecord::Schema.define(version: 20151208145043) do
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.string   "name",                limit: 255
-    t.integer  "intention_id",        limit: 4
   end
 
-  add_index "users", ["intention_id"], name: "index_users_on_intention_id", using: :btree
   add_index "users", ["phone"], name: "index_users_on_phone", unique: true, using: :btree
 
   add_foreign_key "contact_logs", "students"
@@ -79,5 +77,4 @@ ActiveRecord::Schema.define(version: 20151208145043) do
   add_foreign_key "intentions", "students"
   add_foreign_key "intentions", "users"
   add_foreign_key "students", "users"
-  add_foreign_key "users", "intentions"
 end
