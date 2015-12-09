@@ -47,3 +47,53 @@
   $('.ui.checkbox').checkbox();
   $('.datepicker').pickadate();
 </script>
+<script type="text/javascript">
+  $('.ui.form').form({
+    fields: {
+      student: {
+        identifier: 'contact_log_student',
+        rules: [{
+          type: 'empty',
+          prompt: '请选择学员'
+        }]
+      },
+      contact_type: {
+        identifier: 'contact_log_contact_type',
+        rules: [{
+          type: 'empty',
+          prompt: '请选择联系类型'
+        }]
+      },
+      current_status: {
+        identifier: 'contact_log_current_status',
+        optional: true,
+        rules: [{
+          type: 'empty',
+          prompt: '请选择当前的状态'
+        }]
+      },
+      need_contact: {
+        identifier: 'contact_log_need_contact',
+        rules: [{
+          type: 'empty',
+          prompt: '请确定是否需要再出联系'
+        }]
+      },
+      next_contact_at: {
+        identifier: 'contact_log_next_contact_at',
+        optional: true,
+        rules: [{
+          type: 'regExp[/^\\d{4}-(0[1-9]|1[0-2])-\\d{1,2}$/]',
+          prompt: '请输入正确的日期'
+        }]
+      },
+      unit: {
+        identifier: 'student_unit',
+        rules: [{
+          type: 'maxLength[255]',
+          prompt: '超出限定长度，只允许输入255个字符！'
+        }]
+      }
+    }
+  });
+</script>
