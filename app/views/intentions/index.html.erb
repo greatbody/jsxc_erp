@@ -2,48 +2,23 @@
 <div class="intention">
   <div class="ui segment">
     <button class="ui primary button all">全部</button>
-    <button class="ui basic button untouched">未联系</button>
+    <button class="ui basic button wait_call">未联系</button>
     <button class="ui basic button contacting">联系中</button>
+    <button class="ui basic button booking">预约试学</button>
+    <button class="ui basic button wait_pay">预约试学</button>
     <button class="ui basic button signed_up">已报名</button>
   </div>
   <div id="content-list">
-    <% @intentions.each do |intention| %>
-    <div class="ui very raised text container segment intention-block">
-      <div class="title">
-        <%= link_to intention_path(intention) do %>
-        <h1 class="left"><%= intention.student.name %></h1>
-        <% end %>
-        <span class="right"><%= t("sexs.#{intention.student.sex}") %></span>
-      </div>
-
-      <div class="relative">
-        <div class="ui two column middle aligned very relaxed stackable grid">
-          <div class="column">
-            <div>
-              电话：<%= intention.student.phone %>
-            </div>
-            <div>
-              联系地址：<%= intention.student.address %>
-            </div>
-            <div>
-              当前进度：<%= "#{'还没开始'}" %>
-            </div>
-          </div>
-          <div class="ui vertical divider">+</div>
-          <div class="center aligned column">
-          </div>
-        </div>
-      </div>
-    </div>
-    <% end %>
+    <%= render partial: 'index_intention_list' %>
   </div>
 </div>
+<!-- javascript code -->
 <script type="text/javascript">
   $('.all').on('click', function() {
     getIntentionByType('all', this);
   });
 
-  $('.untouched').on('click', function() {
+  $('.wait_call').on('click', function() {
     getIntentionByType('wait_call', this);
   });
 
@@ -51,11 +26,29 @@
     getIntentionByType('contacting', this);
   });
 
+  $('.booking').on('click', function() {
+    getIntentionByType('booking', this);
+  });
+
+  $('.wait_pay').on('click', function() {
+    getIntentionByType('wait_pay', this);
+  });
+
   $('.signed_up').on('click', function() {
     getIntentionByType('signed_up', this);
   });
-</script>
-<script type="text/javascript">
+
+  (function() {
+    var touch = getURLParameter('touch');
+    console.log(touch);
+    console.log(typeof touch);
+    var btn = $('.' + touch)[0];
+    if (!btn) {
+      return;
+    }
+    getIntentionByType(touch, btn);
+  })();
+
   function getIntentionByType(intentionType, btn) {
     $.post('/intentions/get_intention_list', {
       'current_status': intentionType
@@ -74,5 +67,16 @@
     });
     $(btn).removeClass('basic');
     $(btn).addClass('primary');
+  }
+
+  function getURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+      var sParameterName = sURLVariables[i].split('=');
+      if (sParameterName[0] == sParam) {
+        return sParameterName[1];
+      }
+    }
   }
 </script>
