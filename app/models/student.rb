@@ -7,6 +7,8 @@ class Student < ActiveRecord::Base
   validates :address, length: { maximum: 255, message: '地址超出长度限制' }
   validates :unit, length: { maximum: 255, message: '单位名称超出长度限制' }
 
+  scope :normal, -> { joins(:intention).where(intentions: { current_status: 0 }) }
+
   belongs_to :user
   has_one :intention
   has_many :contact_logs
