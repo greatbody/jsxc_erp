@@ -15,3 +15,10 @@ zh-CN:
     booking: '预约试学'
     wait_pay: '等待付款'
     signed_up: '已报名'
+    canceled: '已关闭'
+  application:
+    menus:
+      wait_call: '未联系'
+      contacting: '联系中'
+      booking: '预约试学'
+      wait_pay: '等待付款'

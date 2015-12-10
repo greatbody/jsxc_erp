@@ -11,17 +11,18 @@
     <div class="ui two column middle aligned very relaxed stackable grid">
       <div class="column">
         <div>
-          电话：<%= intention.student.phone %>
+          电话：<%= PhoneExt.format_phone(intention.student.phone) %>
         </div>
         <div>
           联系地址：<%= intention.student.address %>
         </div>
         <div>
-          当前进度：<%= "#{'还没开始'}" %>
+          当前进度：<%= t("current_status.#{intention.current_status}") %>
         </div>
       </div>
       <div class="ui vertical divider">+</div>
       <div class="center aligned column">
+        <%= link_to '学员详情', student_path(intention.student), class: 'ui primary button' %>
       </div>
     </div>
   </div>

@@ -37,6 +37,10 @@ class IntentionsController < ApplicationController
       @intentions = Intention.wait_call
     when 'contacting'
       @intentions = Intention.contacting
+    when 'booking'
+      @intentions = Intention.booking
+    when 'wait_pay'
+      @intentions = Intention.wait_pay
     when 'signed_up'
       @intentions = Intention.signed_up
     end

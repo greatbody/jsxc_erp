@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :students
+  resources :students do
+    collection do
+      post 'get_student_status' => :get_student_status
+    end
+  end
 
 end
