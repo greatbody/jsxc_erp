@@ -3,11 +3,11 @@
   <i class="mail icon"></i> 通知消息
 </a>
 <% else %>
-<% @notify.delete(:total) %>
 <div class="ui simple dropdown item">
-  <i class="mail icon"></i> 通知消息
+  <i class="mail icon"></i> 通知消息( <span style="color: red;margin:0 4px;"><%= @notify[:total] %></span>)
   <i class="dropdown icon"></i>
   <div class="menu">
+    <% @notify.delete(:total) %>
     <% @notify.map do |key, value| %>
       <% if value > 0%>
       <a class="item intention-href" data-type="<%= key %>" href="/intentions?touch=<%= key %>">
