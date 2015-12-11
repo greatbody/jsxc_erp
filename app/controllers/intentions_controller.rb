@@ -15,7 +15,7 @@ class IntentionsController < ApplicationController
     @student.intention.user = @student.user
     if @student.save
       respond_to do |format|
-        format.html { redirect_to intentions_path, notice: "Account created successfully." }
+        format.html { redirect_to root_path, notice: "Account created successfully." }
       end
     end
   end
