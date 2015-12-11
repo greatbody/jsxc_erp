@@ -1,4 +1,4 @@
-<% if @notify[:total] <= 0 %>
+<% if @notify[:total] <= 0 || current_user.nil? %>
 <a class="item">
   <i class="mail icon"></i> 通知消息
 </a>

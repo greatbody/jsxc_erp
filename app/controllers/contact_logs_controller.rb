@@ -11,7 +11,7 @@ class ContactLogsController < ApplicationController
     contact_log = current_user.contact_logs.build(new_contact_params)
     contact_log.student = Student.find(params[:contact_log][:student])
     if contact_log.save
-      contact_log.student.intention.update(next_contact_at: contact_log.next_contact_at)
+      contact_log.student.intention.update(next_contact_at: contact_log.next_contact_at, current_status: contact_log.current_status)
       redirect_to intention_path(contact_log.student.intention)
     else
       redirect_to new_contact_log_path(contact_log.student)
