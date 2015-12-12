@@ -6,7 +6,7 @@
 
   <div class="field">
     <%= f.label :student, "学员" %>
-    <%= f.select :student, options_from_collection_for_select(Student.all, :id, :name, @contact_log.student.nil? ? 0 : @contact_log.student.id ), {}, class: "ui search selection dropdown" %>
+    <%= f.select :student, options_from_collection_for_select(Student.all, :id, :name, @user_id), {}, class: "ui search selection dropdown" %>
   </div>
 
   <div class="field">
