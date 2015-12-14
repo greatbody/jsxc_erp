@@ -1,27 +1,57 @@
 <% @intentions.each do |intention| %>
+<%
+  @color = ' '
+  case intention.current_status
+  when 'wait_call'
+    @color = ' red '
+  when 'contacting'
+    @color = ' teal '
+  when 'booking'
+    @color = ' teal '
+  when 'wait_pay'
+    @color = ' red '
+  when 'signed_up'
+    @color = ' green '
+  when 'canceled'
+    @color = ' grey '
+  end
+  student = intention.student
+  last_contact = student.contact_logs.last
+%>
 <div class="ui very raised text container segment intention-block">
   <div class="title">
     <%= link_to intention_path(intention) do %>
-    <h1 class="left"><%= intention.student.name %></h1>
+    <h1 class="left"><%= student.name %></h1>
     <% end %>
-    <span class="right"><%= t("sexs.#{intention.student.sex}") %></span>
+    <span class="ui<%= @color %>tag label label-left"><%= t("current_status.#{intention.current_status}") %></span>
+    <span class="right"><%= t("sexs.#{student.sex}") %></span>
   </div>
 
   <div class="relative">
     <div class="ui two column middle aligned very relaxed stackable grid">
-      <div class="column">
+      <div class="column" style="width: 60%">
         <div>
-          电话：<%= PhoneExt.format_phone(intention.student.phone) %>
+          电话：<%= PhoneExt.format_phone(student.phone) %>
         </div>
-        <div>
-          联系地址：<%= intention.student.address %>
-        </div>
-        <div>
-          当前进度：<%= t("current_status.#{intention.current_status}") %>
+        <div class="ui segment">
+          <% if last_contact.nil? %>
+          <h4 class="ui header" style="margin-bottom: 0;">
+            最近联系详情
+          </h4>
+          <div class="ui clearing divider" style="margin: 5px 0;"></div>
+          <p>无</p>
+          <% else %>
+          <h4 class="ui header" style="margin-bottom: 0;">
+            最近联系详情
+            <span class="ui teal label right"><%= last_contact.user.nil? ? '未知' : last_contact.user.name %></span>
+          </h4>
+          <div class="ui clearing divider" style="margin: 5px 0;"></div>
+          <p><%= last_contact.contact_log %></p>
+          <% end %>
         </div>
       </div>
       <div class="ui vertical divider">+</div>
-      <div class="center aligned column">
+      <div class="center aligned column" style="width: 40%">
         <%= link_to '学员详情', student_path(intention.student), class: 'ui primary button' %>
       </div>
     </div>
