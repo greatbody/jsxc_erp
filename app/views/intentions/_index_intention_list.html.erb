@@ -19,6 +19,11 @@
   last_contact = student.contact_logs.last
 %>
 <div class="ui very raised text container segment intention-block">
+  <% if intention.next_contact_at %>
+  <span class="ui red ribbon label"  style="margin-bottom: 5px;">
+    下次联系：<%= intention.next_contact_at.to_s(:db) %>
+  </span>
+  <% end %>
   <div class="title" style="padding-bottom: 5px;">
     <%= link_to intention_path(intention) do %>
     <h1 class="left"><%= student.name %></h1>
