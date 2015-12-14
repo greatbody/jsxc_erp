@@ -13,9 +13,18 @@ class IntentionsController < ApplicationController
   def create
     @student = current_user.students.build(params_of_student)
     @student.intention.user = @student.user
+    if params[:student][:contact_log][:has_contact_log] == '1'
+      #save contact log attactched to it
+      contact_log_entity = current_user.contact_logs.build(params_of_contact_log_in_student)
+      @student.contact_logs << contact_log_entity
+    end
     if @student.save
       respond_to do |format|
         format.html { redirect_to root_path, notice: "Account created successfully." }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to :back, alert: @student.errors.messages.values.first.try(&:first) }
       end
     end
   end
@@ -52,8 +61,13 @@ class IntentionsController < ApplicationController
   end
 
   private
+
   def params_of_student
     params.require(:student).permit(:name, :sex, :phone, :id_card, :address, :unit, intention_attributes: [:source])
+  end
+
+  def params_of_contact_log_in_student
+    params.require(:student).require(:contact_log).permit(:contact_type, :current_status, :need_contact, :next_contact_at, :contact_log)
   end
 
 end
