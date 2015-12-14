@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="ui raised text segment">
-      <%= link_to '新的跟踪', new_contact_log_path, class: 'ui primary button' %>
+      <%= link_to '新的跟踪', new_contact_log_path(user: @student.id), class: 'ui primary button' %>
     </div>
     <div>
       <table class="ui celled table">
