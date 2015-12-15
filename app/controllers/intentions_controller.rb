@@ -21,7 +21,7 @@ class IntentionsController < ApplicationController
     if @student.save
       @student.intention.update(next_contact_at: contact_log_entity.next_contact_at, current_status: contact_log_entity.current_status)
       respond_to do |format|
-        format.html { redirect_to root_path, notice: "Account created successfully." }
+        format.html { redirect_to root_path }
       end
     else
       respond_to do |format|
