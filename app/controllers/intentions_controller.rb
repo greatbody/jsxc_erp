@@ -53,6 +53,9 @@ class IntentionsController < ApplicationController
       @intentions = Intention.wait_pay
     when 'signed_up'
       @intentions = Intention.signed_up
+    when 'should_contact'
+      # binding.remote_pry
+      @intentions = Intention.where("next_contact_at <= ? or next_contact_at is null", Date.today)
     end
     @intentions = @intentions.order(next_contact_at: :asc)
     render '_index_intention_list', layout: false

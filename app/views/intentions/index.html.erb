@@ -7,9 +7,12 @@
     <button class="ui basic button booking">预约试学</button>
     <button class="ui basic button wait_pay">等待付款</button>
     <button class="ui basic button signed_up">已报名</button>
+    <button class="ui basic button should_contact">今日任务</button>
   </div>
   <div id="content-list">
     <%= render partial: 'index_intention_list' %>
+  </div>
+  <div class="ui segment">
   </div>
 </div>
 <!-- javascript code -->
@@ -36,6 +39,10 @@
 
   $('.signed_up').on('click', function() {
     getIntentionByType('signed_up', this);
+  });
+
+  $('.should_contact').on('click', function() {
+    getIntentionByType('should_contact', this);
   });
 
   (function() {
