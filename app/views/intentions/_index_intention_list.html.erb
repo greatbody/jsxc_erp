@@ -33,7 +33,7 @@
   </div>
 
   <div class="relative">
-    <div class="ui two column middle aligned very relaxed stackable grid">
+    <div class="ui two column very grid">
       <div class="column" style="width: 60%">
         <div>
           电话：<%= PhoneExt.format_phone(student.phone) %>
@@ -56,8 +56,8 @@
         </div>
       </div>
       <div class="ui vertical divider">+</div>
-      <div class="center aligned column" style="width: 40%">
-        <%= link_to '学员详情', student_path(intention.student), class: 'ui primary button' %>
+      <div class="column" style="width: 40%;">
+        <%= link_to '学员详情', student_path(intention.student), class: 'ui primary button', style: 'margin-top: 5px;' %>
       </div>
     </div>
   </div>
