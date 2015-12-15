@@ -4,13 +4,13 @@
       @color = ' '
       case intention.current_status
       when 'wait_call'
-        @color = ' red '
+        @color = ' orange '
       when 'contacting'
         @color = ' teal '
       when 'booking'
         @color = ' teal '
       when 'wait_pay'
-        @color = ' red '
+        @color = ' orange '
       when 'signed_up'
         @color = ' green '
       when 'canceled'
@@ -22,16 +22,22 @@
     <li style="width: 23%;list-style:none;margin: 5px;display: inline-block;margin-bottom: 20px;">
       <div class="ui very raised text container segment intention-block" style="width: 100%;padding: 8px;">
         <% if intention.next_contact_at %>
-        <span class="ui red ribbon label"  style="margin-bottom: 5px;">
+        <span class="ui yellow ribbon label"  style="margin-bottom: 5px;margin-left: 5px;">
           下次联系：<%= intention.next_contact_at.to_s(:db) %>
         </span>
         <% end %>
         <div class="title" style="padding-bottom: 5px;">
-          <%= link_to intention_path(intention) do %>
-          <h3 class="left"><%= student.name %></h3>
-          <% end %>
-          <span class="ui<%= @color %>tag label label-left"><%= t("current_status.#{intention.current_status}") %></span>
-          <span class="right"><%= t("sexs.#{student.sex}") %></span>
+          <span class="right" style="padding-left: 10px;">
+            <span class="ui<%= @color %>tag label label-left">
+              <%= t("current_status.#{intention.current_status}") %>
+            </span>
+            <%= t("sexs.#{student.sex}") %>
+          </span>
+          <div style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;font-size: 20px;">
+            <%= link_to intention_path(intention) do %>
+            <%= student.name %>
+            <% end %>
+          </div>
         </div>
 
         <div class="relative">
@@ -53,7 +59,7 @@
                   <span class="ui teal label right"><%= last_contact.user.nil? ? '未知' : last_contact.user.name %></span>
                 </h4>
                 <div class="ui clearing divider" style="margin: 5px 0;"></div>
-                <p title="<%= last_contact.contact_log %>" style=""><%= last_contact.contact_log %></p>
+                <p title="<%= last_contact.contact_log %>" style="font-size: 12px;"><%= last_contact.contact_log %></p>
                 <% end %>
               </div>
             </div>
