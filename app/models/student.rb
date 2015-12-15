@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Student < ActiveRecord::Base
   enum sex: [:female, :male, :unknown]
 

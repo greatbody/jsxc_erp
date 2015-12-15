@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class AddNameToUser < ActiveRecord::Migration
   def change
     add_column :users, :name, :string

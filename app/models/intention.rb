@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Intention < ActiveRecord::Base
   enum current_status: [:wait_call, :contacting, :booking, :wait_pay, :signed_up, :canceled]
 

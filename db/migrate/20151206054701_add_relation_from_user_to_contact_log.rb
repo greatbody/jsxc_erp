@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class AddRelationFromUserToContactLog < ActiveRecord::Migration
   def change
     add_reference :contact_logs, :user, index: true, foreign_key: true

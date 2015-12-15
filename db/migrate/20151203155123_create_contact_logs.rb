@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CreateContactLogs < ActiveRecord::Migration
   def change
     create_table :contact_logs do |t|

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module PhoneExt
   def self.format_phone(phone)
     return phone if phone.length != 11

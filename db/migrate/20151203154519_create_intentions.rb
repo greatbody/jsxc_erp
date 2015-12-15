@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CreateIntentions < ActiveRecord::Migration
   def change
     create_table :intentions do |t|
