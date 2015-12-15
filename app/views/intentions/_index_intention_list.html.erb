@@ -19,7 +19,7 @@
       student = intention.student
       last_contact = student.contact_logs.last
     %>
-    <li style="width: 23%;list-style:none;margin: 5px;display: inline-block;">
+    <li style="width: 23%;list-style:none;margin: 5px;display: inline-block;margin-bottom: 20px;">
       <div class="ui very raised text container segment intention-block" style="width: 100%;padding: 8px;">
         <% if intention.next_contact_at %>
         <span class="ui red ribbon label"  style="margin-bottom: 5px;">
@@ -53,7 +53,7 @@
                   <span class="ui teal label right"><%= last_contact.user.nil? ? '未知' : last_contact.user.name %></span>
                 </h4>
                 <div class="ui clearing divider" style="margin: 5px 0;"></div>
-                <p title="<%= last_contact.contact_log %>"><%= last_contact.contact_log %></p>
+                <p title="<%= last_contact.contact_log %>" style=""><%= last_contact.contact_log %></p>
                 <% end %>
               </div>
             </div>
