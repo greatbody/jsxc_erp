@@ -55,7 +55,7 @@ class IntentionsController < ApplicationController
       @intentions = Intention.signed_up
     when 'should_contact'
       # binding.remote_pry
-      @intentions = Intention.where("next_contact_at <= ? or next_contact_at is null", Date.today)
+      @intentions = Intention.where('next_contact_at <= ? or next_contact_at is null', Date.today)
     end
     @intentions = @intentions.order(next_contact_at: :asc)
     render '_index_intention_list', layout: false

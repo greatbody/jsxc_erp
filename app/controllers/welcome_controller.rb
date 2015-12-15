@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class WelcomeController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   def index
