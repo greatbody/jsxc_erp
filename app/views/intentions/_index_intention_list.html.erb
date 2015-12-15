@@ -1,68 +1,73 @@
-<% @intentions.each do |intention| %>
-<%
-  @color = ' '
-  case intention.current_status
-  when 'wait_call'
-    @color = ' red '
-  when 'contacting'
-    @color = ' teal '
-  when 'booking'
-    @color = ' teal '
-  when 'wait_pay'
-    @color = ' red '
-  when 'signed_up'
-    @color = ' green '
-  when 'canceled'
-    @color = ' grey '
-  end
-  student = intention.student
-  last_contact = student.contact_logs.last
-%>
-<div class="ui very raised text container segment intention-block">
-  <% if intention.next_contact_at %>
-  <span class="ui red ribbon label"  style="margin-bottom: 5px;">
-    下次联系：<%= intention.next_contact_at.to_s(:db) %>
-  </span>
-  <% end %>
-  <div class="title" style="padding-bottom: 5px;">
-    <%= link_to intention_path(intention) do %>
-    <h1 class="left"><%= student.name %></h1>
-    <% end %>
-    <span class="ui<%= @color %>tag label label-left"><%= t("current_status.#{intention.current_status}") %></span>
-    <span class="right"><%= t("sexs.#{student.sex}") %></span>
-  </div>
-
-  <div class="relative">
-    <div class="ui two column very grid">
-      <div class="column" style="width: 60%">
-        <div>
-          电话：<%= PhoneExt.format_phone(student.phone) %>
-        </div>
-        <div class="ui segment">
-          <% if last_contact.nil? %>
-          <h4 class="ui header" style="margin-bottom: 0;">
-            最近联系详情
-          </h4>
-          <div class="ui clearing divider" style="margin: 5px 0;"></div>
-          <p>无</p>
-          <% else %>
-          <h4 class="ui header" style="margin-bottom: 0;">
-            最近联系详情
-            <span class="ui teal label right"><%= last_contact.user.nil? ? '未知' : last_contact.user.name %></span>
-          </h4>
-          <div class="ui clearing divider" style="margin: 5px 0;"></div>
-          <p title="<%= last_contact.contact_log %>"><%= last_contact.contact_log %></p>
+<ul>
+    <% @intentions.each do |intention| %>
+    <%
+      @color = ' '
+      case intention.current_status
+      when 'wait_call'
+        @color = ' red '
+      when 'contacting'
+        @color = ' teal '
+      when 'booking'
+        @color = ' teal '
+      when 'wait_pay'
+        @color = ' red '
+      when 'signed_up'
+        @color = ' green '
+      when 'canceled'
+        @color = ' grey '
+      end
+      student = intention.student
+      last_contact = student.contact_logs.last
+    %>
+    <li style="width: 30%;list-style:none;margin: 5px;display: inline-block;">
+      <div class="ui very raised text container segment intention-block" style="width: 100%;">
+        <% if intention.next_contact_at %>
+        <span class="ui red ribbon label"  style="margin-bottom: 5px;">
+          下次联系：<%= intention.next_contact_at.to_s(:db) %>
+        </span>
+        <% end %>
+        <div class="title" style="padding-bottom: 5px;">
+          <%= link_to intention_path(intention) do %>
+          <h1 class="left"><%= student.name %></h1>
           <% end %>
+          <span class="ui<%= @color %>tag label label-left"><%= t("current_status.#{intention.current_status}") %></span>
+          <span class="right"><%= t("sexs.#{student.sex}") %></span>
+        </div>
+
+        <div class="relative">
+          <div class="ui two column very grid">
+            <div class="column" style="width: 60%">
+              <div>
+                电话：<%= PhoneExt.format_phone(student.phone) %>
+              </div>
+              <div class="ui segment">
+                <% if last_contact.nil? %>
+                <h4 class="ui header" style="margin-bottom: 0;">
+                  最近联系详情
+                </h4>
+                <div class="ui clearing divider" style="margin: 5px 0;"></div>
+                <p>无</p>
+                <% else %>
+                <h4 class="ui header" style="margin-bottom: 0;">
+                  最近联系详情
+                  <span class="ui teal label right"><%= last_contact.user.nil? ? '未知' : last_contact.user.name %></span>
+                </h4>
+                <div class="ui clearing divider" style="margin: 5px 0;"></div>
+                <p title="<%= last_contact.contact_log %>"><%= last_contact.contact_log %></p>
+                <% end %>
+              </div>
+            </div>
+            <div class="ui vertical divider">+</div>
+            <div class="column" style="width: 40%;">
+              <%= link_to '学员详情', student_path(intention.student), class: 'ui primary button', style: 'margin-top: 5px;' %>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="ui vertical divider">+</div>
-      <div class="column" style="width: 40%;">
-        <%= link_to '学员详情', student_path(intention.student), class: 'ui primary button', style: 'margin-top: 5px;' %>
-      </div>
-    </div>
-  </div>
-</div>
-<% end %>
+    </li>
+    <% end %>
+</ul>
+
 <% if @intentions.count <= 0 then %>
 <div class="ui very raised text container segment intention-block">
   <div class="ui container">
