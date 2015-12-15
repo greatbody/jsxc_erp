@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # Rails 4.1+ enum support, see https://github.com/sferik/rails_admin/issues/1993
 module ActiveRecord
   module RailsAdminEnum

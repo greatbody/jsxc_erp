@@ -1,3 +1,4 @@
+# encoding: UTF-8
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/20150612', as: 'rails_admin'
 

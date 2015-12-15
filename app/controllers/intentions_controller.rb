@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class IntentionsController < ApplicationController
   require 'phone_ext'
   before_action :authenticate_user!
