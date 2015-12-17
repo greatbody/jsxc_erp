@@ -24,3 +24,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin padded-container {
+  margin: 15px 10px;
+}

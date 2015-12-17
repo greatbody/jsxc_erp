@@ -1,2 +1,105 @@
-<h1>Student#show</h1>
-<p>Find me in app/views/student/show.html.erb</p>
+<% content_for :title, "#{@student.name} - 极速学车ERP系统" %>
+<div class="student">
+  <h4 class="ui horizontal divider header">
+    <i class="tag icon"></i>
+    基本资料
+  </h4>
+  <table class="ui striped definition table">
+    <tbody>
+      <tr>
+        <td class="two wide column">姓名</td>
+        <td><%= @student.name %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">性别</td>
+        <td><%= I18n.t("sexs.#{@student.sex}") %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">录入时间</td>
+        <td><%= @student.created_at.to_s(:db) %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">学校/单位</td>
+        <td><%= @student.unit %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">手机</td>
+        <td><%= @student.phone %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">身份证号</td>
+        <td><%= @student.id_card %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">创建人</td>
+        <td>
+          <div class="ui image label">
+            <img src="/flash-loding.gif">
+            <%= @student.user.name %>
+            <i class="delete icon"></i>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="two wide column">身份证</td>
+        <td>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="two wide column">居住证信息</td>
+        <% if @student.residence_cards.count > 0 %>
+        <% residence_card = @student.residence_cards.last %>
+        <td>
+          <table class="ui striped definition table">
+            <tbody>
+              <tr>
+                <td class="two wide column">身份证号</td>
+                <td><%= residence_card.id_card %></td>
+              </tr>
+              <tr>
+                <td class="two wide column">居住证号</td>
+                <td><%= residence_card.card_id %></td>
+              </tr>
+              <tr>
+                <td class="two wide column">现居住证地址</td>
+                <td><%= residence_card.current_address %></td>
+              </tr>
+              <tr>
+                <td class="two wide column">办理状态</td>
+                <td><%= I18n.t("residence_card.current_status.#{residence_card.current_status}") %></td>
+              </tr>
+              <tr>
+                <td class="two wide column">步骤</td>
+                <td>
+                  <div class="ui image label">
+                    <img src="/flash-loding.gif">
+                    <%= @student.user.name %>
+                    <i class="delete icon"></i>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="two wide column">操作</td>
+                <td>
+                  <button class="ui button notify-coach">发送给教练</button>
+                  <button class="ui button notify-student">发送给学员</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <% else %>
+        <td>
+          <%= link_to new_student_residence_card_path(@student) do %>
+            <div class="ui teal labeled icon button">
+              办居住证
+              <i class="add icon"></i>
+            </div>
+          <% end %>
+        </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>

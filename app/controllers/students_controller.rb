@@ -7,6 +7,10 @@ class StudentsController < ApplicationController
   end
 
   def show
+    id = params[:id].to_i
+    redirect_to root_path if id <= 0
+    @student = Student.find(id)
+    redirect_to root_path if @student.nil?
   end
 
   def edit

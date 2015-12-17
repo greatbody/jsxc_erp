@@ -1,8 +1,10 @@
 # encoding: UTF-8
 class IntentionsController < ApplicationController
   require 'phone_ext'
+  include SendSms
   before_action :authenticate_user!
   def index
+    # NotifyStudentJob.perform_later
     @intentions = Intention.all.order(next_contact_at: :asc)
   end
 

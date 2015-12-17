@@ -49,10 +49,12 @@ end
 
 gem 'devise'
 
-gem 'paperclip'
+gem "paperclip", "3.4.2"
 
 gem 'kaminari'
 
 gem 'semantic-ui-sass'
 
 gem 'rails_admin', '~> 0.6.0'
+
+gem 'rest-client', '~> 1.8.0'

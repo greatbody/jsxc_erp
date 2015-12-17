@@ -92,6 +92,28 @@ if ((typeof pages) == 'undefined') {
         reader.readAsDataURL(image);
       });
     },
+    imgView: function(upload_field_id, preview_img_id, callback) {
+      $('#' + upload_field_id).on('change', function(event) {
+        var files = event.target.files;
+        if (files.length <= 0) {
+          return;
+        }
+        var image = files[0]
+        if (image.type.toLocaleString().indexOf('image') < 0) {
+          return;
+        }
+        var reader = new FileReader();
+        reader.onload = function(file) {
+          var img = new Image();
+          img.src = file.target.result;
+          if (callback) {
+            callback(img);
+          }
+          $('#' + preview_img_id).html(img.outerHTML);
+        }
+        reader.readAsDataURL(image);
+      });
+    },
     initImageCut: function(rate, ratio) {
       //init image cut
       _bindImg(rate, ratio);
