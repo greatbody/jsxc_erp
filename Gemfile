@@ -51,6 +51,8 @@ gem 'devise'
 
 gem "paperclip", "3.4.2"
 
+gem 'remotipart', '~> 1.2'
+
 gem 'kaminari'
 
 gem 'semantic-ui-sass'
