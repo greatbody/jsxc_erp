@@ -93,7 +93,7 @@ if ((typeof pages) == 'undefined') {
       });
     },
     imgView: function(upload_field_id, preview_img_id, callback) {
-      $('#' + upload_field_id).on('change', function(event) {
+      $(document).delegate('#' + upload_field_id, 'change', function(event) {
         var files = event.target.files;
         if (files.length <= 0) {
           return;
@@ -113,6 +113,9 @@ if ((typeof pages) == 'undefined') {
         }
         reader.readAsDataURL(image);
       });
+    },
+    setImgCenter: function(img) {
+      _setImgCenter(img);
     },
     initImageCut: function(rate, ratio) {
       //init image cut
@@ -285,6 +288,45 @@ if ((typeof pages) == 'undefined') {
     });
     $(baseDom).append(structure_code.content);
     return baseDom;
+  }
+
+  function _setImgCenter(img) {
+    var img_jq = $(img);
+    var div_jq = $(img.parentNode);
+    var css_len = function(jqObject, cssAttr) {
+      return parseInt(jqObject.css('border-' + cssAttr + '-width').replace(/px/,''),10);
+    }
+
+    var realImg = new Image();
+    realImg.src = img_jq.attr("src");
+    var img_width = realImg.width;
+    var img_height = realImg.height;
+
+    var div_border_width = css_len(div_jq, 'left') + css_len(div_jq, 'right');
+    var div_border_height = css_len(div_jq, 'top') + css_len(div_jq, 'bottom');
+
+    var div_height = parseInt(div_jq.css('height').replace(/px/,''),10) - div_border_height;
+    var div_width = parseInt(div_jq.css('width').replace(/px/,''),10) - div_border_width;
+    //step one:calculate new img width,height
+
+    if ((img_height / img_width) > (div_height / div_width)) {
+      //make the height proper
+      var new_img_width = (img_width * div_height) / img_height;
+      var new_img_height = div_height
+    } else {
+      //make the width proper
+      var new_img_height = (div_width * img_height) / img_width;
+      var new_img_width = div_width
+    }
+    //remove css
+    $(img).attr('style','');
+    //begin new css
+    $(img).css('margin: 0 auto;');
+    $(img).css('width', new_img_width);
+    $(img).css('height', new_img_height);
+    //offset
+    $(img).css('margin-top', (div_height - new_img_height) / 2);
+
   }
 
   function _bindImg(rate, ratio) {
