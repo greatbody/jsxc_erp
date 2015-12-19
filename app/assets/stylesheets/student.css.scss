@@ -1,3 +1,29 @@
 .student {
   @include padded-container;
+
+  .card {
+    display: inline-block;
+    height: 160px;
+    width: 230px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+
+    .card-preview {
+      height: 140px;
+      border: dashed 2px #ccc;
+
+      .img {
+        display: block;
+        margin: 0 auto;
+        height: inherit;
+        // padding-right: 4px;
+        // padding-bottom: 4px;
+      }
+    }
+
+    .select-btn {
+      width: inherit;
+      margin-top: 5px;
+    }
+  }
 }

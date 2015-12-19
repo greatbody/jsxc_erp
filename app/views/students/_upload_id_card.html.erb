@@ -1,0 +1,66 @@
+<div class="ui modal id-card">
+  <i class="close icon"></i>
+  <div class="header">
+    更新身份证正面
+  </div>
+  <div class="content">
+    <%= form_for(@student, url: update_id_card_students_path, method: :post, html: { class: 'ui form id-card' }, remote: true) do |f| %>
+    <div class="field">
+      <div id="id_card_preview" style="width: 600px; height: 300px;margin: 0 auto;">
+        <%= image_tag @student.id_card_pic.url %>
+      </div>
+      <%= f.file_field :id_card_pic, style: 'display: none', class: '' %>
+      <%= f.hidden_field :student_id, value: @student.id %>
+      <div class="ui input" id="id_card_pic">
+        <input type="text" value="" disabled>
+        <a class="ui teal icon button">
+          <i class="cloud upload icon"></i>
+        </a>
+      </div>
+      <%= f.submit "上传", class: "ui primary button submit-id-card" %>
+    </div>
+    <% end %>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      取消
+    </div>
+    <div class="ui positive right labeled icon button">
+      确认
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
+<div class="ui modal id-card-back">
+  <i class="close icon"></i>
+  <div class="header">
+    更新身份证反面
+  </div>
+  <div class="content">
+    <%= form_for(@student, url: update_id_card_students_path, method: :post, html: { class: 'ui form id-card-back' }, remote: true) do |f| %>
+    <div class="field">
+      <div id="id_card_back_preview" style="width: 600px; height: 300px;margin: 0 auto;">
+        <%= image_tag @student.id_card_back_pic.url %>
+      </div>
+      <%= f.file_field :id_card_back_pic, style: 'display: none', class: '' %>
+      <%= f.hidden_field :student_id, value: @student.id %>
+      <div class="ui input" id="id_card_back_pic">
+        <input type="text" value="" disabled>
+        <a class="ui teal icon button">
+          <i class="cloud upload icon"></i>
+        </a>
+      </div>
+      <%= f.submit "上传", class: "ui primary button submit-id-card-back" %>
+    </div>
+    <% end %>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      取消
+    </div>
+    <div class="ui positive right labeled icon button">
+      确认
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>

@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resources :residence_cards
     collection do
       post 'get_student_status' => :get_student_status
+      post 'update_id_card' => :update_id_card
+      get 'upload_id_card_form' => :upload_id_card_form
     end
   end
 

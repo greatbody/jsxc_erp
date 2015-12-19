@@ -27,8 +27,21 @@
         <td><%= @student.phone %></td>
       </tr>
       <tr>
-        <td class="two wide column">身份证号</td>
-        <td><%= @student.id_card %></td>
+        <td class="two wide column">身份证</td>
+        <td>
+          <div class="card">
+            <div class="card-preview id-card">
+              <%= image_tag @student.id_card_pic.url, class: 'img' %>
+            </div>
+            <div class="ui button select-btn btn-id-card">身份证正</div>
+          </div>
+          <div class="card">
+            <div class="card-preview id-card-back">
+              <%= image_tag @student.id_card_back_pic.url, class: 'img' %>
+            </div>
+            <div class="ui button select-btn btn-id-card-back">身份证反</div>
+          </div>
+        </td>
       </tr>
       <tr>
         <td class="two wide column">创建人</td>
@@ -38,12 +51,6 @@
             <%= @student.user.name %>
             <i class="delete icon"></i>
           </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="two wide column">身份证</td>
-        <td>
-          
         </td>
       </tr>
       <tr>
@@ -103,3 +110,108 @@
     </tbody>
   </table>
 </div>
+<%= render 'upload_id_card' %>
+<script type="text/javascript">
+  var pageOperation = {
+    current_card: '',
+    releaseModel: function(img_url) {
+      switch(this.current_card) {
+        case 'id_card':
+          {
+            $('.ui.modal.id-card').modal('hide');
+            if (!img_url) break;
+            $('#id_card_preview .img').attr('src', img_url);
+            $('#id_card_preview .img').attr('onload', 'pages.common.setImgCenter(this);');
+            $('.id-card .img').attr('src', img_url);
+            break;
+          }
+        case 'id_card_back':
+          {
+            $('.ui.modal.id-card-back').modal('hide');
+            if (!img_url) break;
+            $('#id_card_back_preview .img').attr('src', img_url);
+            $('#id_card_back_preview .img').attr('onload', 'pages.common.setImgCenter(this);');
+            $('.id-card-back .img').attr('src', img_url);
+            break;
+          }
+      }
+      setTimeout('_resize_img()', 500);
+    }
+  };
+
+  function _bind_file_select() {
+    //id card
+    $('#id_card_pic').on('click', function() {
+      $('#student_id_card_pic').click();
+    });
+    pages.common.imgView('student_id_card_pic', 'id_card_preview', function(img, div) {
+      pages.common.setImgCenter(img, div);
+    });
+    //id card back
+    $('#id_card_back_pic').on('click', function() {
+      $('#student_id_card_back_pic').click();
+    });
+    pages.common.imgView('student_id_card_back_pic', 'id_card_back_preview', function(img, div) {
+      pages.common.setImgCenter(img, div);
+    });
+  }
+
+  function _bind_form_submit() {
+    $('.submit-id-card').on('click', function() {
+      pageOperation.current_card = 'id_card';
+      return true;
+    });
+
+    $('.submit-id-card-back').on('click', function() {
+      pageOperation.current_card = 'id_card_back';
+      return true;
+    });
+  }
+
+
+  function _resize_img() {
+    $('.card-preview img').each(function() {
+      pages.common.setImgCenter(this);
+    });
+
+    $('#id_card_back_preview img').each(function() {
+      pages.common.setImgCenter(this);
+    });
+  }
+
+  //绑定按钮打开model
+  (function() {
+    $('.btn-id-card').on('click', function() {
+      pages.common.setImgCenter($('#id_card_preview img')[0]);
+      $('.ui.modal.id-card').modal({
+        closable: true,
+        onDeny: function() {
+          return true;
+        },
+        onApprove: function() {
+          return true;
+        }
+      }).modal('show');
+    });
+
+    $('.btn-id-card-back').on('click', function() {
+      pages.common.setImgCenter($('#id_card_back_preview img')[0]);
+      $('.ui.modal.id-card-back').modal({
+        closable: true,
+        onDeny: function() {
+          return true;
+        },
+        onApprove: function() {
+          return true;
+        }
+      }).modal('show');
+    });
+
+    _bind_file_select();
+    _bind_form_submit();
+  })();
+  window.onload = function() {
+    // setInterval('_resize_img()', 1000);
+    _resize_img();
+  }
+</script>

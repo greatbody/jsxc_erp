@@ -103,19 +103,20 @@ if ((typeof pages) == 'undefined') {
           return;
         }
         var reader = new FileReader();
+        var preview_div = $('#' + preview_img_id)[0];
         reader.onload = function(file) {
           var img = new Image();
           img.src = file.target.result;
           if (callback) {
-            callback(img);
+            callback(img, preview_div);
           }
           $('#' + preview_img_id).html(img.outerHTML);
         }
         reader.readAsDataURL(image);
       });
     },
-    setImgCenter: function(img) {
-      _setImgCenter(img);
+    setImgCenter: function(img, div) {
+      _setImgCenter(img, div);
     },
     initImageCut: function(rate, ratio) {
       //init image cut
@@ -290,17 +291,21 @@ if ((typeof pages) == 'undefined') {
     return baseDom;
   }
 
-  function _setImgCenter(img) {
-    var img_jq = $(img);
-    var div_jq = $(img.parentNode);
+  function _setImgCenter(img, div) {
     var css_len = function(jqObject, cssAttr) {
       return parseInt(jqObject.css('border-' + cssAttr + '-width').replace(/px/,''),10);
     }
 
-    var realImg = new Image();
-    realImg.src = img_jq.attr("src");
-    var img_width = realImg.width;
-    var img_height = realImg.height;
+    var img_jq = $(img);
+    var div_jq;
+    if (div) {
+      div_jq = $(div);
+    } else {
+      div_jq = $(img.parentNode);
+    }
+
+    var img_width = img.naturalWidth;
+    var img_height = img.naturalHeight;
 
     var div_border_width = css_len(div_jq, 'left') + css_len(div_jq, 'right');
     var div_border_height = css_len(div_jq, 'top') + css_len(div_jq, 'bottom');
@@ -321,12 +326,12 @@ if ((typeof pages) == 'undefined') {
     //remove css
     $(img).attr('style','');
     //begin new css
-    $(img).css('margin: 0 auto;');
+    $(img).css('display', 'block');
     $(img).css('width', new_img_width);
     $(img).css('height', new_img_height);
     //offset
+    $(img).css('margin', '0 auto');
     $(img).css('margin-top', (div_height - new_img_height) / 2);
-
   }
 
   function _bindImg(rate, ratio) {
