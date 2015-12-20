@@ -1,2 +1,4 @@
-<h1>Student#edit</h1>
-<p>Find me in app/views/student/edit.html.erb</p>
+<% content_for :title, "编辑 #{@student.name} - 极速学车ERP系统" %>
+<div class="student">
+  <%= render 'form' %>
+</div>

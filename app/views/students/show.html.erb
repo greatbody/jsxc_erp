@@ -1,5 +1,11 @@
 <% content_for :title, "#{@student.name} - 极速学车ERP系统" %>
 <div class="student">
+  <%= link_to edit_student_path(@student) do %>
+    <div class="ui teal labeled icon button">
+      编辑资料
+      <i class="add icon"></i>
+    </div>
+  <% end %>
   <h4 class="ui horizontal divider header">
     <i class="tag icon"></i>
     基本资料
@@ -12,7 +18,7 @@
       </tr>
       <tr>
         <td class="two wide column">性别</td>
-        <td><%= I18n.t("sexs.#{@student.sex}") %></td>
+        <td><%= @student.gender %></td>
       </tr>
       <tr>
         <td class="two wide column">录入时间</td>

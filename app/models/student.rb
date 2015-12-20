@@ -21,4 +21,9 @@ class Student < ActiveRecord::Base
   has_attached_file :id_card_back_pic, styles: { medium: '500x300>', thumb: '250x150>' }, default_url: '/500x300.png'
 
   accepts_nested_attributes_for :intention
+
+  def gender
+    return I18n.t("sexs.#{sex}") if sex.present?
+    '【未填写】'
+  end
 end
