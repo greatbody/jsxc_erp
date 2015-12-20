@@ -38,3 +38,21 @@ en:
     wait_pay: '等待付款'
     signed_up: '已报名'
     canceled: '已关闭'
+  residence_card:
+    current_status:
+      id_card_received: '已收身份证'
+      id_card_returned: '已还身份证'
+      have_number: '居住证出号'
+      notify_sent: '已通知'
+      have_card: '已领居住证'
+      return_card: '已还居住证'
+    process_by:
+      jsxc: '极速学车'
+      student: '学员自助'
+      coach: '教练'
+  application:
+    menus:
+      wait_call: '未联系'
+      contacting: '联系中'
+      booking: '预约试学'
+      wait_pay: '等待付款'

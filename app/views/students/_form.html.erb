@@ -1,0 +1,52 @@
+<%= form_for(@student, url: student_path, method: :patch, html: { class: "ui form" }) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this coach from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :phone, '手机' %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :name, '姓名' %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="grouped fields">
+    <%= f.label :sex, '性别' %>
+    <% [['unknown', '未知'], ['female', '女'], ['male', '男']].reverse.each do |sex_item| %>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <% if sex_item.first == @student.sex || (sex_item.first == 1 && @student.sex == 'male' )%>
+        <input name="student[sex]" checked="checked" type="radio" id="student_sex_<%= sex_item.first %>" value="<%= sex_item.first %>" />
+        <label for="student_sex"><%= sex_item.last %></label>
+        <% else %>
+        <input name="student[sex]" type="radio" id="student_sex_<%= sex_item.first %>" value="<%= sex_item.first %>" />
+        <label for="student_sex"><%= sex_item.last %></label>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :id_card, '身份证' %><br>
+    <%= f.text_field :id_card %>
+  </div>
+  <div class="field">
+    <%= f.label :address, '联系地址' %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :unit, '单位' %><br>
+    <%= f.text_field :unit %>
+  </div>
+  <div class="actions">
+    <%= f.submit '更新学员信息' %>
+  </div>
+<% end %>

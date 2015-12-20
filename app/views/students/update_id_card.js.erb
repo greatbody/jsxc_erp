@@ -1,0 +1,5 @@
+<% if @error_code.nil? %>
+pageOperation.releaseModel('<%= @render_url %>');
+<% else %>
+alert('<%= @error_code %>');
+<% end %>

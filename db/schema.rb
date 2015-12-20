@@ -11,7 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209050044) do
+ActiveRecord::Schema.define(version: 20151216080325) do
+
+  create_table "coaches", force: :cascade do |t|
+    t.string   "phone",                             limit: 255
+    t.string   "name",                              limit: 255
+    t.integer  "gender",                            limit: 4
+    t.string   "id_card",                           limit: 255
+    t.date     "birthday"
+    t.string   "wechat",                            limit: 255
+    t.string   "qq",                                limit: 255
+    t.string   "coaching_license",                  limit: 255
+    t.string   "driving_license",                   limit: 255
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.string   "avatar_file_name",                  limit: 255
+    t.string   "avatar_content_type",               limit: 255
+    t.integer  "avatar_file_size",                  limit: 4
+    t.datetime "avatar_updated_at"
+    t.string   "id_card_pic_file_name",             limit: 255
+    t.string   "id_card_pic_content_type",          limit: 255
+    t.integer  "id_card_pic_file_size",             limit: 4
+    t.datetime "id_card_pic_updated_at"
+    t.string   "coaching_license_pic_file_name",    limit: 255
+    t.string   "coaching_license_pic_content_type", limit: 255
+    t.integer  "coaching_license_pic_file_size",    limit: 4
+    t.datetime "coaching_license_pic_updated_at"
+    t.string   "driving_license_pic_file_name",     limit: 255
+    t.string   "driving_license_pic_content_type",  limit: 255
+    t.integer  "driving_license_pic_file_size",     limit: 4
+    t.datetime "driving_license_pic_updated_at"
+  end
 
   create_table "contact_logs", force: :cascade do |t|
     t.text     "contact_log",     limit: 65535
@@ -41,18 +71,55 @@ ActiveRecord::Schema.define(version: 20151209050044) do
   add_index "intentions", ["student_id"], name: "index_intentions_on_student_id", using: :btree
   add_index "intentions", ["user_id"], name: "index_intentions_on_user_id", using: :btree
 
-  create_table "students", force: :cascade do |t|
-    t.string   "phone",      limit: 255
-    t.string   "name",       limit: 255
-    t.integer  "sex",        limit: 4,   default: 1
-    t.string   "id_card",    limit: 255
-    t.string   "address",    limit: 255
-    t.string   "unit",       limit: 255
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "user_id",    limit: 4
+  create_table "residence_cards", force: :cascade do |t|
+    t.string   "card_id",               limit: 255
+    t.string   "name",                  limit: 255
+    t.string   "gender",                limit: 255
+    t.string   "ethnicity",             limit: 255
+    t.string   "id_card",               limit: 255
+    t.string   "home_region",           limit: 255
+    t.string   "current_address",       limit: 255
+    t.date     "validate_begin_at"
+    t.date     "validate_end_at"
+    t.integer  "current_status",        limit: 4,   default: 0
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.integer  "student_id",            limit: 4
+    t.integer  "process_by",            limit: 4,   default: 0
+    t.string   "card_pic_file_name",    limit: 255
+    t.string   "card_pic_content_type", limit: 255
+    t.integer  "card_pic_file_size",    limit: 4
+    t.datetime "card_pic_updated_at"
   end
 
+  add_index "residence_cards", ["student_id"], name: "index_residence_cards_on_student_id", using: :btree
+
+  create_table "students", force: :cascade do |t|
+    t.string   "phone",                         limit: 255
+    t.string   "name",                          limit: 255
+    t.integer  "sex",                           limit: 4,   default: 1
+    t.string   "id_card",                       limit: 255
+    t.string   "address",                       limit: 255
+    t.string   "unit",                          limit: 255
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.integer  "user_id",                       limit: 4
+    t.integer  "coach_id",                      limit: 4
+    t.string   "avatar_file_name",              limit: 255
+    t.string   "avatar_content_type",           limit: 255
+    t.integer  "avatar_file_size",              limit: 4
+    t.datetime "avatar_updated_at"
+    t.string   "id_card_pic_file_name",         limit: 255
+    t.string   "id_card_pic_content_type",      limit: 255
+    t.integer  "id_card_pic_file_size",         limit: 4
+    t.datetime "id_card_pic_updated_at"
+    t.string   "id_card_back_pic_file_name",    limit: 255
+    t.string   "id_card_back_pic_content_type", limit: 255
+    t.integer  "id_card_back_pic_file_size",    limit: 4
+    t.datetime "id_card_back_pic_updated_at"
+  end
+
+  add_index "students", ["coach_id"], name: "index_students_on_coach_id", using: :btree
   add_index "students", ["user_id"], name: "index_students_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -76,5 +143,7 @@ ActiveRecord::Schema.define(version: 20151209050044) do
   add_foreign_key "contact_logs", "users"
   add_foreign_key "intentions", "students"
   add_foreign_key "intentions", "users"
+  add_foreign_key "residence_cards", "students"
+  add_foreign_key "students", "coaches"
   add_foreign_key "students", "users"
 end

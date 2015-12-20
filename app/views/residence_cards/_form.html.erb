@@ -1,0 +1,37 @@
+<%= form_for(@residence_card, url: student_residence_cards_path, method: :post, html: { class: "ui form" }) do |f| %>
+  <% if @residence_card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@residence_card.errors.count, "error") %> prohibited this coach from being saved:</h2>
+
+      <ul>
+      <% @residence_card.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :card_id %><br>
+    <%= f.text_field :card_id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.number_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :id_card %><br>
+    <%= f.text_field :id_card %>
+  </div>
+  <div class="field">
+    <%= f.label :ethnicity %><br>
+    <%= f.text_field :ethnicity %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,62 @@
+<% content_for :title, "新办居住证" %>
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
+<div class="ui segment">
+  <%= form_for(@residence_card, url: student_residence_cards_path, method: :post, html: { class: "ui form" }) do |f| %>
+  <div class="field">
+    <%= f.label :name, "姓名" %>
+    <%= f.text_field :name, { value: @student.name, readonly: true } %>
+  </div>
+  <div class="field">
+    <%= f.label :gender, "性别" %>
+    <%= f.text_field :gender, { value: "#{I18n.t("sexs.#{@student.sex}")}", readonly: true } %>
+  </div>
+  <div class="field">
+    <%= f.text_field :current_status, style: "display: none;", value: 0 %>
+  </div>
+  <div class="field">
+    <%= f.label :ethnicity, "民族" %>
+    <%= f.select :ethnicity, options_for_select(all_ethnicity), {}, class: "ui search selection dropdown" %>
+  </div>
+  <div class="field">
+    <%= f.label :process_by, "经办" %>
+    <%= f.select :process_by, options_for_select(ResidenceCard.process_by_for_select), {}, class: "ui selection dropdown" %>
+  </div>
+  <div class="field">
+    <div id="id_card_preview"></div>
+    <%= f.file_field :id_card_pic, style: "display: none" %>
+    <div class="ui input" id="id_card_pic">
+      <input type="text" value="" disabled>
+      <a class="ui teal icon button">
+        <i class="cloud upload icon"></i>
+      </a>
+    </div>
+  </div>
+  <div class="div-btn">
+    <%= f.submit "保存联系记录", class: "ui primary button" %>
+  </div>
+  <div class="ui error message">
+  </div>
+  <% end %>
+
+</div>
+<script type="text/javascript">
+  $('.ui.search.selection.dropdown').dropdown({
+    onChange: function(value, text, $selectedItem) {
+    }
+  });
+
+  $('.ui.selection.dropdown').dropdown();
+</script>
+<script type="text/javascript">
+  (function() {
+    pages.common.imgView('residence_card_id_card_pic', 'id_card_preview', function(img) {
+      $(img).css('height', '300px');
+      $(img).css('display', 'block');
+      $(img).css('margin', '0 auto');
+    });
+    $("#id_card_pic").on("click", function() {
+      $('#residence_card_id_card_pic').click();
+    });
+  })();
+</script>

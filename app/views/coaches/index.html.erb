@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Coaches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Phone</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Id card</th>
+      <th>Birthday</th>
+      <th>Wechat</th>
+      <th>Qq</th>
+      <th>Coaching license</th>
+      <th>Driving license</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coaches.each do |coach| %>
+      <tr>
+        <td><%= coach.phone %></td>
+        <td><%= coach.name %></td>
+        <td><%= coach.gender %></td>
+        <td><%= coach.id_card %></td>
+        <td><%= coach.birthday %></td>
+        <td><%= coach.wechat %></td>
+        <td><%= coach.qq %></td>
+        <td><%= coach.coaching_license %></td>
+        <td><%= coach.driving_license %></td>
+        <td><%= link_to 'Show', coach %></td>
+        <td><%= link_to 'Edit', edit_coach_path(coach) %></td>
+        <td><%= link_to 'Destroy', coach, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coach', new_coach_path %>

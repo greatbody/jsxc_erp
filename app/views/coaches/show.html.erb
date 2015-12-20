@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @coach.phone %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @coach.name %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @coach.gender %>
+</p>
+
+<p>
+  <strong>Id card:</strong>
+  <%= @coach.id_card %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @coach.birthday %>
+</p>
+
+<p>
+  <strong>Wechat:</strong>
+  <%= @coach.wechat %>
+</p>
+
+<p>
+  <strong>Qq:</strong>
+  <%= @coach.qq %>
+</p>
+
+<p>
+  <strong>Coaching license:</strong>
+  <%= @coach.coaching_license %>
+</p>
+
+<p>
+  <strong>Driving license:</strong>
+  <%= @coach.driving_license %>
+</p>
+
+<%= link_to 'Edit', edit_coach_path(@coach) %> |
+<%= link_to 'Back', coaches_path %>
