@@ -37,7 +37,18 @@
       </div>
     </div>
     <div class="ui raised text segment">
-      <%= link_to '新的跟踪', new_contact_log_path(user: @student.id), class: 'ui primary button' %>
+      <%= link_to new_contact_log_path(user: @student.id) do %>
+        <div class="ui primary labeled icon button">
+          新的跟踪
+          <i class="add icon"></i>
+        </div>
+      <% end %>
+      <%= link_to edit_intention_path(@intention) do %>
+        <div class="ui teal labeled icon button">
+          编辑意向信息
+          <i class="edit icon"></i>
+        </div>
+      <% end %>
     </div>
     <div>
       <table class="ui celled table">
