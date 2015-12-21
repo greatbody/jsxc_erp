@@ -1,2 +1,11 @@
-<h1>Intentions#edit</h1>
-<p>Find me in app/views/intentions/edit.html.erb</p>
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
+<% content_for :title, "#{@intention.student.name} - 编辑意向信息" %>
+<div class="intention">
+  <%= render 'form_intention' %>
+</div>
+<script type="text/javascript">
+  (function() {
+    $('.ui.dropdown.current_status').dropdown();
+  })();
+</script>

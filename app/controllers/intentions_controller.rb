@@ -65,6 +65,7 @@ class IntentionsController < ApplicationController
   end
 
   def edit
+    @intention = Intention.find(params[:id])
   end
 
   private

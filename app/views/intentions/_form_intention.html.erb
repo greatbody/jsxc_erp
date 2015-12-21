@@ -1,0 +1,26 @@
+<div class="ui segment">
+  <%= form_for(@intention, url: intention_path, method: :patch, html: { class: "ui form" }) do |f| %>
+  <div class="ui error message">
+    <%= render "layouts/flash" %>
+  </div>
+
+  <div class="ui one column doubling stackable grid container">
+    <div class="column">
+      <div class="field">
+          <%= f.label :source, "意向来源" %>
+          <%= f.text_field :source, { placeholder: '请输入意向来源' } %>
+      </div>
+      <div class="field">
+        <%= f.label :current_status, "当前状态" %>
+        <%= f.select :current_status, options_for_select(Intention.current_status_for_select), {}, class: "ui dropdown current_status" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui one column doubling stackable grid container">
+    <div class="column">
+      <%= f.submit "更新意向信息", class: "ui primary button" %>
+    </div>
+  </div>
+  <% end %>
+</div>
