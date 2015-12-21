@@ -68,10 +68,20 @@ class IntentionsController < ApplicationController
     @intention = Intention.find(params[:id])
   end
 
+  def update
+    @intention = Intention.find(params[:id])
+    @intention.update(params_of_intention_update)
+    redirect_to @intention
+  end
+
   private
 
   def params_of_student
     params.require(:student).permit(:name, :sex, :phone, :id_card, :address, :unit, intention_attributes: [:source])
+  end
+
+  def params_of_intention_update
+    params.require(:intention).permit(:source, :current_status)
   end
 
   def params_of_contact_log_in_student

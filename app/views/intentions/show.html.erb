@@ -35,6 +35,15 @@
           下次联系：<%= render partial: 'show_next_contact_date' %>
         </div>
       </div>
+      <div class="ui three column middle aligned very relaxed stackable grid">
+        <div class="column">
+          当前状态：<%= t("current_status.#{@intention.current_status}") %>
+        </div>
+        <div class="column">
+        </div>
+        <div class="column">
+        </div>
+      </div>
     </div>
     <div class="ui raised text segment">
       <%= link_to new_contact_log_path(user: @student.id) do %>
