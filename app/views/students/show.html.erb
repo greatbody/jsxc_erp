@@ -62,25 +62,26 @@
       <tr>
         <td class="two wide column">居住证信息</td>
         <% if @student.residence_cards.count > 0 %>
-        <% residence_card = @student.residence_cards.last %>
+        <% @residence_card = @student.residence_cards.last %>
         <td>
           <table class="ui striped definition table">
             <tbody>
               <tr>
                 <td class="two wide column">身份证号</td>
-                <td><%= residence_card.id_card %></td>
+                <td><%= @residence_card.id_card %></td>
               </tr>
               <tr>
                 <td class="two wide column">居住证号</td>
-                <td><%= residence_card.card_id %></td>
+                <td><%= @residence_card.card_id %></td>
               </tr>
               <tr>
                 <td class="two wide column">现居住证地址</td>
-                <td><%= residence_card.current_address %></td>
+                <td><%= @residence_card.current_address %></td>
               </tr>
               <tr>
                 <td class="two wide column">办理状态</td>
-                <td><%= I18n.t("residence_card.current_status.#{residence_card.current_status}") %></td>
+                <td><%= I18n.t("residence_card.current_status.#{@residence_card.current_status}") %>
+                </td>
               </tr>
               <tr>
                 <td class="two wide column">步骤</td>
@@ -95,8 +96,7 @@
               <tr>
                 <td class="two wide column">操作</td>
                 <td>
-                  <button class="ui button notify-coach">发送给教练</button>
-                  <button class="ui button notify-student">发送给学员</button>
+                  <%= render partial: 'show_rc_operation' %>
                 </td>
               </tr>
             </tbody>

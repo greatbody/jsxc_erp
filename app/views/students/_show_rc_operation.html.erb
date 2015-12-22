@@ -1,0 +1,4 @@
+<% if @residence_card.card_id.present? && @residence_card.current_address.present? %>
+  <button class="ui button notify-coach">发送给教练</button>
+  <button class="ui button notify-student">发送给学员</button>
+<% end %>
