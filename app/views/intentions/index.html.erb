@@ -1,21 +1,5 @@
 <% content_for :title, "意向列表 - 极速学车ERP系统" %>
 <style type="text/css">
-  p {
-    position:relative;
-    line-height:1.4em;
-    /* 3 times the line-height to show 3 lines */
-    height:4.2em;
-    overflow:hidden;
-}
-p::after {
-    content:"...";
-    font-weight:bold;
-    position:absolute;
-    bottom:0;
-    right:0;
-    padding:0 20px 1px 45px;
-    background:url(/ellipsis_bg.png) repeat-y;
-}
 </style>
 <div class="intention">
   <div class="ui segment">
@@ -26,9 +10,10 @@ p::after {
     <button class="ui basic button wait_pay">等待付款</button>
     <button class="ui basic button signed_up">已报名</button>
     <button class="ui basic button should_contact">今日任务</button>
+    <div class="ui input"><input placeholder="Search..." type="text" /></div>
   </div>
   <div id="content-list">
-    <%= render partial: 'index_intention_list' %>
+    <%= render partial: 'index_card_intention_list' %>
   </div>
   <div class="ui segment">
   </div>

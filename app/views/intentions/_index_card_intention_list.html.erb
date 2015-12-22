@@ -1,0 +1,59 @@
+<ul style="padding: 10px;">
+    <% @intentions.each do |intention| %>
+    <%
+      @color = ' '
+      case intention.current_status
+      when 'wait_call'
+        @color = ' orange '
+      when 'contacting'
+        @color = ' teal '
+      when 'booking'
+        @color = ' teal '
+      when 'wait_pay'
+        @color = ' orange '
+      when 'signed_up'
+        @color = ' green '
+      when 'canceled'
+        @color = ' grey '
+      end
+      student = intention.student
+      last_contact = student.contact_logs.last
+    %>
+    <li style="list-style:none;margin: 5px;display: inline-block;margin-bottom: 20px;">
+
+      <div class="ui card">
+        <% if intention.next_contact_at %>
+        <span class="ui yellow ribbon label"  style="margin-left: 15px;">
+          下次联系：<%= intention.next_contact_at.to_s(:db) %>
+        </span>
+        <% end %>
+        <div class="image">
+          <%= image_tag student.id_card_pic.url %>
+        </div>
+        <div class="content">
+          <%= link_to "#{student.name}", student_path(intention.student), class: 'header' %>
+          <div class="meta">
+            <span class="date">当前状态：<%= intention.current_status_text %></span>
+          </div>
+          <div class="description three-line">
+            <%= last_contact.contact_log %>
+          </div>
+        </div>
+        <div class="extra content">
+          <a>
+            <i class="user icon"></i>
+            上次联系人：<%= last_contact.user.nil? ? '未知' : last_contact.user.name %>
+          </a>
+        </div>
+      </div>
+    </li>
+    <% end %>
+</ul>
+
+<% if @intentions.count <= 0 then %>
+<div class="ui very raised text container segment intention-block">
+  <div class="ui container">
+    未找到数据
+  </div>
+</div>
+<% end %>
