@@ -22,16 +22,6 @@
     <%= f.label :process_by, "经办" %>
     <%= f.select :process_by, options_for_select(ResidenceCard.process_by_for_select), {}, class: "ui selection dropdown" %>
   </div>
-  <div class="field">
-    <div id="id_card_preview"></div>
-    <%= f.file_field :id_card_pic, style: "display: none" %>
-    <div class="ui input" id="id_card_pic">
-      <input type="text" value="" disabled>
-      <a class="ui teal icon button">
-        <i class="cloud upload icon"></i>
-      </a>
-    </div>
-  </div>
   <div class="div-btn">
     <%= f.submit "保存联系记录", class: "ui primary button" %>
   </div>
@@ -50,13 +40,5 @@
 </script>
 <script type="text/javascript">
   (function() {
-    pages.common.imgView('residence_card_id_card_pic', 'id_card_preview', function(img) {
-      $(img).css('height', '300px');
-      $(img).css('display', 'block');
-      $(img).css('margin', '0 auto');
-    });
-    $("#id_card_pic").on("click", function() {
-      $('#residence_card_id_card_pic').click();
-    });
   })();
 </script>

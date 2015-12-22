@@ -9,7 +9,13 @@ class ResidenceCardsController < ApplicationController
   end
 
   def create
-    binding.remote_pry
+    @student = Student.find(params[:student_id])
+    @residence_card = @student.residence_cards.build(residence_card_param)
+    if @residence_card.save
+      redirect_to @student, status: 302
+    else
+      redirect_to :back
+    end
   end
 
   def edit
