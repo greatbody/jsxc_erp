@@ -13,4 +13,8 @@ class Intention < ActiveRecord::Base
     end
   end
 
+  def current_status_text
+    I18n.t("current_status.#{current_status}")
+  end
+
 end
