@@ -2,12 +2,22 @@
 <div class="ui very raised text container segment">
   <h2 class="ui header">新的意向</h2>
   <p>当我们得到了意向学员的联系方式后，我们就需要来这里录入我们的意向，避免浪费。</p>
-  <%= link_to '添加意向', new_intention_path, class: 'ui primary button' %>
+  <%= link_to new_intention_path do %>
+    <div class="ui primary labeled icon button">
+      添加意向
+      <i class="add icon"></i>
+    </div>
+  <% end %>
   <%= link_to '意向墙', intentions_path, class: 'ui primary button' %>
 </div>
 
 <div class="ui very raised text container segment">
   <h2 class="ui header">跟踪意向</h2>
   <p>在我们获得了意向后，我们需要持续的跟踪意向确保跟踪转化为报名。</p>
-  <%= link_to '新的跟踪', new_contact_log_path, class: 'ui primary button' %>
+  <%= link_to new_contact_log_path do %>
+    <div class="ui primary labeled icon button">
+      新的跟踪
+      <i class="add icon"></i>
+    </div>
+  <% end %>
 </div>
