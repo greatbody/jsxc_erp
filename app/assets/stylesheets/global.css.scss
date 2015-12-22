@@ -9,3 +9,21 @@
 .relative {
   position: relative;
 }
+
+.three-line {
+  position:relative;
+  line-height:1.4em;
+  /* 3 times the line-height to show 3 lines */
+  height:4.2em;
+  overflow:hidden;
+
+  &::after {
+    content: "...";
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 20px 1px 45px;
+    background: url(/ellipsis_bg.png) repeat-y;
+  }
+}
