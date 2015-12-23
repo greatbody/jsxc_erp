@@ -10,7 +10,7 @@
     <button class="ui basic button wait_pay">等待付款</button>
     <button class="ui basic button signed_up">已报名</button>
     <button class="ui basic button should_contact">今日任务</button>
-    <div class="ui input"><input placeholder="Search..." type="text" /></div>
+    <div class="ui input"><input placeholder="Search..." type="text" class="page-query" /></div>
   </div>
   <div id="content-list">
     <%= render partial: 'index_card_intention_list' %>
@@ -48,10 +48,24 @@
     getIntentionByType('should_contact', this);
   });
 
+  $(document).delegate('.page-query', 'keyup', function() {
+    var queryValue = this.value;
+    if (queryValue == '') {
+      $('.intention-card').show();
+    } else {
+      $('.intention-card').each(function(i) {
+        var stuName = this.getAttribute('data-user-name');
+        if (stuName.indexOf(queryValue) >= 0) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    }
+  });
+
   (function() {
     var touch = getURLParameter('touch');
-    console.log(touch);
-    console.log(typeof touch);
     var btn = $('.' + touch)[0];
     if (!btn) {
       return;

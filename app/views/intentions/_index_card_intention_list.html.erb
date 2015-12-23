@@ -4,7 +4,7 @@
       student = intention.student
       last_contact = student.contact_logs.last
     %>
-    <li style="list-style:none;margin: 5px;display: inline-block;margin-bottom: 20px;">
+    <li class="intention-card" data-user-name="<%= student.name %>">
       <div class="ui card">
         <div class="ui slide masked reveal image">
           <% if intention.next_contact_at %>
