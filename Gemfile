@@ -29,7 +29,6 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-passenger'
-  gem 'rails_admin', '~> 0.6.0'
 end
 
 group :test do
@@ -57,6 +56,7 @@ gem 'kaminari'
 
 gem 'semantic-ui-sass'
 
-gem 'rails_admin', '~> 0.6.0'
+gem 'rest-client'
 
-gem 'rest-client', '~> 1.8.0'
+gem 'rails_admin'
+
