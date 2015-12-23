@@ -31,8 +31,25 @@
   <i class="right angle icon divider"></i>
   <div class="active section">编辑 <%= @student.name %> 基本信息</div>
 </div>
+<% when :edit_intention_path %>
+<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "意向墙", intentions_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "#{@intention.student.name} 意向", intention_path(@intention), class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">编辑 <%= @intention.student.name %> 意向信息</div>
+</div>
+<% when :new_contact_log_path %>
+<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "意向墙", intentions_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">创建新联系记录</div>
+</div>
 <% end %>
-
 
 <!-- <div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
   <a class="section" href="/">首页</a>
