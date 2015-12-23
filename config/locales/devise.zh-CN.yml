@@ -131,3 +131,4 @@ zh-CN:
     sessions:
       user:
         signed_in: '已登录'
+        unauthenticated: '您尚未登陆'
