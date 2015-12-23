@@ -119,15 +119,15 @@ zh-CN:
         bulk_link: '删除选中项'
   devise:
     failure:
-      already_authenticated: "您已登录."
+      already_authenticated: '您已登录.'
       admin:
-        unauthenticated: "继续操作前请注册或者登录."
+        unauthenticated: '继续操作前请注册或者登录.'
       coach:
-        unauthenticated: "继续操作前请注册或者登录."
-      invalid: "手机号或密码错误."
-      not_found_in_database: "手机号或密码错误."
+        unauthenticated: '继续操作前请注册或者登录.'
+      invalid: '手机号或密码错误.'
+      not_found_in_database: '手机号或密码错误.'
       student:
-        unauthenticated: "继续操作前请注册或者登录."
+        unauthenticated: '继续操作前请注册或者登录.'
       user:
         unauthenticated: '您尚未登陆'
     sessions:
