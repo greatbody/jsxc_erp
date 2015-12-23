@@ -58,8 +58,17 @@ if ((typeof pages) == 'undefined') {
           $('#' + id).hide();
         },
         show: function(new_content) {
-          $('#' + id).find('div').html(new_content)
-          $('#' + id).show();
+          var loadingLayer = $('#' + id);
+          var height = parseFloat(loadingLayer.css('height').replace(/px/,''));
+          var width = parseFloat(loadingLayer.css('width').replace(/px/,''));;
+          var clientWidth = document.body.clientWidth;
+          var clientHeight = document.body.clientHeight;
+          var left = (clientWidth - width) / 2;
+          var top = (clientHeight - height) / 2;
+          loadingLayer.css('left', left);
+          loadingLayer.css('top', top);
+          loadingLayer.find('div').html(new_content)
+          loadingLayer.show();
         }
       };
     },
