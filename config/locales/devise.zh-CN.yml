@@ -128,7 +128,8 @@ zh-CN:
       not_found_in_database: "手机号或密码错误."
       student:
         unauthenticated: "继续操作前请注册或者登录."
+      user:
+        unauthenticated: '您尚未登陆'
     sessions:
       user:
         signed_in: '已登录'
-        unauthenticated: '您尚未登陆'
