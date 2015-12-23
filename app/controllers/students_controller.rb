@@ -7,6 +7,7 @@ class StudentsController < ApplicationController
   end
 
   def show
+    @current_page = :student_path
     id = params[:id].to_i
     redirect_to root_path if id <= 0
     @student = Student.find(id)
@@ -14,6 +15,7 @@ class StudentsController < ApplicationController
   end
 
   def edit
+    @current_page = :edit_student_path
     @student = Student.find(params[:id])
   end
 
