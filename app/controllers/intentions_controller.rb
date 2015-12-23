@@ -35,6 +35,7 @@ class IntentionsController < ApplicationController
   end
 
   def show
+    @current_page = :intention_path
     id = params[:id].to_i
     @intention = Intention.find(id)
     @student = @intention.student
@@ -66,6 +67,7 @@ class IntentionsController < ApplicationController
   end
 
   def edit
+    @current_page = :edit_intention_path
     @intention = Intention.find(params[:id])
   end
 

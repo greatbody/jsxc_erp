@@ -5,6 +5,7 @@ class ContactLogsController < ApplicationController
   end
 
   def new
+    @current_page = :new_contact_log_path
     @contact_log = current_user.contact_logs.build
     @user_id = params[:user].to_i > 0 ? params[:user].to_i : 1
   end
