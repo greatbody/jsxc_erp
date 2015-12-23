@@ -61,7 +61,7 @@ class IntentionsController < ApplicationController
       @intentions = Intention.where('next_contact_at <= ? or next_contact_at is null', Date.today)
     end
     @intentions = @intentions.order(next_contact_at: :asc)
-    render '_index_intention_list', layout: false
+    render '_index_card_intention_list', layout: false
   end
 
   def edit
