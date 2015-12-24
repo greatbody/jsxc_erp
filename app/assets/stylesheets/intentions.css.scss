@@ -5,6 +5,12 @@
     color: red;
   }
 
+  .primary > span {
+    &.red {
+      color: white;
+    }
+  }
+
   span {
     &.red {
       color: red;
