@@ -1,13 +1,28 @@
 <% content_for :title, "意向列表 - 极速学车ERP系统" %>
+<% intents = @intentions %>
 <div class="intention">
   <div class="ui segment">
-    <button class="ui primary button all">全部</button>
-    <button class="ui basic button wait_call">未联系</button>
-    <button class="ui basic button contacting">联系中</button>
-    <button class="ui basic button booking">预约试学</button>
-    <button class="ui basic button wait_pay">等待付款</button>
-    <button class="ui basic button signed_up">已报名</button>
-    <button class="ui basic button should_contact">今日任务</button>
+    <a class="ui primary button all">全部
+      <span class="locate-all red padded">(<%= intents.count %>)</span>
+    </a>
+    <a class="ui basic button wait_call">未联系
+      <span class="locate-wait_call red padded">(<%= intents.wait_call.count %>)</span>
+    </a>
+    <a class="ui basic button contacting">联系中
+      <span class="locate-contacting red padded">(<%= intents.contacting.count %>)</span>
+    </a>
+    <a class="ui basic button booking">预约试学
+      <span class="locate-booking red padded">(<%= intents.booking.count %>)</span>
+    </a>
+    <a class="ui basic button wait_pay">等待付款
+      <span class="locate-wait_pay red padded">(<%= intents.wait_pay.count %>)</span>
+    </a>
+    <a class="ui basic button signed_up">已报名
+      <span class="locate-signed_up red padded">(<%= intents.signed_up.count %>)</span>
+    </a>
+    <a class="ui basic button should_contact">今日任务
+      <span class="locate-signed_up red padded">(<%= Intention.where('next_contact_at <= ? or next_contact_at is null', Date.today).count %>)</span>
+    </a>
     <div class="ui input"><input placeholder="Search..." type="text" class="page-query" /></div>
   </div>
   <div id="content-list">

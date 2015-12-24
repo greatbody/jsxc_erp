@@ -1,6 +1,20 @@
 .intention {
   margin-top: 10px;
 
+  span.red {
+    color: red;
+  }
+
+  span {
+    &.red {
+      color: red;
+    }
+
+    &.padded {
+      padding: 0 2px;
+    }
+  }
+
   .img-comment {
     background: rgba(0, 0, 0, 0.3);
     position: absolute;
