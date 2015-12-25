@@ -22,14 +22,20 @@
           <div class="meta">
             <span class="date">当前状态：<%= intention.current_status_text %></span>
           </div>
+          <% unless last_contact.nil? %>
           <div class="description three-line" title="<%= last_contact.contact_log %>">
             <%= last_contact.contact_log %>
           </div>
+          <% end %>
         </div>
         <div class="extra content">
           <a>
             <i class="user icon"></i>
-            上次联系人：<%= last_contact.user.nil? ? '未知' : last_contact.user.name %>
+            <% if last_contact.present? && last_contact.user.present? %>
+            上次联系人：<%= last_contact.user.name %>
+            <% else %>
+            上次联系人：未知
+            <% end %>
           </a>
         </div>
       </div>
