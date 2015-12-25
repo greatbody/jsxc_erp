@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :update_id_card, :notify_got_number, :notify_got_card]
+  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card]
   def index
   end
 
@@ -43,6 +43,7 @@ class StudentsController < ApplicationController
 
   def update_id_card
     upload_param = params_update_id_card
+    @student = Student.find(params_update_id_card[:student_id])
     @error_code = '学员不存在' if @student.nil?
     if upload_param[:id_card_pic].present?
       @student.update(id_card_pic: upload_param[:id_card_pic])
