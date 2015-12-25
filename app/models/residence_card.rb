@@ -5,9 +5,19 @@ class ResidenceCard < ActiveRecord::Base
 
   belongs_to :student
 
+  def error_msg
+    errors.messages.values.first.try(&:first)
+  end
+
   def self.process_by_for_select
     process_bies.map do |process_by, _|
       [I18n.t("residence_card.process_by.#{process_by}"), process_by]
+    end
+  end
+
+  def self.current_status_for_select
+    current_statuses.map do |current_status, _|
+      [I18n.t("residence_card.current_status.#{current_status}"), current_status]
     end
   end
 end

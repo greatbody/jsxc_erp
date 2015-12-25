@@ -19,6 +19,10 @@
     <%= f.select :ethnicity, options_for_select(all_ethnicity), {}, class: "ui search selection dropdown" %>
   </div>
   <div class="field">
+    <%= f.label :id_card, "身份证" %>
+    <%= f.text_field :id_card, { value: "#{@residence_card.id_card}", readonly: true } %>
+  </div>
+  <div class="field">
     <%= f.label :process_by, "经办" %>
     <%= f.select :process_by, options_for_select(ResidenceCard.process_by_for_select), {}, class: "ui selection dropdown" %>
   </div>

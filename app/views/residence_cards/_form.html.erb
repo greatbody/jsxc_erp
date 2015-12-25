@@ -1,37 +1,54 @@
-<%= form_for(@residence_card, url: student_residence_cards_path, method: :post, html: { class: "ui form" }) do |f| %>
-  <% if @residence_card.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@residence_card.errors.count, "error") %> prohibited this coach from being saved:</h2>
-
-      <ul>
-      <% @residence_card.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<% content_for :title, "编辑 #{@residence_card.name} 居住证信息" %>
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
+<div class="ui segment">
+  <%= form_for(@residence_card, url: student_residence_card_path, method: :patch, html: { class: "ui form" }) do |f| %>
+  <% student = @residence_card %>
+  <div class="field">
+    <%= f.label :name, "姓名" %>
+    <%= f.text_field :name, { value: @residence_card.name, readonly: true } %>
+  </div>
+  <div class="field">
+    <%= f.label :gender, "性别" %>
+    <%= f.text_field :gender, { value: @residence_card.gender, readonly: true } %>
+  </div>
+  <div class="field">
+    <%= f.label :card_id, "居住证号" %>
+    <%= f.text_field :card_id, { value: @residence_card.card_id } %>
+  </div>
+  <div class="field">
+    <%= f.label :current_address, "居住证地址" %>
+    <%= f.text_field :current_address, { value: @residence_card.current_address } %>
+  </div>
+  <div class="field">
+    <%= f.label :current_status, "当前进度" %>
+    <%= f.select :current_status, options_for_select(ResidenceCard.current_status_for_select), {}, class: "ui selection dropdown" %>
+  </div>
+  <div class="field">
+    <%= f.label :ethnicity, "民族" %>
+    <%= f.select :ethnicity, options_for_select(all_ethnicity), {}, class: "ui search selection dropdown" %>
+  </div>
+  <div class="field">
+    <%= f.label :process_by, "经办" %>
+    <%= f.select :process_by, options_for_select(ResidenceCard.process_by_for_select), {}, class: "ui selection dropdown" %>
+  </div>
+  <div class="div-btn">
+    <%= f.submit "保存联系记录", class: "ui primary button" %>
+  </div>
+  <div class="ui error message">
+  </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :card_id %><br>
-    <%= f.text_field :card_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.number_field :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :id_card %><br>
-    <%= f.text_field :id_card %>
-  </div>
-  <div class="field">
-    <%= f.label :ethnicity %><br>
-    <%= f.text_field :ethnicity %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+<script type="text/javascript">
+  $('.ui.search.selection.dropdown').dropdown({
+    onChange: function(value, text, $selectedItem) {
+    }
+  });
+
+  $('.ui.selection.dropdown').dropdown();
+</script>
+<script type="text/javascript">
+  (function() {
+  })();
+</script>
