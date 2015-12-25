@@ -20,7 +20,7 @@
   </div>
   <div class="field">
     <%= f.label :id_card, "身份证" %>
-    <%= f.text_field :id_card, { value: "#{@residence_card.id_card}", readonly: true } %>
+    <%= f.text_field :id_card, { value: @student.id_card, readonly: true } %>
   </div>
   <div class="field">
     <%= f.label :process_by, "经办" %>
