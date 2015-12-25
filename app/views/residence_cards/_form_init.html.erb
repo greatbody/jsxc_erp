@@ -20,7 +20,15 @@
   </div>
   <div class="field">
     <%= f.label :id_card, "身份证" %>
+    <% if @student.id_card.blank? %>
+    <%= f.text_field :id_card, { value: @student.id_card } %>
+    <% else %>
     <%= f.text_field :id_card, { value: @student.id_card, readonly: true } %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :current_address, "居住证地址" %>
+    <%= f.text_field :current_address, { value: '武汉市洪山区桂元路124号1栋1单元1楼1号' } %>
   </div>
   <div class="field">
     <%= f.label :process_by, "经办" %>

@@ -13,6 +13,8 @@ class ResidenceCardsController < ApplicationController
     @student = Student.find(params[:student_id])
     @residence_card = @student.residence_cards.build(residence_card_params)
     if @residence_card.save
+      # update student id_card if empty
+      @student.update(id_card: residence_card_params[:id_card]) if @student.id_card.blank?
       redirect_to @student, status: 302
     else
       redirect_to :back
@@ -37,11 +39,11 @@ class ResidenceCardsController < ApplicationController
   private
 
   def residence_card_params
-    params.require(:residence_card).permit(:name, :gender, :current_status, :ethnicity, :process_by)
+    params.require(:residence_card).permit(:name, :gender, :current_status, :ethnicity, :process_by, :id_card)
   end
 
   def update_residence_card_params
-    params.require(:residence_card).permit(:name, :gender, :current_status, :ethnicity, :process_by, :card_id, :current_address)
+    params.require(:residence_card).permit(:name, :gender, :current_status, :ethnicity, :process_by, :card_id, :id_card, :current_address)
   end
 
   def set_residence_card
