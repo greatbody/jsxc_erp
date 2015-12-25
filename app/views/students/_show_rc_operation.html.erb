@@ -6,7 +6,17 @@
     </div>
   <% end %>
 <% end %>
-<% if @residence_card.card_id.present? && @residence_card.current_address.present? %>
+<% if @residence_card.have_number? && @residence_card.student.coach.cover_all? %>
+  <% if @residence_card.notify_at.nil? %>
   <a class="ui button notify-rc-info">下发居住证信息</a>
+  <% else %>
+  <a class="ui button notify-rc-info">下发居住证信息(上次：<%= @residence_card.last_notify_at.to_s(:db) %>)</a>
+  <% end %>
+<% end %>
+<% if @residence_card.have_card? %>
+  <% if @residence_card.fatch_notify_at.nil? %>
   <a class="ui button notify-fetch-rc">通知领取居住证</a>
+  <% else %>
+  <a class="ui button notify-fetch-rc">通知领取居住证(上次：<%= @residence_card.last_fatch_notify_at.to_s(:db) %>)</a>
+  <% end %>
 <% end %>

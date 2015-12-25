@@ -16,6 +16,10 @@ zh-CN:
     wait_pay: '等待付款'
     signed_up: '已报名'
     canceled: '已关闭'
+  coach:
+    coach_type:
+      cover_all_training: '训练全包，不处理档案'
+      cover_all: '训练档案包干'
   residence_card:
     current_status:
       id_card_received: '已收身份证'

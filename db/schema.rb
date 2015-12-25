@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216080325) do
+ActiveRecord::Schema.define(version: 20151225091022) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20151216080325) do
     t.string   "qq",                                limit: 255
     t.string   "coaching_license",                  limit: 255
     t.string   "driving_license",                   limit: 255
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
     t.string   "avatar_file_name",                  limit: 255
     t.string   "avatar_content_type",               limit: 255
     t.integer  "avatar_file_size",                  limit: 4
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20151216080325) do
     t.string   "driving_license_pic_content_type",  limit: 255
     t.integer  "driving_license_pic_file_size",     limit: 4
     t.datetime "driving_license_pic_updated_at"
+    t.integer  "coach_type",                        limit: 4,   default: 0
   end
 
   create_table "contact_logs", force: :cascade do |t|
@@ -90,6 +91,10 @@ ActiveRecord::Schema.define(version: 20151216080325) do
     t.string   "card_pic_content_type", limit: 255
     t.integer  "card_pic_file_size",    limit: 4
     t.datetime "card_pic_updated_at"
+    t.date     "notify_at"
+    t.date     "last_notify_at"
+    t.date     "fatch_notify_at"
+    t.date     "last_fatch_notify_at"
   end
 
   add_index "residence_cards", ["student_id"], name: "index_residence_cards_on_student_id", using: :btree
