@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :update_id_card]
+  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :update_id_card, :notify_got_number, :notify_got_card]
   def index
   end
 
@@ -53,6 +53,24 @@ class StudentsController < ApplicationController
     end
     respond_to do |format|
       format.js
+    end
+  end
+
+  def notify_got_number
+    if @student.present?
+      NotifyStudentJob.perform_later(@student.id, 'notify_got_number')
+      render json: { msg_code: 'success' }
+    else
+      render json: { msg_code: 'error', msg_text: '学员不存在，请检查系统数据！' }
+    end
+  end
+
+  def notify_got_card
+    if @student.present?
+      NotifyStudentJob.perform_later(@student.id, 'notify_got_card')
+      render json: { msg_code: 'success' }
+    else
+      render json: { msg_code: 'error', msg_text: '学员不存在，请检查系统数据！' }
     end
   end
 

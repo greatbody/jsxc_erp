@@ -3,11 +3,13 @@ module SendSms
     send_sms(phone, '8106', token)
   end
   # 提醒学员来拿卡
-  def residence_card(student_phone, coach_name, coach_phone)
-    # send_sms(student_phone, '11994', [coach_name, coach_phone])
+  def residence_card(student)
+    # 领取居住证通知模板
+    # {1}同学，您的居住证卡片已经制作完成，请于周一至周六或其它法定上班时间到我公司领取证件，公司地址：武汉市洪山区珞狮路147号武汉理工大学生创业园404（以及407）室，联系电话：027-51112676。祝您学车顺利。
+    send_sms(student.phone, '18801', [student.name])
   end
   # 告知教练、学员号码出来
-  def residence_num(res_card, coach)
+  def residence_num(student, res_card, coach)
     # 学员模板
     # {1}同学，您的居住证编号：{2}，地址：{3}。若教练3日内未联系您，请联系教练{4}，祝学习工作顺利。
     send_sms(student.phone, '18290', [res_card.name, res_card.card_id, res_card.current_address, coach.name])

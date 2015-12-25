@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       post 'get_student_status' => :get_student_status
       post 'update_id_card' => :update_id_card
       get 'upload_id_card_form' => :upload_id_card_form
+      post 'notify_got_number' => :notify_got_number
+      post 'notify_got_card' => :notify_got_card
     end
   end
 
