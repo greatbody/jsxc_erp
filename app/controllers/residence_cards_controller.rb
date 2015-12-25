@@ -41,7 +41,7 @@ class ResidenceCardsController < ApplicationController
   end
 
   def update_residence_card_params
-    params.require(:residence_card).permit(:name, :gender, :current_status, :ethnicity, :process_by)
+    params.require(:residence_card).permit(:name, :gender, :current_status, :ethnicity, :process_by, :card_id, :current_address)
   end
 
   def set_residence_card
