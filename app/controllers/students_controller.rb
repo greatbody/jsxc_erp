@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class StudentsController < ApplicationController
+  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :update_id_card]
   def index
   end
 
@@ -7,21 +8,17 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @current_page = :student_path
-    id = params[:id].to_i
-    redirect_to root_path if id <= 0
-    @student = Student.find(id)
     redirect_to root_path if @student.nil?
   end
 
   def edit
     @current_page = :edit_student_path
-    @student = Student.find(params[:id])
   end
 
   def update
-    @student = Student.find(params[:id])
     if @student.update(params_student)
+      coach = Coach.find(params_student[:coach_id])
+      @student.update(coach: coach) if coach.present?
       redirect_to student_path(@student)
     else
       redirect_to :back
@@ -29,11 +26,7 @@ class StudentsController < ApplicationController
   end
 
   def get_student_status
-    id = params[:id]
-    render html: '' if !is_number?(id)
-    id = id.to_i
-    student = Student.find(id)
-    render html: '' if student.nil?
+    render html: '' if @student.nil?
     case student.intention.current_status
     when 'wait_call'
       render html: 'intent'
@@ -50,8 +43,6 @@ class StudentsController < ApplicationController
 
   def update_id_card
     upload_param = params_update_id_card
-    @error_code = '学员不存在' if upload_param[:student_id].to_i == 0
-    @student = Student.find(upload_param[:student_id])
     @error_code = '学员不存在' if @student.nil?
     if upload_param[:id_card_pic].present?
       @student.update(id_card_pic: upload_param[:id_card_pic])
@@ -76,6 +67,10 @@ class StudentsController < ApplicationController
   end
 
   def params_student
-    params.require(:student).permit(:phone, :name, :sex, :address, :unit, :id_card)
+    params.require(:student).permit(:phone, :name, :sex, :address, :unit, :id_card, :coach_id)
+  end
+
+  def set_student
+    @student = Student.find(params[:id])
   end
 end
