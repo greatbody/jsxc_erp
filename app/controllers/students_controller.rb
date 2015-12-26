@@ -8,6 +8,7 @@ class StudentsController < ApplicationController
   end
 
   def show
+    @current_page = :student_path
     redirect_to root_path if @student.nil?
   end
 
