@@ -17,6 +17,11 @@ module SendSms
     # {1}教练，学员{2}的居住证号：{3}，地址：{4}，请尽快处理档案，祝工作顺利。
     send_sms(coach.phone, '18289', [coach.name, res_card.name, res_card.card_id, res_card.current_address])
   end
+  # 指派任务
+  def assign_task(processer, sender, student, business_type)
+    # {1}你好，请处理{2}学员（手机：{3}）的{4}。指派人：{5}（手机：{6}）
+    send_sms(processer.phone, '18826', [processer.name, student.name, student.phone, business_type, sender.name, sender.phone])
+  end
 
   protected
 
