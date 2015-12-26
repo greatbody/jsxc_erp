@@ -4,9 +4,8 @@ class IntentionsController < ApplicationController
   include SendSms
   before_action :authenticate_user!
   def index
-    # NotifyStudentJob.perform_later
     @current_page = :intentions_path
-    @intentions = Intention.all.order(next_contact_at: :asc)
+    @intentions = Intention.all.order(updated_at: :desc, next_contact_at: :asc)
   end
 
   def new
@@ -66,7 +65,7 @@ class IntentionsController < ApplicationController
     when 'should_contact'
       @intentions = Intention.where('next_contact_at <= ? or next_contact_at is null', Date.today)
     end
-    @intentions = @intentions.order(next_contact_at: :asc)
+    @intentions = @intentions.order(updated_at: :desc, next_contact_at: :asc)
     render '_index_card_intention_list', layout: false
   end
 
