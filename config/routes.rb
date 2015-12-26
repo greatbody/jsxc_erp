@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     get '/demo' => :demo
   end
 
+  namespace :service do
+    post 'assign_task' => :assign_task
+  end
+
   resources :contact_logs
 
   resources :intentions do

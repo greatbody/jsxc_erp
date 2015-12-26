@@ -31,6 +31,7 @@
   <div class="ui segment">
   </div>
 </div>
+<%= render partial: 'index_assign_task' %>
 <!-- javascript code -->
 <script type="text/javascript">
   $('.all').on('click', function() {
@@ -76,6 +77,46 @@
       });
     }
   });
+
+  $(document).delegate('.user-action > .button', 'click', function() {
+    var student_id = $(this.parentNode).attr('data-student-id');
+    $('.ui.search.dropdown').dropdown();
+    $('#processor').val(0);
+    $('#task_type').val('');
+    $('.ui.modal.assign-task').modal('setting', 'closable', false).modal({
+      closable: false,
+      onDeny: function() {
+        return true;
+      },
+      onApprove: function() {
+        var student = student_id;
+        var processor = $('#processor').val();
+        var task_type = $('#task_type').val();
+        if (!student && !processor && !task_type) {
+          alert('请选择指派人，并填写任务类型');
+          return false;
+        }
+        assign_task(student_id, processor, task_type);
+        return false;
+      }
+    }).modal('show');
+  });
+
+  function assign_task(student_id, processor_id, task_type) {
+    $.post('/service/assign_task', {
+      'student_id': student_id,
+      'processor_id': processor_id,
+      'task_type': task_type
+    }).success(function(data) {
+      if (data && data.msg_code == 'success') {
+        $('.ui.modal.assign-task').modal('hide');
+      } else {
+        alert('发送消息错误，请联系管理员！');
+      }
+    }).error(function(data) {
+      alert('发送消息错误，请联系管理员！');
+    });
+  }
 
   (function() {
     window.flash = pages.common.showFlashText('loading');
