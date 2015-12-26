@@ -57,6 +57,26 @@
   <i class="right angle icon divider"></i>
   <div class="active section">创建新联系记录</div>
 </div>
+<% when :new_student_residence_card_path %>
+<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "意向墙", intentions_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "#{@student.name}", student_path(@student), class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">创建居住证信息</div>
+</div>
+<% when :edit_student_residence_card_path %>
+<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "意向墙", intentions_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "#{@residence_card.student.name}", student_path(@residence_card.student, @residence_card), class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">编辑居住证信息</div>
+</div>
 <% end %>
 
 <!-- <div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">

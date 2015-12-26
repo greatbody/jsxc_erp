@@ -2,6 +2,7 @@
 class ResidenceCardsController < ApplicationController
   before_action :set_residence_card, only: [:show, :edit, :update]
   def new
+    @current_page = :new_student_residence_card_path
     @student = Student.find(params[:student_id])
     # unless @student.id_card_pic.present? && @student.id_card_back_pic.present?
     #   redirect_to edit_student_path(@student)
@@ -25,6 +26,7 @@ class ResidenceCardsController < ApplicationController
   end
 
   def edit
+    @current_page = :edit_student_residence_card_path
   end
 
   def update
@@ -47,6 +49,7 @@ class ResidenceCardsController < ApplicationController
   end
 
   def set_residence_card
-    @residence_card = ResidenceCard.find(params[:id])
+    @residence_card = ResidenceCard.where("id = ?", params[:id]).first
+    redirect_to intentions_path if @residence_card.nil?
   end
 end
