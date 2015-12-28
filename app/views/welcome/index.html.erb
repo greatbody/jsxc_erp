@@ -1,23 +1,62 @@
 <% content_for :title, "极速学车ERP系统" %>
-<div class="ui very raised text container segment">
-  <h2 class="ui header">新的意向</h2>
-  <p>当我们得到了意向学员的联系方式后，我们就需要来这里录入我们的意向，避免浪费。</p>
-  <%= link_to new_intention_path do %>
-    <div class="ui primary labeled icon button">
-      添加意向
-      <i class="add icon"></i>
+<div class="padded">
+  <div class="ui grid">
+    <div class="eight wide column">
+      <div class="ui raised text segment">
+        <h2 class="ui header">新的意向</h2>
+        <p>当我们得到了意向学员的联系方式后，我们就需要来这里录入我们的意向，避免浪费。</p>
+        <%= link_to new_intention_path do %>
+          <div class="ui primary labeled icon button">
+            添加意向
+            <i class="add icon"></i>
+          </div>
+        <% end %>
+        <%= link_to '意向墙', intentions_path, class: 'ui primary button' %>
+      </div>
     </div>
-  <% end %>
-  <%= link_to '意向墙', intentions_path, class: 'ui primary button' %>
-</div>
-
-<div class="ui very raised text container segment">
-  <h2 class="ui header">跟踪意向</h2>
-  <p>在我们获得了意向后，我们需要持续的跟踪意向确保跟踪转化为报名。</p>
-  <%= link_to new_contact_log_path do %>
-    <div class="ui primary labeled icon button">
-      新的跟踪
-      <i class="add icon"></i>
+    <div class="eight wide column">
+      <div class="ui raised text segment">
+        <h2 class="ui header">跟踪意向</h2>
+        <p>在我们获得了意向后，我们需要持续的跟踪意向确保跟踪转化为报名。</p>
+        <%= link_to new_contact_log_path do %>
+          <div class="ui primary labeled icon button">
+            新的跟踪
+            <i class="add icon"></i>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+    <div class="four wide column">
+      <div class="ui raised text segment">
+        <div class="ui header thin">居住证待办通知</div>
+        <div class="ui divider thin"></div>
+        <div class="ui list">
+          <% ResidenceCard.id_card_received.each do |residence_card| %>
+          <div class="item">
+            <i class="alarm icon"></i>
+            <div class="content">
+              <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="four wide column">
+      <div class="ui raised text segment">
+        <div class="ui header thin">居住证办理通知</div>
+        <div class="ui divider thin"></div>
+        <div class="ui list">
+          <% ResidenceCard.have_card.each do |residence_card| %>
+          <div class="item">
+            <i class="mail icon"></i>
+            <div class="content">
+              <%= residence_card.name %>学员<%= link_to "居住证", student_path(residence_card.student), { target: '_blank' } %>待领取
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
