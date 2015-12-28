@@ -5,6 +5,6 @@ class AssignTaskJob < ActiveJob::Base
     student = Student.find(student_id)
     processer = User.find(processer_id)
     sender = User.find(sender_id)
-    # assign_task(processer, sender, student, business_type)
+    assign_task(processer, sender, student, business_type)
   end
 end
