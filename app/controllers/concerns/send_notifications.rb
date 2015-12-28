@@ -7,7 +7,7 @@ module SendNotifications
       发布人：#{notify[:sender][:name]}（手机：#{notify[:sender][:phone]}）
       发布时间：#{Time.now.to_s(:db)}
       消息：
-        #{notify[:processor]}你好，请处理#{notify[:student][:name]}学员（手机：#{notify[:student][:phone]}）的#{notify[:task_type]}。
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{notify[:processor]}你好，请处理#{notify[:student][:name]}学员（手机：#{notify[:student][:phone]}）的#{notify[:task_type]}。
       EOS
     }.to_json
     response = RestClient.post uri, json_data, content_type: :json, accept: :json
