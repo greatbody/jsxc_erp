@@ -50,6 +50,7 @@ en:
       notify_sent: '已通知'
       have_card: '已领居住证'
       return_card: '已还居住证'
+      applyed: '已提交办理'
     process_by:
       jsxc: '极速学车'
       student: '学员自助'

@@ -43,6 +43,8 @@ class ResidenceCardsController < ApplicationController
         @residence_card.update(have_card_at: current_time)
       when 'return_card'
         @residence_card.update(return_card_at: current_time)
+      when 'applyed'
+        @residence_card.update(applyed_at: current_time)
       end
     end
     if @residence_card.update(update_residence_card_params)
