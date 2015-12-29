@@ -22,15 +22,15 @@
   </div>
   <div class="field">
     <%= f.label :current_status, "当前进度" %>
-    <%= f.select :current_status, options_for_select(ResidenceCard.current_status_for_select), { value: @residence_card.current_status }, class: "ui selection dropdown" %>
+    <%= f.select :current_status, options_for_select(ResidenceCard.current_status_for_select, @residence_card.current_status), {}, class: "ui selection dropdown" %>
   </div>
   <div class="field">
     <%= f.label :ethnicity, "民族" %>
-    <%= f.select :ethnicity, options_for_select(all_ethnicity), { value: @residence_card.ethnicity }, class: "ui search selection dropdown" %>
+    <%= f.select :ethnicity, options_for_select(all_ethnicity, @residence_card.ethnicity), {}, class: "ui search selection dropdown" %>
   </div>
   <div class="field">
     <%= f.label :process_by, "经办" %>
-    <%= f.select :process_by, options_for_select(ResidenceCard.process_by_for_select), { value: @residence_card.process_by }, class: "ui selection dropdown" %>
+    <%= f.select :process_by, options_for_select(ResidenceCard.process_by_for_select, @residence_card.process_by), {}, class: "ui selection dropdown" %>
   </div>
   <div class="div-btn">
     <%= f.submit "更新居住证", class: "ui primary button" %>
