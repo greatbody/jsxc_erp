@@ -34,6 +34,22 @@
     </div>
     <% end %>
   </div>
+  <div class="grouped fields">
+    <%= f.label :is_local, '户籍' %>
+    <% [[0, '外地'], [1, '本地']].reverse.each do |local_item| %>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <% if local_item.first == @student.is_local || (local_item.first == 1)%>
+        <input name="student[is_local]" checked="checked" type="radio" id="student_is_local_<%= local_item.first %>" value="<%= local_item.first %>" />
+        <label for="student_is_local"><%= local_item.last %></label>
+        <% else %>
+        <input name="student[is_local]" type="radio" id="student_is_local_<%= local_item.first %>" value="<%= local_item.first %>" />
+        <label for="student_is_local"><%= local_item.last %></label>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
   <div class="field">
     <%= f.label :coach_id, "负责教练" %>
     <%= f.select :coach_id, options_from_collection_for_select(Coach.all, :id, :name, @student.coach.present? ? @student.coach.id : 0) %>
