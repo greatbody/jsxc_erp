@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229073259) do
+ActiveRecord::Schema.define(version: 20151229081138) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -95,6 +95,12 @@ ActiveRecord::Schema.define(version: 20151229073259) do
     t.date     "last_notify_at"
     t.date     "fatch_notify_at"
     t.date     "last_fatch_notify_at"
+    t.date     "id_card_received_at"
+    t.date     "id_card_returned_at"
+    t.date     "have_number_at"
+    t.date     "notify_sent_at"
+    t.date     "have_card_at"
+    t.date     "return_card_at"
   end
 
   add_index "residence_cards", ["student_id"], name: "index_residence_cards_on_student_id", using: :btree

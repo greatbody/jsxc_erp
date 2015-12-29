@@ -30,6 +30,21 @@ class ResidenceCardsController < ApplicationController
   end
 
   def update
+    unless @residence_card.current_status == update_residence_card_params[:current_status]
+      current_time = Time.now
+      case update_residence_card_params[:current_status]
+      when 'id_card_received'
+        @residence_card.update(id_card_received_at: current_time)
+      when 'id_card_returned'
+        @residence_card.update(id_card_returned_at: current_time)
+      when 'have_number'
+        @residence_card.update(have_number_at: current_time)
+      when 'have_card'
+        @residence_card.update(have_card_at: current_time)
+      when 'return_card'
+        @residence_card.update(return_card_at: current_time)
+      end
+    end
     if @residence_card.update(update_residence_card_params)
       redirect_to student_path(@residence_card.student), status: 302
     else
