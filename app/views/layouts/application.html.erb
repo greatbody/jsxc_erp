@@ -61,7 +61,7 @@
           $.each(githubResponse.items, function(index, item) {
             var
               business = item.business || '其它',
-              maxResults = 8;
+              maxResults = 20;
             if (index >= maxResults) {
               return false;
             }
