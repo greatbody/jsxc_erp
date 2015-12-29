@@ -13396,11 +13396,11 @@ $.fn.search.settings = {
 
   error : {
     source      : 'Cannot search. No source used, and Semantic API module was not included',
-    noResults   : 'Your search returned no results',
+    noResults   : '没有找到内容',
     logging     : 'Error in debug logging, exiting.',
     noEndpoint  : 'No search endpoint was specified',
     noTemplate  : 'A valid template name was not specified.',
-    serverError : 'There was an issue querying the server.',
+    serverError : '服务器响应错误',
     maxResults  : 'Results must be an array to use maxResults setting',
     method      : 'The method you called is not defined.'
   },
@@ -13474,7 +13474,7 @@ $.fn.search.settings = {
         // message type
         if(type == 'empty') {
           html += ''
-            + '<div class="header">No Results</div class="header">'
+            + '<div class="header">查询结果</div class="header">'
             + '<div class="description">' + message + '</div class="description">'
           ;
         }
@@ -13505,7 +13505,7 @@ $.fn.search.settings = {
             // each item inside category
             $.each(category.results, function(index, result) {
               if(result[fields.url]) {
-                html  += '<a class="result" href="' + result[fields.url] + '">';
+                html  += '<a class="result" target="_blank" href="' + result[fields.url] + '">';
               }
               else {
                 html  += '<a class="result">';
