@@ -67,7 +67,7 @@
           </div>
         </td>
       </tr>
-      <% unless @student.is_local %>
+      <% unless @student.is_local == 1 %>
       <tr>
         <td class="two wide column">居住证信息</td>
         <% if @student.residence_cards.count > 0 %>
