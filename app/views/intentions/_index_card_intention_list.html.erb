@@ -1,49 +1,49 @@
-<ul style="padding: 10px;">
-    <% @intentions.each do |intention| %>
-    <%
-      student = intention.student
-      last_contact = student.contact_logs.last
-    %>
-    <li class="intention-card" data-user-name="<%= student.name %>">
-      <div class="ui card">
-        <div class="ui slide masked reveal image">
-          <% if intention.next_contact_at %>
-          <div class="img-comment">下次联系: <%= intention.next_contact_at.to_s(:db) %>
-          </div>
-          <% end %>
-          <%= image_tag student.id_card_pic.url, class: 'visible content' %>
-          <%= image_tag student.id_card_back_pic.url, class: 'hidden content' %>
+<ul class="intention-cards">
+  <% @intentions.each do |intention| %>
+  <%
+    student = intention.student
+    last_contact = student.contact_logs.last
+  %>
+  <li class="intention-card" data-user-name="<%= student.name %>">
+    <div class="ui card">
+      <div class="ui slide masked reveal image">
+        <% if intention.next_contact_at %>
+        <div class="img-comment">下次联系: <%= intention.next_contact_at.to_s(:db) %>
         </div>
-        <div class="content">
-          <div class="header">
-            <%= link_to "#{student.name}", student_path(intention.student), class: 'header' %>
-            (<%= link_to "意向信息", intention_path(intention), class: 'meta' %>)
-          </div>
-          <div class="meta">
-            <span class="date">当前状态：<%= intention.current_status_text %></span>
-          </div>
-          <% unless last_contact.nil? %>
-          <div class="description three-line" title="<%= last_contact.contact_log %>">
-            <%= last_contact.contact_log %>
-          </div>
-          <% end %>
-        </div>
-        <div class="extra content">
-          <a>
-            <i class="user icon"></i>
-            <% if last_contact.present? && last_contact.user.present? %>
-            上次联系人：<%= last_contact.user.name %>
-            <% else %>
-            上次联系人：未知
-            <% end %>
-          </a>
-        </div>
-        <div class="extra content user-action" data-student-id="<%= student.id %>">
-          <a class="ui button padded">指派任务</a>
-        </div>
+        <% end %>
+        <%= image_tag student.id_card_pic.url, class: 'visible content' %>
+        <%= image_tag student.id_card_back_pic.url, class: 'hidden content' %>
       </div>
-    </li>
-    <% end %>
+      <div class="content">
+        <div class="header">
+          <%= link_to "#{student.name}", student_path(intention.student), class: 'header' %>
+          (<%= link_to "意向信息", intention_path(intention), class: 'meta' %>)
+        </div>
+        <div class="meta">
+          <span class="date">当前状态：<%= intention.current_status_text %></span>
+        </div>
+        <% unless last_contact.nil? %>
+        <div class="description three-line" title="<%= last_contact.contact_log %>">
+          <%= last_contact.contact_log %>
+        </div>
+        <% end %>
+      </div>
+      <div class="extra content">
+        <a>
+          <i class="user icon"></i>
+          <% if last_contact.present? && last_contact.user.present? %>
+          上次联系人：<%= last_contact.user.name %>
+          <% else %>
+          上次联系人：未知
+          <% end %>
+        </a>
+      </div>
+      <div class="extra content user-action" data-student-id="<%= student.id %>">
+        <a class="ui button padded">指派任务</a>
+      </div>
+    </div>
+  </li>
+  <% end %>
 </ul>
 
 <% if @intentions.count <= 0 then %>

@@ -1,6 +1,15 @@
 .intention {
   margin-top: 10px;
 
+  ul {
+    &.intention-cards {
+      text-align: center;
+      .intention-card {
+        text-align: initial;
+      }
+    }
+  }
+
   span.red {
     color: red;
   }
@@ -12,7 +21,7 @@
   }
 
   .ui.button.padded {
-    padding: 5px;
+    padding: 8px;
   }
 
   span {
@@ -22,6 +31,7 @@
 
     &.padded {
       padding: 0 2px;
+      margin: 2px;
     }
   }
 
