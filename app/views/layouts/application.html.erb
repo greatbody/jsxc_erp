@@ -34,13 +34,56 @@
         </div>
       </div>
       <div class="right item">
-        <div class="ui input"><input placeholder="Search..." type="text" /></div>
+        <div class="ui search">
+          <div class="ui left icon input">
+            <input class="prompt" type="text" placeholder="Search ERP">
+            <i class="search icon"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <%= render partial: 'layouts/breadcrumb' %>
 <% end %>
 <%= yield %>
-
+<script type="text/javascript">
+  $('.ui.search')
+    .search({
+      type: 'category',
+      minCharacters: 1,
+      apiSettings: {
+        onResponse: function(githubResponse) {
+          var
+            response = {
+              results: {}
+            };
+          // translate GitHub API response to work with search
+          $.each(githubResponse.items, function(index, item) {
+            var
+              business = item.business || '其它',
+              maxResults = 8;
+            if (index >= maxResults) {
+              return false;
+            }
+            // create new business category
+            if (response.results[business] === undefined) {
+              response.results[business] = {
+                name: business,
+                results: []
+              };
+            }
+            // add result to category
+            response.results[business].results.push({
+              title: item.name,
+              description: item.description,
+              url: item.html_url
+            });
+          });
+          return response;
+        },
+        url: '/service/search?q={query}'
+      }
+    });
+</script>
 </body>
 </html>

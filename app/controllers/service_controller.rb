@@ -13,4 +13,29 @@ class ServiceController < ApplicationController
       render json: { msg_code: 'success', msg_text: '' }
     end
   end
+
+  def search
+    q = params[:q].to_s
+    items = []
+    intentions = Intention.where("source LIKE ?", "%#{q}%")
+    students = Student.where("phone LIKE ? OR name LIKE ?", "%#{q}%", "%#{q}%")
+    intentions.each do |intention|
+      items << {
+        business: '意向信息',
+        name: "#{intention.student.name}",
+        html_url: "/intentions/#{intention.id}",
+        description: ''
+      }
+    end
+
+    students.each do |student|
+      items << {
+        business: '学员信息',
+        name: "#{student.name}",
+        html_url: "/students/#{student.id}",
+        description: ''
+      }
+    end
+    render json: { items: items }
+  end
 end

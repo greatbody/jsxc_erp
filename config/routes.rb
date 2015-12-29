@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   namespace :service do
     post 'assign_task' => :assign_task
+    get 'search' => :search
   end
 
   resources :contact_logs
