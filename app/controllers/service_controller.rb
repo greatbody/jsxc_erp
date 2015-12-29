@@ -25,21 +25,20 @@ class ServiceController < ApplicationController
     residence_cards = ResidenceCard.where('card_id LIKE :q OR name LIKE :q OR gender LIKE :q OR ethnicity LIKE :q OR id_card LIKE :q OR home_region LIKE :q OR current_address LIKE :q', { q: "%#{q}%" })
     users = User.where('phone LIKE :q OR name LIKE :q OR email LIKE :q', { q: "%#{q}%" })
 
-    intentions.each do |intention|
+    students.each do |student|
       items << {
-        business: '意向信息',
-        name: "#{intention.student.name}",
-        html_url: "/intentions/#{intention.id}",
+        business: '学员',
+        name: "#{student.name}",
+        html_url: "/students/#{student.id}",
         description: ''
       }
     end
 
-    students.each do |student|
+    residence_cards.each do |residence_card|
       items << {
-        business: '学员信息',
-        name: "#{student.name}",
-        html_url: "/students/#{student.id}",
-        description: ''
+        business: '居住证记录',
+        name: "#{residence_card.name} | #{I18n.t("residence_card.current_status.#{residence_card.current_status}")}",
+        description: "身份证：#{residence_card.id_card}"
       }
     end
 
@@ -51,19 +50,20 @@ class ServiceController < ApplicationController
       }
     end
 
+    intentions.each do |intention|
+      items << {
+        business: '意向',
+        name: "#{intention.student.name}",
+        html_url: "/intentions/#{intention.id}",
+        description: ''
+      }
+    end
+
     contact_logs.each do |contact_log|
       items << {
         business: '联系记录',
         name: "#{contact_log.student.name} | #{contact_log.created_at.to_date.to_s(:db)}",
         description: "#{contact_log.contact_log}"
-      }
-    end
-
-    residence_cards.each do |residence_card|
-      items << {
-        business: '居住证记录',
-        name: "#{residence_card.name} | #{I18n.t("residence_card.current_status.#{residence_card.current_status}")}",
-        description: "身份证：#{residence_card.id_card}"
       }
     end
 
