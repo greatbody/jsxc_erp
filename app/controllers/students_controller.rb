@@ -28,7 +28,7 @@ class StudentsController < ApplicationController
 
   def get_student_status
     render html: '' if @student.nil?
-    case student.intention.current_status
+    case @student.intention.current_status
     when 'wait_call'
       render html: 'intent'
     when 'contacting'
