@@ -20,6 +20,8 @@
   <%= link_to "意向墙", intentions_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <div class="active section"><%= @student.name %></div>
+  <i class="right angle icon divider"></i>
+  <%= link_to "#{@student.name} 意向", intention_path(@student.intention), class: 'section' %>
 </div>
 <% when :edit_student_path %>
 <div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
