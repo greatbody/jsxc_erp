@@ -20,7 +20,7 @@
           (<%= link_to "意向信息", intention_path(intention), class: 'meta' %>)
         </div>
         <div class="meta">
-          <span class="date">当前状态：<%= intention.current_status_text %></span>
+          <span class="date">当前状态：<%= intention.current_status_text %>[<%= intention.current_status_date %>]</span>
         </div>
         <% unless last_contact.nil? %>
         <div class="description three-line" title="<%= last_contact.contact_log %>">

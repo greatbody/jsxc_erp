@@ -17,4 +17,13 @@ class Intention < ActiveRecord::Base
     I18n.t("current_status.#{current_status}")
   end
 
+  def current_status_date
+    contact_logs = student.contact_logs.where(current_status: current_status)
+    if contact_logs.count > 0
+      contact_logs.order(created_at: :desc).first.created_at.to_s(:db)
+    else
+      '未知'
+    end
+  end
+
 end
