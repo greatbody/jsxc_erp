@@ -21,12 +21,11 @@
       <span class="locate-signed_up red padded">(<%= intents.signed_up.count %>)</span>
     </a>
     <a class="ui basic button padded should_contact">今日任务
-      <span class="locate-signed_up red padded">(<%= Intention.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 4 or current_status != 5)', Date.today).count %>)</span>
+      <span class="locate-signed_up red padded">(<%= Intention.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 4 and current_status != 5)', Date.today).count %>)</span>
     </a>
     <div class="ui input"><input placeholder="Search..." type="text" class="page-query" /></div>
   </div>
   <div id="content-list">
-    <%= render partial: 'index_card_intention_list' %>
   </div>
   <div class="ui segment">
   </div>
@@ -123,9 +122,10 @@
     var touch = getURLParameter('touch');
     var btn = $('.' + touch)[0];
     if (!btn) {
-      return;
+      getIntentionByType('should_contact', $('.should_contact')[0]);
+    } else {
+      getIntentionByType(touch, btn);
     }
-    getIntentionByType(touch, btn);
   })();
 
   function getIntentionByType(intentionType, btn) {
