@@ -67,7 +67,7 @@
         <div class="item">
           <i class="mail icon"></i>
           <div class="content">
-            <%= residence_card.name %>学员<%= link_to "居住证", student_path(residence_card.student), { target: '_blank' } %>待领取
+            <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>（<%= residence_card.student.phone %>）
           </div>
         </div>
         <% end %>
