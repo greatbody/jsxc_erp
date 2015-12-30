@@ -21,7 +21,7 @@
       <span class="locate-signed_up red padded">(<%= intents.signed_up.count %>)</span>
     </a>
     <a class="ui basic button padded should_contact">今日任务
-      <span class="locate-signed_up red padded">(<%= Intention.where('(next_contact_at <= ? or next_contact_at is null) and current_status != 4', Date.today).count %>)</span>
+      <span class="locate-signed_up red padded">(<%= Intention.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 4 or current_status != 5)', Date.today).count %>)</span>
     </a>
     <div class="ui input"><input placeholder="Search..." type="text" class="page-query" /></div>
   </div>
