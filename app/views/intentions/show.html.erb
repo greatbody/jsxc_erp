@@ -60,12 +60,12 @@
       <% end %>
     </div>
     <div>
-      <table class="ui celled table">
+      <table class="ui celled table" style="table-layout: fixed;">
         <colgroup>
           <col style="width: 100px;" />
-          <col style="width: 130px;" />
-          <col style="width: 130px;" />
-          <col style="width: 130px;" />
+          <col style="width: 100px;" />
+          <col style="width: 100px;" />
+          <col style="width: 100px;" />
           <col />
         </colgroup>
         <thead>
@@ -84,7 +84,7 @@
             next_contact_at = contact_log.next_contact_at
           %>
           <tr>
-            <td>
+            <td style="text-align: center;">
               <%= created_at_date.to_s(:db) %>
             </td>
             <td>
@@ -104,7 +104,7 @@
             <% end %>
             <td>
               <i class="chevron down icon" style="border: solid 1px #ccc;width: 30px;height: 20px;cursor: pointer;float: right;"></i>
-              <p style="white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;width: 500px" title="<%= contact_log.contact_log %>">
+              <p class="one-line" title="<%= contact_log.contact_log %>">
               <%= contact_log.contact_log %>
               </p>
             </td>
@@ -133,3 +133,26 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $('.chevron.icon').on('click', function () {
+    var contentJq = $(this).parent().find('p');
+    var iconJq = $(this);
+    if (iconJq.hasClass('down')) {
+      //释放内容
+      contentJq.removeClass('one-line');
+      //改箭头方向
+      iconJq.removeClass('down');
+      iconJq.addClass('up');
+      //内容替换
+      contentJq.html(contentJq.html().replace(/\n/g, '<br>'));
+    } else {
+      //回收内容
+      contentJq.addClass('one-line');
+      //改箭头方向
+      iconJq.removeClass('up');
+      iconJq.addClass('down');
+      //恢复内容
+      contentJq.html(contentJq.attr('title'));
+    }
+  });
+</script>
