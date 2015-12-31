@@ -78,10 +78,6 @@ class StudentsController < ApplicationController
 
   private
 
-  def is_number? string
-    true if Float(string) rescue false
-  end
-
   def params_update_id_card
     params.require(:student).permit(:id_card_pic, :id_card_back_pic, :student_id)
   end
