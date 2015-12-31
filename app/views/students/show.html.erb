@@ -29,8 +29,8 @@
         <td><%= @student.created_at.to_s(:db) %></td>
       </tr>
       <tr>
-        <td class="two wide column">学校/单位</td>
-        <td><%= @student.unit %></td>
+        <td class="two wide column">流水号</td>
+        <td><%= @student.swift_number %></td>
       </tr>
       <tr>
         <td class="two wide column">手机</td>
@@ -39,6 +39,10 @@
       <tr>
         <td class="two wide column">身份证号</td>
         <td><%= @student.id_card %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">学校/单位</td>
+        <td><%= @student.unit %></td>
       </tr>
       <tr>
         <td class="two wide column">身份证</td>
