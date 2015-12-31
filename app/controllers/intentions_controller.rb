@@ -21,12 +21,15 @@ class IntentionsController < ApplicationController
       #save contact log attactched to it
       contact_log_entity = current_user.contact_logs.build(params_of_contact_log_in_student)
       @student.contact_logs << contact_log_entity
+    else
+      contact_log_entity = current_user.contact_logs.build(default_contact_log)
+      @student.contact_logs << contact_log_entity
     end
     if @student.save
       if can_update_last_contact
         @student.intention.update(next_contact_at: contact_log_entity.next_contact_at, current_status: contact_log_entity.current_status)
       else
-        @student.intention.update(next_contact_at: nil, current_status: 0)
+        @student.intention.update(next_contact_at: Date.today, current_status: 0)
       end
       respond_to do |format|
         format.html { redirect_to root_path }
@@ -92,6 +95,16 @@ class IntentionsController < ApplicationController
 
   def params_of_contact_log_in_student
     params.require(:student).require(:contact_log).permit(:contact_type, :current_status, :need_contact, :next_contact_at, :contact_log)
+  end
+
+  def default_contact_log
+    {
+      contact_type: 'intent',
+      current_status: 'wait_call',
+      need_contact: 1,
+      next_contact_at: Date.today,
+      contact_log: ''
+    }
   end
 
 end
