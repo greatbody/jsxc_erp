@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Intention < ActiveRecord::Base
-  enum current_status: [:wait_call, :contacting, :booking, :wait_pay, :signed_up, :canceled]
+  enum current_status: { wait_call: 0, contacting: 1, booking: 2, wait_pay: 3, signed_up: 4, canceled: 5 }
 
   belongs_to :student
   belongs_to :user
@@ -18,7 +18,7 @@ class Intention < ActiveRecord::Base
   end
 
   def current_status_date
-    contact_logs = student.contact_logs.where(current_status: current_status)
+    contact_logs = student.contact_logs.where(current_status: self[:current_status])
     if contact_logs.count > 0
       contact_logs.order(created_at: :desc).first.created_at.to_date.to_s(:db)
     else
