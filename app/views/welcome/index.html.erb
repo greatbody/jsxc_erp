@@ -47,7 +47,7 @@
       <div class="ui header thin">预估出号居住证(<a href="http://www.whga.gov.cn/pawh/query/jzzQuery.jsp" target="_blank" style="font-size: 10px;">居住证号查询</a>)</div>
       <div class="ui divider thin"></div>
       <div class="ui list">
-        <% ResidenceCard.applyed.where('applyed_at < ?', Time.now.ago(2.days)).each do |residence_card| %>
+        <% ResidenceCard.applyed.where('applyed_at < ?', Time.now.ago(3.days)).each do |residence_card| %>
         <div class="item">
           <i class="mail icon"></i>
           <div class="content">
