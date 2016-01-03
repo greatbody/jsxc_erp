@@ -57,6 +57,3 @@ gem 'kaminari'
 gem 'semantic-ui-sass'
 
 gem 'rest-client'
-
-gem 'rails_admin'
-
