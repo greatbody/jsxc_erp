@@ -61,3 +61,5 @@ gem 'rest-client'
 gem 'rails_admin'
 
 gem 'cancancan', '~> 1.10'
+
+gem 'rolify'
