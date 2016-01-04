@@ -1,5 +1,9 @@
 <% content_for :title, "极速学车ERP系统" %>
-
+<% if flash[:alert].present? %>
+  <div class="ui error message" style="display:block;">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 <div class="ui grid">
   <div class="eight wide column">
     <div class="ui raised text segment" style="margin-top: 10px;">
