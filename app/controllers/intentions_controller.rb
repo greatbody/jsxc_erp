@@ -3,6 +3,7 @@ class IntentionsController < ApplicationController
   require 'phone_ext'
   include SendSms
   before_action :authenticate_user!
+  load_and_authorize_resource
   def index
     @current_page = :intentions_path
     @intentions = Intention.all.order(updated_at: :desc, next_contact_at: :asc)
