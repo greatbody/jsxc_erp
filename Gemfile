@@ -63,3 +63,5 @@ gem 'rails_admin'
 gem 'cancancan', '~> 1.10'
 
 gem 'rolify'
+
+gem 'nokogiri', '~> 1.6.0'
