@@ -1,6 +1,4 @@
 class Coach < ActiveRecord::Base
-  resourcify
-
   enum gender: [:female, :male]
   enum coach_type: [:cover_all_training, :cover_all]
 
