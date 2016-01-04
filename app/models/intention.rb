@@ -1,5 +1,7 @@
 # encoding: UTF-8
 class Intention < ActiveRecord::Base
+  resourcify
+
   enum current_status: { wait_call: 0, contacting: 1, booking: 2, wait_pay: 3, signed_up: 4, canceled: 5 }
 
   belongs_to :student

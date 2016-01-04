@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card]
+  load_and_authorize_resource
   def index
   end
 

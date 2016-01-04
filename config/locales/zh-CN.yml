@@ -39,3 +39,8 @@ zh-CN:
       contacting: '联系中'
       booking: '预约试学'
       wait_pay: '等待付款'
+  unauthorized:
+    default: '默认错误消息.'
+    manage:
+      all: "你无权进行此操作."
+      user: '无权操作他人的账户.'

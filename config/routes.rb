@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'residence_cards/show'
 
+  mount RailsAdmin::Engine => '/20150612', as: 'rails_admin'
+
   devise_for :users
 
   root 'welcome#index'
