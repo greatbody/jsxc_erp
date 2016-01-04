@@ -1,5 +1,7 @@
 # encoding: UTF-8
 class Student < ActiveRecord::Base
+  resourcify
+
   enum sex: [:female, :male, :unknown]
 
   validates :phone, uniqueness: { message: '手机号码重复.' }, presence: { message: '请输入手机号码.'}, format: { with: /\A1\d{10}\z/, message: '手机号码格式不正确.' }

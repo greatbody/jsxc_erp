@@ -1,5 +1,7 @@
 # encoding: UTF-8
 class ResidenceCard < ActiveRecord::Base
+  resourcify
+
   enum current_status: [:id_card_received, :id_card_returned, :have_number, :notify_sent, :have_card, :return_card, :applyed]
   enum process_by: [:jsxc, :student, :coach]
 
