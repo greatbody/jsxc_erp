@@ -3,4 +3,5 @@ class StudentSource < ActiveRecord::Base
 
   has_many :source_contacts
   has_many :intentions
+  has_many :source_contracts
 end
