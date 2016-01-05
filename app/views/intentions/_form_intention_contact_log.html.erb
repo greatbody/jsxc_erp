@@ -47,6 +47,12 @@
           <%= pf.text_field :source, { placeholder: '请输入意向来源' } %>
         <% end %>
       </div>
+      <%= f.fields_for :student_source do |ssf| %>
+      <div class="field follow_create_contact_log">
+        <%= ssf.label :id, "渠道来源" %>
+        <%= ssf.select :id, options_for_select(StudentSource.student_source_for_select), {}, class: "ui dropdown student-source-name" %>
+      </div>
+      <% end %>
     </div>
     <div class="column">
       <%= f.fields_for :contact_log do |cf| %>

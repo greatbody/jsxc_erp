@@ -18,6 +18,7 @@ class IntentionsController < ApplicationController
     @student = current_user.students.build(params_of_student)
     @student.intention.user = @student.user
     can_update_last_contact = (params[:student][:contact_log][:has_contact_log] == '1')
+    student_source_id = params[:student][:student_source][:id]
     if can_update_last_contact
       #save contact log attactched to it
       contact_log_entity = current_user.contact_logs.build(params_of_contact_log_in_student)
@@ -32,6 +33,14 @@ class IntentionsController < ApplicationController
       else
         @student.intention.update(next_contact_at: Date.today, current_status: 0)
       end
+
+      if student_source_id.is_number?
+        student_source = StudentSource.find(student_source_id)
+        @student.intention.student_source = student_source
+      else
+        @student.intention.student_source = nil
+      end
+
       respond_to do |format|
         format.html { redirect_to root_path }
       end
