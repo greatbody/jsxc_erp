@@ -6,6 +6,7 @@ class Intention < ActiveRecord::Base
 
   belongs_to :student
   belongs_to :user
+  belongs_to :student_source
 
   validates :source, length: { maximum: 255, message: '来源名称超出长度限制' }
 
