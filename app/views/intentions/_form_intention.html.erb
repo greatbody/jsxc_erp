@@ -10,6 +10,13 @@
           <%= f.label :source, "意向来源" %>
           <%= f.text_field :source, { placeholder: '请输入意向来源' } %>
       </div>
+      <%= f.fields_for :student_source do |ssf| %>
+      <% student_source_id = (@intention.student_source.nil? ? 0 : @intention.student_source.id) %>
+      <div class="field follow_create_contact_log">
+        <%= ssf.label :id, "渠道来源" %>
+        <%= ssf.select :id, options_for_select(StudentSource.student_source_for_select, student_source_id), {}, class: "ui dropdown student-source-name" %>
+      </div>
+      <% end %>
       <div class="field">
         <%= f.label :current_status, "当前状态" %>
         <%= f.select :current_status, options_for_select(Intention.current_status_for_select), {}, class: "ui dropdown current_status" %>

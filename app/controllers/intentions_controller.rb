@@ -88,8 +88,16 @@ class IntentionsController < ApplicationController
   end
 
   def update
+    student_source_id = params[:intention][:student_source][:id]
     @intention = Intention.find(params[:id])
+
     @intention.update(params_of_intention_update)
+    if student_source_id.is_number?
+      @intention.student_source = StudentSource.find(student_source_id)
+    else
+      @intention.student_source = nil
+    end
+    @intention.save
     redirect_to @intention
   end
 
