@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105083856) do
+ActiveRecord::Schema.define(version: 20160105090640) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -154,7 +154,10 @@ ActiveRecord::Schema.define(version: 20160105083856) do
     t.string   "alipay",     limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "school_id",  limit: 4
   end
+
+  add_index "student_sources", ["school_id"], name: "index_student_sources_on_school_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "phone",                         limit: 255
@@ -224,6 +227,7 @@ ActiveRecord::Schema.define(version: 20160105083856) do
   add_foreign_key "intentions", "students"
   add_foreign_key "intentions", "users"
   add_foreign_key "residence_cards", "students"
+  add_foreign_key "student_sources", "schools"
   add_foreign_key "students", "coaches"
   add_foreign_key "students", "users"
 end
