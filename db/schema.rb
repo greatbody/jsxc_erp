@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105090640) do
+ActiveRecord::Schema.define(version: 20160105091816) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -127,12 +127,15 @@ ActiveRecord::Schema.define(version: 20160105090640) do
   end
 
   create_table "source_contacts", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "business",   limit: 255
-    t.text     "content",    limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "title",             limit: 255
+    t.string   "business",          limit: 255
+    t.text     "content",           limit: 65535
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "student_source_id", limit: 4
   end
+
+  add_index "source_contacts", ["student_source_id"], name: "index_source_contacts_on_student_source_id", using: :btree
 
   create_table "source_contracts", force: :cascade do |t|
     t.date     "sign_at"
@@ -227,6 +230,7 @@ ActiveRecord::Schema.define(version: 20160105090640) do
   add_foreign_key "intentions", "students"
   add_foreign_key "intentions", "users"
   add_foreign_key "residence_cards", "students"
+  add_foreign_key "source_contacts", "student_sources"
   add_foreign_key "student_sources", "schools"
   add_foreign_key "students", "coaches"
   add_foreign_key "students", "users"
