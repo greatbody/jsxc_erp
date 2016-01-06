@@ -1,3 +1,4 @@
+<% content_for :title, "Demo" %>
 <div>
   <button class="ui button">
     Button
@@ -153,5 +154,37 @@
   </tr></tfoot>
 </table>
 
-<i class="chevron down icon">
-  
+<i class="chevron down icon"></i>
+<div style="width: 100%">
+  <table class="ui teal striped sortable celled table">
+    <thead>
+      <tr>
+        <th class="five wide">Name</th>
+        <th class="five wide">Status</th>
+        <th class="six wide sorted ascending">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td class="middle aligned">Jill</td>
+          <td class="middle aligned">Denied</td>
+          <td class="middle aligned">None</td>
+      </tr>
+      <tr>
+          <td class="middle aligned">John</td>
+          <td class="middle aligned">No Action</td>
+          <td class="middle aligned">None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td class="middle aligned positive">Approved</td>
+        <td class="middle aligned warning">Requires call</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<script type="text/javascript">
+  $('table').tablesort();
+</script>
