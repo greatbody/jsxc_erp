@@ -11,6 +11,7 @@ class StudentSourcesController < ApplicationController
   end
 
   def new
+    @current_page = :student_sources_path_new
     @student_source = @student_source || StudentSource.new
   end
 

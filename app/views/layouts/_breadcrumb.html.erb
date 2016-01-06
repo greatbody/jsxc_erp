@@ -87,6 +87,14 @@
   <i class="right angle icon divider"></i>
   <div class="active section">渠道管理</div>
 </div>
+<% when :student_sources_path_new %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "渠道管理", student_sources_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">添加渠道</div>
+</div>
 <% when :student_source_path %>
 <div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
