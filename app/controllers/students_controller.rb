@@ -19,8 +19,10 @@ class StudentsController < ApplicationController
 
   def update
     if @student.update(params_student)
-      coach = Coach.find(params_student[:coach_id])
-      @student.update(coach: coach) if coach.present?
+      unless params_student[:coach_id].blank?
+        coach = Coach.find(params_student[:coach_id])
+        @student.update(coach: coach) if coach.present?
+      end
       redirect_to student_path(@student)
     else
       redirect_to :back
