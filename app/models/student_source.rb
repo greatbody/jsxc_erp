@@ -1,5 +1,5 @@
 class StudentSource < ActiveRecord::Base
-  enum gender: [:female, :male, :unknown]
+  enum gender: { unknown: 2, male: 1, female: 0 }
 
   belongs_to :school
 
@@ -17,5 +17,11 @@ class StudentSource < ActiveRecord::Base
 
   def gender_text
     I18n.t("student_source.gender.#{gender}", gender)
+  end
+
+  def self.gender_for_select
+    genders.map do |gender, _|
+      [I18n.t("student_source.gender.#{gender}"), gender]
+    end
   end
 end

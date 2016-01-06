@@ -24,6 +24,17 @@
           学校: <%= @student_source.school.name %>
         </div>
       </div>
+      <div class="ui three column middle aligned very relaxed stackable grid">
+        <div class="column">
+          QQ：<%= @student_source.qq %>
+        </div>
+        <div class="column">
+          支付宝：<%= @student_source.alipay %>
+        </div>
+        <div class="column">
+          二维码: <%= @student_source.qr_code %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

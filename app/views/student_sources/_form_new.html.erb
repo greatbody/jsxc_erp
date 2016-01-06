@@ -1,0 +1,52 @@
+<div class="ui segment">
+  <%= form_for(@student_source, url: student_sources_path, method: :post, html: { class: "ui form" }) do |f| %>
+  <div class="ui error message">
+    <%= render "layouts/flash" %>
+  </div>
+  <div class="ui one column doubling stackable grid container">
+    <div class="column">
+      <div class="field">
+        <%= f.label :name, "姓名" %>
+        <%= f.text_field :name, { placeholder: '请输入姓名' } %>
+      </div>
+      <div class="field">
+        <%= f.label :gender, "性别" %>
+        <%= f.select :gender, options_for_select(StudentSource.gender_for_select), {}, class: "ui dropdown gender" %>
+      </div>
+      <div class="field">
+        <%= f.label :phone, "手机号" %>
+        <%= f.text_field :phone, { placeholder: '请输入11位手机号码' } %>
+      </div>
+      <div class="field">
+        <%= f.label :id_card, "身份证号" %>
+        <%= f.text_field :id_card, { placeholder: '请输入身份证号' } %>
+      </div>
+      <div class="field">
+        <%= f.label :qr_code, "推广二维码" %>
+        <%= f.text_field :qr_code, { placeholder: '请输入推广二维码的代码' } %>
+      </div>
+      <div class="field">
+        <%= f.label :qq, "QQ" %>
+        <%= f.text_field :qq, { placeholder: '请输入QQ号码' } %>
+      </div>
+      <div class="field">
+        <%= f.label :email, "Email" %>
+        <%= f.text_field :email, { placeholder: '请输入邮箱地址' } %>
+      </div>
+      <div class="field">
+        <%= f.label :alipay, "支付宝" %>
+        <%= f.text_field :alipay, { placeholder: '请输入支付宝账号' } %>
+      </div>
+      <div class="field">
+        <%= f.label :school_id, "学校" %>
+        <%= f.select :school_id, options_for_select(School.school_for_select), {}, class: "ui dropdown school" %>
+      </div>
+    </div>
+  </div>
+  <div class="ui one column doubling stackable grid container">
+    <div class="column">
+      <%= f.submit "保存渠道", class: "ui primary button" %>
+    </div>
+  </div>
+  <% end %>
+</div>

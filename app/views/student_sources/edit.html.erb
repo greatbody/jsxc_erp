@@ -1,2 +1,13 @@
-<h1>StudentSources#edit</h1>
-<p>Find me in app/views/student_sources/edit.html.erb</p>
+<% content_for :title, "编辑 #{@student_source.name} - 极速学车ERP系统" %>
+<div class="student">
+  <%= render 'form_edit' %>
+</div>
+<script type="text/javascript">
+  (function() {
+    $('.ui.dropdown.gender').dropdown();
+    $('.ui.dropdown.school').dropdown();
+    <% if flash[:alert] %>
+    $('.form').addClass('error');
+    <% end %>
+  })();
+</script>

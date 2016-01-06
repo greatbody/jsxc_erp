@@ -24,7 +24,7 @@ zh-CN:
     gender:
       male: '男'
       female: '女'
-      unknown: ''
+      unknown: '[请选择]'
   residence_card:
     current_status:
       id_card_received: '公司已收身份证'

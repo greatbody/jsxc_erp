@@ -1,2 +1,13 @@
-<h1>StudentSources#new</h1>
-<p>Find me in app/views/student_sources/new.html.erb</p>
+<% content_for :title, "登记渠道 - 极速学车ERP系统" %>
+<div class="student">
+  <%= render 'form_new' %>
+</div>
+<script type="text/javascript">
+  (function() {
+    $('.ui.dropdown.gender').dropdown();
+    $('.ui.dropdown.school').dropdown();
+    <% if flash[:alert] %>
+    $('.form').addClass('error');
+    <% end %>
+  })();
+</script>
