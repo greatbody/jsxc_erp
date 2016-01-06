@@ -1,4 +1,5 @@
 .student-source {
+  @include ui-grid-fix;
   a.button {
     padding: 3px;
     background-color: #fef;
