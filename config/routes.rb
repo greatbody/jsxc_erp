@@ -40,6 +40,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :student_sources do
+    collection do
+      get 'list' => :list
+    end
+  end
+
   resources :coaches, only: [:show]
 
 end

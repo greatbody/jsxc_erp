@@ -17,7 +17,9 @@
       </a>
       <%= render partial: 'layouts/application_menu_notifies' %>
       <div class="ui simple dropdown item">
-        <a href="" class="black">渠道管理</a>
+        <%= link_to(student_sources_path, class: 'black') do %>
+          <i class="sign in icon"></i>渠道管理
+        <% end %>
         <i class="dropdown icon"></i>
         <div class="menu">
           <a class="item" href="http://idcard.911cha.com/" target="_blank"><i class="user icon"></i>身份证信息</a>

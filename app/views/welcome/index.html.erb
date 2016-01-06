@@ -4,93 +4,95 @@
     <%= flash[:alert] %>
   </div>
 <% end %>
-<div class="ui grid">
-  <div class="eight wide column">
-    <div class="ui raised text segment" style="margin-top: 10px;">
-      <h2 class="ui header">新的意向</h2>
-      <p>当我们得到了意向学员的联系方式后，我们就需要来这里录入我们的意向，避免浪费。</p>
-      <%= link_to new_intention_path do %>
-        <div class="ui primary labeled icon button">
-          添加意向
-          <i class="add icon"></i>
-        </div>
-      <% end %>
-      <%= link_to '意向墙', intentions_path, class: 'ui primary button' %>
-    </div>
-  </div>
-  <div class="eight wide column">
-    <div class="ui raised text segment" style="margin-top: 10px;">
-      <h2 class="ui header">跟踪意向</h2>
-      <p>在我们获得了意向后，我们需要持续的跟踪意向确保跟踪转化为报名。</p>
-      <%= link_to new_contact_log_path do %>
-        <div class="ui primary labeled icon button">
-          新的跟踪
-          <i class="add icon"></i>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="four wide column">
-    <div class="ui raised text segment">
-      <div class="ui header thin">居住证待办</div>
-      <div class="ui divider thin"></div>
-      <div class="ui list">
-        <% ResidenceCard.id_card_received.each do |residence_card| %>
-        <div class="item">
-          <i class="alarm icon"></i>
-          <div class="content">
-            <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>
+<div class="welcome">
+  <div class="ui grid">
+    <div class="eight wide column" style="padding-top: 0;">
+      <div class="ui raised text segment" style="margin-top: 10px;">
+        <h2 class="ui header">新的意向</h2>
+        <p>当我们得到了意向学员的联系方式后，我们就需要来这里录入我们的意向，避免浪费。</p>
+        <%= link_to new_intention_path do %>
+          <div class="ui primary labeled icon button">
+            添加意向
+            <i class="add icon"></i>
           </div>
-        </div>
+        <% end %>
+        <%= link_to '意向墙', intentions_path, class: 'ui primary button' %>
+      </div>
+    </div>
+    <div class="eight wide column" style="padding-top: 0;">
+      <div class="ui raised text segment" style="margin-top: 10px;">
+        <h2 class="ui header">跟踪意向</h2>
+        <p>在我们获得了意向后，我们需要持续的跟踪意向确保跟踪转化为报名。</p>
+        <%= link_to new_contact_log_path do %>
+          <div class="ui primary labeled icon button">
+            新的跟踪
+            <i class="add icon"></i>
+          </div>
         <% end %>
       </div>
     </div>
-  </div>
-  <div class="four wide column">
-    <div class="ui raised text segment">
-      <div class="ui header thin">预估出号居住证(<a href="http://www.whga.gov.cn/pawh/query/jzzQuery.jsp" target="_blank" style="font-size: 10px;">居住证号查询</a>)</div>
-      <div class="ui divider thin"></div>
-      <div class="ui list">
-        <% ResidenceCard.applyed.where('applyed_at < ?', Time.now.ago(3.days)).each do |residence_card| %>
-        <div class="item">
-          <i class="mail icon"></i>
-          <div class="content">
-            <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>: <span title="身份证号"><%= residence_card.id_card %></span>
+    <div class="four wide column">
+      <div class="ui raised text segment">
+        <div class="ui header thin">居住证待办</div>
+        <div class="ui divider thin"></div>
+        <div class="ui list">
+          <% ResidenceCard.id_card_received.each do |residence_card| %>
+          <div class="item">
+            <i class="alarm icon"></i>
+            <div class="content">
+              <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>
+            </div>
           </div>
+          <% end %>
         </div>
-        <% end %>
       </div>
     </div>
-  </div>
-  <div class="four wide column">
-    <div class="ui raised text segment">
-      <div class="ui header thin">待下发证号居住证</div>
-      <div class="ui divider thin"></div>
-      <div class="ui list">
-        <% ResidenceCard.have_number.where(last_notify_at: nil).each do |residence_card| %>
-        <div class="item">
-          <i class="mail icon"></i>
-          <div class="content">
-            <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>: <span title="身份证号"><%= residence_card.student.id_card %></span>
+    <div class="four wide column">
+      <div class="ui raised text segment">
+        <div class="ui header thin">预估出号居住证(<a href="http://www.whga.gov.cn/pawh/query/jzzQuery.jsp" target="_blank" style="font-size: 10px;">居住证号查询</a>)</div>
+        <div class="ui divider thin"></div>
+        <div class="ui list">
+          <% ResidenceCard.applyed.where('applyed_at < ?', Time.now.ago(3.days)).each do |residence_card| %>
+          <div class="item">
+            <i class="mail icon"></i>
+            <div class="content">
+              <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>: <span title="身份证号"><%= residence_card.id_card %></span>
+            </div>
           </div>
+          <% end %>
         </div>
-        <% end %>
       </div>
     </div>
-  </div>
-  <div class="four wide column">
-    <div class="ui raised text segment">
-      <div class="ui header thin">居住证领取</div>
-      <div class="ui divider thin"></div>
-      <div class="ui list">
-        <% ResidenceCard.have_card.each do |residence_card| %>
-        <div class="item">
-          <i class="mail icon"></i>
-          <div class="content">
-            <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank', style: 'width: 60px;display: inline-block;' } %>（<%= PhoneExt.format_phone(residence_card.student.phone) %>）
+    <div class="four wide column">
+      <div class="ui raised text segment">
+        <div class="ui header thin">待下发证号居住证</div>
+        <div class="ui divider thin"></div>
+        <div class="ui list">
+          <% ResidenceCard.have_number.where(last_notify_at: nil).each do |residence_card| %>
+          <div class="item">
+            <i class="mail icon"></i>
+            <div class="content">
+              <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>: <span title="身份证号"><%= residence_card.student.id_card %></span>
+            </div>
           </div>
+          <% end %>
         </div>
-        <% end %>
+      </div>
+    </div>
+    <div class="four wide column">
+      <div class="ui raised text segment">
+        <div class="ui header thin">居住证领取</div>
+        <div class="ui divider thin"></div>
+        <div class="ui list">
+          <% ResidenceCard.have_card.each do |residence_card| %>
+          <div class="item">
+            <i class="mail icon"></i>
+            <div class="content">
+              <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank', style: 'width: 60px;display: inline-block;' } %>（<%= PhoneExt.format_phone(residence_card.student.phone) %>）
+            </div>
+          </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
