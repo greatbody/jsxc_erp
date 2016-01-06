@@ -20,6 +20,11 @@ zh-CN:
     coach_type:
       cover_all_training: '训练全包，不处理档案'
       cover_all: '训练档案包干'
+  student_source:
+    gender:
+      male: '男'
+      female: '女'
+      unknown: ''
   residence_card:
     current_status:
       id_card_received: '公司已收身份证'
