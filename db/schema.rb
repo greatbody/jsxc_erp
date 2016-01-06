@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104025122) do
+ActiveRecord::Schema.define(version: 20160106062010) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -60,16 +60,18 @@ ActiveRecord::Schema.define(version: 20160104025122) do
   add_index "contact_logs", ["user_id"], name: "index_contact_logs_on_user_id", using: :btree
 
   create_table "intentions", force: :cascade do |t|
-    t.string   "source",          limit: 255
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.integer  "student_id",      limit: 4
-    t.integer  "current_status",  limit: 4,   default: 0
+    t.string   "source",            limit: 255
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "student_id",        limit: 4
+    t.integer  "current_status",    limit: 4,   default: 0
     t.date     "next_contact_at"
-    t.integer  "user_id",         limit: 4
+    t.integer  "user_id",           limit: 4
+    t.integer  "student_source_id", limit: 4
   end
 
   add_index "intentions", ["student_id"], name: "index_intentions_on_student_id", using: :btree
+  add_index "intentions", ["student_source_id"], name: "index_intentions_on_student_source_id", using: :btree
   add_index "intentions", ["user_id"], name: "index_intentions_on_user_id", using: :btree
 
   create_table "residence_cards", force: :cascade do |t|
@@ -116,6 +118,56 @@ ActiveRecord::Schema.define(version: 20160104025122) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "schools", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "province",   limit: 255
+    t.string   "city",       limit: 255
+    t.text     "describe",   limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "district",   limit: 255
+  end
+
+  create_table "source_contacts", force: :cascade do |t|
+    t.string   "title",             limit: 255
+    t.string   "business",          limit: 255
+    t.text     "content",           limit: 65535
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "student_source_id", limit: 4
+  end
+
+  add_index "source_contacts", ["student_source_id"], name: "index_source_contacts_on_student_source_id", using: :btree
+
+  create_table "source_contracts", force: :cascade do |t|
+    t.date     "sign_at"
+    t.date     "begin_at"
+    t.date     "end_at"
+    t.text     "contract_log",      limit: 65535
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "student_source_id", limit: 4
+  end
+
+  add_index "source_contracts", ["student_source_id"], name: "index_source_contracts_on_student_source_id", using: :btree
+
+  create_table "student_sources", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "phone",      limit: 255
+    t.string   "class_name", limit: 255
+    t.string   "id_card",    limit: 255
+    t.string   "qr_code",    limit: 255
+    t.string   "email",      limit: 255
+    t.string   "qq",         limit: 255
+    t.string   "alipay",     limit: 255
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "school_id",  limit: 4
+    t.integer  "gender",     limit: 4,   default: 1
+  end
+
+  add_index "student_sources", ["school_id"], name: "index_student_sources_on_school_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "phone",                         limit: 255
@@ -182,9 +234,13 @@ ActiveRecord::Schema.define(version: 20160104025122) do
 
   add_foreign_key "contact_logs", "students"
   add_foreign_key "contact_logs", "users"
+  add_foreign_key "intentions", "student_sources"
   add_foreign_key "intentions", "students"
   add_foreign_key "intentions", "users"
   add_foreign_key "residence_cards", "students"
+  add_foreign_key "source_contacts", "student_sources"
+  add_foreign_key "source_contracts", "student_sources"
+  add_foreign_key "student_sources", "schools"
   add_foreign_key "students", "coaches"
   add_foreign_key "students", "users"
 end

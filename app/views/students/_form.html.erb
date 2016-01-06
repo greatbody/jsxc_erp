@@ -52,7 +52,7 @@
   </div>
   <div class="field">
     <%= f.label :coach_id, "负责教练" %>
-    <%= f.select :coach_id, options_from_collection_for_select(Coach.all, :id, :name, @student.coach.present? ? @student.coach.id : 0) %>
+    <%= f.select :coach_id, options_for_select(Coach.coach_for_select, @student.coach.present? ? @student.coach.id : 0) %>
   </div>
   <div class="field">
     <%= f.label :id_card, '身份证' %><br>

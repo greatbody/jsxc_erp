@@ -1,12 +1,12 @@
 <% case @current_page %>
 <% when :intentions_path %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <div class="active section">意向墙</div>
 </div>
 <% when :intention_path %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <%= link_to "意向墙", intentions_path, class: 'section' %>
@@ -16,7 +16,7 @@
   <%= link_to "#{@intention.student.name} 详情", student_path(@intention.student), class: 'section' %>
 </div>
 <% when :student_path %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <%= link_to "意向墙", intentions_path, class: 'section' %>
@@ -26,7 +26,7 @@
   <%= link_to "#{@student.name} 意向", intention_path(@student.intention), class: 'section' %>
 </div>
 <% when :edit_student_path %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <%= link_to "意向墙", intentions_path, class: 'section' %>
@@ -36,7 +36,7 @@
   <div class="active section">编辑 <%= @student.name %> 基本信息</div>
 </div>
 <% when :edit_intention_path %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <%= link_to "意向墙", intentions_path, class: 'section' %>
@@ -46,7 +46,7 @@
   <div class="active section">编辑 <%= @intention.student.name %> 意向信息</div>
 </div>
 <% when :new_contact_log_path %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <%= link_to "意向墙", intentions_path, class: 'section' %>
@@ -54,7 +54,7 @@
   <div class="active section">创建新联系记录</div>
 </div>
 <% when :student_path %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <%= link_to "意向墙", intentions_path, class: 'section' %>
@@ -62,7 +62,7 @@
   <div class="active section">创建新联系记录</div>
 </div>
 <% when :new_student_residence_card_path %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <%= link_to "意向墙", intentions_path, class: 'section' %>
@@ -72,7 +72,7 @@
   <div class="active section">创建居住证信息</div>
 </div>
 <% when :edit_student_residence_card_path %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
   <i class="right angle icon divider"></i>
   <%= link_to "意向墙", intentions_path, class: 'section' %>
@@ -81,8 +81,40 @@
   <i class="right angle icon divider"></i>
   <div class="active section">编辑居住证信息</div>
 </div>
+<% when :student_sources_path %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">渠道管理</div>
+</div>
+<% when :student_sources_path_new %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "渠道管理", student_sources_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">添加渠道</div>
+</div>
+<% when :student_source_path %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "渠道管理", student_sources_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "渠道详表", list_student_sources_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section"><%= @student_source.name %><%= link_to "[编辑]", edit_student_source_path(@student_source), class: 'section' %></div>
+</div>
+<% when :list_student_sources_path %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "渠道管理", student_sources_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">渠道详表</div>
+</div>
 <% else %>
-<div class="ui breadcrumb" style="margin-top: 10px;margin-left: 10px;">
+<div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
 </div>
 <% end %>

@@ -5727,6 +5727,11 @@ $.fn.dropdown = function(parameters) {
                   ;
                   if(settings.placeholder === 'auto' && value === '') {
                     select.placeholder = name;
+                    select.values.push({
+                      name     : name,
+                      value    : value,
+                      disabled : disabled
+                    });
                   }
                   else {
                     select.values.push({

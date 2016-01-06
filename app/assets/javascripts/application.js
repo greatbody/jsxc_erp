@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require semantic
+//= require jquery.tablesort
 //= require picker
 //= require picker.date
 //= require_tree .

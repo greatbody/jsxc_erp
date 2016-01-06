@@ -13,9 +13,12 @@ class Coach < ActiveRecord::Base
   validates :phone, uniqueness: { message: '手机号码重复.' }, presence: { message: '请输入手机号码.'}, format: { with: /\A1\d{10}\z/, message: '手机号码格式不正确.' }
   validates :id_card, format: { with: /\A\d{17}(\d|(x|X))\z/, message: '身份证号码格式不正确.' }, allow_blank: true, on: :update
 
-  def join_pic_errors
-    ['avatar', 'id_card_pic', 'driving_license_pic', 'coaching_license_pic'].each do |pic|
-      errors.messages[pic.to_sym] = errors.messages["#{pic}_content_type".to_sym] if errors.messages.has_key?("#{pic}_content_type".to_sym)
+  def self.coach_for_select
+    coach_collection = [['[空]', '']]
+    Coach.all.each do |coach|
+      coach_collection << [coach.name, coach.id]
     end
+    coach_collection
   end
+
 end

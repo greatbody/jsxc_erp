@@ -1,0 +1,29 @@
+<% content_for :title, "渠道详表 - 渠道管理 - 极速学车ERP系统" %>
+<div class="ui segment student-source">
+  <table class="ui teal striped sortable celled table">
+    <thead>
+      <tr>
+        <th class="two wide sorted ascending">姓名</th>
+        <th class="five wide">学校</th>
+        <th class="one wide center aligned">性别</th>
+        <th class="eight wide">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @student_sources.each do |ss| %>
+      <tr>
+        <td class="middle aligned"><%= ss.name %></td>
+        <td class="middle aligned"><%= ss.school.name %></td>
+        <td class="middle center aligned"><%= ss.gender_text %></td>
+        <td class="middle aligned">
+          <%= link_to '详情', student_source_path(ss), { class: 'small-button', target: '_blank' } %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $('table').tablesort();
+</script>

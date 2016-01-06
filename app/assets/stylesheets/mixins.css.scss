@@ -28,3 +28,12 @@
 @mixin padded-container {
   margin: 15px 10px;
 }
+
+@mixin ui-grid-fix {
+  .ui.grid {
+    margin-top: 0;
+    .column {
+      padding-top: 0;
+    }
+  }
+}
