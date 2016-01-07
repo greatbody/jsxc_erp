@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :students
   has_many :intentions
   has_many :contact_logs
+  has_many :student_sources
 
   def before_add_method(role)
     # do something before it gets added
