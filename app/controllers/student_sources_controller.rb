@@ -6,6 +6,12 @@ class StudentSourcesController < ApplicationController
     @student_sources = StudentSource.all
   end
 
+  def new_source_contact
+    if request.method.downcase == 'post'
+      redirect_to new_student_source_source_contact_path(params[:student_source_id])
+    end
+  end
+
   def index
     @current_page = :student_sources_path
   end

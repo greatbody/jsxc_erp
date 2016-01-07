@@ -36,5 +36,49 @@
         </div>
       </div>
     </div>
+    <div>
+      <%= link_to new_student_source_source_contact_path(@student_source) do %>
+        <div class="ui primary labeled icon button">
+          联系渠道
+          <i class="add icon"></i>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <table class="ui teal striped sortable celled table">
+        <thead>
+          <tr>
+            <th class="two wide center aligned sorted ascending">日期</th>
+            <th class="four wide">标题</th>
+            <th class="two wide center aligned">业务类型</th>
+            <th class="eight wide">概要</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @student_source.source_contacts.each do |sc| %>
+          <tr>
+            <td class="middle aligned center aligned"><%= sc.created_at.to_date.to_s(:db) %></td>
+            <td class="middle aligned"><%= sc.title %></td>
+            <td class="middle aligned center aligned"><%= sc.business %></td>
+            <td class="top aligned text-ellipsis long content" title="<%= sc.content %>"><%= sc.content %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+<script type="text/javascript">
+  $('table').tablesort();
+  $(".table > tbody > tr > td.content").mouseenter(function() {
+    $(this).css('white-space', 'initial');
+    $(this).html($(this).html().replace(/\n/g, '<br>'));
+    $(this).hide();
+    $(this).fadeIn();
+  });
+  $(".table > tbody > tr > td.content").mouseleave(function() {
+    $(this).css('white-space', 'nowrap');
+    $(this).html($(this).attr('title'));
+    $(this).fadeIn();
+  });
+</script>

@@ -1,0 +1,12 @@
+<% content_for :title, "新的渠道跟踪 - 极速学车ERP" %>
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
+<div class="source-contact">
+  <%= render 'form_new' %>
+</div>
+<script type="text/javascript">
+  (function() {
+    $('.datepicker').pickadate();
+    $('#source_contact_title').focus();
+  })();
+</script>
