@@ -4,7 +4,7 @@ class Ability
     if user.has_role? :superadmin
       can :manage, :all             # allow superadmins to do anything
     elsif user.has_role? :user
-      can :manage, [Intention, ContactLog, ResidenceCard, Student, StudentSource]  # allow managers to do anything to products and users
+      can :manage, [Intention, ContactLog, ResidenceCard, Student, StudentSource, SourceContact]  # allow managers to do anything to products and users
       can [:assign_task, :search], :service
     elsif user.has_role? :intern
       # can :cru, [Intention, ContactLog, ResidenceCard, Student]

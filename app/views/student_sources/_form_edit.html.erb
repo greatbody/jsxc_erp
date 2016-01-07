@@ -41,6 +41,10 @@
         <%= f.label :school_id, "学校" %>
         <%= f.select :school_id, options_for_select(School.school_for_select, @student_source.school_id), {}, class: "ui dropdown school" %>
       </div>
+      <div class="field">
+        <%= f.label :remarks, "联系记录" %>
+        <%= f.text_area :remarks, rows: 10, value: @student_source.remarks %>
+      </div>
     </div>
   </div>
   <div class="ui one column doubling stackable grid container">
