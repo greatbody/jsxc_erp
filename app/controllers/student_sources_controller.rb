@@ -12,7 +12,7 @@ class StudentSourcesController < ApplicationController
 
   def new
     @current_page = :student_sources_path_new
-    @student_source = @student_source || StudentSource.new
+    @student_source = @student_source || current_user.student_sources.new
   end
 
   def show
@@ -23,7 +23,7 @@ class StudentSourcesController < ApplicationController
   end
 
   def create
-    @student_source = StudentSource.new(student_source_params)
+    @student_source = current_user.student_sources.build(student_source_params)
     if @student_source.save
       respond_to do |format|
         format.html { redirect_to student_sources_path }
