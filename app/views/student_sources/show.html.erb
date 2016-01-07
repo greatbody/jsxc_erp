@@ -21,7 +21,7 @@
           身份证：<%= @student_source.id_card %>
         </div>
         <div class="column">
-          学校: <%= @student_source.school.name %>
+          学校: <%= @student_source.school.name if @student_source.school.present? %>
         </div>
       </div>
       <div class="ui three column middle aligned very relaxed stackable grid">

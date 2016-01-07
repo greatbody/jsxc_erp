@@ -13,7 +13,7 @@
       <% @student_sources.each do |ss| %>
       <tr>
         <td class="middle aligned"><%= ss.name %></td>
-        <td class="middle aligned"><%= ss.school.name %></td>
+        <td class="middle aligned"><%= ss.school.name if ss.school.present? %></td>
         <td class="middle center aligned"><%= ss.gender_text %></td>
         <td class="middle aligned">
           <%= link_to '详情', student_source_path(ss), { class: 'small-button', target: '_blank' } %>
