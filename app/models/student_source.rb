@@ -1,4 +1,6 @@
 class StudentSource < ActiveRecord::Base
+  resourcify
+
   enum gender: { unknown: 2, male: 1, female: 0 }
 
   belongs_to :school

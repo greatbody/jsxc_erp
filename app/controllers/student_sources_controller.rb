@@ -1,6 +1,7 @@
 class StudentSourcesController < ApplicationController
   require 'phone_ext'
   before_action :set_student_source, only: [:show, :edit, :update]
+  load_and_authorize_resource
   def list
     @current_page = :list_student_sources_path
     @student_sources = StudentSource.all
