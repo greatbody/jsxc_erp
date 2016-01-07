@@ -1,0 +1,30 @@
+<%= form_for(@contact, url: student_source_source_contacts_path, method: :post, html: { class: "ui form" }) do |f| %>
+
+<div class="field">
+  <%= f.label :created_at, "联系日期" %>
+  <%= f.text_field :created_at, { class: 'datepicker', value: Date.today.to_s } %>
+</div>
+
+<div class="field">
+  <%= f.label :title, "主题" %>
+  <%= f.text_field :title, {} %>
+</div>
+
+<div class="field">
+  <%= f.label :business, "业务" %>
+  <%= f.text_field :business, {} %>
+</div>
+
+<div class="field">
+  <%= f.label :content, "联系记录" %>
+  <%= f.text_area :content, rows: 10, value: @contact.content %>
+</div>
+
+<div class="div-btn">
+  <%= f.submit "保存联系记录", class: "ui primary button" %>
+</div>
+
+<div class="ui error message">
+</div>
+
+<% end %>

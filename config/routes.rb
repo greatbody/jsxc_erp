@@ -41,8 +41,12 @@ Rails.application.routes.draw do
   end
 
   resources :student_sources do
+    resources :source_contracts
+    resources :source_contacts
     collection do
       get 'list' => :list
+      get 'new_source_contact' => :new_source_contact
+      post 'new_source_contact' => :new_source_contact
     end
   end
 

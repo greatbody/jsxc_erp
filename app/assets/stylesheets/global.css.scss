@@ -65,3 +65,22 @@ a.black {
   margin-left: 10px !important;
   padding: 5px;
 }
+
+.text-ellipsis {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &.short {
+    max-width: 100px;
+  }
+
+  &.normal {
+    max-width: 300px;
+  }
+
+  &.long {
+    max-width: 500px;
+  }
+}

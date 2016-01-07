@@ -2,6 +2,7 @@ class StudentSource < ActiveRecord::Base
   enum gender: { unknown: 2, male: 1, female: 0 }
 
   belongs_to :school
+  belongs_to :user
 
   has_many :source_contacts
   has_many :intentions
