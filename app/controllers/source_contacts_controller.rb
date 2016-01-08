@@ -1,5 +1,6 @@
 class SourceContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit]
+  load_and_authorize_resource
   def index
   end
 
@@ -34,6 +35,10 @@ class SourceContactsController < ApplicationController
   end
 
   def new_contact_params
+    params.require(:source_contact).permit(:title, :business, :content, :created_at, :student_source_id)
+  end
+  # https://github.com/CanCanCommunity/cancancan/wiki/Strong-Parameters
+  def create_params
     params.require(:source_contact).permit(:title, :business, :content, :created_at, :student_source_id)
   end
 end

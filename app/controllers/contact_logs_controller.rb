@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class ContactLogsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource except: :create
+  load_and_authorize_resource
   def index
   end
 
@@ -36,6 +36,11 @@ class ContactLogsController < ApplicationController
   private
 
   def new_contact_params
+    params.require(:contact_log).permit(:contact_type, :current_status, :need_contact, :next_contact_at, :contact_log)
+  end
+
+  # https://github.com/CanCanCommunity/cancancan/wiki/Strong-Parameters
+  def create_params
     params.require(:contact_log).permit(:contact_type, :current_status, :need_contact, :next_contact_at, :contact_log)
   end
 end
