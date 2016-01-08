@@ -9,6 +9,7 @@ zh-CN:
     sign_up: '报名'
     suggestion: '建议'
     complaint: '投诉'
+    coaching_business: '教学业务'
   current_status:
     wait_call: '待联系'
     contacting: '联系中'
