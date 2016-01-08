@@ -18,6 +18,17 @@
       <%= render partial: 'layouts/application_menu_notifies' %>
       <div class="ui simple dropdown item">
         <%= link_to(student_sources_path, class: 'black') do %>
+          <i class="users icon"></i>学员管理
+        <% end %>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <%= link_to(students_path, class: 'item') do %>
+            <i class="browser icon"></i>学员列表
+          <% end %>
+        </div>
+      </div>
+      <div class="ui simple dropdown item">
+        <%= link_to(student_sources_path, class: 'black') do %>
           <i class="sign in icon"></i>渠道管理
         <% end %>
         <i class="dropdown icon"></i>
