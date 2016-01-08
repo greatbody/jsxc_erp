@@ -14,6 +14,7 @@ class ContactLogsController < ApplicationController
   def new
     @current_page = :new_contact_log_path
     @contact_log = current_user.contact_logs.build
+    @student = Student.find(params[:student_id])
   end
 
   def create
