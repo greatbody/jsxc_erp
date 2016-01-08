@@ -105,6 +105,18 @@
   <i class="right angle icon divider"></i>
   <div class="active section"><%= @student_source.name %><%= link_to "[编辑]", edit_student_source_path(@student_source), class: 'section' %></div>
 </div>
+<% when :edit_student_source_path %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "渠道管理", student_sources_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "渠道详表", list_student_sources_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "#{@student_source.name}", student_source_path(@student_source), class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">编辑</div>
+</div>
 <% when :list_student_sources_path %>
 <div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>

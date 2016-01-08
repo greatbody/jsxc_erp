@@ -27,6 +27,7 @@ class StudentSourcesController < ApplicationController
   end
 
   def edit
+    @current_page = :edit_student_source_path
   end
 
   def create
