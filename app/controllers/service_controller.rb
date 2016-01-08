@@ -7,10 +7,11 @@ class ServiceController < ApplicationController
     processor_id = params[:processor_id]
     sender_id = current_user.id
     task_type = params[:task_type]
+    task_date = params[:task_date]
     if student_id.blank? || processor_id.blank?
       render json: { msg_code: 'error', msg_text: '未指定学员或处理人' }
     else
-      AssignTaskJob.perform_later(student_id, processor_id, sender_id, task_type)
+      AssignTaskJob.perform_later(student_id, processor_id, sender_id, task_type, task_date)
       render json: { msg_code: 'success', msg_text: '' }
     end
   end

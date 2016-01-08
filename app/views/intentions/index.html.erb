@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <% content_for :title, "意向列表 - 极速学车ERP系统" %>
 <% intents = @intentions %>
 <div class="intention center">
@@ -29,10 +31,13 @@
   </div>
   <div class="ui segment">
   </div>
+  <%= render partial: 'index_assign_task' %>
 </div>
-<%= render partial: 'index_assign_task' %>
 <!-- javascript code -->
 <script type="text/javascript">
+  (function() {
+    $('.datepicker').pickadate();
+  })();
   $('.all').on('click', function() {
     getIntentionByType('all', this);
   });
@@ -91,21 +96,28 @@
         var student = student_id;
         var processor = $('#processor').val();
         var task_type = $('#task_type').val();
+        var task_date = $('#task_date').val();
         if (!student && !processor && !task_type) {
           alert('请选择指派人，并填写任务类型');
           return false;
         }
-        assign_task(student_id, processor, task_type);
+        assign_task({
+          student_id: student_id,
+          processor_id: processor,
+          task_type: task_type,
+          task_date: task_date
+        });
         return false;
       }
     }).modal('show');
   });
 
-  function assign_task(student_id, processor_id, task_type) {
+  function assign_task(options) {
     $.post('/service/assign_task', {
-      'student_id': student_id,
-      'processor_id': processor_id,
-      'task_type': task_type
+      'student_id': options.student_id,
+      'processor_id': options.processor_id,
+      'task_type': options.task_type,
+      'task_date': options.task_date
     }).success(function(data) {
       if (data && data.msg_code == 'success') {
         $('.ui.modal.assign-task').modal('hide');

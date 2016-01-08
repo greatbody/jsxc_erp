@@ -84,3 +84,9 @@ a.black {
     max-width: 500px;
   }
 }
+
+.t {
+  &.red {
+    color: red;
+  }
+}
