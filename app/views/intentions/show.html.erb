@@ -40,6 +40,11 @@
           当前状态：<%= t("current_status.#{@intention.current_status}") %>
         </div>
         <div class="column">
+          <% if @student.coach.present? %>
+          教练：<%= PhoneExt.format_phone(@student.coach.phone) %>
+          <% else %>
+          教练：<span class="t red">尚未指定教练</span>
+          <% end %>
         </div>
         <div class="column">
         </div>

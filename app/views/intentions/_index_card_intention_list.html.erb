@@ -21,6 +21,10 @@
         </div>
         <div class="meta">
           <span class="date">当前状态：<%= intention.current_status_text %>[<%= intention.current_status_date %>]</span>
+          <% unless student.coach.nil? %>
+          <br>
+          <span class="date">教练：<%= student.coach.name %>[ <%= PhoneExt.format_phone(student.coach.phone) %> ]</span>
+          <% end %>
         </div>
         <% unless last_contact.nil? %>
         <div class="description three-line" title="<%= last_contact.contact_log %>">
