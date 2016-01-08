@@ -2,13 +2,7 @@
 <link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
 <link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <div class="ui segment">
-  <%= form_for(@contact_log, url: contact_logs_path, method: :post, html: { class: "ui form" }) do |f| %>
-
-  <div class="field">
-    <%= f.label :student, "学员" %>
-    <%= f.select :student, options_from_collection_for_select(Student.all, :id, :name, @user_id), {}, class: "ui search selection dropdown" %>
-  </div>
-
+  <%= form_for(@contact_log, url: student_contact_logs_path, method: :post, html: { class: "ui form" }) do |f| %>
   <div class="field">
     <%= f.label :contact_type, "联系类型" %>
     <%= f.select :contact_type, options_for_select(ContactLog.contact_types_for_select, @contact_log.contact_type), {}, class: "ui dropdown contact_type" %>
@@ -42,7 +36,6 @@
   <div class="ui error message">
   </div>
   <% end %>
-
 </div>
 <script type="text/javascript">
   $('.ui.search.selection.dropdown').dropdown({
@@ -112,25 +105,4 @@
       }
     }
   });
-
-  (function() {
-    //get current data
-    var student_id = $('.ui.form').form('get value', 'contact_log[student]');
-    if (!student_id) {
-      return;
-    }
-    setStudentStatus(student_id);
-  })();
-
-  function setStudentStatus(student_id) {
-    $.post('/students/get_student_status', {
-      'id': student_id
-    }).success(function(data) {
-      if (data.length > 0) {
-        $('.ui.form').form('set value', 'contact_log[contact_type]', data)
-      } else {
-      }
-    }).error(function(data) {
-    });
-  }
 </script>

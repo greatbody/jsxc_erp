@@ -1,0 +1,18 @@
+<% content_for :title, "新的跟踪 - 极速学车ERP系统" %>
+<div class="source-contact">
+<%= form_tag('/contact_logs/new_contact_log', method: "post", class: 'ui form', id: 'choose_student') do |f| %>
+  <div class="field">
+    <%= label_tag :student_id, "学员" %>
+    <%= select_tag :student_id, options_for_select(Student.student_for_select), { class: 'ui search selection dropdown' } %>
+  </div>
+  <div class="div-btn">
+    <%= submit_tag "下一步", class: "ui primary button" %>
+  </div>
+<% end %>
+</div>
+<script type="text/javascript">
+  $('.ui.search.selection.dropdown').dropdown();
+  $('#choose_student').submit(function() {
+    if (!$("select[name='student_id']").val()) return false;
+  });
+</script>

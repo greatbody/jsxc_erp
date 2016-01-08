@@ -26,4 +26,12 @@ class Student < ActiveRecord::Base
     return I18n.t("sexs.#{sex}") if sex.present?
     '【未填写】'
   end
+
+  def self.student_for_select
+    student_collection = [['[空]', '']]
+    Student.all.each do |student|
+      student_collection << [student.name, student.id]
+    end
+    student_collection
+  end
 end

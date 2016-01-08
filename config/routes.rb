@@ -16,12 +16,15 @@ Rails.application.routes.draw do
     get '/demo' => :demo
   end
 
+  namespace :contact_logs do
+    get 'new_contact_log' => :new_contact_log
+    post 'new_contact_log' => :new_contact_log
+  end
+
   namespace :service do
     post 'assign_task' => :assign_task
     get 'search' => :search
   end
-
-  resources :contact_logs
 
   resources :intentions do
     collection do
@@ -31,6 +34,7 @@ Rails.application.routes.draw do
 
   resources :students do
     resources :residence_cards
+    resources :contact_logs
     collection do
       post 'get_student_status' => :get_student_status
       post 'update_id_card' => :update_id_card
