@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160107094653) do
+ActiveRecord::Schema.define(version: 20160108142121) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20160107094653) do
     t.datetime "id_card_back_pic_updated_at"
     t.integer  "is_local",                      limit: 4,   default: 0
     t.string   "swift_number",                  limit: 255
+    t.date     "signed_at"
   end
 
   add_index "students", ["coach_id"], name: "index_students_on_coach_id", using: :btree

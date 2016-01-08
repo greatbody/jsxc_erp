@@ -10,4 +10,30 @@
   .padding-container {
     padding: 10px 0;
   }
+
+  tr {
+    &.wait_call {
+      background-color: white;
+    }
+
+    &.contacting {
+      background-color: #b0d3ff;
+    }
+
+    &.booking {
+      background-color: violet;
+    }
+
+    &.wait_pay {
+      background-color: yellow;
+    }
+
+    &.signed_up {
+      background-color: #b8fc96;
+    }
+
+    &.canceled {
+      background-color: #ccc;
+    }
+  }
 }
