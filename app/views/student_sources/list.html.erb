@@ -16,7 +16,8 @@
         <td class="middle aligned"><%= ss.school.name if ss.school.present? %></td>
         <td class="middle center aligned"><%= ss.gender_text %></td>
         <td class="middle aligned">
-          <%= link_to '详情', student_source_path(ss), { class: 'small-button', target: '_blank' } %>
+          <%= link_to '详情', student_source_path(ss), { class: 'small-button' } %>
+          <%= link_to '编辑', edit_student_source_path(ss), { class: 'small-button' } %>
         </td>
       </tr>
       <% end %>
