@@ -90,4 +90,9 @@ class ServiceController < ApplicationController
 
     render json: { items: items }
   end
+
+  def daily_sign
+    current_user.daily_signs.build.save
+    render html: ''
+  end
 end

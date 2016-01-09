@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   namespace :service do
     post 'assign_task' => :assign_task
     get 'search' => :search
+    post 'daily_sign' => :daily_sign
   end
 
   resources :intentions do

@@ -1,0 +1,3 @@
+class DailySign < ActiveRecord::Base
+  belongs_to :user
+end
