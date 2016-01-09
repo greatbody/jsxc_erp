@@ -41,6 +41,8 @@ Rails.application.routes.draw do
       get 'upload_id_card_form' => :upload_id_card_form
       post 'notify_got_number' => :notify_got_number
       post 'notify_got_card' => :notify_got_card
+      get 'signed_up' => :signed_up
+      get 'wait_pay' => :wait_pay
     end
   end
 

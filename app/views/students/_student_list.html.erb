@@ -1,0 +1,48 @@
+<div class="ui segment student-source">
+  <table class="ui teal sortable celled table">
+    <thead>
+      <tr>
+        <th class="three wide center sorted ascending">姓名</th>
+        <th class="one wide center aligned">性别</th>
+        <th class="two wide center aligned">联系电话</th>
+        <th class="two wide center aligned">状态</th>
+        <th class="two wide center aligned">报名日期</th>
+        <th class="four wide center aligned">教练</th>
+        <th class="three wide center aligned">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @students.each do |st| %>
+      <tr class="<%= st.intention.current_status %>">
+        <td class="middle aligned"><%= st.name %></td>
+        <td class="middle center aligned"><%= st.gender %></td>
+        <td class="middle center aligned"><%= st.phone %></td>
+        <td class="middle center aligned"><%= st.intention.current_status_text %></td>
+        <td class="middle center aligned">
+          <% if st.signed_at.present? %>
+          <%= "#{st.signed_at.to_date.to_s(:db)}" %>
+          <% else %>
+          暂无
+          <% end %>
+        </td>
+        <td class="middle aligned">
+          <% if st.coach.present? %>
+          <%= "#{st.coach.name} [ #{st.coach.phone} ]" %>
+          <% else %>
+          暂无
+          <% end %>
+        </td>
+        <td class="middle aligned">
+          <%= link_to '意向', intention_path(st.intention), { class: 'small-button', target: '_blank' } %>
+          <%= link_to '资料', student_path(st), { class: 'small-button', target: '_blank' } %>
+          <%= link_to '编辑', edit_student_path(st), { class: 'small-button', target: '_blank' } %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $('table').tablesort();
+</script>

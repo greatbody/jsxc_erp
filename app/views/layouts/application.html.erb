@@ -25,6 +25,12 @@
           <%= link_to(students_path, class: 'item') do %>
             <i class="browser icon"></i>学员列表
           <% end %>
+          <%= link_to(signed_up_students_path, class: 'item') do %>
+            <i class="browser icon"></i>已报名学员
+          <% end %>
+          <%= link_to(wait_pay_students_path, class: 'item') do %>
+            <i class="browser icon"></i>已试学学员
+          <% end %>
         </div>
       </div>
       <div class="ui simple dropdown item">

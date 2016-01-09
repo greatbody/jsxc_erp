@@ -6,6 +6,14 @@ class StudentsController < ApplicationController
     @students = Student.all
   end
 
+  def signed_up
+    @students = Student.joins(:intention).where(intentions: {current_status: 4})
+  end
+
+  def wait_pay
+    @students = Student.joins(:intention).where(intentions: {current_status: 3})
+  end
+
   def new
   end
 
