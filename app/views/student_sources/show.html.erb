@@ -35,6 +35,15 @@
           二维码: <%= @student_source.qr_code %>
         </div>
       </div>
+      <div class="ui three column middle aligned very relaxed stackable grid">
+        <div class="column">
+          签约日期：<%= @student_source.signed_at.to_date.to_s(:db) if @student_source.signed_at.present? %>
+        </div>
+        <div class="column">
+        </div>
+        <div class="column">
+        </div>
+      </div>
     </div>
     <div>
       <%= link_to new_student_source_source_contact_path(@student_source) do %>
