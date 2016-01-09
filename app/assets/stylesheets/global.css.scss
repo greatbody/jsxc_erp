@@ -32,12 +32,20 @@
   margin: 10px;
 }
 
-.ui.header.thin {
-  margin-bottom: 2px;
-}
+.ui {
+  &.table {
+    td {
+      padding: 0.41428571em;
+    }
+  }
 
-.ui.divider.thin {
-  margin-top: 2px;
+  &.header.thin {
+    margin-bottom: 2px;
+  }
+
+  &.divider.thin {
+    margin-top: 2px;
+  }
 }
 
 .one-line {

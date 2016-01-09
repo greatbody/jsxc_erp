@@ -7,10 +7,10 @@
         <th class="three wide">学校</th>
         <th class="one wide center aligned">性别</th>
         <th class="two wide center aligned">签约日期</th>
-        <th class="two wide center aligned">实缴/应缴</th>
+        <th class="one wide center aligned">实缴/应缴</th>
         <th class="one wide center aligned">意向</th>
         <th class="one wide center aligned">已报名</th>
-        <th class="five wide">操作</th>
+        <th class="six wide">操作</th>
       </tr>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
         <td class="middle aligned"><%= ss.school.name if ss.school.present? %></td>
         <td class="middle center aligned"><%= ss.gender_text %></td>
         <td class="middle center aligned"><%= ss.signed_at.nil? ? '-' : ss.signed_at.to_date.to_s(:db) %></td>
-        <td class="middle right aligned"><%= number_with_precision(ss.deposit_paid.to_f, precision: 2) %> / <%= number_with_precision(ss.deposit.to_f, precision: 2) %></td>
+        <td class="middle right aligned"><%= number_with_precision(ss.deposit_paid.to_f, precision: 0) %> / <%= number_with_precision(ss.deposit.to_f, precision: 0) %></td>
         <td class="middle right aligned"><%= ss.intentions.count %></td>
         <td class="middle right aligned"><%= ss.intentions.signed_up.count %></td>
         <td class="middle aligned">
