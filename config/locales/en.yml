@@ -43,6 +43,7 @@ en:
     coach_type:
       cover_all_training: '训练全包，不处理档案'
       cover_all: '训练档案包干'
+      just_display: '教练墙模式'
   student_source:
     gender:
       male: '男'
