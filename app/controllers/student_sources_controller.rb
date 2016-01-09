@@ -62,6 +62,6 @@ class StudentSourcesController < ApplicationController
   end
 
   def student_source_params
-    params.require(:student_source).permit(:name, :phone, :gender, :id_card, :school_id, :qq, :email, :alipay, :qr_code, :remarks)
+    params.require(:student_source).permit(:name, :phone, :gender, :id_card, :school_id, :qq, :email, :alipay, :qr_code, :remarks, :signed_at)
   end
 end

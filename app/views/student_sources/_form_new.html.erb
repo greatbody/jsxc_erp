@@ -22,6 +22,10 @@
         <%= f.text_field :id_card, { placeholder: '请输入身份证号' } %>
       </div>
       <div class="field">
+        <%= f.label :signed_at, "签约日期" %>
+        <%= f.text_field :signed_at, class: 'datepicker' %>
+      </div>
+      <div class="field">
         <%= f.label :qr_code, "推广二维码" %>
         <%= f.text_field :qr_code, { placeholder: '请输入推广二维码的代码' } %>
       </div>
@@ -42,7 +46,7 @@
         <%= f.select :school_id, options_for_select(School.school_for_select), {}, class: "ui dropdown school" %>
       </div>
       <div class="field">
-        <%= f.label :remarks, "联系记录" %>
+        <%= f.label :remarks, "备注" %>
         <%= f.text_area :remarks, rows: 10, value: @student_source.remarks %>
       </div>
     </div>

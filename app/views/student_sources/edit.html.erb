@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <% content_for :title, "编辑 #{@student_source.name} - 极速学车ERP系统" %>
 <div class="student">
   <%= render 'form_edit' %>
@@ -6,6 +8,7 @@
   (function() {
     $('.ui.dropdown.gender').dropdown();
     $('.ui.dropdown.school').dropdown();
+    $('.datepicker').pickadate();
     <% if flash[:alert] %>
     $('.form').addClass('error');
     <% end %>
