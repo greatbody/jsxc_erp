@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109023735) do
+ActiveRecord::Schema.define(version: 20160109045741) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -153,21 +153,23 @@ ActiveRecord::Schema.define(version: 20160109023735) do
   add_index "source_contracts", ["student_source_id"], name: "index_source_contracts_on_student_source_id", using: :btree
 
   create_table "student_sources", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "phone",      limit: 255
-    t.string   "class_name", limit: 255
-    t.string   "id_card",    limit: 255
-    t.string   "qr_code",    limit: 255
-    t.string   "email",      limit: 255
-    t.string   "qq",         limit: 255
-    t.string   "alipay",     limit: 255
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.integer  "school_id",  limit: 4
-    t.integer  "gender",     limit: 4,     default: 1
-    t.integer  "user_id",    limit: 4
-    t.text     "remarks",    limit: 65535
+    t.string   "name",         limit: 255
+    t.string   "phone",        limit: 255
+    t.string   "class_name",   limit: 255
+    t.string   "id_card",      limit: 255
+    t.string   "qr_code",      limit: 255
+    t.string   "email",        limit: 255
+    t.string   "qq",           limit: 255
+    t.string   "alipay",       limit: 255
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.integer  "school_id",    limit: 4
+    t.integer  "gender",       limit: 4,                             default: 1
+    t.integer  "user_id",      limit: 4
+    t.text     "remarks",      limit: 65535
     t.date     "signed_at"
+    t.decimal  "deposit",                    precision: 8, scale: 2
+    t.decimal  "deposit_paid",               precision: 8, scale: 2
   end
 
   add_index "student_sources", ["school_id"], name: "index_student_sources_on_school_id", using: :btree
