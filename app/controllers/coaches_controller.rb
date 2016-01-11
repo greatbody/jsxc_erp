@@ -1,5 +1,6 @@
 class CoachesController < ApplicationController
   require 'phone_ext'
+  load_and_authorize_resource
   before_action :set_coach, only: [:show, :edit, :update, :destroy]
 
   # GET /coaches
