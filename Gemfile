@@ -32,9 +32,11 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
   gem 'ffaker'
+  gem 'capybara', '~> 2.4.3'
+  gem 'database_cleaner', '~> 1.3.0'
+  gem 'launchy', '~> 2.4.2'
+  gem 'selenium-webdriver', '~> 2.43.0'
 end
 
 group :development, :test do
@@ -44,6 +46,8 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 gem 'devise'

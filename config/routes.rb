@@ -1,10 +1,6 @@
 # encoding: UTF-8
 Rails.application.routes.draw do
 
-  get 'residence_cards/new'
-
-  get 'residence_cards/show'
-
   mount RailsAdmin::Engine => '/20150612', as: 'rails_admin'
 
   devise_for :users
@@ -48,7 +44,7 @@ Rails.application.routes.draw do
   end
 
   resources :student_sources do
-    resources :source_contracts
+    # resources :source_contracts
     resources :source_contacts
     collection do
       get 'list' => :list
@@ -56,7 +52,5 @@ Rails.application.routes.draw do
       post 'new_source_contact' => :new_source_contact
     end
   end
-
-  resources :coaches, only: [:show]
 
 end
