@@ -1,13 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe StudentSourcesController, type: :controller do
+let(:user) { FactoryGirl.create(:user) }
 
-  # describe "GET #index" do
-  #   it "returns http success" do
-  #     get :index
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+RSpec.describe StudentSourcesController, type: :controller do
+  before { sign_in(user) }
+  before { controller.stub(:current_user).and_return user }
+  describe "GET #index" do
+    it "returns http success" do
+      let(@superadmin) { FactoryGirl.create(:superadmin) }
+      before do
+        sign_in @superadmin
+      end
+      get :index
+      expect(response).to have_http_status(:success)
+    end
+  end
 
   # describe "GET #new" do
   #   it "returns http success" do
