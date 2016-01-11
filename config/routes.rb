@@ -53,6 +53,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :coaches, only: [:index, :show, :edit]
+  resources :coaches, only: [:index, :show, :edit, :update]
 
 end

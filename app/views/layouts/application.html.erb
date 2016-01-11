@@ -12,9 +12,6 @@
   <div class="ui container">
   <% if request.path != new_user_session_path %>
     <div class="ui attached stackable menu">
-      <a class="item" href="/">
-        <i class="home icon"></i> 首页
-      </a>
       <%= render partial: 'layouts/application_menu_notifies' %>
       <div class="ui simple dropdown item">
         <%= link_to(students_path, class: 'black') do %>
@@ -30,6 +27,17 @@
           <% end %>
           <%= link_to(wait_pay_students_path, class: 'item') do %>
             <i class="browser icon"></i>已试学学员
+          <% end %>
+        </div>
+      </div>
+      <div class="ui simple dropdown item">
+        <%= link_to(coaches_path, class: 'black') do %>
+          <i class="users icon"></i>教练管理
+        <% end %>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <%= link_to(coaches_path, class: 'item') do %>
+            <i class="browser icon"></i>教练列表
           <% end %>
         </div>
       </div>

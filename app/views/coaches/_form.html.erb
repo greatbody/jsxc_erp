@@ -1,7 +1,7 @@
 <%= form_for(@coach, html: { class: 'ui form' }) do |f| %>
   <% if @coach.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@coach.errors.count, "error") %> prohibited this coach from being saved:</h2>
+      <h2><%= pluralize(@coach.errors.count, "error") %> 更新未保存，请检查以下问题:</h2>
 
       <ul>
       <% @coach.errors.full_messages.each do |message| %>
@@ -10,52 +10,57 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :name, '姓名' %>
-    <%= f.text_field :name %>
+  <div class="ui one column doubling stackable grid container">
+    <div class="column">
+      <div class="field">
+        <%= f.label :name, '姓名' %>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :gender, "性别" %>
+        <%= f.select :gender, options_for_select(Coach.gender_for_select, @coach.gender), {}, class: "ui dropdown gender" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone, '手机' %>
+        <%= f.text_field :phone %>
+      </div>
+
+      <div class="field">
+        <%= f.label :id_card, '身份证' %>
+        <%= f.text_field :id_card %>
+      </div>
+
+      <div class="field">
+        <%= f.label :birthday, '生日' %>
+        <%= f.text_field :birthday, class: 'datepicker' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :wechat, '微信' %>
+        <%= f.text_field :wechat %>
+      </div>
+
+      <div class="field">
+        <%= f.label :qq, 'QQ' %>
+        <%= f.text_field :qq %>
+      </div>
+
+      <div class="field">
+        <%= f.label :driving_license, '驾驶证' %>
+        <%= f.text_field :driving_license %>
+      </div>
+
+      <div class="field">
+        <%= f.label :coaching_license, '教练证' %>
+        <%= f.text_field :coaching_license %>
+      </div>
+
+      <div class="div-btn">
+        <%= f.submit "提交更改", class: "ui primary button" %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :gender, "性别" %>
-    <%= f.select :gender, options_for_select(Coach.gender_for_select, @coach.gender), {}, class: "ui dropdown gender" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone, '手机' %>
-    <%= f.text_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :id_card, '身份证' %>
-    <%= f.text_field :id_card %>
-  </div>
-
-  <div class="field">
-    <%= f.label :birthday, '生日' %>
-    <%= f.text_field :birthday, class: 'datepicker' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :wechat, '微信' %>
-    <%= f.text_field :wechat %>
-  </div>
-
-  <div class="field">
-    <%= f.label :qq, 'QQ' %>
-    <%= f.text_field :qq %>
-  </div>
-
-  <div class="field">
-    <%= f.label :driving_license, '驾驶证' %>
-    <%= f.text_field :driving_license %>
-  </div>
-
-  <div class="field">
-    <%= f.label :coaching_license, '教练证' %>
-    <%= f.text_field :coaching_license %>
-  </div>
-
-  <div class="div-btn">
-    <%= f.submit "提交更改", class: "ui primary button" %>
-  </div>
 <% end %>
