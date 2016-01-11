@@ -37,3 +37,12 @@
     }
   }
 }
+
+@mixin small-button {
+  a.small-button {
+    padding: 3px;
+    background-color: #fef;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+  }
+}

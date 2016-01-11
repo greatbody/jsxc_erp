@@ -1,0 +1,9 @@
+.coach {
+  @include ui-grid-fix;
+  @include small-button;
+
+  .padding-container {
+    padding: 10px 0;
+  }
+
+}

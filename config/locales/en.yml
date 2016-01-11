@@ -22,9 +22,9 @@
 en:
   hello: "Hello world"
   sexs:
-    male: '汉子'
-    female: '妹子'
-    unknown: '鬼知道'
+    male: '男'
+    female: '女'
+    unknown: '未知'
   contact_types:
     intent: '意向'
     trylearn: '免费试学'

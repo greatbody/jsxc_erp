@@ -1,4 +1,4 @@
-<% content_for :title, "渠道详表 - 渠道管理 - 极速学车ERP系统" %>
+<% content_for :title, "教练详表 - 教练管理 - 极速学车ERP系统" %>
 <div class="ui segment coach">
   <table class="ui teal striped sortable celled table">
     <thead>
@@ -17,10 +17,10 @@
       <% @coaches.each_with_index do |coach, index| %>
       <tr>
         <td class="middle center aligned"><%= (index + 1).to_s.rjust(3, '0') %></td>
-        <td class="middle aligned"><%= coach.name %></td>
+        <td class="middle aligned text"><%= coach.name %></td>
         <td class="middle center aligned"><%= coach.gender_text %></td>
         <td class="middle aligned phone"><%= PhoneExt.format_phone(coach.phone) if coach.phone.present? %></td>
-        <td class="middle"><%= coach.qq if coach.qq.present? %></td>
+        <td class="middle text"><%= coach.qq.present? ? coach.qq : '-' %></td>
         <td class="middle aligned date-time"><%= coach.signed_at.nil? ? '-' : coach.signed_at.to_date.to_s(:db) %></td>
         <td class="middle aligned number"><%= coach.students.count %></td>
         <td class="middle aligned">

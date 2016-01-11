@@ -25,7 +25,7 @@ class Coach < ActiveRecord::Base
 
   def gender_text
     return I18n.t("sexs.#{gender}") if gender.present?
-    '【未填写】'
+    '-'
   end
 
 end
