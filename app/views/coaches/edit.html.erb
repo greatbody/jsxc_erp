@@ -1,6 +1,14 @@
-<h1>Editing Coach</h1>
-
+<% content_for :title, "编辑 #{@coach.name} 信息" %>
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <%= render 'form' %>
 
-<%= link_to 'Show', @coach %> |
-<%= link_to 'Back', coaches_path %>
+<script type="text/javascript">
+  (function() {
+    $('.ui.dropdown.gender').dropdown();
+    $('.datepicker').pickadate();
+    <% if flash[:alert] %>
+    $('.form').addClass('error');
+    <% end %>
+  })();
+</script>

@@ -40,6 +40,10 @@ zh-CN:
       jsxc: '极速学车'
       student: '学员自助'
       coach: '教练'
+  coach:
+    gender:
+      male: '男'
+      female: '女'
   application:
     menus:
       wait_call: '未联系'

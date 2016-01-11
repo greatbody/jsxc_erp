@@ -28,4 +28,10 @@ class Coach < ActiveRecord::Base
     '-'
   end
 
+  def self.gender_for_select
+    genders.map do |gender, _|
+      [I18n.t("coach.gender.#{gender}"), gender]
+    end
+  end
+
 end
