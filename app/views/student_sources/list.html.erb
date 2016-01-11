@@ -19,7 +19,7 @@
     <tbody>
       <% @student_sources.each_with_index do |ss, index| %>
       <tr>
-        <td class="middle center aligned"><%= index + 1 %></td>
+        <td class="middle center aligned"><%= (index + 1).to_s.rjust(3, '0') %></td>
         <td class="middle aligned"><%= ss.name %></td>
         <td class="middle aligned"><%= ss.school.name if ss.school.present? %></td>
         <td class="middle center aligned"><%= ss.gender_text %></td>
