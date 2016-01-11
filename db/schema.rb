@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111112455) do
+ActiveRecord::Schema.define(version: 20160111113404) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -140,6 +140,14 @@ ActiveRecord::Schema.define(version: 20160111112455) do
     t.datetime "updated_at",               null: false
     t.string   "district",   limit: 255
   end
+
+  create_table "schools_train_fields", id: false, force: :cascade do |t|
+    t.integer "train_field_id", limit: 4, null: false
+    t.integer "school_id",      limit: 4, null: false
+  end
+
+  add_index "schools_train_fields", ["school_id", "train_field_id"], name: "index_schools_train_fields_on_school_id_and_train_field_id", using: :btree
+  add_index "schools_train_fields", ["train_field_id", "school_id"], name: "index_schools_train_fields_on_train_field_id_and_school_id", using: :btree
 
   create_table "source_contacts", force: :cascade do |t|
     t.string   "title",             limit: 255
