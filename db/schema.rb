@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111113404) do
+ActiveRecord::Schema.define(version: 20160111120543) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -236,6 +236,29 @@ ActiveRecord::Schema.define(version: 20160111113404) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "train_services", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.integer  "coach_id",        limit: 4
+    t.integer  "train_field_id",  limit: 4
+    t.decimal  "base_price",                  precision: 10
+    t.decimal  "price",                       precision: 10
+    t.decimal  "discount_price",              precision: 10
+    t.boolean  "sr_health_check"
+    t.boolean  "sr_km1"
+    t.boolean  "sr_km2"
+    t.boolean  "sr_km3"
+    t.boolean  "sr_km4"
+    t.decimal  "sim_km2_price",               precision: 10
+    t.decimal  "sim_km3_price",               precision: 10
+    t.decimal  "km2_bk_fee",                  precision: 10
+    t.decimal  "km3_bk_fee",                  precision: 10
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "train_services", ["coach_id"], name: "index_train_services_on_coach_id", using: :btree
+  add_index "train_services", ["train_field_id"], name: "index_train_services_on_train_field_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "phone",               limit: 255, default: "", null: false
     t.string   "email",               limit: 255, default: "", null: false
@@ -275,4 +298,6 @@ ActiveRecord::Schema.define(version: 20160111113404) do
   add_foreign_key "student_sources", "users"
   add_foreign_key "students", "coaches"
   add_foreign_key "students", "users"
+  add_foreign_key "train_services", "coaches"
+  add_foreign_key "train_services", "train_fields"
 end
