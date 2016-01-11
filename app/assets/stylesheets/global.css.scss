@@ -35,7 +35,22 @@
 .ui {
   &.table {
     td {
-      padding: 0.41428571em;
+      padding: 0.41428571em 0.1em;
+
+      &.number {
+        text-align: right;
+        padding-right: 0.4em;
+      }
+
+      &.date-time {
+        text-align: center;
+        padding: 0.2em;
+      }
+
+      &.phone {
+        text-align: center;
+        padding: 0.2em;
+      }
     }
   }
 

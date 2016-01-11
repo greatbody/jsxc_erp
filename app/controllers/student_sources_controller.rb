@@ -4,7 +4,7 @@ class StudentSourcesController < ApplicationController
   load_and_authorize_resource
   def list
     @current_page = :list_student_sources_path
-    @student_sources = StudentSource.all
+    @student_sources = StudentSource.all.order(signed_at: :desc)
   end
 
   def new_source_contact

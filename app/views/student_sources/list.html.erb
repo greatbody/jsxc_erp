@@ -3,12 +3,13 @@
   <table class="ui teal striped sortable celled table">
     <thead>
       <tr>
-        <th class="one wide sorted ascending">姓名</th>
+        <th class="one wide">序号</th>
+        <th class="one wide">姓名</th>
         <th class="three wide">学校</th>
         <th class="one wide center aligned">性别</th>
         <th class="two wide center aligned">手机</th>
         <th class="two wide center aligned">QQ</th>
-        <th class="two wide center aligned">签约日期</th>
+        <th class="one wide center aligned sorted descending">签约日期</th>
         <th class="one wide center aligned">实缴/应缴</th>
         <th class="one wide center aligned">意向</th>
         <th class="one wide center aligned">已报名</th>
@@ -16,17 +17,18 @@
       </tr>
     </thead>
     <tbody>
-      <% @student_sources.each do |ss| %>
+      <% @student_sources.each_with_index do |ss, index| %>
       <tr>
+        <td class="middle center aligned"><%= (index + 1).to_s.rjust(3, '0') %></td>
         <td class="middle aligned"><%= ss.name %></td>
         <td class="middle aligned"><%= ss.school.name if ss.school.present? %></td>
         <td class="middle center aligned"><%= ss.gender_text %></td>
-        <td class="middle center aligned"><%= PhoneExt.format_phone(ss.phone) if ss.phone.present? %></td>
+        <td class="middle aligned phone"><%= PhoneExt.format_phone(ss.phone) if ss.phone.present? %></td>
         <td class="middle"><%= ss.qq if ss.qq.present? %></td>
         <td class="middle center aligned"><%= ss.signed_at.nil? ? '-' : ss.signed_at.to_date.to_s(:db) %></td>
         <td class="middle center aligned"><%= number_with_precision(ss.deposit_paid.to_f, precision: 0) %> / <%= number_with_precision(ss.deposit.to_f, precision: 0) %></td>
-        <td class="middle right aligned"><%= ss.intentions.count %></td>
-        <td class="middle right aligned"><%= ss.intentions.signed_up.count %></td>
+        <td class="middle aligned number"><%= ss.intentions.count %></td>
+        <td class="middle aligned number"><%= ss.intentions.signed_up.count %></td>
         <td class="middle aligned">
           <%= link_to '详情', student_source_path(ss), { class: 'small-button' } %>
           <%= link_to '编辑', edit_student_source_path(ss), { class: 'small-button' } %>

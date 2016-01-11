@@ -3,15 +3,15 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card]
   load_and_authorize_resource
   def index
-    @students = Student.all
+    @students = Student.all.order(signed_at: :desc)
   end
 
   def signed_up
-    @students = Student.joins(:intention).where(intentions: {current_status: 4})
+    @students = Student.joins(:intention).where(intentions: {current_status: 4}).order(signed_at: :desc)
   end
 
   def wait_pay
-    @students = Student.joins(:intention).where(intentions: {current_status: 3})
+    @students = Student.joins(:intention).where(intentions: {current_status: 3}).order(signed_at: :desc)
   end
 
   def new
