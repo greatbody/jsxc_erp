@@ -23,4 +23,15 @@ class Coach < ActiveRecord::Base
     coach_collection
   end
 
+  def gender_text
+    return I18n.t("sexs.#{gender}") if gender.present?
+    '-'
+  end
+
+  def self.gender_for_select
+    genders.map do |gender, _|
+      [I18n.t("coach.gender.#{gender}"), gender]
+    end
+  end
+
 end

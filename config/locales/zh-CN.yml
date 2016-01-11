@@ -1,8 +1,8 @@
 zh-CN:
   sexs:
-    male: '汉子'
-    female: '妹子'
-    unknown: '鬼知道'
+    male: '男'
+    female: '女'
+    unknown: '未知'
   contact_types:
     intent: '意向'
     trylearn: '免费试学'
@@ -40,6 +40,10 @@ zh-CN:
       jsxc: '极速学车'
       student: '学员自助'
       coach: '教练'
+  coach:
+    gender:
+      male: '男'
+      female: '女'
   application:
     menus:
       wait_call: '未联系'

@@ -1,49 +1,49 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @coach.phone %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @coach.name %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @coach.gender %>
-</p>
-
-<p>
-  <strong>Id card:</strong>
-  <%= @coach.id_card %>
-</p>
-
-<p>
-  <strong>Birthday:</strong>
-  <%= @coach.birthday %>
-</p>
-
-<p>
-  <strong>Wechat:</strong>
-  <%= @coach.wechat %>
-</p>
-
-<p>
-  <strong>Qq:</strong>
-  <%= @coach.qq %>
-</p>
-
-<p>
-  <strong>Coaching license:</strong>
-  <%= @coach.coaching_license %>
-</p>
-
-<p>
-  <strong>Driving license:</strong>
-  <%= @coach.driving_license %>
-</p>
-
-<%= link_to 'Edit', edit_coach_path(@coach) %> |
-<%= link_to 'Back', coaches_path %>
+<% content_for :title, "#{@coach.name} - 教练管理 - 极速学车ERP系统" %>
+<div class="coach">
+  <%= link_to edit_coach_path(@coach) do %>
+    <div class="ui teal labeled icon button">
+      编辑教练
+      <i class="edit icon"></i>
+    </div>
+  <% end %>
+  <h4 class="ui horizontal divider header">
+    <i class="tag icon"></i>
+    基本资料
+  </h4>
+  <table class="ui striped definition table">
+    <tbody>
+      <tr>
+        <td class="two wide column">姓名</td>
+        <td><%= @coach.name %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">性别</td>
+        <td><%= @coach.gender_text %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">手机</td>
+        <td><%= @coach.phone.present? ? PhoneExt.format_phone(@coach.phone) : '-' %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">身份证号</td>
+        <td><%= @coach.id_card.present? ? @coach.id_card : '-' %></td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 class="ui horizontal divider header">
+    <i class="bar chart icon"></i>
+    合作详情
+  </h4>
+  <table class="ui striped definition table">
+    <tbody>
+      <tr>
+        <td class="two wide column">签约日期</td>
+        <td><%= @coach.signed_at.present? ? @coach.signed_at.to_date.to_s(:db) : '-' %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">招生数量</td>
+        <td><%= @coach.students.count %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

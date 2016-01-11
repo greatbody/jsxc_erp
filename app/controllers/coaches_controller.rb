@@ -1,15 +1,18 @@
 class CoachesController < ApplicationController
+  require 'phone_ext'
   before_action :set_coach, only: [:show, :edit, :update, :destroy]
 
   # GET /coaches
   # GET /coaches.json
   def index
+    @current_page = :coaches_path
     @coaches = Coach.all
   end
 
   # GET /coaches/1
   # GET /coaches/1.json
   def show
+    @current_page = :coach_path
   end
 
   # GET /coaches/new
