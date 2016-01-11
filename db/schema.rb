@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109075955) do
+ActiveRecord::Schema.define(version: 20160111065638) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160109075955) do
     t.integer  "driving_license_pic_file_size",     limit: 4
     t.datetime "driving_license_pic_updated_at"
     t.integer  "coach_type",                        limit: 4,   default: 0
+    t.date     "signed_at"
   end
 
   create_table "contact_logs", force: :cascade do |t|

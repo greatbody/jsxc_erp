@@ -1,4 +1,5 @@
 class CoachesController < ApplicationController
+  require 'phone_ext'
   before_action :set_coach, only: [:show, :edit, :update, :destroy]
 
   # GET /coaches

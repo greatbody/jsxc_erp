@@ -1,43 +1,38 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Coaches</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Phone</th>
-      <th>Name</th>
-      <th>Gender</th>
-      <th>Id card</th>
-      <th>Birthday</th>
-      <th>Wechat</th>
-      <th>Qq</th>
-      <th>Coaching license</th>
-      <th>Driving license</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @coaches.each do |coach| %>
+<% content_for :title, "渠道详表 - 渠道管理 - 极速学车ERP系统" %>
+<div class="ui segment coach">
+  <table class="ui teal striped sortable celled table">
+    <thead>
       <tr>
-        <td><%= coach.phone %></td>
-        <td><%= coach.name %></td>
-        <td><%= coach.gender %></td>
-        <td><%= coach.id_card %></td>
-        <td><%= coach.birthday %></td>
-        <td><%= coach.wechat %></td>
-        <td><%= coach.qq %></td>
-        <td><%= coach.coaching_license %></td>
-        <td><%= coach.driving_license %></td>
-        <td><%= link_to 'Show', coach %></td>
-        <td><%= link_to 'Edit', edit_coach_path(coach) %></td>
-        <td><%= link_to 'Destroy', coach, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th class="one wide">序号</th>
+        <th class="one wide">姓名</th>
+        <th class="one wide center aligned">性别</th>
+        <th class="two wide center aligned">手机</th>
+        <th class="two wide center aligned">QQ</th>
+        <th class="one wide center aligned sorted descending">签约日期</th>
+        <th class="one wide center aligned">学员</th>
+        <th class="seven wide">操作</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @coaches.each_with_index do |coach, index| %>
+      <tr>
+        <td class="middle center aligned"><%= (index + 1).to_s.rjust(3, '0') %></td>
+        <td class="middle aligned"><%= coach.name %></td>
+        <td class="middle center aligned"><%= coach.gender_text %></td>
+        <td class="middle aligned phone"><%= PhoneExt.format_phone(coach.phone) if coach.phone.present? %></td>
+        <td class="middle"><%= coach.qq if coach.qq.present? %></td>
+        <td class="middle aligned date-time"><%= coach.signed_at.nil? ? '-' : coach.signed_at.to_date.to_s(:db) %></td>
+        <td class="middle aligned number"><%= coach.students.count %></td>
+        <td class="middle aligned">
+          <%= link_to '详情', coach_path(coach), { class: 'small-button' } %>
+          <%= link_to '编辑', edit_coach_path(coach), { class: 'small-button' } %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<br>
-
-<%= link_to 'New Coach', new_coach_path %>
+<script type="text/javascript">
+  $('table').tablesort();
+</script>
