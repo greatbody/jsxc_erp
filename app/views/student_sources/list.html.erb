@@ -23,12 +23,12 @@
         <td class="middle aligned"><%= ss.name %></td>
         <td class="middle aligned"><%= ss.school.name if ss.school.present? %></td>
         <td class="middle center aligned"><%= ss.gender_text %></td>
-        <td class="middle center aligned"><%= PhoneExt.format_phone(ss.phone) if ss.phone.present? %></td>
+        <td class="middle aligned phone"><%= PhoneExt.format_phone(ss.phone) if ss.phone.present? %></td>
         <td class="middle"><%= ss.qq if ss.qq.present? %></td>
         <td class="middle center aligned"><%= ss.signed_at.nil? ? '-' : ss.signed_at.to_date.to_s(:db) %></td>
         <td class="middle center aligned"><%= number_with_precision(ss.deposit_paid.to_f, precision: 0) %> / <%= number_with_precision(ss.deposit.to_f, precision: 0) %></td>
-        <td class="middle right aligned"><%= ss.intentions.count %></td>
-        <td class="middle right aligned"><%= ss.intentions.signed_up.count %></td>
+        <td class="middle aligned number"><%= ss.intentions.count %></td>
+        <td class="middle aligned number"><%= ss.intentions.signed_up.count %></td>
         <td class="middle aligned">
           <%= link_to '详情', student_source_path(ss), { class: 'small-button' } %>
           <%= link_to '编辑', edit_student_source_path(ss), { class: 'small-button' } %>
