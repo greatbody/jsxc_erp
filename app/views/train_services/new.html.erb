@@ -1,0 +1,15 @@
+<% content_for :title, "录入新服务" %>
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
+<div class="coach">
+  <div class="ui segment">
+    <%= render 'form' %>
+  </div>
+</div>
+<script type="text/javascript">
+  (function() {
+    <% if flash[:alert] %>
+    $('.form').addClass('error');
+    <% end %>
+  })();
+</script>

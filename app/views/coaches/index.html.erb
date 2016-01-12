@@ -26,6 +26,7 @@
         <td class="middle aligned">
           <%= link_to '详情', coach_path(coach), { class: 'small-button' } %>
           <%= link_to '编辑', edit_coach_path(coach), { class: 'small-button' } %>
+          <%= link_to '新服务', new_coach_train_service_path(coach), { class: 'small-button' } %>
         </td>
       </tr>
       <% end %>
