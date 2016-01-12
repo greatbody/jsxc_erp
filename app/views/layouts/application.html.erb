@@ -36,6 +36,9 @@
         <% end %>
         <i class="dropdown icon"></i>
         <div class="menu">
+          <%= link_to(new_coach_path, class: 'item') do %>
+            <i class="add icon"></i>录入教练
+          <% end %>
           <%= link_to(coaches_path, class: 'item') do %>
             <i class="browser icon"></i>教练列表
           <% end %>

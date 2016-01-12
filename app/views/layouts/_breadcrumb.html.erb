@@ -139,6 +139,14 @@
   <i class="right angle icon divider"></i>
   <div class="active section"><%= "#{@coach.name}" %></div>
 </div>
+<% when :new_coach_path %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "教练详表", coaches_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">创建教练</div>
+</div>
 <% else %>
 <div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>
