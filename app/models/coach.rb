@@ -5,7 +5,8 @@ class Coach < ActiveRecord::Base
   enum coach_type: [:just_training, :cover_all, :just_display]
 
   has_many :students
-  belongs_to :train_field
+  has_many :train_services
+  has_and_belongs_to_many :train_fields
 
   has_attached_file :avatar, styles: { medium: '300x300>', thumb: '80x80>' }, default_url: '/80x80.png'
   has_attached_file :id_card_pic, styles: { medium: '300x300>', thumb: '80x80>' }, default_url: '/80x80.png'
