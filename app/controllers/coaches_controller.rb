@@ -30,7 +30,6 @@ class CoachesController < ApplicationController
   # POST /coaches.json
   def create
     @coach = Coach.new(coach_params)
-
     respond_to do |format|
       if @coach.save
         format.html { redirect_to @coach, notice: 'Coach was successfully created.' }
@@ -47,6 +46,10 @@ class CoachesController < ApplicationController
   def update
     respond_to do |format|
       if @coach.update(coach_params)
+        @coach.train_fields.delete_all
+        params[:coach][:train_fields][:id].each { |id|
+          @coach.train_fields << TrainField.find(id) if id.is_number?
+        }
         format.html { redirect_to @coach, notice: 'Coach was successfully updated.' }
         format.json { render :show, status: :ok, location: @coach }
       else

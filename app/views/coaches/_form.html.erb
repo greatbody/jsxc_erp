@@ -57,6 +57,13 @@
         <%= f.text_field :coaching_license %>
       </div>
 
+      <%= f.fields_for :train_fields do |tf| %>
+      <div class="field">
+        <%= tf.label :id, "训练场" %>
+        <%= tf.select :id, options_for_select(TrainField.train_fields_for_select), {}, class: "ui fluid search dropdown train-fields", multiple: '' %>
+      </div>
+      <% end %>
+
       <div class="div-btn">
         <%= f.submit "提交更改", class: "ui primary button" %>
       </div>
@@ -64,3 +71,8 @@
   </div>
 
 <% end %>
+<script type="text/javascript">
+  (function() {
+    $('.ui.dropdown.train-fields').dropdown('set selected', ['<%= @coach.train_fields.pluck(:id).join("','").html_safe %>']);
+  })();
+</script>
