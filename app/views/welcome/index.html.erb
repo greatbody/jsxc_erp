@@ -109,13 +109,16 @@
         </div>
       </div>
     </div>
+    <% if current_user.has_role?(:superadmin) || current_user.has_role?(:user) %>
     <div class="ui row">
       <div class="fixteen wide column">
         <div id="chart" style="width: 100%;height: 400px;"></div>
       </div>
     </div>
+    <% end %>
   </div>
 </div>
+<% if current_user.has_role?(:superadmin) || current_user.has_role?(:user) %>
 <script type="text/javascript">
   (function() {
     var myChart = echarts.init($('#chart')[0]);
@@ -159,3 +162,4 @@
     myChart.setOption(option);
   })();
 </script>
+<% end %>
