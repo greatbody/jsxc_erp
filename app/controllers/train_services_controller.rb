@@ -1,11 +1,16 @@
 class TrainServicesController < ApplicationController
   before_action :set_train_service, only: [:show, :edit, :update]
+  before_action :set_new_train_service, only: [:new, :create]
 
   def index
   end
 
   def new
     @train_service = TrainService.new
+  end
+
+  def create
+    @train_service.update(train_service_params)
   end
 
   def edit
@@ -18,6 +23,10 @@ class TrainServicesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_train_service
       @train_service = TrainService.find(params[:id])
+    end
+
+    def set_new_train_service
+      @train_service = Coach.find(params[:coach_id]).train_services.build
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
