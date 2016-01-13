@@ -17,5 +17,5 @@
 //= require jquery.tablesort
 //= require picker
 //= require picker.date
-//= require echarts.min
+//= require echarts
 //= require_tree .
