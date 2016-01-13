@@ -9,4 +9,8 @@ namespace :fix do
     end
     p "done"
   end
+
+  task :add_new_role => :environment do
+    Role.create(name: 'manage_student_source')
+  end
 end
