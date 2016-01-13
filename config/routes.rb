@@ -53,8 +53,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :coaches, only: [:index, :show, :edit, :update, :new, :create] do
-    # resources :train_services, only: [:new, :create]
+  resources :coaches, only: [:index, :new, :show, :edit, :update, :create] do
+    resources :train_services, only: [:index, :new, :show, :edit, :create, :update]
   end
 
 end

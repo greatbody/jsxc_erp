@@ -147,6 +147,28 @@
   <i class="right angle icon divider"></i>
   <div class="active section">创建教练</div>
 </div>
+<% when :coach_train_services_path %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "教练详表", coaches_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "#{@coach.name}", coach_path(@coach), class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">服务表</div>
+</div>
+<% when :coach_train_service_path %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "教练详表", coaches_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "#{@train_service.coach.name}", coach_path(@train_service.coach), class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <%= link_to "服务表", coach_train_services_path(@train_service.coach), class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section"><%= @train_service.name %></div>
+</div>
 <% else %>
 <div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>

@@ -1,2 +1,39 @@
-<h1>TrainServices#index</h1>
-<p>Find me in app/views/train_services/index.html.erb</p>
+<% content_for :title, "服务表 - 教练管理 - 极速学车ERP系统" %>
+<div class="ui segment coach">
+  <table class="ui teal striped sortable celled table">
+    <thead>
+      <tr>
+        <th class="one wide">序号</th>
+        <th class="one wide">名称</th>
+        <th class="one wide center aligned">价格</th>
+        <th class="four wide center aligned">接送</th>
+        <th class="nine wide">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @train_services.each_with_index do |train_service, index| %>
+      <tr>
+        <td class="middle center aligned"><%= (index + 1).to_s.rjust(3, '0') %></td>
+        <td class="middle aligned text"><%= train_service.name %></td>
+        <td class="middle center aligned"><%= number_to_currency(train_service.price, unit: "¥", precision: 2) %>
+        </td>
+        <td class="middle aligned phone">
+          <%= "体检√ " if train_service.sr_health_check %>
+          <%= "科目一√ " if train_service.sr_km1 %>
+          <%= "科目二√ " if train_service.sr_km2 %>
+          <%= "科目三√ " if train_service.sr_km3 %>
+          <%= "科目四√ " if train_service.sr_km4 %>
+        </td>
+        <td class="middle aligned">
+          <%= link_to '详情', coach_train_service_path(coach_id: train_service.coach.id, id: train_service.id), { class: 'small-button' } %>
+          <%= link_to '编辑', edit_coach_train_service_path(coach_id: train_service.coach.id, id: train_service.id), { class: 'small-button' } %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $('table').tablesort();
+</script>

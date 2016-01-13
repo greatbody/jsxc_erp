@@ -3,11 +3,102 @@
 <link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <div class="coach">
   <div class="ui segment">
-    <%= render 'form' %>
+    <%= form_for(@train_service, url: new_coach_train_service_path, html: { class: 'ui form' }) do |f| %>
+      <% if @train_service.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@train_service.errors.count, "error") %> 更新未保存，请检查以下问题:</h2>
+
+          <ul>
+          <% @train_service.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="ui one column doubling stackable grid container">
+        <div class="column">
+          <div class="field">
+            <%= f.label :name, '服务名' %>
+            <%= f.text_field :name %>
+          </div>
+
+          <div class="field">
+            <%= f.label :train_field_id, "训练场" %>
+            <%= f.select :train_field_id, options_for_select(TrainField.train_fields_for_select, @train_service.train_field), {}, class: "ui dropdown train-field" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :price, '标价' %>
+            <%= f.number_field :price, in: 1..100000, step: 1 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :base_price, '底价' %>
+            <%= f.number_field :base_price, in: 1..100000, step: 1 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :discount_price, '折扣价' %>
+            <%= f.number_field :discount_price, in: 1..100000, step: 1 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :sr_health_check, '体检接送费' %>
+            <%= f.number_field :sr_health_check, in: 1..100000, step: 1 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :sr_km1, "科目一接送" %>
+            <%= f.check_box :sr_km1 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :sr_km2, "科目二接送" %>
+            <%= f.check_box :sr_km2 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :sr_km3, "科目三接送" %>
+            <%= f.check_box :sr_km3 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :sr_km4, "科目四接送" %>
+            <%= f.check_box :sr_km4 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :sim_km2_price, '科目二模拟费' %>
+            <%= f.number_field :sim_km2_price, in: 1..100000, step: 1 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :sim_km3_price, '科目三模拟费' %>
+            <%= f.number_field :sim_km3_price, in: 1..100000, step: 1 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :km2_bk_fee, '科目二补考费' %>
+            <%= f.number_field :km2_bk_fee, in: 1..100000, step: 1 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :km3_bk_fee, '科目三补考费' %>
+            <%= f.number_field :km3_bk_fee, in: 1..100000, step: 1 %>
+          </div>
+
+          <div class="div-btn">
+            <%= f.submit "提交", class: "ui primary button" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 <script type="text/javascript">
   (function() {
+    $('.ui.dropdown.train-field').dropdown();
     <% if flash[:alert] %>
     $('.form').addClass('error');
     <% end %>

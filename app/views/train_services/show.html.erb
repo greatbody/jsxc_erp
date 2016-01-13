@@ -1,2 +1,73 @@
-<h1>TrainServices#show</h1>
-<p>Find me in app/views/train_services/show.html.erb</p>
+<% content_for :title, "#{@train_service.name} - 服务管理 - 教练管理 - 极速学车ERP系统" %>
+<div class="coach">
+  <%= link_to edit_coach_train_service_path(coach_id: @train_service.coach.id, id: @train_service.id) do %>
+    <div class="ui teal labeled icon button">
+      编辑服务
+      <i class="edit icon"></i>
+    </div>
+  <% end %>
+  <h4 class="ui horizontal divider header">
+    <i class="tag icon"></i>
+    基本资料
+  </h4>
+  <table class="ui striped definition table">
+    <tbody>
+      <tr>
+        <td class="two wide column">服务名</td>
+        <td><%= @train_service.name %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">教练</td>
+        <td><%= link_to "#{@train_service.coach.name}", coach_path(@train_service.coach) %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">场地</td>
+        <td><%= "#{@train_service.train_field.name}" if @train_service.train_field.present? %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">底价</td>
+        <td><%= number_to_currency(@train_service.base_price, unit: "¥", precision: 2) %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">标价</td>
+        <td><%= number_to_currency(@train_service.price, unit: "¥", precision: 2) %></td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 class="ui horizontal divider header">
+    <i class="bar chart icon"></i>
+    服务详情
+  </h4>
+  <table class="ui striped definition table">
+    <tbody>
+      <tr>
+        <td class="two wide column">科目一</td>
+        <td>
+          接送考：<%= @train_service.sr_km1 ? '√' : '×' %>
+        </td>
+      </tr>
+      <tr>
+        <td class="two wide column">科目二</td>
+        <td>
+          接送考：<%= @train_service.sr_km2 ? '√' : '×' %><br>
+          补考费:<%= number_to_currency(@train_service.km2_bk_fee, unit: "¥", precision: 2) %><br>
+          模拟考试费:<%= number_to_currency(@train_service.sim_km2_price, unit: "¥", precision: 2) %>
+        </td>
+      </tr>
+      <tr>
+        <td class="two wide column">科目三</td>
+        <td>
+          接送考：<%= @train_service.sr_km3 ? '√' : '×' %><br>
+          补考费:<%= number_to_currency(@train_service.km3_bk_fee, unit: "¥", precision: 2) %><br>
+          模拟考试费:<%= number_to_currency(@train_service.sim_km3_price, unit: "¥", precision: 2) %>
+        </td>
+      </tr>
+      <tr>
+        <td class="two wide column">科目四</td>
+        <td>
+          接送考：<%= @train_service.sr_km4 ? '√' : '×' %><br>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
