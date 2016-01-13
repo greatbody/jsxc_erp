@@ -11,6 +11,15 @@ class TrainServicesController < ApplicationController
 
   def create
     @train_service.update(train_service_params)
+    respond_to do |format|
+      if @train_service.save
+        format.html { redirect_to @train_service, notice: '服务添加成功.' }
+        format.json { render :show, status: :created, location: @coach }
+      else
+        format.html { render :new }
+        format.json { render json: @train_service.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit
