@@ -24,6 +24,7 @@ class CoachesController < ApplicationController
 
   # GET /coaches/1/edit
   def edit
+    @current_page = :edit_coach_path
   end
 
   # POST /coaches
