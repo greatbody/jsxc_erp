@@ -108,5 +108,50 @@
         </div>
       </div>
     </div>
+    <div class="ui row">
+      <div class="fixteen wide column">
+        <div id="chart" style="width: 100%;height: 400px;"></div>
+      </div>
+    </div>
   </div>
 </div>
+<script type="text/javascript">
+  (function() {
+    var myChart = echarts.init($('#chart')[0]);
+    option = {
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['报名']
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      xAxis: [{
+        type: 'category',
+        boundaryGap: false,
+        data: <%= @dates.to_json.html_safe %>
+      }],
+      yAxis: [{
+        type: 'value'
+      }],
+      series: [{
+        name: '报名',
+        type: 'line',
+        stack: '总量',
+        data: <%= @datas.to_json.html_safe %>
+      }]
+    };
+
+    myChart.setOption(option);
+  })();
+</script>
