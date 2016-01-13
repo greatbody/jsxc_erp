@@ -9,6 +9,7 @@ class TrainServicesController < ApplicationController
   end
 
   def new
+    @current_page = :new_coach_train_service_path
     @train_service = TrainService.new
   end
 
@@ -51,7 +52,8 @@ class TrainServicesController < ApplicationController
     end
 
     def set_new_train_service
-      @train_service = Coach.find(params[:coach_id]).train_services.build
+      @coach = Coach.find(params[:coach_id])
+      @train_service = @coach.train_services.build
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
