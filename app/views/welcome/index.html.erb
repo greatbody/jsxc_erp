@@ -111,8 +111,11 @@
     </div>
     <% if current_user.has_role?(:superadmin) || current_user.has_role?(:user) %>
     <div class="ui row">
-      <div class="fixteen wide column">
-        <div id="chart" style="width: 100%;height: 400px;"></div>
+      <div class="eight wide column">
+        <div id="chartSigned" style="width: 100%;height: 300px;"></div>
+      </div>
+      <div class="eight wide column">
+        <div id="chartStudentContact" style="width: 100%;height: 300px;"></div>
       </div>
     </div>
     <% end %>
@@ -121,8 +124,10 @@
 <% if current_user.has_role?(:superadmin) || current_user.has_role?(:user) %>
 <script type="text/javascript">
   (function() {
-    var myChart = echarts.init($('#chart')[0]);
-    option = {
+    var signedUpChart = echarts.init($('#chartSigned')[0]);
+    var studentContactLogChart = echarts.init($('#chartStudentContact')[0])
+
+    var signedUpOption = {
       title: {
         text: '极速学车报名趋势图'
       },
@@ -158,16 +163,56 @@
         name: '当日报名',
         type: 'line',
         smooth: true,
-        data: <%= @datas.to_json.html_safe %>
+        data: <%= @signed_up_datas.to_json.html_safe %>
       },{
         name: '累计报名',
         type: 'line',
         smooth: true,
-        data: <%= @data_sum.to_json.html_safe %>
+        data: <%= @signed_up_data_sum.to_json.html_safe %>
+      }]
+    };
+    var studentContactLogOption = {
+      title: {
+        text: '极速学车学员联系趋势图'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['当日联系']
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      xAxis: [{
+        type: 'category',
+        boundaryGap: false,
+        data: <%= @dates.to_json.html_safe %>
+      }],
+      yAxis: [{
+        type: 'value'
+      }],
+      dataZoom: {
+        type: 'inside'
+      },
+      series: [{
+        name: '当日联系',
+        type: 'line',
+        smooth: true,
+        data: <%= @student_contact_logs.to_json.html_safe %>
       }]
     };
 
-    myChart.setOption(option);
+    signedUpChart.setOption(signedUpOption);
+    studentContactLogChart.setOption(studentContactLogOption);
   })();
 </script>
 <% end %>
