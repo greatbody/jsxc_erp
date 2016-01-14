@@ -83,7 +83,7 @@ class ServiceController < ApplicationController
         items << {
           business: '管理员',
           name: "#{user.name} | #{user.phone}",
-          description: "上次登陆： #{user.last_sign_in_at.to_s(:db)}"
+          description: "上次登陆： #{user.last_sign_in_at.to_s(:db) if user.last_sign_in_at.present?}"
         }
       end
     end
