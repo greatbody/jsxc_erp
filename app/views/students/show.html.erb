@@ -26,11 +26,11 @@
       </tr>
       <tr>
         <td class="two wide column">录入时间</td>
-        <td><%= @student.created_at.to_s(:db) %></td>
+        <td><%= @student.created_at.localtime.to_s(:db) %></td>
       </tr>
       <tr>
         <td class="two wide column">更新时间</td>
-        <td><%= @student.updated_at.to_s(:db) %></td>
+        <td><%= @student.updated_at.localtime.to_s(:db) %></td>
       </tr>
       <tr>
         <td class="two wide column">流水号</td>
