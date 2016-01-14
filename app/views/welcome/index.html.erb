@@ -130,7 +130,7 @@
         trigger: 'axis'
       },
       legend: {
-        data: ['报名']
+        data: ['报名', '一月内累计']
       },
       grid: {
         left: '3%',
@@ -151,11 +151,21 @@
       yAxis: [{
         type: 'value'
       }],
+      dataZoom: {
+        type: 'inside',
+        start: 0,
+        end: 90
+      },
       series: [{
         name: '报名',
         type: 'line',
-        stack: '总量',
+        smooth: true,
         data: <%= @datas.to_json.html_safe %>
+      },{
+        name: '一月内累计',
+        type: 'line',
+        smooth: true,
+        data: <%= @data_sum.to_json.html_safe %>
       }]
     };
 

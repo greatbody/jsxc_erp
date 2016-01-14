@@ -7,10 +7,15 @@ class WelcomeController < ApplicationController
     finish = Date.today
     @dates = []
     @datas = []
+    @data_sum = []
+    signed_count_total = 0
     while(start < finish) do
       start += 1.day
+      signed_count = Student.where(signed_at: start).count
+      signed_count_total += signed_count
       @dates << start.strftime("%m-%d")
-      @datas << Student.where(signed_at: start).count
+      @datas << signed_count
+      @data_sum << signed_count_total
     end
   end
 
