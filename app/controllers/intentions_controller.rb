@@ -113,7 +113,7 @@ class IntentionsController < ApplicationController
   end
 
   def params_of_contact_log_in_student
-    params.require(:student).require(:contact_log).permit(:contact_type, :current_status, :need_contact, :next_contact_at, :contact_log)
+    params.require(:student).require(:contact_log).permit(:contact_type, :current_status, :need_contact, :next_contact_at, :contact_log, :created_at)
   end
 
   def default_contact_log

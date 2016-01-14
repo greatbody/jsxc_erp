@@ -73,6 +73,11 @@
       </div>
 
       <div class="field follow_create_contact_log">
+        <%= cf.label :created_at, "联系日期" %>
+        <%= cf.text_field :created_at, class: 'datepicker' %>
+      </div>
+
+      <div class="field follow_create_contact_log">
         <div class="ui toggle checkbox need_contact">
           <%= cf.check_box :need_contact %>
           <%= cf.label :need_contact, "需要联系" %>
