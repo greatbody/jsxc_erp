@@ -17,7 +17,7 @@ class TrainServicesController < ApplicationController
     @train_service.update(train_service_params)
     respond_to do |format|
       if @train_service.save
-        format.html { redirect_to @train_service, notice: '服务添加成功.' }
+        format.html { redirect_to coach_train_service_path(coach_id: @train_service.coach.id, id: @train_service.id), notice: '服务添加成功.' }
         format.json { render :show, status: :created, location: @coach }
       else
         format.html { render :new }

@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <div class="coach">
   <div class="ui segment">
-    <%= form_for(@train_service, url: new_coach_train_service_path, html: { class: 'ui form' }) do |f| %>
+    <%= form_for(@train_service, url: coach_train_services_path, html: { class: 'ui form' }) do |f| %>
       <% if @train_service.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@train_service.errors.count, "error") %> 更新未保存，请检查以下问题:</h2>

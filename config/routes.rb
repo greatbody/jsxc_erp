@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   end
 
   resources :coaches, only: [:index, :new, :show, :edit, :update, :create] do
-    resources :train_services, only: [:index, :new, :show, :edit, :create, :update]
+    resources :train_services, only: [:index, :new, :show, :edit, :update, :create]
   end
 
 end
