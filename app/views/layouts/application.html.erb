@@ -9,9 +9,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="ui container">
   <% if request.path != new_user_session_path %>
-    <div class="ui attached stackable menu">
+    <div class="ui attached stackable menu" style="height: 50px;">
       <%= render partial: 'layouts/application_menu_notifies' %>
       <div class="ui simple dropdown item">
         <%= link_to(students_path, class: 'black') do %>
@@ -110,8 +109,9 @@
         <% end %>
       </div>
     </div>
-    <%= render partial: 'layouts/breadcrumb' %>
   <% end %>
+  <div class="ui container">
+  <%= render partial: 'layouts/breadcrumb' %>
   <%= yield %>
   </div>
 <script type="text/javascript">
