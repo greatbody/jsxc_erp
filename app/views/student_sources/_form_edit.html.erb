@@ -51,7 +51,7 @@
       </div>
       <div class="field">
         <%= f.label :school_id, "学校" %>
-        <%= f.select :school_id, options_for_select(School.school_for_select, @student_source.school_id), {}, class: "ui dropdown school" %>
+        <%= f.select :school_id, options_for_select(School.school_for_select, @student_source.school_id), {}, class: "ui fluid search dropdown school" %>
       </div>
       <div class="field">
         <%= f.label :remarks, "备注" %>
