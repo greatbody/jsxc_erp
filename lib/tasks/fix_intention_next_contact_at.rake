@@ -10,7 +10,9 @@ namespace :fix do
     p "done"
   end
 
-  task :add_new_role => :environment do
-    Role.create(name: 'manage_student_source')
+  task :add_new_role => :environment do |t, args|
+    role_name = ENV['role_name']
+    Role.create(name: role_name)
+    p "#{role_name} 添加完成"
   end
 end

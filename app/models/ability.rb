@@ -25,5 +25,9 @@ class Ability
       # can :cru, [Intention, ContactLog, ResidenceCard, Student]
       # can :get_intention_list_api, [Intention]
     end
+
+    if user.has_role? :business_explorer
+      can :manage, [TrainService, Coach, TrainField]
+    end
   end
 end
