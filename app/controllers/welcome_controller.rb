@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   require 'phone_ext'
   before_action :authenticate_user!, only: [:index]
   def index
-    start = Date.today.ago(1.month).to_date
+    start = Date.today.ago(2.month).to_date
     finish = Date.today
     @dates = []
     @datas = []
