@@ -129,13 +129,13 @@
 
     var signedUpOption = {
       title: {
-        text: '极速学车报名趋势图'
+        text: '报名趋势图'
       },
       tooltip: {
         trigger: 'axis'
       },
       legend: {
-        data: ['当日报名', '累计报名']
+        data: ['当日报名', '累计报名', '联系学员']
       },
       grid: {
         left: '3%',
@@ -169,11 +169,16 @@
         type: 'line',
         smooth: true,
         data: <%= @signed_up_data_sum.to_json.html_safe %>
+      },{
+        name: '联系学员',
+        type: 'line',
+        smooth: true,
+        data: <%= @student_contact_logs.to_json.html_safe %>
       }]
     };
     var studentContactLogOption = {
       title: {
-        text: '极速学车学员联系趋势图'
+        text: '学员联系趋势图'
       },
       tooltip: {
         trigger: 'axis'
