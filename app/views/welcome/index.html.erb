@@ -130,7 +130,7 @@
         trigger: 'axis'
       },
       legend: {
-        data: ['报名', '二个月累计']
+        data: ['当日报名', '累计报名']
       },
       grid: {
         left: '3%',
@@ -157,12 +157,12 @@
         end: 90
       },
       series: [{
-        name: '报名',
+        name: '当日报名',
         type: 'line',
         smooth: true,
         data: <%= @datas.to_json.html_safe %>
       },{
-        name: '二个月累计',
+        name: '累计报名',
         type: 'line',
         smooth: true,
         data: <%= @data_sum.to_json.html_safe %>
