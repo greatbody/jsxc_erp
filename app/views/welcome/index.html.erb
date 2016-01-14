@@ -130,7 +130,7 @@
         trigger: 'axis'
       },
       legend: {
-        data: ['报名', '一月内累计']
+        data: ['报名', '二个月累计']
       },
       grid: {
         left: '3%',
@@ -162,7 +162,7 @@
         smooth: true,
         data: <%= @datas.to_json.html_safe %>
       },{
-        name: '一月内累计',
+        name: '二个月累计',
         type: 'line',
         smooth: true,
         data: <%= @data_sum.to_json.html_safe %>
