@@ -7,6 +7,7 @@ class Coach < ActiveRecord::Base
   has_many :students
   has_many :train_services
   has_and_belongs_to_many :train_fields
+  belongs_to :train_school
 
   has_attached_file :avatar, styles: { medium: '300x300>', thumb: '80x80>' }, default_url: '/80x80.png'
   has_attached_file :id_card_pic, styles: { medium: '300x300>', thumb: '80x80>' }, default_url: '/80x80.png'

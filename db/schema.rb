@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112022348) do
+ActiveRecord::Schema.define(version: 20160115030116) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -43,7 +43,12 @@ ActiveRecord::Schema.define(version: 20160112022348) do
     t.datetime "driving_license_pic_updated_at"
     t.integer  "coach_type",                        limit: 4,   default: 0
     t.date     "signed_at"
+    t.integer  "train_school_id",                   limit: 4
+    t.date     "contract_begin_at"
+    t.date     "contract_end_at"
   end
+
+  add_index "coaches", ["train_school_id"], name: "index_coaches_on_train_school_id", using: :btree
 
   create_table "coaches_train_fields", id: false, force: :cascade do |t|
     t.integer "train_field_id", limit: 4, null: false
@@ -238,6 +243,14 @@ ActiveRecord::Schema.define(version: 20160112022348) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "train_schools", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "phone",      limit: 255
+    t.string   "web_site",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "train_services", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.integer  "coach_id",        limit: 4
@@ -286,6 +299,7 @@ ActiveRecord::Schema.define(version: 20160112022348) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  add_foreign_key "coaches", "train_schools"
   add_foreign_key "contact_logs", "students"
   add_foreign_key "contact_logs", "users"
   add_foreign_key "daily_signs", "users"
