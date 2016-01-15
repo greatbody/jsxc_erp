@@ -4,7 +4,7 @@ class ApiController < ApplicationController
   protect_from_forgery with: :null_session
 
   def notify
-    if Authorize.verify?(params)
+    if Authorize.verify?(params[:api])
       render html: 'success'
       send_html('success')
     else
