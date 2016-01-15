@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115022631) do
+ActiveRecord::Schema.define(version: 20160115023026) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -43,7 +43,10 @@ ActiveRecord::Schema.define(version: 20160115022631) do
     t.datetime "driving_license_pic_updated_at"
     t.integer  "coach_type",                        limit: 4,   default: 0
     t.date     "signed_at"
+    t.integer  "train_school_id",                   limit: 4
   end
+
+  add_index "coaches", ["train_school_id"], name: "index_coaches_on_train_school_id", using: :btree
 
   create_table "coaches_train_fields", id: false, force: :cascade do |t|
     t.integer "train_field_id", limit: 4, null: false
@@ -294,6 +297,7 @@ ActiveRecord::Schema.define(version: 20160115022631) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  add_foreign_key "coaches", "train_schools"
   add_foreign_key "contact_logs", "students"
   add_foreign_key "contact_logs", "users"
   add_foreign_key "daily_signs", "users"
