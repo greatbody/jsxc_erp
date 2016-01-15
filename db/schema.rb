@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112022348) do
+ActiveRecord::Schema.define(version: 20160115022631) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -234,6 +234,14 @@ ActiveRecord::Schema.define(version: 20160112022348) do
     t.string   "latitude",   limit: 255
     t.boolean  "locked"
     t.integer  "rate",       limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "train_schools", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "phone",      limit: 255
+    t.string   "web_site",   limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
