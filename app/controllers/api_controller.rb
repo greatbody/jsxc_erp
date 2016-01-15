@@ -1,17 +1,15 @@
 class ApiController < ApplicationController
+  require 'authorize'
+  include SendNotifications
   protect_from_forgery with: :null_session
 
   def notify
-    api_key = Rails.configuration.x.jisuxuechekey
-    api_timestamp = params[:timestamp].to_s
-    api_signature = params[:signature].to_s
-    api_action = params[:action].to_s
-    str = "timestamp=#{api_timestamp}&key=#{api_key}&action=#{api_action}"
-    signature = Digest::SHA1.hexdigest(str)
-    if signature == api_signature
+    if Authorize.verify?(params)
       render html: 'success'
+      send_html('success')
     else
-      render html: ''
+      render html: 'error'
+      send_html('error')
     end
   end
 

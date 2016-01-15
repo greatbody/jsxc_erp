@@ -12,4 +12,14 @@ module SendNotifications
     }.to_json
     response = RestClient.post uri, json_data, content_type: :json, accept: :json
   end
+
+  def send_html(html)
+    return if Rails.env == 'development'
+    uri = 'https://jianliao.com/v2/services/webhook/e124d435e2e78297bd8a2fb152346137c0361fad'
+    json_data = {
+      title: "微信消息",
+      text: "#{html}"
+    }.to_json
+    response = RestClient.post uri, json_data, content_type: :json, accept: :json
+  end
 end
