@@ -33,6 +33,21 @@
       </div>
 
       <div class="field">
+        <%= f.label :signed_at, '签约日期' %>
+        <%= f.text_field :signed_at, class: 'datepicker' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :contract_begin_at, '合同起始日期' %>
+        <%= f.text_field :contract_begin_at, class: 'datepicker' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :contract_end_at, '合同终止日期' %>
+        <%= f.text_field :contract_end_at, class: 'datepicker' %>
+      </div>
+
+      <div class="field">
         <%= f.label :birthday, '生日' %>
         <%= f.text_field :birthday, class: 'datepicker' %>
       </div>

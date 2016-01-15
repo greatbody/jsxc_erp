@@ -53,6 +53,14 @@
         <td><%= @coach.signed_at.present? ? @coach.signed_at.to_date.to_s(:db) : '-' %></td>
       </tr>
       <tr>
+        <td class="two wide column">合约起始</td>
+        <td><%= @coach.contract_begin_at.present? ? @coach.contract_begin_at.to_s(:db) : '-' %></td>
+      </tr>
+      <tr>
+        <td class="two wide column">合约终止</td>
+        <td><%= @coach.contract_end_at.present? ? @coach.contract_end_at.to_s(:db) : '-' %></td>
+      </tr>
+      <tr>
         <td class="two wide column">招生数量</td>
         <td><%= @coach.students.count %></td>
       </tr>
