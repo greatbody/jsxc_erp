@@ -57,4 +57,8 @@ Rails.application.routes.draw do
     resources :train_services, only: [:index, :new, :show, :edit, :update, :create]
   end
 
+  namespace :api do
+    post 'notify' => :notify
+  end
+
 end

@@ -27,6 +27,8 @@ module JisuxuecheErp
 
     config.i18n.default_locale = :"zh-CN"
 
+    config.x.jisuxuechekey = 'NKNrK2rd4!@wIcO$TC(+#)~]B*z$epkM'
+
     config.generators do |g|
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
