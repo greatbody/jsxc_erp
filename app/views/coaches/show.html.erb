@@ -34,6 +34,12 @@
         <td class="two wide column">身份证号</td>
         <td><%= @coach.id_card.present? ? @coach.id_card : '-' %></td>
       </tr>
+      <% unless @coach.train_school.nil? %>
+      <tr>
+        <td class="two wide column">所属驾校</td>
+        <td><%= @coach.train_school.name %></td>
+      </tr>
+      <% end %>
     </tbody>
   </table>
   <h4 class="ui horizontal divider header">

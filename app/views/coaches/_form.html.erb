@@ -63,7 +63,10 @@
         <%= tf.select :id, options_for_select(TrainField.train_fields_for_select), {}, class: "ui fluid search dropdown train-fields", multiple: '' %>
       </div>
       <% end %>
-
+      <div class="field">
+        <%= f.label :train_school_id, "驾校" %>
+        <%= f.select :train_school_id, options_for_select(TrainSchool.train_schools_for_select, @coach.train_school.present? ? @coach.train_school.id : 0), {}, class: "ui fluid search dropdown train-school" %>
+      </div>
       <div class="div-btn">
         <%= f.submit "提交更改", class: "ui primary button" %>
       </div>
@@ -74,5 +77,6 @@
 <script type="text/javascript">
   (function() {
     $('.ui.dropdown.train-fields').dropdown('set selected', ['<%= @coach.train_fields.pluck(:id).join("','").html_safe %>']);
+    $('.ui.dropdown.train-school').dropdown();
   })();
 </script>
