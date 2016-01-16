@@ -21,4 +21,17 @@ module SendNotifications
     }.to_json
     response = RestClient.post uri, json_data, content_type: :json, accept: :json
   end
+
+  def send_erp_notify(notify)
+    uri = 'https://jianliao.com/v2/services/webhook/ec09bfa1640e70c3a43ca920350981aad33b537a'
+    json_data = {
+      title: "ERP操作通知",
+      text: <<-EOS
+      操作人：#{notify[:sender]}
+      发布时间：#{Time.now.localtime.to_s(:db)}
+      消息：#{notify[:message]}
+      EOS
+    }.to_json
+    response = RestClient.post uri, json_data, content_type: :json, accept: :json
+  end
 end
