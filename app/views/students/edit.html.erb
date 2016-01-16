@@ -2,3 +2,27 @@
 <div class="student">
   <%= render 'form' %>
 </div>
+<script type="text/javascript">
+  (function() {
+    $(document).delegate('.coach-id', 'change', function() {
+      $.post('/coaches/train_services', {
+        'coach_id': this.value
+      }).success(function(data) {
+        $('.train-service').html(render_select(data));
+      }).error(function(data) {
+        console.log('error');
+      });
+    });
+  })();
+
+  function render_select(options) {
+    var htmlOptions = [];
+    htmlOptions.push('<option>[空]</option>')
+    if (typeof options == 'object') {
+      for (var i = 0; i < options.length; i++) {
+        htmlOptions.push('<option value="' + options[i].train_service_id + '">' + options[i].train_service_name + '</option>');
+      }
+    }
+    return htmlOptions.join('');
+  }
+</script>

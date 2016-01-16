@@ -55,6 +55,10 @@ Rails.application.routes.draw do
 
   resources :coaches, only: [:index, :new, :show, :edit, :update, :create] do
     resources :train_services, only: [:index, :new, :show, :edit, :update, :create]
+    collection do
+      get 'train_services' => :train_services
+      post 'train_services' => :train_services
+    end
   end
 
   namespace :api do

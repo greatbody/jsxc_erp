@@ -52,8 +52,19 @@
   </div>
   <div class="field">
     <%= f.label :coach_id, "负责教练" %>
-    <%= f.select :coach_id, options_for_select(Coach.coach_for_select, @student.coach.present? ? @student.coach.id : 0) %>
+    <%= f.select :coach_id, options_for_select(Coach.coach_for_select, @student.coach.present? ? @student.coach.id : 0), {}, class: 'coach-id' %>
   </div>
+  <% if @student.coach.present? %>
+  <div class="field">
+    <%= f.label :train_service_id, "享受服务" %>
+    <%= f.select :train_service_id, options_for_select(TrainService.train_service_for_select(@student.coach), @student.train_service_id), {}, class: 'train-service' %>
+  </div>
+  <% else %>
+  <div class="field">
+    <%= f.label :train_service_id, "享受服务" %>
+    <%= f.select :train_service_id, [], {}, class: 'train-service' %>
+  </div>
+  <% end %>
   <div class="field">
     <%= f.label :id_card, '身份证' %><br>
     <%= f.text_field :id_card %>

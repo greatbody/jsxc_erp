@@ -70,6 +70,17 @@ class CoachesController < ApplicationController
     end
   end
 
+  def train_services
+    json = []
+    TrainService.where(coach_id: params[:coach_id].to_i).each do |train_service|
+      json << {
+        train_service_id: train_service.id,
+        train_service_name: train_service.name
+      }
+    end
+    render json: json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_coach
