@@ -28,12 +28,11 @@
             <% coach.train_fields.each do |tf| %>
             <div class="item">
               <div class="content">
-                <a class="header"><%= tf.name %></a>
-                <div class="description">经度：<%= tf.longitude %></div>
-                <div class="description">纬度：<%= tf.latitude %></div>
+                <a class="header" target="_blank" href="http://apis.map.qq.com/uri/v1/marker?marker=coord:<%= tf.latitude %>,<%= tf.longitude %>;title:<%= tf.name %>&referer=jisuxueche"><i class="large map middle aligned icon"></i><%= tf.name %></a>
               </div>
             </div>
             <% end %>
+            <!-- http://apis.map.qq.com/uri/v1/marker?marker=coord:39.892326,116.342763;title:超好吃冰激凌;addr:手帕口桥北铁路道口&referer=myapp -->
           </div>
         </td>
         <td class="middle aligned number"><%= coach.students.count %></td>
