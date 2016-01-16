@@ -42,7 +42,7 @@ class WelcomeController < ApplicationController
 
   def birthday_messages
     messages = []
-    Student.where("birthday is not null").each do |student|
+    Student.where("birthday is not null and signed_at is not null").each do |student|
       days_before_birthday = student.birthday.days_before_birthday
       messages << "<a target='_blank' href='/students/#{student.id}'>#{student.name}</a> #{days_before_birthday} 天后过生日" if days_before_birthday < 10
     end
