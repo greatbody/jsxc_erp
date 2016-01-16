@@ -8,10 +8,10 @@
         <th class="one wide center aligned">性别</th>
         <th class="two wide center aligned">手机</th>
         <th class="two wide center aligned">驾校</th>
-        <th class="two wide center aligned">QQ</th>
-        <th class="one wide center aligned sorted descending">签约日期</th>
+        <th class="two wide center aligned">微信</th>
+        <th class="three wide center aligned">训练场</th>
         <th class="one wide center aligned">学员</th>
-        <th class="five wide">操作</th>
+        <th class="three wide">操作</th>
       </tr>
     </thead>
     <tbody>
@@ -22,8 +22,8 @@
         <td class="middle center aligned"><%= coach.gender_text %></td>
         <td class="middle aligned phone"><%= PhoneExt.format_phone(coach.phone) if coach.phone.present? %></td>
         <td class="middle aligned text"><%= coach.train_school.name if coach.train_school.present? %></td>
-        <td class="middle text"><%= coach.qq.present? ? coach.qq : '-' %></td>
-        <td class="middle aligned date-time"><%= coach.signed_at.nil? ? '-' : coach.signed_at.to_date.to_s(:db) %></td>
+        <td class="middle text"><%= coach.wechat.present? ? coach.wechat : '-' %></td>
+        <td class="middle aligned date-time"><%= coach.train_fields.pluck(:name).join(',') %></td>
         <td class="middle aligned number"><%= coach.students.count %></td>
         <td class="middle aligned">
           <%= link_to '详情', coach_path(coach), { class: 'small-button' } %>
