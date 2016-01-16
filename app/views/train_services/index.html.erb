@@ -1,5 +1,11 @@
 <% content_for :title, "服务表 - 教练管理 - 极速学车ERP系统" %>
 <div class="ui segment coach">
+  <%= link_to new_coach_train_service_path(@coach) do %>
+    <div class="ui teal labeled icon button">
+      录入服务
+      <i class="add icon"></i>
+    </div>
+  <% end %>
   <table class="ui teal striped sortable celled table">
     <thead>
       <tr>
