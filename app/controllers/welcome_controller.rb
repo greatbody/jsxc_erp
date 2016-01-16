@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
   require 'phone_ext'
   before_action :authenticate_user!, only: [:index]
   def index
+  # prepare data for carve display
     start = Date.today.ago(2.month).to_date
     finish = Date.today
     @dates = []
@@ -25,8 +26,27 @@ class WelcomeController < ApplicationController
       # 插入每天的联系记录数据
       @student_contact_logs << ContactLog.where("date(created_at) = ?", start).count
     end
+  # for message display
+    @messages = colleact_messages
   end
 
   def demo
   end
+
+  private
+
+  def colleact_messages
+    messages = []
+    messages += birthday_messages
+  end
+
+  def birthday_messages
+    messages = []
+    Student.where("birthday is not null").each do |student|
+      days_before_birthday = student.birthday.days_before_birthday
+      messages << "<a target='_blank' href='/students/#{student.id}'>#{student.name}</a> #{days_before_birthday} 天后过生日" if days_before_birthday < 10
+    end
+    messages
+  end
+
 end

@@ -15,4 +15,12 @@ namespace :fix do
     Role.create(name: role_name)
     p "#{role_name} 添加完成"
   end
+
+  task :update_student_birthday => :environment do |t, args|
+    Student.where("LENGTH(id_card) = 18 and birthday is null").each do |student|
+      birthday = student.id_card[6..13]
+      student.update(birthday: birthday)
+      p "#{student.name} 的生日应该是 #{birthday}"
+    end
+  end
 end
