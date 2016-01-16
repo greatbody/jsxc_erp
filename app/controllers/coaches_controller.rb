@@ -1,4 +1,5 @@
 class CoachesController < ApplicationController
+  include SendNotifications
   require 'phone_ext'
   load_and_authorize_resource
   before_action :set_coach, only: [:show, :edit, :update, :destroy]
@@ -33,6 +34,11 @@ class CoachesController < ApplicationController
     @coach = Coach.new(coach_params)
     respond_to do |format|
       if @coach.save
+        notify = {
+          operator: current_user.name,
+          message: "录入了【#{coach_params[:name]}】教练的信息"
+        }
+        send_erp_notify(notify)
         format.html { redirect_to @coach, notice: 'Coach was successfully created.' }
         format.json { render :show, status: :created, location: @coach }
       else
@@ -51,6 +57,11 @@ class CoachesController < ApplicationController
         params[:coach][:train_fields][:id].each { |id|
           @coach.train_fields << TrainField.find(id) if id.is_number?
         }
+        notify = {
+          operator: current_user.name,
+          message: "更新了【#{coach_params[:name]}】教练的信息"
+        }
+        send_erp_notify(notify)
         format.html { redirect_to @coach, notice: 'Coach was successfully updated.' }
         format.json { render :show, status: :ok, location: @coach }
       else
