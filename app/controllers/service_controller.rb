@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class ServiceController < ApplicationController
+  include SendNotifications
   before_action :authenticate_user!
   authorize_resource :class => false
   def assign_task
@@ -93,6 +94,11 @@ class ServiceController < ApplicationController
 
   def daily_sign
     current_user.daily_signs.build.save
+    notify = {
+      operator: current_user.name,
+      message: "完成了#{Date.today.to_s(:db)}的签到"
+    }
+    send_erp_notify(notify)
     render html: ''
   end
 end
