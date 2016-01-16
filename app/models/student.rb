@@ -13,6 +13,7 @@ class Student < ActiveRecord::Base
   belongs_to :user
   belongs_to :coach
   has_one :intention
+  belongs_to :train_service
   has_many :contact_logs
   has_many :residence_cards
 

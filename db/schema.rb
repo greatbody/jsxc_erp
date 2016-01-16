@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116064719) do
+ActiveRecord::Schema.define(version: 20160116084517) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -229,9 +229,11 @@ ActiveRecord::Schema.define(version: 20160116064719) do
     t.string   "swift_number",                  limit: 255
     t.date     "signed_at"
     t.date     "birthday"
+    t.integer  "train_service_id",              limit: 4
   end
 
   add_index "students", ["coach_id"], name: "index_students_on_coach_id", using: :btree
+  add_index "students", ["train_service_id"], name: "index_students_on_train_service_id", using: :btree
   add_index "students", ["user_id"], name: "index_students_on_user_id", using: :btree
 
   create_table "train_fields", force: :cascade do |t|
@@ -313,6 +315,7 @@ ActiveRecord::Schema.define(version: 20160116064719) do
   add_foreign_key "student_sources", "schools"
   add_foreign_key "student_sources", "users"
   add_foreign_key "students", "coaches"
+  add_foreign_key "students", "train_services"
   add_foreign_key "students", "users"
   add_foreign_key "train_services", "coaches"
   add_foreign_key "train_services", "train_fields"
