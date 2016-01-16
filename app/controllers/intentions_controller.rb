@@ -2,6 +2,7 @@
 class IntentionsController < ApplicationController
   require 'phone_ext'
   include SendSms
+  include SendNotifications
 
   before_action :authenticate_user!
   load_and_authorize_resource
@@ -42,6 +43,12 @@ class IntentionsController < ApplicationController
       else
         @student.intention.student_source = nil
       end
+
+      notify = {
+        operator: current_user.name,
+        message: "创建了【#{@student.name}】学员，并录入了他（她）的意向信息"
+      }
+      send_erp_notify(notify)
 
       respond_to do |format|
         format.html { redirect_to root_path }
@@ -100,6 +107,11 @@ class IntentionsController < ApplicationController
       @intention.student_source = nil
     end
     @intention.save
+    notify = {
+      operator: current_user.name,
+      message: "更新了【#{@intention.student.name}】学员的意向信息"
+    }
+    send_erp_notify(notify)
     redirect_to @intention
   end
 

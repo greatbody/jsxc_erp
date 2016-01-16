@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class ContactLogsController < ApplicationController
+  include SendNotifications
   before_action :authenticate_user!
   load_and_authorize_resource
   def index
@@ -24,6 +25,12 @@ class ContactLogsController < ApplicationController
       contact_log.student.intention.update(next_contact_at: contact_log.next_contact_at, current_status: contact_log.current_status)
 
       contact_log.student.update(signed_at: Date.today) if new_contact_params[:current_status] == 'signed_up' && contact_log.student.signed_at.nil?
+
+      notify = {
+        operator: current_user.name,
+        message: "录入了【#{contact_log.student.name}】学员的一条新联系记录，状态变更为：#{I18n.t("current_status.#{contact_log.current_status}")}"
+      }
+      send_erp_notify(notify)
 
       redirect_to intention_path(contact_log.student.intention)
     else
