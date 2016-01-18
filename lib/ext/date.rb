@@ -1,11 +1,16 @@
 class Date
   def next_birthday
+    today = Date.today
     if self.month == 2 && self.day == 29
-      this_birthday = Date.new(Date.today.year, 2, 28)
+      if today.leap?
+        this_birthday = Date.new(today.year, 2, 29)
+      else
+        this_birthday = Date.new(today.year, 3, 1)
+      end
     else
-      this_birthday = Date.new(Date.today.year, self.month, self.day)
+      this_birthday = Date.new(today.year, self.month, self.day)
     end
-    this_birthday += 1.year if Date.today > this_birthday
+    this_birthday += 1.year if today > this_birthday
     this_birthday
   end
 
