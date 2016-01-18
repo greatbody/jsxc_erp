@@ -17,7 +17,7 @@
 
   function render_select(options) {
     var htmlOptions = [];
-    htmlOptions.push('<option>[空]</option>')
+    htmlOptions.push('<option value=''>[空]</option>')
     if (typeof options == 'object') {
       for (var i = 0; i < options.length; i++) {
         htmlOptions.push('<option value="' + options[i].train_service_id + '">' + options[i].train_service_name + '</option>');
