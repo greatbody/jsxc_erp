@@ -43,13 +43,13 @@
       <tr>
         <td class="two wide column">科目一</td>
         <td>
-          接送考：<%= @train_service.sr_km1 ? '√' : '×' %>
+          接考：<%= @train_service.sr_km1 ? '√' : '×' %>
         </td>
       </tr>
       <tr>
         <td class="two wide column">科目二</td>
         <td>
-          接送考：<%= @train_service.sr_km2 ? '√' : '×' %><br>
+          接考：<%= @train_service.sr_km2 ? '√' : '×' %><br>
           补考费:<%= number_to_currency(@train_service.km2_bk_fee, unit: "¥", precision: 2) %><br>
           模拟考试费:<%= number_to_currency(@train_service.sim_km2_price, unit: "¥", precision: 2) %>
         </td>
@@ -57,7 +57,7 @@
       <tr>
         <td class="two wide column">科目三</td>
         <td>
-          接送考：<%= @train_service.sr_km3 ? '√' : '×' %><br>
+          接考：<%= @train_service.sr_km3 ? '√' : '×' %><br>
           补考费:<%= number_to_currency(@train_service.km3_bk_fee, unit: "¥", precision: 2) %><br>
           模拟考试费:<%= number_to_currency(@train_service.sim_km3_price, unit: "¥", precision: 2) %>
         </td>
@@ -65,7 +65,7 @@
       <tr>
         <td class="two wide column">科目四</td>
         <td>
-          接送考：<%= @train_service.sr_km4 ? '√' : '×' %><br>
+          接考：<%= @train_service.sr_km4 ? '√' : '×' %><br>
         </td>
       </tr>
     </tbody>

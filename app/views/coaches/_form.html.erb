@@ -48,6 +48,11 @@
       </div>
 
       <div class="field">
+        <%= f.label :is_locked, "是否锁定" %>
+        <%= f.check_box :is_locked %>
+      </div>
+
+      <div class="field">
         <%= f.label :birthday, '生日' %>
         <%= f.text_field :birthday, class: 'datepicker' %>
       </div>

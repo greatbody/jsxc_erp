@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116084517) do
+ActiveRecord::Schema.define(version: 20160118022913) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20160116084517) do
     t.string   "qq",                                limit: 255
     t.string   "coaching_license",                  limit: 255
     t.string   "driving_license",                   limit: 255
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
     t.string   "avatar_file_name",                  limit: 255
     t.string   "avatar_content_type",               limit: 255
     t.integer  "avatar_file_size",                  limit: 4
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160116084517) do
     t.integer  "train_school_id",                   limit: 4
     t.date     "contract_begin_at"
     t.date     "contract_end_at"
+    t.boolean  "is_locked",                                     default: false
   end
 
   add_index "coaches", ["train_school_id"], name: "index_coaches_on_train_school_id", using: :btree
