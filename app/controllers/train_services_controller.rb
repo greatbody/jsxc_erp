@@ -12,7 +12,6 @@ class TrainServicesController < ApplicationController
   def new
     @current_page = :new_coach_train_service_path
     @train_service = TrainService.new
-    UserMailer.assign_task(current_user).deliver_now
   end
 
   def create
