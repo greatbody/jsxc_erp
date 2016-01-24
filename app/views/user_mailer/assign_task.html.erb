@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style type="text/css">
+  table.gridtable {
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+  }
+
+  table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+  }
+
+  table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+  }
+  </style>
+</head>
+
+<body>
+  <p style="color: red;">
+    <%= @processor.name %> 你好，以下是任务信息
+    <table class="gridtable">
+      <tr>
+        <td>指派人</td>
+        <td>
+          <%= "#{@sender.name}(#{@sender.phone})" %>
+        </td>
+      </tr>
+      <tr>
+        <td>发布时间</td>
+        <td>
+          <%= "#{Time.now.strftime('%Y年%m月%d日 %H:%M:%S')}" %>
+        </td>
+      </tr>
+      <tr>
+        <td>任务期限</td>
+        <td>
+          <%= "#{@task_date}" %>
+        </td>
+      </tr>
+      <tr>
+        <td>任务类型</td>
+        <td>
+          <%= "#{@business_type}" %>
+        </td>
+      </tr>
+      <tr>
+        <td>联系地址</td>
+        <td>
+          <%= "#{@student.address}" %>
+        </td>
+      </tr>
+      <tr>
+        <td>任务详情</td>
+        <td>
+          <%= "#{@student.address}" %>
+          [<%= @processor.name %>]你好，请于[<%= @task_date %>]处理[<%= @student.name %>]学员（手机：[<%= @student.phone %>]）的[<%= @business_type %>]。
+        </td>
+      </tr>
+    </table>
+  </p>
+</body>
+
+</html>
