@@ -73,8 +73,8 @@
       </div>
 
       <div class="field follow_create_contact_log">
-        <%= cf.label :created_at, "联系日期" %>
-        <%= cf.text_field :created_at, class: 'datepicker' %>
+        <%= cf.label :created_at, "创建日期" %>
+        <%= cf.text_field :created_at, value: Date.today.to_s(:db), class: 'datepicker' %>
       </div>
 
       <div class="field follow_create_contact_log">

@@ -19,7 +19,7 @@
 
   <div class="field">
     <%= f.label :created_at, "创建日期" %>
-    <%= f.text_field :created_at, class: 'datepicker' %>
+    <%= f.text_field :created_at, value: Date.today.to_s(:db), class: 'datepicker' %>
   </div>
 
   <div class="field">
