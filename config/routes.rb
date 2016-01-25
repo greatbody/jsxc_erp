@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :welcome do
     get '/' => :index
     get '/demo' => :demo
+    get '/map' => :map
   end
 
   namespace :contact_logs do
