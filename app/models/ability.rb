@@ -1,7 +1,6 @@
 class Ability
   include CanCan::Ability
   def initialize(user)
-    # binding.remote_pry
     if user.has_role? :superadmin
       can :manage, :all
     end
@@ -20,7 +19,7 @@ class Ability
     end
 
     if user.has_role? :manage_student_source
-      # binding.remote_pry
+
       can [:manage], [StudentSource, SourceContact]
       # can :cru, [Intention, ContactLog, ResidenceCard, Student]
       # can :get_intention_list_api, [Intention]

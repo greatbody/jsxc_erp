@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118022913) do
+ActiveRecord::Schema.define(version: 20160125055232) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -147,6 +147,8 @@ ActiveRecord::Schema.define(version: 20160118022913) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "district",   limit: 255
+    t.string   "longitude",  limit: 255
+    t.string   "latitude",   limit: 255
   end
 
   create_table "schools_train_fields", id: false, force: :cascade do |t|
