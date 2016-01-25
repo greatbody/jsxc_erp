@@ -9,7 +9,7 @@ class AdminAbility
         if user.has_role?(:business_explorer)
           can :access, :rails_admin
           can :dashboard
-          can :manage, [School]
+          can :manage, [School, TrainField]
         end
       end
     end
