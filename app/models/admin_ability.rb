@@ -11,6 +11,12 @@ class AdminAbility
           can :dashboard
           can :manage, [School, TrainField]
         end
+
+        if user.has_role?(:manage_student_source)
+          can :access, :rails_admin
+          can :dashboard
+          can :manage, [School]
+        end
       end
     end
   end

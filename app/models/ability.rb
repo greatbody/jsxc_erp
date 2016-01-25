@@ -18,6 +18,7 @@ class Ability
       can [:search, :daily_sign], :service
     end
 
+    # 校园CEO管理：刘犇
     if user.has_role? :manage_student_source
 
       can [:manage], [StudentSource, SourceContact]
@@ -25,6 +26,7 @@ class Ability
       # can :get_intention_list_api, [Intention]
     end
 
+    # 业务拓展：李德宽
     if user.has_role? :business_explorer
       can :manage, [TrainService, Coach, TrainField]
     end
