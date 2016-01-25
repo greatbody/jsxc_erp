@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "windowsloveubuntu@163.com"
+  default from: "dev@jisuxueche.com"
   layout 'mailer'
 end

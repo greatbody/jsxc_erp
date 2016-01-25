@@ -40,11 +40,10 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'smtp.163.com',
+      address: 'smtp.exmail.qq.com',
       port: 25,
-      user_name: 'windowsloveubuntu@163.com',
-      domain: '163.com',
-      password: 'iocnszcqhjwcczbw',
+      user_name: 'dev@jisuxueche.com',
+      password: 'qFUTYGHSfZJ4',
       authentication: 'plain',
       enable_starttls_auto: true
   }

@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'windowsloveubuntu@163.com'
+  default from: 'dev@jisuxueche.com'
 
   def assign_task(student_id, processor_id, sender_id, business_type, task_date)
     @student = Student.find(student_id)
