@@ -67,7 +67,7 @@
   var label = new qq.maps.Label({
     position: new qq.maps.LatLng(<%= school.latitude %>, <%= school.longitude %>),
     map: map,
-    content:'<span style="color: red;cursor:pointer;">【学】</span>'
+    content:'<span style="color: red;cursor:pointer;">【学】<%= school.student_sources.count %></span>'
   });
   qq.maps.event.addListener(label, 'click', function() {
     infoWin.open();
