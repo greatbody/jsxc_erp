@@ -69,7 +69,7 @@
             <td class="middle aligned center aligned"><%= sc.created_at.to_date.to_s(:db) %></td>
             <td class="middle aligned"><%= sc.title %></td>
             <td class="middle aligned center aligned"><%= sc.business %></td>
-            <td class="top aligned text-ellipsis long content"><%= sc.content %></td>
+            <td class="top aligned text-ellipsis long content" data-text="<%= sc.content %>"><%= sc.content %></td>
           </tr>
           <% end %>
         </tbody>
@@ -87,7 +87,7 @@
   });
   $(".table > tbody > tr > td.content").mouseleave(function() {
     $(this).css('white-space', 'nowrap');
-    $(this).html($(this).attr('title'));
+    $(this).html($(this).attr('data-text'));
     $(this).fadeIn();
   });
 </script>
