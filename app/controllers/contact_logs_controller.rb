@@ -24,7 +24,7 @@ class ContactLogsController < ApplicationController
     if contact_log.save
       contact_log.student.intention.update(next_contact_at: contact_log.next_contact_at, current_status: contact_log.current_status)
 
-      contact_log.student.update(signed_at: Date.today) if new_contact_params[:current_status] == 'signed_up' && contact_log.student.signed_at.nil?
+      contact_log.student.update(signed_at: new_contact_params[:created_at]) if new_contact_params[:current_status] == 'signed_up' && contact_log.student.signed_at.nil?
 
       notify = {
         operator: current_user.name,
@@ -47,7 +47,7 @@ class ContactLogsController < ApplicationController
   private
 
   def new_contact_params
-    params.require(:contact_log).permit(:contact_type, :current_status, :need_contact, :next_contact_at, :contact_log)
+    params.require(:contact_log).permit(:contact_type, :current_status, :need_contact, :next_contact_at, :contact_log, :created_at)
   end
 
   # https://github.com/CanCanCommunity/cancancan/wiki/Strong-Parameters
