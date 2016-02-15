@@ -45,31 +45,57 @@
         </div>
       </div>
     </div>
-    <div>
-      <%= link_to new_student_source_source_contact_path(@student_source) do %>
-        <div class="ui primary labeled icon button">
-          联系渠道
-          <i class="add icon"></i>
-        </div>
-      <% end %>
+    <div class="ui top attached tabular menu">
+      <a class="item active" data-tab="contacts">联系记录</a>
+      <a class="item" data-tab="achievement">报名成功</a>
     </div>
-    <div>
+    <div class="ui bottom attached tab segment active" data-tab="contacts">
+      <div>
+        <%= link_to new_student_source_source_contact_path(@student_source) do %>
+          <div class="ui primary labeled icon button">
+            联系渠道
+            <i class="add icon"></i>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <table class="ui teal striped sortable celled table">
+          <thead>
+            <tr>
+              <th class="two wide center aligned sorted ascending">日期</th>
+              <th class="four wide">标题</th>
+              <th class="two wide center aligned">业务类型</th>
+              <th class="eight wide">概要</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @student_source.source_contacts.each do |sc| %>
+            <tr>
+              <td class="middle aligned center aligned"><%= sc.created_at.to_date.to_s(:db) %></td>
+              <td class="middle aligned"><%= sc.title %></td>
+              <td class="middle aligned center aligned"><%= sc.business %></td>
+              <td class="top aligned text-ellipsis long content" data-text="<%= sc.content %>"><%= sc.content %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="achievement">
       <table class="ui teal striped sortable celled table">
         <thead>
           <tr>
-            <th class="two wide center aligned sorted ascending">日期</th>
-            <th class="four wide">标题</th>
-            <th class="two wide center aligned">业务类型</th>
-            <th class="eight wide">概要</th>
+            <th class="two wide center aligned sorted ascending">创建日期</th>
+            <th class="four wide">学员</th>
+            <th class="ten wide center aligned">报名日期</th>
           </tr>
         </thead>
         <tbody>
-          <% @student_source.source_contacts.each do |sc| %>
+          <% @student_source.intentions.where(current_status: 4).each do |intention| %>
           <tr>
-            <td class="middle aligned center aligned"><%= sc.created_at.to_date.to_s(:db) %></td>
-            <td class="middle aligned"><%= sc.title %></td>
-            <td class="middle aligned center aligned"><%= sc.business %></td>
-            <td class="top aligned text-ellipsis long content" data-text="<%= sc.content %>"><%= sc.content %></td>
+            <td class="middle aligned center aligned"><%= intention.created_at.to_date.to_s(:db) %></td>
+            <td class="middle aligned"><%= intention.student.name %></td>
+            <td class="middle aligned center aligned"><%= intention.student.signed_at.to_date.to_s(:db) %></td>
           </tr>
           <% end %>
         </tbody>
@@ -90,4 +116,5 @@
     $(this).html($(this).attr('data-text'));
     $(this).fadeIn();
   });
+  $('.menu .item').tab();
 </script>
