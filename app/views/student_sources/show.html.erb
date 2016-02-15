@@ -63,7 +63,7 @@
         <table class="ui teal striped sortable celled table">
           <thead>
             <tr>
-              <th class="two wide center aligned sorted ascending">日期</th>
+              <th class="two wide center aligned sorted descending">日期</th>
               <th class="four wide">标题</th>
               <th class="two wide center aligned">业务类型</th>
               <th class="eight wide">概要</th>
@@ -86,16 +86,16 @@
       <table class="ui teal striped sortable celled table">
         <thead>
           <tr>
-            <th class="two wide center aligned sorted ascending">创建日期</th>
+            <th class="two wide center aligned sorted descending">创建日期</th>
             <th class="four wide">学员</th>
             <th class="ten wide center aligned">报名日期</th>
           </tr>
         </thead>
         <tbody>
-          <% @student_source.intentions.where(current_status: 4).each do |intention| %>
+          <% @student_source.intentions.where(current_status: 4).order(created_at: :desc).each do |intention| %>
           <tr>
             <td class="middle aligned center aligned"><%= intention.created_at.to_date.to_s(:db) %></td>
-            <td class="middle aligned"><%= intention.student.name %></td>
+            <td class="middle aligned"><%= link_to "#{intention.student.name}", intention_path(intention), { target: '_blank' } %></td>
             <td class="middle aligned center aligned"><%= intention.student.signed_at.to_date.to_s(:db) %></td>
           </tr>
           <% end %>
@@ -106,17 +106,17 @@
       <table class="ui teal striped sortable celled table">
         <thead>
           <tr>
-            <th class="two wide center aligned sorted ascending">创建日期</th>
+            <th class="two wide center aligned sorted descending">创建日期</th>
             <th class="four wide">学员</th>
             <th class="six wide center aligned">最新状态</th>
             <th class="four wide center aligned">最新联系</th>
           </tr>
         </thead>
         <tbody>
-          <% @student_source.intentions.each do |intention| %>
+          <% @student_source.intentions.order(created_at: :desc).each do |intention| %>
           <tr>
             <td class="middle aligned center aligned"><%= intention.created_at.to_date.to_s(:db) %></td>
-            <td class="middle aligned"><%= link_to "#{intention.student.name}", intention_path(intention), { class: 'small-button' } %></td>
+            <td class="middle aligned"><%= link_to "#{intention.student.name}", intention_path(intention), { target: '_blank' } %></td>
             <td class="middle aligned center aligned"><%= intention.current_status_text %></td>
             <% contact_logs_desc = intention.student.contact_logs.order(created_at: :desc) %>
             <% if contact_logs_desc.count > 0 %>
