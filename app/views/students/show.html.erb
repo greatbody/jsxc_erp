@@ -48,6 +48,12 @@
         <td class="two wide column">学校/单位</td>
         <td><%= @student.unit %></td>
       </tr>
+      <% if @student.coach.present? %>
+      <tr>
+        <td class="two wide column">教练</td>
+        <td><%= link_to "#{@student.coach.name}", coach_path(@student.coach), { target: '_blank' } %></td>
+      </tr>
+      <% end %>
       <tr>
         <td class="two wide column">身份证</td>
         <td>

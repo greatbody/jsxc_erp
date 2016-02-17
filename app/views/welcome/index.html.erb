@@ -131,7 +131,7 @@
     <div class="ui row">
       <div class="four wide column">
         <div class="ui raised text segment">
-          <div class="ui header thin">无教练学员</div>
+          <div class="ui header thin">已报名无教练学员</div>
           <div class="ui divider thin"></div>
           <div class="ui list">
             <% Student.where("signed_at is not null and coach_id is null").each do |student| %>
