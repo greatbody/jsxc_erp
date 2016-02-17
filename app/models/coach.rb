@@ -3,6 +3,9 @@ class Coach < ActiveRecord::Base
 
   enum gender: [:female, :male]
   enum coach_type: [:just_training, :cover_all, :just_display]
+  #just_training:我们办居住证档案，号码不需要通知学员
+  #cover_all:教练训练以及走档案，号码需要通知学员
+  #just_display:只是显示，并不在系统中使用，一般是历史数据，老模式中的教练。
 
   has_many :students
   has_many :train_services

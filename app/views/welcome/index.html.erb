@@ -61,12 +61,15 @@
           <div class="ui divider thin"></div>
           <div class="ui list">
             <% ResidenceCard.have_number.where(last_notify_at: nil).each do |residence_card| %>
-            <div class="item">
-              <i class="mail icon"></i>
-              <div class="content">
-                <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>: <span title="身份证号"><%= residence_card.student.id_card %></span>
+              <% coach = residence_card.student.coach %>
+              <% if coach.present? && coach.coach_type == 1 %>
+              <div class="item">
+                <i class="mail icon"></i>
+                <div class="content">
+                  <%= link_to "#{residence_card.name}", student_path(residence_card.student), { target: '_blank' } %>: <span title="身份证号"><%= residence_card.student.id_card %></span>
+                </div>
               </div>
-            </div>
+              <% end %>
             <% end %>
           </div>
         </div>
