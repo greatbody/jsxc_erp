@@ -87,6 +87,10 @@
         <%= f.label :train_school_id, "驾校" %>
         <%= f.select :train_school_id, options_for_select(TrainSchool.train_schools_for_select, @coach.train_school.present? ? @coach.train_school.id : 0), {}, class: "ui fluid search dropdown train-school" %>
       </div>
+      <div class="field">
+        <%= f.label :coach_type, "合作类型" %>
+        <%= f.select :coach_type, options_for_select(Coach.coach_type_for_select, @coach.coach_type.present? ? @coach.coach_type : 0), {}, class: "ui fluid search dropdown coach-type" %>
+      </div>
       <div class="div-btn">
         <%= f.submit "提交", class: "ui primary button" %>
       </div>
@@ -98,5 +102,6 @@
   (function() {
     $('.ui.dropdown.train-fields').dropdown('set selected', ['<%= @coach.train_fields.pluck(:id).join("','").html_safe %>']);
     $('.ui.dropdown.train-school').dropdown();
+    $('.ui.dropdown.coach-type').dropdown();
   })();
 </script>

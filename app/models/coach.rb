@@ -40,4 +40,10 @@ class Coach < ActiveRecord::Base
     end
   end
 
+  def self.coach_type_for_select
+    coach_types.map do |coach_type, _|
+      [I18n.t("coach.coach_type.#{coach_type}"), coach_type]
+    end
+  end
+
 end

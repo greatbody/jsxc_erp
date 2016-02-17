@@ -128,6 +128,24 @@
         </div>
       </div>
     </div>
+    <div class="ui row">
+      <div class="four wide column">
+        <div class="ui raised text segment">
+          <div class="ui header thin">无教练学员</div>
+          <div class="ui divider thin"></div>
+          <div class="ui list">
+            <% Student.where("signed_at is not null and coach_id is null").each do |student| %>
+            <div class="item">
+              <i class="mail icon"></i>
+              <div class="content">
+                <%= link_to "#{student.name}", student_path(student), { target: '_blank', style: 'width: 60px;display: inline-block;' } %>（<%= PhoneExt.format_phone(student.phone) %>）
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
     <% if current_user.has_role?(:superadmin) || current_user.has_role?(:user) %>
     <div class="ui row">
       <div class="eight wide column">
