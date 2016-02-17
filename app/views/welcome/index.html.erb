@@ -131,10 +131,10 @@
     <div class="ui row">
       <div class="four wide column">
         <div class="ui raised text segment">
-          <div class="ui header thin">已报名无教练学员</div>
+          <div class="ui header thin">已报名无教练或服务</div>
           <div class="ui divider thin"></div>
           <div class="ui list">
-            <% Student.where("signed_at is not null and coach_id is null").each do |student| %>
+            <% Student.where("signed_at is not null and (coach_id is null or train_service_id is null)").each do |student| %>
             <div class="item">
               <i class="mail icon"></i>
               <div class="content">
