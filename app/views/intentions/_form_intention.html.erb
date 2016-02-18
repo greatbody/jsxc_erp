@@ -19,7 +19,7 @@
       <% end %>
       <div class="field">
         <%= f.label :current_status, "当前状态" %>
-        <%= f.select :current_status, options_for_select(Intention.current_status_for_select), {}, class: "ui dropdown current_status" %>
+        <%= f.select :current_status, options_for_select(Intention.current_status_for_select, @intention.current_status), {}, class: "ui dropdown current_status" %>
       </div>
     </div>
   </div>
