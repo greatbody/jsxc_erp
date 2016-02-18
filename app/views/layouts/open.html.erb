@@ -1,0 +1,29 @@
+<!-- http://semantic-ui.com/elements/container.html#/examples -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %></title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if request.path != new_user_session_path %>
+    <div class="ui attached stackable menu" style="height: 50px;">
+      <div class="ui simple dropdown item">
+        常用工具
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item" href="http://idcard.911cha.com/" target="_blank"><i class="user icon"></i>身份证信息</a>
+          <a class="item" href="http://www.whga.gov.cn/pawh/query/jzzQuery.jsp" target="_blank"><i class="home icon"></i>居住证号查询</a>
+          <a class="item" href="http://www.whjg.gov.cn:8084/fee/clx/aaa/search" target="_blank"><i class="browser icon"></i>流水号查询</a>
+          <a class="item" href="http://www.whjg.gov.cn:8083/jgksyy/ksyy.do?method=frd_ksyy" target="_blank"><i class="calendar icon"></i>考试预约</a>
+          <a class="item" href="http://www.whjg.gov.cn:8084/fee/driverOrder.jsp"><i class="browser icon"></i>考试缴费</a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= yield %>
+</body>
+</html>

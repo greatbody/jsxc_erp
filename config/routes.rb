@@ -1,6 +1,5 @@
 # encoding: UTF-8
 Rails.application.routes.draw do
-
   mount RailsAdmin::Engine => '/20150612', as: 'rails_admin'
 
   devise_for :users
@@ -10,6 +9,11 @@ Rails.application.routes.draw do
   namespace :welcome do
     get '/' => :index
     get '/demo' => :demo
+    get '/map' => :map
+  end
+
+  namespace :open do
+    get '/' => :index
     get '/map' => :map
   end
 

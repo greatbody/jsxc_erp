@@ -1,0 +1,25 @@
+<script src="/javascripts/echarts.min.js"></script>
+<% content_for :title, "极速学车ERP系统" %>
+<% if flash[:alert].present? %>
+  <div class="ui error message" style="display:block;">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+<div class="welcome">
+  <div class="ui grid">
+    <div class="ui row">
+      <div class="eight wide column" style="padding-top: 0;">
+        <div class="ui raised text segment" style="margin-top: 10px;">
+          <h2 class="ui header">场地地图</h2>
+          <p>欢迎大家挑选场地，前来报名</p>
+          <%= link_to open_map_path do %>
+            <div class="ui primary labeled icon button">
+              场地地图
+              <i class="add icon"></i>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
