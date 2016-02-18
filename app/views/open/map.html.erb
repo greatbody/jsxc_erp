@@ -1,8 +1,8 @@
-<% content_for :title, "部分训练场分布图 - 极速学车" %>
+<% content_for :title, "训练场分布图 - 极速学车" %>
 <style type="text/css">
   html, body{
-      width: 100%;
-      height: 100%;
+    width: 100%;
+    height: 100%;
   }
 
   *{
@@ -26,6 +26,10 @@
 </style>
 <div id="container"></div>
 <script type="text/javascript">
+  $(function() {
+    $('.ui.attached.stackable.menu').hide();
+  });
+
   //异步加载地图库函数文件
   function loadScript() {
     //创建script标签
@@ -37,6 +41,7 @@
     //添加标签到dom
     document.body.appendChild(script);
   }
+
   function init() {
     //设置地图中心点
     var myCenter = new qq.maps.LatLng(<%= "#{@average_latitude},#{@average_longitude}" %>);
@@ -53,24 +58,30 @@
     });
     $('#container').css('width', document.body.clientWidth);
     $('#container').css('height', document.body.clientHeight - 50);
-<% @train_fields.each do |train_field| %>
-  var marker = new qq.maps.Marker({
-    //设置Marker的位置坐标
-    position: new qq.maps.LatLng(<%= train_field.latitude %>, <%= train_field.longitude %>),
-    //设置显示Marker的地图
-    map: map
-  });
-  var scaleSize = new qq.maps.Size(12, 42),
-      icon = new qq.maps.MarkerImage(
-          "http://pic.qiantucdn.com/58pic/15/44/26/69s58PICd6F_1024.png",
+    <% @train_fields.each do |train_field| %>
+      var marker = new qq.maps.Marker({
+        //设置Marker的位置坐标
+        position: new qq.maps.LatLng(<%= train_field.latitude %>, <%= train_field.longitude %>),
+        //设置显示Marker的地图
+        map: map
+      });
+      var scaleSize = new qq.maps.Size(20, 35),
+        icon = new qq.maps.MarkerImage(
+          "/marker.png",
           null,
           null,
           null,
           scaleSize
-      );
-  marker.setTitle("<%= train_field.name %>");
-  marker.setIcon(icon);
-<% end %>
+        );
+      marker.setTitle("<%= train_field.name %>");
+      marker.setIcon(icon);
+      qq.maps.event.addListener(marker, 'click', function() {
+      infoWin.open();
+      infoWin.setContent('<div style="text-align:center;white-space:'+
+      'nowrap;margin:5px;"><%= train_field.name %></div>');
+      infoWin.setPosition(new qq.maps.LatLng(<%= train_field.latitude %>, <%= train_field.longitude %>));
+  });
+    <% end %>
   }
   window.onload = loadScript;
 </script>
