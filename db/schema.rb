@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125074849) do
+ActiveRecord::Schema.define(version: 20160219092142) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(version: 20160125074849) do
     t.decimal  "km3_bk_fee",                  precision: 10
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.decimal  "km1_bk_fee",                  precision: 10
   end
 
   add_index "train_services", ["coach_id"], name: "index_train_services_on_coach_id", using: :btree

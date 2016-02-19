@@ -69,6 +69,6 @@ class TrainServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def train_service_params
-      params.require(:train_service).permit(:name, :base_price, :price, :discount_price, :sr_health_check, :sr_km1, :sr_km2, :sr_km3, :sr_km4, :sim_km2_price, :sim_km3_price, :km2_bk_fee, :km3_bk_fee, :train_field_id)
+      params.require(:train_service).permit(:name, :base_price, :price, :discount_price, :sr_health_check, :sr_km1, :sr_km2, :sr_km3, :sr_km4, :sim_km2_price, :sim_km3_price, :km1_bk_fee, :km2_bk_fee, :km3_bk_fee, :train_field_id)
     end
 end
