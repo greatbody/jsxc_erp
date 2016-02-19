@@ -79,6 +79,11 @@
           </div>
 
           <div class="field">
+            <%= f.label :km1_bk_fee, '科目一补考费' %>
+            <%= f.number_field :km1_bk_fee, in: 1..100000, step: 1 %>
+          </div>
+
+          <div class="field">
             <%= f.label :km2_bk_fee, '科目二补考费' %>
             <%= f.number_field :km2_bk_fee, in: 1..100000, step: 1 %>
           </div>
