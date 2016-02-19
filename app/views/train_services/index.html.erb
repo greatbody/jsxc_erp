@@ -31,8 +31,8 @@
           <%= "科目四√ " if train_service.sr_km4 %>
         </td>
         <td class="middle aligned">
-          <%= link_to '详情', coach_train_service_path(coach_id: train_service.coach.id, id: train_service.id), { class: 'small-button' } %>
-          <%= link_to '编辑', edit_coach_train_service_path(coach_id: train_service.coach.id, id: train_service.id), { class: 'small-button' } %>
+          <%= link_to '详情', coach_train_service_path(coach_id: train_service.coach.id, id: train_service.id), { class: 'small-button', target: '_blank' } %>
+          <%= link_to '编辑', edit_coach_train_service_path(coach_id: train_service.coach.id, id: train_service.id), { class: 'small-button', target: '_blank' } %>
         </td>
       </tr>
       <% end %>
