@@ -25,7 +25,7 @@ module SendSms
   # 指派学车顾问的消息
   def assign_consultant(student, user)
     # 感谢您选择极速学车，我们为您安排了专属的学车顾问{1}(手机：{2})，学车过程中如有任何的疑问、遇到任何的困难都可以与他（她）联系，祝您学车顺利，极速拿证！
-    content = user.phone + ',微信：' + user.weixin
+    content = user.phone + ' 微信：' + user.weixin
     send_sms(student.phone, '20701', [user.name, content])
   end
 
