@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219092142) do
+ActiveRecord::Schema.define(version: 20160222075848) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -295,6 +295,7 @@ ActiveRecord::Schema.define(version: 20160219092142) do
     t.datetime "updated_at",                                   null: false
     t.string   "name",                limit: 255
     t.boolean  "admin"
+    t.string   "weixin",              limit: 255, default: ""
   end
 
   add_index "users", ["phone"], name: "index_users_on_phone", unique: true, using: :btree

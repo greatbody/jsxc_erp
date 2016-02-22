@@ -104,7 +104,7 @@ class ServiceController < ApplicationController
 
   def sms_consultant
     student_id = params[:student_id]
-    
-
+    NotifySmsConsultantJob.perform_later(student_id)
+    render json: { msg_code: 'success', msg_text: '' }
   end
 end

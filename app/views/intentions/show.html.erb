@@ -164,13 +164,10 @@
   });
   $('.sms-consultant').on('click', function() {
     $.post('/service/sms_consultant', {
-      'student_id': options.student_id,
-      'processor_id': options.processor_id,
-      'task_type': options.task_type,
-      'task_date': options.task_date
+      'student_id': <%= @student.id %>
     }).success(function(data) {
       if (data && data.msg_code == 'success') {
-        $('.ui.modal.assign-task').modal('hide');
+        alert('发送消息成功！');
       } else {
         alert('发送消息错误，请联系管理员！');
       }

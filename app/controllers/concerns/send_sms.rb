@@ -22,6 +22,12 @@ module SendSms
     # {1}你好，请处理{2}学员（手机：{3}）的{4}。指派人：{5}（手机：{6}）
     send_sms(processer.phone, '18826', [processer.name, student.name, student.phone, business_type, sender.name, sender.phone])
   end
+  # 指派学车顾问的消息
+  def assign_consultant(student, user)
+    # 感谢您选择极速学车，我们为您安排了专属的学车顾问{1}(手机：{2})，学车过程中如有任何的疑问、遇到任何的困难都可以与他（她）联系，祝您学车顺利，极速拿证！
+    content = user.phone + ',微信：' + user.weixin
+    send_sms(student.phone, '20701', [user.name, content])
+  end
 
   protected
 
