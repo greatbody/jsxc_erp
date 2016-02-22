@@ -63,6 +63,10 @@
           <i class="edit icon"></i>
         </div>
       <% end %>
+      <div class="ui teal labeled icon button sms-consultant">
+        发送学车顾问信息
+        <i class="mail icon"></i>
+      </div>
     </div>
     <div>
       <table class="ui celled table" style="table-layout: fixed;">
@@ -157,5 +161,21 @@
       //恢复内容
       contentJq.html(contentJq.attr('title'));
     }
+  });
+  $('.sms-consultant').on('click', function() {
+    $.post('/service/sms_consultant', {
+      'student_id': options.student_id,
+      'processor_id': options.processor_id,
+      'task_type': options.task_type,
+      'task_date': options.task_date
+    }).success(function(data) {
+      if (data && data.msg_code == 'success') {
+        $('.ui.modal.assign-task').modal('hide');
+      } else {
+        alert('发送消息错误，请联系管理员！');
+      }
+    }).error(function(data) {
+      alert('发送消息错误，请联系管理员！');
+    });
   });
 </script>

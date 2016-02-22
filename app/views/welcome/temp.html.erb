@@ -1,0 +1,37 @@
+<% content_for :title, "学校 - 极速学车ERP系统" %>
+<div class="ui segment coach">
+  <table class="ui teal striped sortable celled table">
+    <thead>
+      <tr>
+        <th class="one wide">序号</th>
+        <th class="one">区</th>
+        <th class="four wide">学校</th>
+        <th class="eight wide">校园大使</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @schools.each_with_index do |school, index| %>
+      <tr>
+        <td class="middle center aligned"><%= (index + 1).to_s.rjust(3, '0') %></td>
+        <td class="middle center aligned"><%= school.district %></td>
+        <td class="middle aligned text"><%= school.name %></td>
+        <td class="middle aligned text">
+          <div class="ui relaxed divided list">
+            <% school.student_sources.each do |ss| %>
+            <div class="item">
+              <div class="ui label">
+                <%= ss.name %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $('table').tablesort();
+</script>

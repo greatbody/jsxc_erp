@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get '/' => :index
     get '/demo' => :demo
     get '/map' => :map
+    get '/temp' => :temp
   end
 
   namespace :open do
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
     post 'assign_task' => :assign_task
     get 'search' => :search
     post 'daily_sign' => :daily_sign
+    post 'sms_consultant' => :sms_consultant
   end
 
   resources :intentions do

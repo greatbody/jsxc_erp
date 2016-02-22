@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class WelcomeController < ApplicationController
   require 'phone_ext'
-  before_action :authenticate_user!, only: [:index, :map]
+  before_action :authenticate_user!, only: [:index, :map, :temp]
   def index
   # prepare data for carve display
     start = Date.today.ago(2.month).to_date
@@ -38,6 +38,11 @@ class WelcomeController < ApplicationController
     @schools = School.where("longitude is not null and latitude is not null")
     @average_longitude = TrainField.average(:longitude).to_f
     @average_latitude = TrainField.average(:latitude).to_f
+  end
+
+  def temp
+    # 显示校园
+    @schools = School.all
   end
 
   private

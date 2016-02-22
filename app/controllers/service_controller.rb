@@ -101,4 +101,10 @@ class ServiceController < ApplicationController
     send_erp_notify(notify)
     render html: ''
   end
+
+  def sms_consultant
+    student_id = params[:student_id]
+    
+
+  end
 end
