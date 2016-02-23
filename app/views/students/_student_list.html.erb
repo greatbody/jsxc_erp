@@ -2,12 +2,13 @@
   <table class="ui teal sortable celled table">
     <thead>
       <tr>
-        <th class="three wide center sorted ascending">姓名</th>
+        <th class="one wide center sorted ascending">姓名</th>
         <th class="one wide center aligned">性别</th>
         <th class="two wide center aligned">联系电话</th>
         <th class="two wide center aligned">状态</th>
+        <th class="two wide center aligned">进度</th>
         <th class="two wide center aligned">报名日期</th>
-        <th class="four wide center aligned">教练</th>
+        <th class="three wide center aligned">教练</th>
         <th class="three wide center aligned">操作</th>
       </tr>
     </thead>
@@ -18,6 +19,7 @@
         <td class="middle center aligned"><%= st.gender %></td>
         <td class="middle center aligned"><%= st.phone %></td>
         <td class="middle center aligned"><%= st.intention.current_status_text %></td>
+        <td class="middle center aligned"><%= st.process_text %></td>
         <td class="middle center aligned">
           <% if st.signed_at.present? %>
           <%= "#{st.signed_at.to_date.to_s(:db)}" %>

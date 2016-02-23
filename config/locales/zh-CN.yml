@@ -54,3 +54,11 @@ zh-CN:
     manage:
       all: "你无权进行此操作."
       user: '无权操作他人的账户.'
+  student:
+    process:
+      wait: '等待'
+      km1: '科一中'
+      km2: '科二中'
+      km3: '科三中'
+      km4: '科四中'
+      lingzheng: '已领证'

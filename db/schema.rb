@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222075848) do
+ActiveRecord::Schema.define(version: 20160223090621) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -208,12 +208,12 @@ ActiveRecord::Schema.define(version: 20160222075848) do
   create_table "students", force: :cascade do |t|
     t.string   "phone",                         limit: 255
     t.string   "name",                          limit: 255
-    t.integer  "sex",                           limit: 4,   default: 1
+    t.integer  "sex",                           limit: 4,                           default: 1
     t.string   "id_card",                       limit: 255
     t.string   "address",                       limit: 255
     t.string   "unit",                          limit: 255
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.datetime "created_at",                                                                    null: false
+    t.datetime "updated_at",                                                                    null: false
     t.integer  "user_id",                       limit: 4
     t.integer  "coach_id",                      limit: 4
     t.string   "avatar_file_name",              limit: 255
@@ -228,11 +228,13 @@ ActiveRecord::Schema.define(version: 20160222075848) do
     t.string   "id_card_back_pic_content_type", limit: 255
     t.integer  "id_card_back_pic_file_size",    limit: 4
     t.datetime "id_card_back_pic_updated_at"
-    t.integer  "is_local",                      limit: 4,   default: 0
+    t.integer  "is_local",                      limit: 4,                           default: 0
     t.string   "swift_number",                  limit: 255
     t.date     "signed_at"
     t.date     "birthday"
     t.integer  "train_service_id",              limit: 4
+    t.integer  "process",                       limit: 4,                           default: 0
+    t.decimal  "price",                                     precision: 8, scale: 2
   end
 
   add_index "students", ["coach_id"], name: "index_students_on_coach_id", using: :btree

@@ -65,6 +65,12 @@
     <%= f.select :train_service_id, [], {}, class: 'train-service' %>
   </div>
   <% end %>
+  <% unless @student.signed_at.nil? %>
+  <div class="field">
+    <%= f.label :process, "学习进度" %>
+    <%= f.select :process, options_for_select(Student.process_for_select, @student.process), {}, class: '' %>
+  </div>
+  <% end %>
   <div class="field">
     <%= f.label :id_card, '身份证' %><br>
     <%= f.text_field :id_card %>
