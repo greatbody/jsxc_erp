@@ -98,7 +98,7 @@
         </div>
       </div>
       <div class="item">
-        <% if current_user.daily_signs.where("daily_signs.created_at >= ?", Time.zone.now.beginning_of_day.ago(8.hours)).count == 0 %>
+        <% if current_user.daily_signs.where("daily_signs.created_at >= ?", Time.zone.now.beginning_of_day).count == 0 %>
         <div class="ui blue labeled icon button daily-sign">
           签到
           <i class="add icon"></i>
