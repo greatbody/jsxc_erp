@@ -105,7 +105,7 @@
         </div>
         <% else %>
         <div class="ui disabled button">
-          已签到
+          已签到<%= Time.zone.now.beginning_of_day %>
         </div>
         <% end %>
       </div>
