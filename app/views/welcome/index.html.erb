@@ -100,7 +100,7 @@
               <i class="mail icon"></i>
               <div class="content">
                 <span style="width: 100px;display: inline-block;"><%= user.name %></span>
-                <% if user.daily_signs.where("daily_signs.created_at >= ?", Time.zone.now.beginning_of_day.ago(8.hours)).count > 0 %>
+                <% if user.daily_signs.where("daily_signs.created_at >= ?", Time.zone.now.beginning_of_day).count > 0 %>
                 <span style="padding: 0.3em 0.5em;color: blue;">已签到</span>
                 <% else %>
                 <span style="padding: 0.3em 0.5em;color: red;">未签到</span>
