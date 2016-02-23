@@ -106,7 +106,7 @@
         <% else %>
         <div class="ui disabled button">
           已签到<%= Time.zone.now.beginning_of_day %>
-          123 <%= current_user.daily_signs.order(created_at: :desc).created_at %>
+          123 <%= current_user.daily_signs.order(created_at: :desc).first.created_at %>
         </div>
         <% end %>
       </div>
