@@ -93,8 +93,10 @@ class StudentsController < ApplicationController
     if student.present?
       # 存在学员
       if student.last_evaluation_by == current_user.name
+        # 上次自己更改的
         render json: { msg_code: 'success' }
       else
+        # 上次他人更改的
         if student.last_evaluation_by.blank?
           render json: { msg_code: 'success' }
         else
