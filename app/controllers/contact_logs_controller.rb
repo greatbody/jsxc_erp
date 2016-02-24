@@ -19,15 +19,21 @@ class ContactLogsController < ApplicationController
   end
 
   def create
-    contact_log = current_user.contact_logs.build(new_contact_params)
-    contact_log.student = Student.find(params[:student_id])
+    user_id = current_user.id
+    if params[:contact_log].present?
+      user_id = params[:contact_log][:user_id].to_i
+    end
+    user = User.find(user_id)
+    contact_log = user.contact_logs.build(new_contact_params)
+    student_id = params[:student_id].to_i
+    contact_log.student = Student.find(student_id)
     if contact_log.save
       contact_log.student.intention.update(next_contact_at: contact_log.next_contact_at, current_status: contact_log.current_status)
 
       contact_log.student.update(signed_at: new_contact_params[:created_at]) if new_contact_params[:current_status] == 'signed_up' && contact_log.student.signed_at.nil?
 
       notify = {
-        operator: current_user.name,
+        operator: user.name,
         message: "录入了【#{contact_log.student.name}】学员的一条新联系记录，状态变更为：#{I18n.t("current_status.#{contact_log.current_status}")}"
       }
       send_erp_notify(notify)

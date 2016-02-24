@@ -3,6 +3,12 @@
 <link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <div class="ui segment">
   <%= form_for(@contact_log, url: student_contact_logs_path, method: :post, html: { class: "ui form" }) do |f| %>
+
+  <div class="field">
+    <%= f.label :user_id, "创建人" %>
+    <%= f.select :user_id, options_for_select(User.user_for_select), {}, class: "ui dropdown user-id" %>
+  </div>
+
   <div class="field">
     <%= f.label :contact_type, "联系类型" %>
     <% if @student.contact_logs.count > 0 %>
@@ -55,6 +61,7 @@
 
   $('.ui.dropdown.contact_type').dropdown();
   $('.ui.dropdown.current_status').dropdown();
+  $('.ui.dropdown.user-id').dropdown();
   $('.ui.checkbox').checkbox();
   $('.datepicker').pickadate();
 </script>

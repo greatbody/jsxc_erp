@@ -17,16 +17,21 @@ class IntentionsController < ApplicationController
   end
 
   def create
-    @student = current_user.students.build(params_of_student)
+    user_id = current_user.id
+    if params[:student][:contact_log].present?
+      user_id = params[:student][:contact_log][:user_id].to_i
+    end
+    user = User.find(user_id)
+    @student = user.students.build(params_of_student)
     @student.intention.user = @student.user
     can_update_last_contact = (params[:student][:contact_log][:has_contact_log] == '1')
     student_source_id = params[:student][:student_source][:id]
     if can_update_last_contact
       #save contact log attactched to it
-      contact_log_entity = current_user.contact_logs.build(params_of_contact_log_in_student)
+      contact_log_entity = user.contact_logs.build(params_of_contact_log_in_student)
       @student.contact_logs << contact_log_entity
     else
-      contact_log_entity = current_user.contact_logs.build(default_contact_log)
+      contact_log_entity = user.contact_logs.build(default_contact_log)
       @student.contact_logs << contact_log_entity
     end
     if @student.save
@@ -45,7 +50,7 @@ class IntentionsController < ApplicationController
       end
 
       notify = {
-        operator: current_user.name,
+        operator: user.name,
         message: "创建了【#{@student.name}】学员，并录入了他（她）的意向信息"
       }
       send_erp_notify(notify)

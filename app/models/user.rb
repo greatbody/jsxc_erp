@@ -17,4 +17,12 @@ class User < ActiveRecord::Base
   def before_add_method(role)
     # do something before it gets added
   end
+
+  def self.user_for_select
+    users = []
+    User.all.each do |user|
+      users << [user.name, user.id]
+    end
+    users
+  end
 end

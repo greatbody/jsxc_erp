@@ -7,6 +7,7 @@
     $('.ui.dropdown.contact_type').dropdown();
     $('.ui.dropdown.current_status').dropdown();
     $('.ui.dropdown.student-source-name').dropdown();
+    $('.ui.dropdown.user-id').dropdown();
     $('.ui.checkbox.need_contact').checkbox();
     $('.ui.checkbox.create_contact_log').checkbox({
       onChecked: function() {
@@ -16,6 +17,7 @@
         $('.follow_create_contact_log').hide();
       }
     });
+
     $('.datepicker').pickadate();
     <% if flash[:alert] %>
     $('.form').addClass('error');

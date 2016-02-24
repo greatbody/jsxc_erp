@@ -87,14 +87,14 @@
           </tr>
         </thead>
         <tbody>
-          <% @contact_logs.each do |contact_log| %>
+          <% @contact_logs.order(updated_at: :desc).each do |contact_log| %>
           <%
-            created_at_date = contact_log.created_at.to_date
+            updated_at_date = contact_log.updated_at
             next_contact_at = contact_log.next_contact_at
           %>
           <tr>
             <td style="text-align: center;">
-              <%= created_at_date.to_s(:db) %>
+              <%= updated_at_date.to_s(:db) %>
             </td>
             <td>
               <%= contact_log.user.name %>
