@@ -88,6 +88,15 @@ class StudentsController < ApplicationController
     end
   end
 
+  def update_evaluation
+    student = Student.find(params[:id])
+    if student.update(evaluation: params[:evaluation])
+      render json: { msg_code: 'success' }
+    else
+      render json: { msg_code: 'error', msg_text: '更新错误，请联系18771024287！' }
+    end
+  end
+
   private
 
   def params_update_id_card

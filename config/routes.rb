@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       post 'notify_got_card' => :notify_got_card
       get 'signed_up' => :signed_up
       get 'wait_pay' => :wait_pay
+      post 'update_evaluation' => :update_evaluation
     end
   end
 

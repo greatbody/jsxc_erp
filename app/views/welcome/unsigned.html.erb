@@ -15,13 +15,57 @@
         <td class="middle center aligned"><%= (index + 1).to_s.rjust(3, '0') %></td>
         <td class="middle"><%= link_to "#{student.name}", intention_path(student.intention), { target: '_blank' } %></td>
         <td class="middle aligned text"><%= PhoneExt.format_phone(student.phone) %></td>
-        <td class="middle aligned text"></td>
+        <td class="middle aligned text">
+          <textarea data-type="evaluation" data-student-id="<%= student.id %>" style="height: 150px;width: 100%;"><%= student.evaluation %></textarea>
+          <button class="ui primary button save-evaluation">更新</button>
+          <span style="color: red;" class="msg-warning"></span>
+          <span style="color: green;" class="msg-success"></span>
+        </td>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-
+<script type="text/javascript">
+  var __sto = setTimeout;　　
+  window.setTimeout = function(callback, timeout, param)　　 {　　
+    var args = Array.prototype.slice.call(arguments, 2);　　
+    var _cb = function()　　 {　　
+      callback.apply(null, args);　　
+    }　　
+    __sto(_cb, timeout);　　
+  }
+</script>
 <script type="text/javascript">
   $('table').tablesort();
+  $('.save-evaluation').on('click', function() {
+    var jq_td = $(this.parentNode);
+    var textarea = $('textarea', this.parentNode);
+    var student_id = textarea.attr('data-student-id');
+    var evaluation_text = textarea.val();
+    if (!confirm('是否更新？')) {
+      return;
+    }
+    $.post('/students/update_evaluation', {
+      'id': student_id,
+      'evaluation': evaluation_text
+    }).success(function(data) {
+      if (data && data.msg_code == 'success') {
+        jq_td.find('.msg-success').html('更新成功！');
+        setTimeout(function(td) {
+          td.find('.msg-success').html('');
+        }, 1500, jq_td);
+      } else {
+        jq_td.find('.msg-warning').html('更新错误，请联系管理员！');
+        setTimeout(function(td) {
+          td.find('.msg-warning').html('');
+        }, 1500, jq_td);
+      }
+    }).error(function(data) {
+        jq_td.find('.msg-warning').html('更新错误，请联系管理员！');
+        setTimeout(function(td) {
+          td.find('.msg-warning').html('');
+        }, 1500, jq_td);
+    });
+  });
 </script>
