@@ -89,7 +89,7 @@
         <tbody>
           <% @contact_logs.order(updated_at: :desc).each do |contact_log| %>
           <%
-            updated_at_date = contact_log.updated_at
+            updated_at_date = contact_log.updated_at.localtime
             next_contact_at = contact_log.next_contact_at
           %>
           <tr>
