@@ -4,10 +4,10 @@ class Ability
     if user.has_role? :superadmin
       can :manage, :all
     end
-
+    # 普通用户
     if user.has_role? :user
       can :manage, [Intention, ContactLog, ResidenceCard, Student, StudentSource, SourceContact]  # allow managers to do anything to products and users
-      can [:read, :update], [Coach]
+      can [:read, :update, :train_services], [Coach]
       can [:assign_task, :search, :daily_sign], :service
     end
 
