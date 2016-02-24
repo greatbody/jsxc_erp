@@ -45,6 +45,10 @@ class WelcomeController < ApplicationController
     @schools = School.all
   end
 
+  def unsigned
+    @students = Student.joins(:intention).where(intentions: {current_status: 0..3}).order(created_at: :asc)
+  end
+
   private
 
   def colleact_messages

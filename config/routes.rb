@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get '/demo' => :demo
     get '/map' => :map
     get '/temp' => :temp
+    get '/unsigned' => :unsigned
   end
 
   namespace :open do
