@@ -88,9 +88,32 @@ class StudentsController < ApplicationController
     end
   end
 
+  def peek_before_evaluation
+    student = Student.find(params[:id])
+    if student.present?
+      # 存在学员
+      if student.last_evaluation_by == current_user.name
+        render json: { msg_code: 'success' }
+      else
+        if student.last_evaluation_by.blank?
+          render json: { msg_code: 'success' }
+        else
+          if (Time.zone.now - student.updated_at).abs < 100
+            render json: { msg_code: 'error', msg_text: "刚才#{student.last_evaluation_by}编辑了，是否覆盖？" }
+          else
+            render json: { msg_code: 'success' }
+          end
+        end
+      end
+    else
+      # 学员不存在
+      render json: { msg_code: 'error', msg_text: '学员不存在，请检查系统数据！' }
+    end
+  end
+
   def update_evaluation
     student = Student.find(params[:id])
-    if student.update(evaluation: params[:evaluation])
+    if student.update(evaluation: params[:evaluation], last_evaluation_by: current_user.name)
       render json: { msg_code: 'success' }
     else
       render json: { msg_code: 'error', msg_text: '更新错误，请联系18771024287！' }

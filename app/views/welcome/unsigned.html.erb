@@ -37,18 +37,13 @@
   }
 </script>
 <script type="text/javascript">
-  $('table').tablesort();
-  $('.save-evaluation').on('click', function() {
-    var jq_td = $(this.parentNode);
-    var textarea = $('textarea', this.parentNode);
-    var student_id = textarea.attr('data-student-id');
-    var evaluation_text = textarea.val();
-    if (!confirm('是否更新？')) {
+  function update(id, evaluation, jq_td, showConfirm) {
+    if (showConfirm && !confirm('是否更新？')) {
       return;
     }
     $.post('/students/update_evaluation', {
-      'id': student_id,
-      'evaluation': evaluation_text
+      'id': id,
+      'evaluation': evaluation
     }).success(function(data) {
       if (data && data.msg_code == 'success') {
         jq_td.find('.msg-success').html('更新成功！');
@@ -67,5 +62,42 @@
           td.find('.msg-warning').html('');
         }, 1500, jq_td);
     });
+  }
+
+  function valid(id, evaluation, jq_td) {
+    $.post('/students/peek_before_evaluation', {
+      'id': id
+    }).success(function(data) {
+      if (data && data.msg_code == 'success') {
+        update(id, evaluation, jq_td, true);
+      } else {
+        if (data && data.msg_code == 'error') {
+          if (confirm(data.msg_text)) {
+            update(id, evaluation, jq_td, false);
+          }
+        } else {
+          jq_td.find('.msg-warning').html('校验错误！');
+          setTimeout(function(td) {
+            td.find('.msg-warning').html('');
+          }, 1500, jq_td);
+        }
+      }
+    }).error(function(data) {
+        jq_td.find('.msg-warning').html('校验错误！');
+        setTimeout(function(td) {
+          td.find('.msg-warning').html('');
+        }, 1500, jq_td);
+    });
+  }
+</script>
+<script type="text/javascript">
+  $('table').tablesort();
+  $('.save-evaluation').on('click', function() {
+    var jq_td = $(this.parentNode);
+    var textarea = $('textarea', this.parentNode);
+    var student_id = textarea.attr('data-student-id');
+    var evaluation_text = textarea.val();
+
+    valid(student_id, evaluation_text, jq_td);
   });
 </script>

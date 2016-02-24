@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224022721) do
+ActiveRecord::Schema.define(version: 20160224080814) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -237,6 +237,7 @@ ActiveRecord::Schema.define(version: 20160224022721) do
     t.decimal  "price",                                       precision: 8, scale: 2
     t.text     "evaluation",                    limit: 65535
     t.integer  "possibility",                   limit: 4
+    t.string   "last_evaluation_by",            limit: 255
   end
 
   add_index "students", ["coach_id"], name: "index_students_on_coach_id", using: :btree

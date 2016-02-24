@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       get 'signed_up' => :signed_up
       get 'wait_pay' => :wait_pay
       post 'update_evaluation' => :update_evaluation
+      post 'peek_before_evaluation' => :peek_before_evaluation
     end
   end
 
