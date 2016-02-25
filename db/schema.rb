@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225093813) do
+ActiveRecord::Schema.define(version: 20160225095603) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -314,6 +314,17 @@ ActiveRecord::Schema.define(version: 20160225093813) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "work_tasks", force: :cascade do |t|
+    t.string   "title",        limit: 255
+    t.text     "html",         limit: 65535
+    t.integer  "type",         limit: 4
+    t.integer  "status",       limit: 4
+    t.integer  "from_user_id", limit: 4
+    t.integer  "to_user_id",   limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   add_foreign_key "coaches", "train_schools"
   add_foreign_key "contact_logs", "students"
