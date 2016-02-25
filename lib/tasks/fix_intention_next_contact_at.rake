@@ -9,8 +9,9 @@ namespace :fix do
     end
     p "done"
   end
-
-  task :add_new_role => :environment do |t, args|
+  # 调用实例
+  # bundle exec rake fix:add_role role_name='trys'
+  task :add_role => :environment do |t, args|
     role_name = ENV['role_name']
     Role.create(name: role_name)
     p "#{role_name} 添加完成"
