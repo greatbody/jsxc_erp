@@ -65,7 +65,7 @@
 
       <div class="field follow_create_contact_log">
         <%= cf.label :user_id, "创建人" %>
-        <%= cf.select :user_id, options_for_select(User.user_for_select), {}, class: "ui dropdown user-id" %>
+        <%= cf.select :user_id, options_for_select(User.user_for_select, current_user.id), {}, class: "ui dropdown user-id" %>
       </div>
 
       <div class="field follow_create_contact_log">

@@ -6,7 +6,7 @@
 
   <div class="field">
     <%= f.label :user_id, "创建人" %>
-    <%= f.select :user_id, options_for_select(User.user_for_select), {}, class: "ui dropdown user-id" %>
+    <%= f.select :user_id, options_for_select(User.user_for_select, current_user.id), {}, class: "ui dropdown user-id" %>
   </div>
 
   <div class="field">
