@@ -8,7 +8,7 @@
         <th class="one wide center aligned">性别</th>
         <th class="two wide center aligned">手机</th>
         <th class="two wide center aligned">驾校</th>
-        <th class="two wide center aligned">微信</th>
+        <th class="two wide center aligned">支付宝</th>
         <th class="three wide center aligned">训练场</th>
         <th class="one wide center aligned">学员</th>
         <th class="three wide">操作</th>
@@ -22,7 +22,7 @@
         <td class="middle center aligned"><%= coach.gender_text %></td>
         <td class="middle aligned phone"><%= PhoneExt.format_phone(coach.phone) if coach.phone.present? %></td>
         <td class="middle aligned text"><%= coach.train_school.name if coach.train_school.present? %></td>
-        <td class="middle text"><%= coach.wechat.present? ? coach.wechat : '-' %></td>
+        <td class="middle text"><%= coach.zfb.present? ? coach.zfb : '-' %></td>
         <td class="middle aligned text">
           <div class="ui relaxed divided list">
             <% coach.train_fields.each do |tf| %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224080814) do
+ActiveRecord::Schema.define(version: 20160225093813) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -47,6 +47,9 @@ ActiveRecord::Schema.define(version: 20160224080814) do
     t.date     "contract_begin_at"
     t.date     "contract_end_at"
     t.boolean  "is_locked",                                     default: false
+    t.string   "zfb",                               limit: 255
+    t.string   "bank",                              limit: 255
+    t.string   "bank_card",                         limit: 255
   end
 
   add_index "coaches", ["train_school_id"], name: "index_coaches_on_train_school_id", using: :btree
