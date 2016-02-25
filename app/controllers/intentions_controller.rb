@@ -18,9 +18,7 @@ class IntentionsController < ApplicationController
 
   def create
     user_id = current_user.id
-    if params[:student][:contact_log].present?
-      user_id = params[:student][:contact_log][:user_id].to_i
-    end
+    user_id = params[:student][:contact_log][:user_id].to_i if params[:student][:contact_log][:user_id].present?
     user = User.find(user_id)
     @student = user.students.build(params_of_student)
     @student.intention.user = @student.user

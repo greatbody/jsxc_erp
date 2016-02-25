@@ -20,9 +20,7 @@ class ContactLogsController < ApplicationController
 
   def create
     user_id = current_user.id
-    if params[:contact_log].present?
-      user_id = params[:contact_log][:user_id].to_i
-    end
+    user_id = params[:contact_log][:user_id].to_i if params[:contact_log][:user_id].present?
     user = User.find(user_id)
     contact_log = user.contact_logs.build(new_contact_params)
     student_id = params[:student_id].to_i
