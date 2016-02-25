@@ -3,12 +3,12 @@
 <link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <div class="ui segment">
   <%= form_for(@contact_log, url: student_contact_logs_path, method: :post, html: { class: "ui form" }) do |f| %>
-
+  <% if current_user.has_role? :can_choose_user %>
   <div class="field">
     <%= f.label :user_id, "创建人" %>
     <%= f.select :user_id, options_for_select(User.user_for_select, current_user.id), {}, class: "ui dropdown user-id" %>
   </div>
-
+  <% end %>
   <div class="field">
     <%= f.label :contact_type, "联系类型" %>
     <% if @student.contact_logs.count > 0 %>

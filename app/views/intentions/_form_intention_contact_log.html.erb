@@ -62,12 +62,12 @@
           <%= cf.label :has_contact_log, "创建联系记录" %>
         </div>
       </div>
-
+      <% if current_user.has_role? :can_choose_user %>
       <div class="field follow_create_contact_log">
         <%= cf.label :user_id, "创建人" %>
         <%= cf.select :user_id, options_for_select(User.user_for_select, current_user.id), {}, class: "ui dropdown user-id" %>
       </div>
-
+      <% end %>
       <div class="field follow_create_contact_log">
         <%= cf.label :contact_type, "联系类型" %>
         <%= cf.select :contact_type, options_for_select(ContactLog.contact_types_for_select), {}, class: "ui dropdown contact_type" %>
