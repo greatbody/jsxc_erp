@@ -1,34 +1,59 @@
 <% content_for :title, "任务列表 - #{current_user.name}" %>
+<style type="text/css">
+  .tags {
+    position: absolute;
+    top: 52%;
+    right: 30px;
+    margin-top: -15px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 11px;
+    font-size: 15px;
+  }
+
+  .task-active {
+    background-color: white;
+  }
+
+  .task-done {
+
+  }
+
+  .task-close {
+    width: 18px;
+    height: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    background:url(/mail2757b6.png) -48px -16px no-repeat;
+  }
+</style>
 <header class="ui-header ui-header-positive ui-border-b">
-  <i class="ui-icon-return" onclick="history.back()"></i>
   <h1>任务列表</h1>
   <%= link_to work_tasks_path do %>
     <button class="ui-btn">回首页</button>
   <% end %>
 </header>
-<footer class="ui-footer ui-footer-btn">
-  <ul class="ui-tiled ui-border-t">
-    <li data-href="index.html" class="ui-border-r"><div>基础样式</div></li>
-    <li data-href="ui.html" class="ui-border-r"><div>UI组件</div></li>
-    <li data-href="js.html"><div>JS插件</div></li>
-  </ul>
-</footer>
+
 <section class="ui-container">
   <section id="tab">
     <div class="demo-item">
       <div class="demo-block">
         <div class="ui-tab">
           <ul class="ui-tab-nav ui-border-b">
-            <li class="current">今日任务</li>
-            <li>全部表情</li>
-            <li>表情</li>
+            <li class="current">我的任务</li>
+            <li>已完成</li>
+            <li>他人任务</li>
           </ul>
           <ul class="ui-tab-content" style="width:300%">
             <li>
-              <div class="ui-whitespace"><%= render 'index_current_task' %></div>
+              <%= render 'index_current_task' %>
             </li>
-            <li>内容2</li>
-            <li>内容3</li>
+            <li>
+              <%= render 'index_done_task' %>
+            </li>
+            <li>
+              <%= render 'index_other_task' %>
+            </li>
           </ul>
         </div>
       </div>

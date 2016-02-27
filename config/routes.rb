@@ -73,6 +73,7 @@ Rails.application.routes.draw do
 
   resources :work_tasks do
     collection do
+      post 'process_task' => :process_task
     end
   end
 

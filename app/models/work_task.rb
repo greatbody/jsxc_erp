@@ -27,4 +27,8 @@ class WorkTask < ActiveRecord::Base
       nil
     end
   end
+
+  def status_text
+    I18n.t("work_task.status.#{status}")
+  end
 end

@@ -1,4 +1,4 @@
-<% @tasks.each do |task| %>
+<% @other_tasks.each do |task| %>
 <ul class="ui-list ui-list-function ui-list-link ui-border-tb">
   <li class="ui-border-t" href="">
     <div class="ui-list-thumb">
@@ -11,6 +11,7 @@
     </div>
     <% end %>
     <div class="tags">
+      <label class="ui-label"><%= task.status_text %></label>
       <label class="ui-label"><%= task.is_read? ? '已读' : '未读' %></label>
     </div>
   </li>
