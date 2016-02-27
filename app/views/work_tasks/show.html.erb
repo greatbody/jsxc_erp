@@ -43,9 +43,6 @@
     <% if @task.done? %>
     <button class="ui-btn-lg ui-btn-primary" data-action="activate">重启任务</button>
     <% end %>
-    <% unless @task.done? %>
-    <button class="ui-btn-lg" data-action="transfer">转移任务</button>
-    <% end %>
     <% if @task.active? %>
     <button class="ui-btn-lg ui-btn-danger" data-action="close">关闭任务</button>
     <% end %>
