@@ -71,6 +71,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :work_tasks do
+    collection do
+    end
+  end
+
   namespace :api do
     post 'notify' => :notify
   end

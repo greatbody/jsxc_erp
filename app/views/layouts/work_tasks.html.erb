@@ -1,0 +1,15 @@
+<!-- http://semantic-ui.com/elements/container.html#/examples -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %></title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/frozen/css/frozen.css">
+  <%= csrf_meta_tags %>
+</head>
+<body ontouchstart="">
+  <script src="/frozen/lib/zepto.min.js"></script>
+  <script src="/frozen/js/frozen.js"></script>
+  <%= yield %>
+</body>
+</html>
