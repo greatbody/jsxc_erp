@@ -1,0 +1,5 @@
+<div name="preview" style="border: solid 1px #ccc;border-radius: 5px;padding: 5px;">
+  发布人：<%= from_user.name %>（手机：<%= from_user.phone %>）<br>
+  发布时间：<span class="t red"><%= Time.now.localtime.to_s(:db) %></span><br>
+  消息：<br><span class="t red"><%= to_user.name %></span>你好，请于<span class="t red"><%= task_date %></span>处理<span class="t red"><%= student.name %></span>学员（手机：<span class="t red"><%= student.phone %></span>）的业务<br><span class="t red"><%= task_type %></span>
+</div>

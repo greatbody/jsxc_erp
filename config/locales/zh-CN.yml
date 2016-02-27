@@ -43,6 +43,11 @@ zh-CN:
       jsxc: '极速学车'
       student: '学员自助'
       coach: '教练'
+  work_task:
+    status:
+      closed: '已关闭'
+      active: '已激活'
+      done: '已完成'
   application:
     menus:
       wait_call: '未联系'

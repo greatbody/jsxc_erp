@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class ServiceController < ApplicationController
   include SendNotifications
+  include AbstractController
   before_action :authenticate_user!
   authorize_resource :class => false
   def assign_task
@@ -12,7 +13,20 @@ class ServiceController < ApplicationController
     if student_id.blank? || processor_id.blank?
       render json: { msg_code: 'error', msg_text: '未指定学员或处理人' }
     else
-      AssignTaskJob.perform_later(student_id, processor_id, sender_id, task_type, task_date)
+      msg = render_to_string(partial: 'service/assign_task_templete',
+        locals: {
+          :from_user => User.find(sender_id),
+          :to_user => User.find(processor_id),
+          :task_date => task_date,
+          :student => Student.find(student_id),
+          :task_type => task_type
+        }
+      )
+      task = WorkTask.new(title: task_type, html: msg, status: 1,
+                          from_user_id: sender_id, to_user_id: processor_id,
+                          task_type: 0, is_read: false)
+      task.save
+      # AssignTaskJob.perform_later(student_id, processor_id, sender_id, task_type, task_date)
       render json: { msg_code: 'success', msg_text: '' }
     end
   end
@@ -106,5 +120,11 @@ class ServiceController < ApplicationController
     student_id = params[:student_id]
     NotifySmsConsultantJob.perform_later(student_id)
     render json: { msg_code: 'success', msg_text: '' }
+  end
+
+  private
+
+  def render_to_string(*args, &block)
+    ActionController::Base.new.render_to_string(*args, &block)
   end
 end

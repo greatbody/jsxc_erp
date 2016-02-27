@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225093813) do
+ActiveRecord::Schema.define(version: 20160227082222) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -315,6 +315,33 @@ ActiveRecord::Schema.define(version: 20160225093813) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  create_table "work_task_steps", force: :cascade do |t|
+    t.integer  "work_task_id",    limit: 4
+    t.integer  "operation",       limit: 4
+    t.integer  "operate_user_id", limit: 4
+    t.integer  "target_user_id",  limit: 4
+    t.string   "remarks",         limit: 255
+    t.text     "html",            limit: 65535
+    t.date     "new_deadline"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "work_task_steps", ["work_task_id"], name: "index_work_task_steps_on_work_task_id", using: :btree
+
+  create_table "work_tasks", force: :cascade do |t|
+    t.string   "title",        limit: 255
+    t.text     "html",         limit: 65535
+    t.integer  "status",       limit: 4
+    t.integer  "from_user_id", limit: 4
+    t.integer  "to_user_id",   limit: 4
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "task_type",    limit: 4
+    t.boolean  "is_read",                    default: true
+    t.date     "deadline"
+  end
+
   add_foreign_key "coaches", "train_schools"
   add_foreign_key "contact_logs", "students"
   add_foreign_key "contact_logs", "users"
@@ -332,4 +359,5 @@ ActiveRecord::Schema.define(version: 20160225093813) do
   add_foreign_key "students", "users"
   add_foreign_key "train_services", "coaches"
   add_foreign_key "train_services", "train_fields"
+  add_foreign_key "work_task_steps", "work_tasks"
 end
