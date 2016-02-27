@@ -62,7 +62,7 @@
       'action_type': action
     }).success(function(data) {
       if (data && data.msg_code == 'success') {
-        window.location.href = "/work_tasks";
+        location.href = "/work_tasks";
       } else {
         showDialog('警告', data.msg_text);
       }
