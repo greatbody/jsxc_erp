@@ -54,20 +54,23 @@
     var id = this.parentNode.getAttribute('data-task-id');
     var action_type = $(this).data('action');
     processTask(id, action_type);
-    alert(3);
   });
 
   function processTask(task_id, action) {
+    alert(3);
     $.post('/work_tasks/process_task', {
       'task_id': task_id,
       'action_type': action
     }).success(function(data) {
       if (data && data.msg_code == 'success') {
+        alert(4);
         location.href = "/work_tasks";
       } else {
+        alert(5);
         showDialog('警告', data.msg_text);
       }
     }).error(function(data) {
+      alert(6);
       showDialog('警告', data.msg_text);
     });
   }
