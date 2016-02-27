@@ -41,8 +41,8 @@
 (function (){
   var tab = new fz.Scroll('.ui-tab', {
     role: 'tab',
-    autoplay: true,
-    interval: 3000
+    autoplay: false,
+    interval: 6000
   });
   /* 滑动开始前 */
   tab.on('beforeScrollStart', function(fromIndex, toIndex) {

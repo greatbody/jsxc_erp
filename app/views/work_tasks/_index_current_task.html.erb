@@ -1,1 +1,14 @@
-<b>test</b>
+<% @tasks.each do |task| %>
+<ul class="ui-list ui-list-function ui-list-link ui-border-tb">
+  <li class="ui-border-t">
+    <div class="ui-avatar">
+      <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+    </div>
+    <div class="ui-list-info">
+      <h4 class="ui-nowrap"><%= task.title %></h4>
+      <p class="ui-nowrap"><%= task.html.html_safe %></p>
+    </div>
+    <div class="ui-btn">PK</div>
+  </li>
+</ul>
+<% end %>

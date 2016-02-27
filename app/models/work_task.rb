@@ -1,7 +1,7 @@
 class WorkTask < ActiveRecord::Base
   has_many :work_task_steps
 
-  enum type: [:other, :activity, :free_try, :request_pay]
+  enum task_type: [:other, :activity, :free_try, :request_pay]
   # other 其它
   # activity 活动
   # free_try 免费试学
