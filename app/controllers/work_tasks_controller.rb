@@ -29,6 +29,7 @@ class WorkTasksController < ApplicationController
       render json: { msg_code: 'success', msg_text: '' }
     when 'activate'
       task.active!
+      task.update(is_read: false)
       task.work_task_steps.build(params_for_activate).save
       render json: { msg_code: 'success', msg_text: '' }
     when 'close'

@@ -1,15 +1,13 @@
 <% @tasks.each do |task| %>
 <ul class="ui-list ui-list-function ui-list-link ui-border-tb">
-  <li class="ui-border-t" href="">
+  <li class="ui-border-t" data-href="/work_tasks/<%= task.id %>">
     <div class="ui-list-thumb">
       <span style="background-image:url(/email.png)"></span>
     </div>
-    <%= link_to work_task_path(task) do %>
     <div class="ui-list-info">
       <h4 class="ui-nowrap"><%= task.title %></h4>
-      <p class="ui-nowrap"><%= task.html.html_safe %></p>
+      <p class="ui-nowrap">执行人：<%= task.to_user.name %></p>
     </div>
-    <% end %>
     <div class="tags">
       <label class="ui-label"><%= task.is_read? ? '已读' : '未读' %></label>
     </div>
