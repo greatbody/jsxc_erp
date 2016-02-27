@@ -54,6 +54,7 @@
     var id = this.parentNode.getAttribute('data-task-id');
     var action_type = $(this).data('action');
     processTask(id, action_type);
+    alert(3);
   });
 
   function processTask(task_id, action) {
@@ -61,7 +62,6 @@
       'task_id': task_id,
       'action_type': action
     }).success(function(data) {
-      alert(2);
       if (data && data.msg_code == 'success') {
         location.href = "/work_tasks";
       } else {
