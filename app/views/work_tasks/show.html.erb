@@ -57,20 +57,16 @@
   });
 
   function processTask(task_id, action) {
-    alert(3);
     $.post('/work_tasks/process_task', {
       'task_id': task_id,
       'action_type': action
     }).success(function(data) {
       if (data && data.msg_code == 'success') {
-        alert(4);
-        location.href = "/work_tasks";
+        location.href = "/work_tasks?t=" + Math.random();
       } else {
-        alert(5);
         showDialog('警告', data.msg_text);
       }
     }).error(function(data) {
-      alert(6);
       showDialog('警告', data.msg_text);
     });
   }
