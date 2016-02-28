@@ -6,10 +6,10 @@
     </div>
     <div class="ui-list-info">
       <h4 class="ui-nowrap"><%= task.title %></h4>
-      <p class="ui-nowrap">执行人：<%= task.to_user.name %></p>
-    </div>
-    <div class="tags">
-      <label class="ui-label"><%= task.is_read? ? '已读' : '未读' %></label>
+      <p class="ui-nowrap">
+        <label class="ui-label-s"><%= task.is_read? ? '已读' : '未读' %></label>
+        执行人：<%= task.to_user.name %>
+      </p>
     </div>
   </li>
 </ul>
