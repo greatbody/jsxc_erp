@@ -1,0 +1,22 @@
+<ul class="ui-list ui-list-one ui-border-t">
+  <%
+    top_count = 1
+    top_count = @rank_week[0]['count'] if @rank_week.count > 0 && @rank_week[0]['count'] > 0
+  %>
+  <% @rank_week.each_with_index do |source_rank, index| %>
+  <li class="ui-border-b">
+    <div class="ui-list-thumb">
+      <span style="text-align: center;color: white;background-color:<%= (index < 3) ? 'red' : 'gray' %>;line-height: 50px;">
+        <%= index + 1 %>
+      </span>
+    </div>
+    <div class="ui-list-info">
+      <h4 class="ui-nowrap"><%= source_rank['name'] %></h4>
+      <div class="ui-txt-info"><%= source_rank['count'] %></div>
+      <div style="position: absolute;right: 40px;width: 50%;height: 50px;">
+        <div style="width: <%= source_rank['count'] * 100 / top_count %>%;background-color: #7FDC7E;height: 100%;border-radius: 5px;">&nbsp;</div>
+      </div>
+    </div>
+  </li>
+  <% end %>
+</ul>

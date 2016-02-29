@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   namespace :open do
     get '/' => :index
     get '/map' => :map
+    get '/rank' => :rank
   end
 
   namespace :contact_logs do
