@@ -2,6 +2,7 @@ class StudentSource < ActiveRecord::Base
   resourcify
 
   enum gender: { unknown: 2, male: 1, female: 0 }
+  enum source_type: { student: 0, employee: 1, shareholder: 2 }
 
   belongs_to :school
   belongs_to :user
@@ -25,6 +26,12 @@ class StudentSource < ActiveRecord::Base
   def self.gender_for_select
     genders.map do |gender, _|
       [I18n.t("student_source.gender.#{gender}"), gender]
+    end
+  end
+
+  def self.source_type_for_select
+    source_types.map do |source_type, _|
+      [I18n.t("student_source.source_type.#{source_type}"), source_type]
     end
   end
 end

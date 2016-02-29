@@ -8,4 +8,7 @@ class OpenController < ApplicationController
     @average_longitude = TrainField.average(:longitude).to_f
     @average_latitude = TrainField.average(:latitude).to_f
   end
+
+  def rank
+  end
 end

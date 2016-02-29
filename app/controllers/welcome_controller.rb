@@ -2,6 +2,7 @@
 class WelcomeController < ApplicationController
   require 'phone_ext'
   before_action :authenticate_user!, only: [:index, :map, :temp, :unsigned]
+  include BrowserExt
   def index
   # prepare data for carve display
     start = Date.today.ago(2.month).to_date

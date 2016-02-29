@@ -69,3 +69,5 @@ gem 'cancancan', '~> 1.10'
 gem 'rolify'
 
 gem 'nokogiri', '~> 1.6.0'
+
+gem 'browser'

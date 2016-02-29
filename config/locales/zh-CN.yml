@@ -30,6 +30,10 @@ zh-CN:
       male: '男'
       female: '女'
       unknown: '[请选择]'
+    source_type:
+      student: '学生'
+      employee: '职员'
+      shareholder: '股东'
   residence_card:
     current_status:
       id_card_received: '公司已收身份证'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227082222) do
+ActiveRecord::Schema.define(version: 20160229024836) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(version: 20160227082222) do
     t.date     "signed_at"
     t.decimal  "deposit",                    precision: 8, scale: 2
     t.decimal  "deposit_paid",               precision: 8, scale: 2
+    t.integer  "source_type",  limit: 4,                             default: 0
   end
 
   add_index "student_sources", ["school_id"], name: "index_student_sources_on_school_id", using: :btree

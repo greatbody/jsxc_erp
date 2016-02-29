@@ -2,6 +2,7 @@ class WorkTasksController < ApplicationController
   before_action :set_task, only: [:show, :edit]
   before_action :authenticate_user!
   protect_from_forgery with: :null_session
+  include BrowserExt
   def index
     @tasks = WorkTask.where(to_user_id: current_user.id, status: 1)
     @other_tasks = WorkTask.where.not(to_user_id: current_user.id)
