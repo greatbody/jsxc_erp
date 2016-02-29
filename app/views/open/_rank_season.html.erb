@@ -1,9 +1,9 @@
 <ul class="ui-list ui-list-one ui-border-t">
   <%
     top_count = 1
-    top_count = @rank_week[0]['count'] if @rank_week.count > 0 && @rank_week[0]['count'] > 0
+    top_count = @rank_season[0]['count'] if @rank_season.count > 0 && @rank_season[0]['count'] > 0
   %>
-  <% @rank_week.each_with_index do |source_rank, index| %>
+  <% @rank_season.each_with_index do |source_rank, index| %>
   <li class="ui-border-b">
     <div class="ui-list-thumb">
       <span style="text-align: center;color: white;background-color:<%= (index < 3) ? 'red' : 'gray' %>;line-height: 50px;">
