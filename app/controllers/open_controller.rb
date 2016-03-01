@@ -1,4 +1,5 @@
 class OpenController < ApplicationController
+  before_action :authenticate_user!, only: [:students, :coaches, :student_sources]
   def index
   end
 
@@ -38,5 +39,17 @@ class OpenController < ApplicationController
     @rank_season = StudentSource.connection.select_all(season_sql)
 
     render layout: 'work_tasks'
+  end
+
+  def students
+    @students = Student.where(signed_at: nil)
+  end
+
+  def coaches
+    @coaches = Coach.all
+  end
+
+  def student_sources
+    @student_sources = StudentSource.all
   end
 end

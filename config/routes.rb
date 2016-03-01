@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     get '/' => :index
     get '/map' => :map
     get '/rank' => :rank
+    # temp
+    get '/students' => :students
+    get '/coaches' => :coaches
+    get '/student_sources' => :student_sources
   end
 
   namespace :contact_logs do
@@ -80,6 +84,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     post 'notify' => :notify
+  end
+
+  namespace :m do
+    root 'dashboard#index'
+    resources :intentions
+    namespace :dashboard do
+      get '/' => :index
+    end
   end
 
 end

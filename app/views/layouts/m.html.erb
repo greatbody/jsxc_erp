@@ -1,0 +1,25 @@
+<!-- http://semantic-ui.com/elements/container.html#/examples -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %></title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/frozen/css/frozen.css">
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+  <%= csrf_meta_tags %>
+</head>
+<body ontouchstart="">
+  <script type="text/javascript">
+    window.Zepto = $;
+  </script>
+  <script src="/frozen/js/frozen.js"></script>
+  <%= yield %>
+  <script type="text/javascript">
+    $('li').click(function() {
+      if ($(this).data('href')) {
+        location.href = $(this).data('href');
+      }
+    });
+  </script>
+</body>
+</html>

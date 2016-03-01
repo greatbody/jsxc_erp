@@ -1,4 +1,4 @@
-class SourceContactsController < ApplicationController
+class SourceContactsController < PcApplicationController
   before_action :set_contact, only: [:show, :edit]
   load_and_authorize_resource
   def index

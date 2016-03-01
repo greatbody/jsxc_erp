@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class ResidenceCardsController < ApplicationController
+class ResidenceCardsController < PcApplicationController
   before_action :set_residence_card, only: [:show, :edit, :update]
   def new
     @current_page = :new_student_residence_card_path

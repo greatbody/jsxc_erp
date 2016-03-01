@@ -1,0 +1,73 @@
+<% content_for :title, "新的意向" %>
+<style type="text/css">
+</style>
+<header class="ui-header ui-header-positive ui-border-b">
+  <h1><%= yield(:title) %></h1>
+  <%= link_to m_root_path do %>
+    <button class="ui-btn">回首页</button>
+  <% end %>
+</header>
+<div class="ui-container">
+  <div class="ui-form ui-border-t">
+  <%= form_for(@student, url: m_intentions_path, method: :post, html: { class: "ui form" }) do |f| %>
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :name, "姓名" %>
+      <%= f.text_field :name, { placeholder: '请输入姓名' } %>
+      <a href="javascript:void(0);" class="ui-icon-close"></a>
+    </div>
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :phone, "手机号" %>
+      <%= f.text_field :phone, { placeholder: '请输入11位手机号码' } %>
+      <a href="#" class="ui-icon-close"></a>
+    </div>
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :sex, "性别" %>
+      <div class="ui-select">
+        <%= f.select :sex, options_for_select(Student.sex_for_select), {}, class: "" %>
+      </div>
+    </div>
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :id_card, "身份证" %>
+      <%= f.text_field :id_card, { placeholder: '请输入18位的身份证号' } %>
+      <a href="#" class="ui-icon-close"></a>
+    </div>
+    <div class="ui-form-item ui-form-item-textarea ui-border-b">
+      <%= f.label :address, "联系地址" %>
+      <%= f.text_area :address, { placeholder: '联系地址', value: @student.address } %>
+    </div>
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :unit, "单位" %>
+      <%= f.text_field :unit, { placeholder: '单位' } %>
+      <a href="#" class="ui-icon-close"></a>
+    </div>
+    <div class="ui-form-item ui-border-b">
+      <%= f.fields_for :intention do |pf| %>
+        <%= pf.label :source, "意向来源" %>
+        <%= pf.text_field :source, { placeholder: '请输入意向来源' } %>
+        <a href="#" class="ui-icon-close"></a>
+      <% end %>
+    </div>
+    <div class="ui-form-item ui-border-b">
+    <%= f.fields_for :student_source do |ssf| %>
+      <%= ssf.label :id, "渠道来源" %>
+      <div class="ui-select">
+        <%= ssf.select :id, options_for_select(StudentSource.student_source_for_select) %>
+      </div>
+    <% end %>
+    </div>
+    <div class="ui-btn-wrap">
+      <%= f.submit "保存意向", class: "ui-btn-lg ui-btn-primary" %>
+    </div>
+  <% end %>
+  </div>
+</div>
+<script type="text/javascript">
+  // 点击文本框关闭按钮删除内容，同时设置焦点
+  $('.ui-icon-close').on('touchend', function(e) {
+    var inputs = $(this.parentNode).find('input');
+    inputs.val('');
+    setTimeout(function(inputs) {
+      inputs.focus();
+    }, 100, inputs);
+  });
+</script>

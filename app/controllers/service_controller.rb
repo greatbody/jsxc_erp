@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class ServiceController < ApplicationController
+class ServiceController < PcApplicationController
   include SendNotifications
   include AbstractController
   before_action :authenticate_user!
