@@ -1,4 +1,4 @@
-class CoachesController < ApplicationController
+class CoachesController < PcApplicationController
   include SendNotifications
   require 'phone_ext'
   load_and_authorize_resource

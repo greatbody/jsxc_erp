@@ -1,4 +1,4 @@
-class TrainServicesController < ApplicationController
+class TrainServicesController < PcApplicationController
   include SendNotifications
   before_action :set_train_service, only: [:show, :edit, :update]
   before_action :set_new_train_service, only: [:new, :create]

@@ -1,4 +1,4 @@
-class StudentSourcesController < ApplicationController
+class StudentSourcesController < PcApplicationController
   require 'phone_ext'
   before_action :set_student_source, only: [:show, :edit, :update]
   load_and_authorize_resource

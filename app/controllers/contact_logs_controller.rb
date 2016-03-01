@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class ContactLogsController < ApplicationController
+class ContactLogsController < PcApplicationController
   include SendNotifications
   before_action :authenticate_user!
   load_and_authorize_resource

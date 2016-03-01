@@ -1,4 +1,4 @@
-class SourceContractsController < ApplicationController
+class SourceContractsController < PcApplicationController
   def index
   end
 

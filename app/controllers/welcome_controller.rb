@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class WelcomeController < ApplicationController
+class WelcomeController < PcApplicationController
   require 'phone_ext'
   before_action :authenticate_user!, only: [:index, :map, :temp, :unsigned]
   def index
