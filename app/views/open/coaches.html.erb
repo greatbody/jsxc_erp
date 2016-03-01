@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Phone</td>
+  </tr>
+  <% @coaches.each_with_index do |coach, index| %>
+  <tr>
+    <td><%= coach.name %></td>
+    <td><%= coach.phone %></td>
+    <td>
+      <% @tfs = coach.train_fields %>
+        <table>
+          <% @tfs.each_with_index do |tf, index| %>
+          <tr>
+            <td><%= tf.name %></td>
+          </tr>
+          <% end %>
+        </table>
+    </td>
+  </tr>
+  <% end %>
+</table>

@@ -46,4 +46,10 @@ class Student < ActiveRecord::Base
     end
     student_collection
   end
+
+  def self.sex_for_select
+    sexes.map do |sex, _|
+      [I18n.t("sexs.#{sex}"), sex]
+    end
+  end
 end

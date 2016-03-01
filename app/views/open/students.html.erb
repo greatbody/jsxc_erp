@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Phone</td>
+    <td>Status</td>
+    <td>LastContact</td>
+  </tr>
+  <% @students.each_with_index do |student, index| %>
+  <tr>
+    <td><%= student.name %></td>
+    <td><%= student.phone %></td>
+    <td><%= student.contact_logs.last.current_status if student.contact_logs.count > 0 %></td>
+    <td><%= student.contact_logs.last.contact_log if student.contact_logs.count > 0 %></td>
+  </tr>
+  <% end %>
+</table>

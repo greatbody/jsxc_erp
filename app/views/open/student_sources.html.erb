@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <td>Name</td>
+    <td>School</td>
+    <td>District</td>
+    <td>Phone</td>
+    <td>Remark</td>
+  </tr>
+  <% @student_sources.each_with_index do |ss, index| %>
+  <tr>
+    <td><%= ss.name %></td>
+    <td><%= ss.school.name if ss.school.present? %></td>
+    <td><%= ss.school.district if ss.school.present? %></td>
+    <td><%= ss.phone %></td>
+    <td><%= ss.remarks %></td>
+  </tr>
+  <% end %>
+</table>
