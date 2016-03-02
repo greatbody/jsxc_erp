@@ -16,7 +16,7 @@ class M::StudentsController < MController
 
   def query
     q = params[:q].to_s
-    @intentions = Intention.joins(:student).where("`students`.`phone` LIKE ?", "%#{q}%")
+    @intentions = Intention.joins(:student).where("`students`.`phone` LIKE ? OR `students`.`name` LIKE ?", "%#{q}%", "%#{q}%")
     @intentions = @intentions.where.not(current_status: 5).order(updated_at: :desc, next_contact_at: :asc)
     render '_student_list', layout: false
   end
