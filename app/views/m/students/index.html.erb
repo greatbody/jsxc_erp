@@ -38,6 +38,13 @@
   $('.ui-btn.ui-btn-primary.search').click(function() {
     search($('.search-input').val());
   });
+  $('.ui-icon-close').on('touchend', function(e) {
+    var inputs = $(this.parentNode).find('input');
+    inputs.val('');
+    setTimeout(function(inputs) {
+      inputs.focus();
+    }, 100, inputs);
+  });
 </script>
 <script type="text/javascript">
   function search(data) {
