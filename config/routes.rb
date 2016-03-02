@@ -92,7 +92,11 @@ Rails.application.routes.draw do
       get '/' => :index
     end
     resources :intentions
-    resources :students
+    resources :students do
+      collection do
+        post 'query' => :query
+      end
+    end
   end
 
 end
