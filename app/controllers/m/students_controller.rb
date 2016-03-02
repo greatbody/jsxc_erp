@@ -9,6 +9,7 @@ class M::StudentsController < MController
   end
 
   def show
+    @contact_logs = @student.contact_logs.order(updated_at: :desc)
   end
 
   def edit

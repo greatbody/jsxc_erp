@@ -1,0 +1,17 @@
+<div class="ui-container">
+  <% @contact_logs.each do |log| %>
+  <div style="border: solid 1px #ccc;margin: 5px;border-radius: 5px;padding: 10px;">
+    <div style="border-bottom-color: #ccc;border-bottom-style: solid;border-bottom-width: 1px;">
+      <%= log.user.name %>
+      <span style="float: right"><%= log.updated_at.localtime.to_s(:db) %></span>
+    </div>
+    <div style="padding-top: 5px;">
+      <% if log.contact_log.present? %>
+      <%= log.contact_log %>
+      <% else %>
+      [这人很懒，没有留下任何信息]
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>
