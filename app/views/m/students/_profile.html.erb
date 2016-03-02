@@ -6,7 +6,13 @@
   </div>
   <div class="ui-form-item ui-form-item-show ui-border-b">
     <label>手机号</label>
-    <input type="text" value="<%= PhoneExt.format_phone(stu.phone) %>" readonly>
+    <span style="padding-left: 95px;">
+      <%= PhoneExt.format_phone(stu.phone) %>
+      <% if stu.phone.present? %>
+      <a style="padding-left: 5px;" href="tel:<%= stu.phone %>">拨打电话</a>
+      <% end %>
+    </span>
+
   </div>
   <div class="ui-form-item ui-form-item-show ui-border-b">
     <label>性别</label>
