@@ -15,7 +15,7 @@
   <script src="/frozen/js/frozen.js"></script>
   <%= yield %>
   <script type="text/javascript">
-    $('li').click(function() {
+    $(document).delegate('li', 'click', function() {
       if ($(this).data('href')) {
         location.href = $(this).data('href');
       }
