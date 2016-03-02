@@ -2,9 +2,10 @@
 <style type="text/css">
 </style>
 <header class="ui-header ui-header-positive ui-border-b">
+  <i class="ui-icon-return" onclick="history.back()"></i>
   <h1><%= yield(:title) %></h1>
   <%= link_to m_root_path do %>
-    <button class="ui-btn">回首页</button>
+  <button class="ui-btn">回首页</button>
   <% end %>
 </header>
 <div class="ui-container">

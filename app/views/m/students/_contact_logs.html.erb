@@ -7,7 +7,7 @@
     </div>
     <div style="padding-top: 5px;">
       <% if log.contact_log.present? %>
-      <%= log.contact_log %>
+      <%= simple_format(log.contact_log) %>
       <% else %>
       [这人很懒，没有留下任何信息]
       <% end %>
