@@ -88,10 +88,11 @@ Rails.application.routes.draw do
 
   namespace :m do
     root 'dashboard#index'
-    resources :intentions
     namespace :dashboard do
       get '/' => :index
     end
+    resources :intentions
+    resources :students
   end
 
 end

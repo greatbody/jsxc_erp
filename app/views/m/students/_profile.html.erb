@@ -1,0 +1,43 @@
+<div class="ui-form ui-border-t">
+  <% stu = @student %>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>姓名</label>
+    <input type="text" value="<%= stu.name %>" readonly>
+  </div>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>手机号</label>
+    <input type="text" value="<%= PhoneExt.format_phone(stu.phone) %>" readonly>
+  </div>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>性别</label>
+    <input type="text" value="<%= stu.gender %>" readonly>
+  </div>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>户籍</label>
+    <input type="text" value="<%= (stu.is_local == 0) ? '外地' : '本地' %>" readonly>
+  </div>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>教练</label>
+    <input type="text" value="<%= stu.coach.present? ? stu.coach.name : '-' %>" readonly>
+  </div>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>服务</label>
+    <input type="text" value="<%= stu.train_service.name if stu.train_service.present? %>" readonly>
+  </div>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>身份证</label>
+    <input type="text" value="<%= stu.id_card %>" readonly>
+  </div>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>业务流水号</label>
+    <input type="text" value="<%= stu.swift_number %>" readonly>
+  </div>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>联系地址</label>
+    <input type="text" value="<%= stu.address %>" readonly>
+  </div>
+  <div class="ui-form-item ui-form-item-show ui-border-b">
+    <label>单位</label>
+    <input type="text" value="<%= stu.unit %>" readonly>
+  </div>
+</div>

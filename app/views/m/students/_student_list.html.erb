@@ -1,0 +1,18 @@
+<% @intentions.each do |intent| %>
+<% stu = intent.student %>
+<li class="ui-border-t">
+  <div class="ui-avatar">
+    <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+  </div>
+  <div class="ui-list-info">
+    <h4 class="ui-nowrap">
+      <%= stu.name %>
+      <label class="ui-label-s ly-right"><%= intent.current_status_text %></label>
+    </h4>
+    <p class="ui-nowrap">
+      手机：<%= stu.phone %>
+      <span class="ly-right"><%= intent.current_status_date %></span>
+    </p>
+  </div>
+</li>
+<% end %>
