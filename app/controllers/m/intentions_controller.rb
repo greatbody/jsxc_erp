@@ -40,7 +40,7 @@ class M::IntentionsController < MController
       send_erp_notify(notify)
 
       respond_to do |format|
-        format.html { redirect_to m_root_path }
+        format.html { redirect_to m_student_path(@student) }
       end
     else
       respond_to do |format|
