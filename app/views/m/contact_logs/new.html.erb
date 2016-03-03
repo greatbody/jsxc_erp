@@ -1,0 +1,86 @@
+<% content_for :title, "新的联系" %>
+<style type="text/css">
+</style>
+<header class="ui-header ui-header-positive ui-border-b">
+  <i class="ui-icon-return" onclick="history.back()"></i>
+  <h1><%= yield(:title) %></h1>
+  <i class="ui-icon-refresh" onclick="refresh()" style="display: block;
+    position: absolute;
+    right: 10px;
+    top: 0;"></i>
+</header>
+<div class="ui-container">
+  <div class="ui-form ui-border-t">
+  <%= form_for(@contact_log, url: m_student_contact_logs_path, method: :post, html: { class: "ui form" }) do |f| %>
+    <% if current_user.has_role? :can_choose_user %>
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :user_id, "创建人" %>
+      <div class="ui-select">
+      <%= f.select :user_id, options_for_select(User.user_for_select, current_user.id), {}, class: "ui dropdown user-id" %>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :contact_type, "联系类型" %>
+      <div class="ui-select">
+      <% if @student.contact_logs.count > 0 %>
+        <%= f.select :contact_type, options_for_select(ContactLog.contact_types_for_select, @student.contact_logs.last.contact_type) %>
+      <% else %>
+        <%= f.select :contact_type, options_for_select(ContactLog.contact_types_for_select) %>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :current_status, "当前状态" %>
+      <div class="ui-select">
+      <%= f.select :current_status, options_for_select(ContactLog.current_status_for_select, @student.intention.current_status) %>
+      </div>
+    </div>
+
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :created_at, "创建日期" %>
+      <%= f.text_field :created_at, { placeholder: '创建日期', type: 'date' } %>
+      <a href="#" class="ui-icon-close"></a>
+    </div>
+
+    <div class="ui-form-item ui-form-item-switch ui-border-b">
+      <p>需要联系</p>
+      <label class="ui-switch">
+        <input type="checkbox">
+        <%= f.check_box :need_contact %>
+      </label>
+    </div>
+
+    <div class="ui-form-item ui-border-b">
+      <%= f.label :next_contact_at, "联系日期" %>
+      <%= f.text_field :next_contact_at, { placeholder: '联系日期', type: 'date' } %>
+      <a href="#" class="ui-icon-close"></a>
+    </div>
+
+    <div class="ui-form-item ui-form-item-textarea ui-border-b" style="height: 160px;">
+      <%= f.label :contact_log, "联系记录" %>
+      <%= f.text_area :contact_log, { placeholder: '联系记录', value: @contact_log.contact_log, style: 'height: 140px;' } %>
+    </div>
+
+    <div class="ui-btn-wrap">
+      <%= f.submit "保存意向", class: "ui-btn-lg ui-btn-primary" %>
+    </div>
+  <% end %>
+  </div>
+</div>
+<script type="text/javascript">
+  // 点击文本框关闭按钮删除内容，同时设置焦点
+  $('.ui-icon-close').on('touchend', function(e) {
+    var inputs = $(this.parentNode).find('input');
+    inputs.val('');
+    setTimeout(function(inputs) {
+      inputs.focus();
+    }, 100, inputs);
+  });
+
+  function refresh() {
+    location.href = location.href;
+  }
+</script>

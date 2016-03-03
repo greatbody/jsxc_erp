@@ -1,4 +1,9 @@
 <div class="ui-container">
+  <div class="ui-btn-wrap">
+    <%= link_to new_m_student_contact_log_path(@student.id) do %>
+    <button class="ui-btn-lg ui-btn-primary">新的联系</button>
+    <% end %>
+  </div>
   <% @contact_logs.each do |log| %>
   <div style="border: solid 1px #ccc;margin: 5px;border-radius: 5px;padding: 10px;">
     <div style="border-bottom-color: #ccc;border-bottom-style: solid;border-bottom-width: 1px;">

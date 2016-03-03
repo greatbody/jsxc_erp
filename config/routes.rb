@@ -93,6 +93,7 @@ Rails.application.routes.draw do
     end
     resources :intentions
     resources :students do
+      resources :contact_logs
       collection do
         post 'query' => :query
       end
