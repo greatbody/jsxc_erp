@@ -41,7 +41,7 @@
 
     <div class="ui-form-item ui-border-b">
       <%= f.label :created_at, "创建日期" %>
-      <%= f.text_field :created_at, { placeholder: '创建日期', type: 'date' } %>
+      <%= f.text_field :created_at, { placeholder: '创建日期', type: 'date', value: Date.today.to_s(:db) } %>
       <a href="#" class="ui-icon-close"></a>
     </div>
 
