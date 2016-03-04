@@ -1,4 +1,5 @@
 class ApiController < ApplicationController
+  # accept request
   require 'authorize'
   include SendNotifications
   protect_from_forgery with: :null_session
