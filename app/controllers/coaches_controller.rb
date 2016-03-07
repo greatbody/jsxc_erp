@@ -1,5 +1,6 @@
 class CoachesController < PcApplicationController
   include SendNotifications
+  include ApiService
   require 'phone_ext'
   load_and_authorize_resource
   before_action :set_coach, only: [:show, :edit, :update, :destroy]
@@ -34,11 +35,7 @@ class CoachesController < PcApplicationController
     @coach = Coach.new(coach_params)
     respond_to do |format|
       if @coach.save
-        notify = {
-          operator: current_user.name,
-          message: "录入了【#{coach_params[:name]}】教练的信息"
-        }
-        send_erp_notify(notify)
+        sync_coach(@coach)
         format.html { redirect_to @coach, notice: 'Coach was successfully created.' }
         format.json { render :show, status: :created, location: @coach }
       else
@@ -53,15 +50,7 @@ class CoachesController < PcApplicationController
   def update
     respond_to do |format|
       if @coach.update(coach_params)
-        @coach.train_fields.delete_all
-        params[:coach][:train_fields][:id].each { |id|
-          @coach.train_fields << TrainField.find(id) if id.is_number?
-        }
-        notify = {
-          operator: current_user.name,
-          message: "更新了【#{coach_params[:name]}】教练的信息"
-        }
-        send_erp_notify(notify)
+        sync_coach(@coach)
         format.html { redirect_to @coach, notice: 'Coach was successfully updated.' }
         format.json { render :show, status: :ok, location: @coach }
       else
@@ -101,5 +90,37 @@ class CoachesController < PcApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def coach_params
       params.require(:coach).permit(:phone, :name, :gender, :id_card, :birthday, :wechat, :qq, :coaching_license, :driving_license, :coach_type, :signed_at, :train_school_id, :contract_begin_at, :contract_end_at, :is_locked, :coach_type, :zfb, :bank, :bank_card)
+    end
+
+    def sync_coach(coach)
+      return if coach.is_locked
+      data = {
+        job: 'sync_coach',
+        data: {
+          phone: coach.phone,
+          name: coach.name,
+          id_card: coach.id_card,
+          gender: coach.gender
+        }
+      }
+      # update age
+      if coach.id_card.length == 18
+        data[:data][:age] = Date.today.year.to_i - coach.id_card[6..9].to_i
+      end
+      p '>>>>>>>>>>>>>>>start synatic data'
+      response = JSON.parse(test_send(data.to_json))
+      if response['error_code'] == '0'
+        notify = {
+          operator: '系统数据同步',
+          message: "同步了【#{coach_params[:name]}】教练的信息到线上平台"
+        }
+      else
+        notify = {
+          operator: '系统数据同步',
+          message: "同步【#{coach_params[:name]}】教练信息错误<br>#{response['error_message']}"
+        }
+      end
+      send_erp_notify(notify)
+      p '<<<<<<<<<<<<<<<end synatic data'
     end
 end

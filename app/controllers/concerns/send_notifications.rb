@@ -27,8 +27,8 @@ module SendNotifications
     json_data = {
       title: "ERP操作通知",
       text: <<-EOS
-      操作人：#{notify[:operator]}
-      操作时间：#{Time.now.localtime.to_s(:db)}
+      操作人：#{notify[:operator]}<br>
+      操作时间：#{Time.now.localtime.to_s(:db)}<br>
       消息：#{notify[:message]}
       EOS
     }.to_json

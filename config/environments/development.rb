@@ -48,7 +48,7 @@ Rails.application.configure do
       enable_starttls_auto: true
   }
   Paperclip.options[:command_path] = "/usr/local/bin/"
-
+  config.x.jisuxueche_port = 'http://localhost:3000/api/notify'
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

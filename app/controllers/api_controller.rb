@@ -6,7 +6,7 @@ class ApiController < ApplicationController
 
   def notify
     if Authorize.verify?(params[:api])
-      action_params = params[:api][:content]
+      action_params = JSON.parse(params[:api][:content]).deep_symbolize_keys
       send_html(action_params.to_json)
       render html: action_params.to_json
     else
