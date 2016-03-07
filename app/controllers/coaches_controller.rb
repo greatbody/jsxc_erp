@@ -1,6 +1,4 @@
 class CoachesController < PcApplicationController
-  include SendNotifications
-  include ApiService
   require 'phone_ext'
   load_and_authorize_resource
   before_action :set_coach, only: [:show, :edit, :update, :destroy]
