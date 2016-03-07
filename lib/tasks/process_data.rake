@@ -4,10 +4,7 @@ namespace :process do
     Coach.where(is_locked: false).each do |coach|
       p "processing coach #{coach.id}"
       # update age
-      if coach.id_card.length == 18
-        coach.update(birthday: coach.id_card[6..13].to_date)
-        coach.update(gender: (coach.id_card[16].to_i % 2))
-      end
+      coach.process_coach
     end
     p "done"
   end

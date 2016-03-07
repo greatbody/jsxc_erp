@@ -1,23 +1,8 @@
 namespace :sync do
-  require 'api_service'
   task :coach => :environment do
     include ApiService
     Coach.where(is_locked: false).each do |coach|
-      p "processing coach #{coach.id}"
-      data = {
-        job: 'sync_coach',
-        data: {
-          phone: coach.phone,
-          name: coach.name,
-          id_card: coach.id_card,
-          gender: coach.gender
-        }
-      }
-      # update age
-      if coach.id_card.length == 18
-        data[:data][:age] = Date.today.year.to_i - coach.id_card[6..9].to_i
-      end
-      p test_send(data.to_json)
+      coach.sync
     end
     p "done"
   end

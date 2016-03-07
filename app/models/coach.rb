@@ -1,6 +1,7 @@
 class Coach < ActiveRecord::Base
   resourcify
-
+  include ApiService
+  include SendNotifications
   enum gender: [:female, :male]
   enum coach_type: [:just_training, :cover_all, :just_display]
   #just_training:我们办居住证档案，号码不需要通知学员
@@ -21,17 +22,55 @@ class Coach < ActiveRecord::Base
   validates :phone, uniqueness: { message: '手机号码重复.' }, presence: { message: '请输入手机号码.'}, format: { with: /\A1\d{10}\z/, message: '手机号码格式不正确.' }
   validates :id_card, format: { with: /\A\d{17}(\d|(x|X))\z/, message: '身份证号码格式不正确.' }, allow_blank: true, on: :update
 
+  def gender_text
+    return I18n.t("sexs.#{gender}") if gender.present?
+    '-'
+  end
+
+  def process_coach
+    if id_card.length == 18
+      update(birthday: id_card[6..13].to_date)
+      update(gender: id_card[16].to_i % 2)
+    end
+  end
+
+  def sync
+    data = {
+      job: 'sync_coach',
+      data: {
+        phone: phone,
+        name: name,
+        id_card: id_card,
+        gender: gender
+      }
+    }
+    # update age
+    if id_card.length == 18
+      data[:data][:age] = Date.today.year.to_i - id_card[6..9].to_i
+    end
+    p '>>>>>>>>>>>>>>>start synatic data'
+    response = JSON.parse(test_send(data.to_json))
+    if response['error_code'] == '0'
+      notify = {
+        operator: '系统数据同步',
+        message: "同步了【#{name}】教练的信息到线上平台"
+      }
+    else
+      notify = {
+        operator: '系统数据同步',
+        message: "同步【#{name}】教练信息错误<br>#{response['error_message']}"
+      }
+    end
+    send_erp_notify(notify)
+    p '<<<<<<<<<<<<<<<end synatic data'
+  end
+
   def self.coach_for_select
     coach_collection = [['[空]', '']]
     Coach.all.each do |coach|
       coach_collection << [coach.name, coach.id]
     end
     coach_collection
-  end
-
-  def gender_text
-    return I18n.t("sexs.#{gender}") if gender.present?
-    '-'
   end
 
   def self.gender_for_select
