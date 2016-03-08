@@ -2,7 +2,9 @@
 <% stu = intent.student %>
 <li class="ui-border-t" data-href="/m/students/<%= stu.id %>">
   <div class="ui-avatar">
+    <% link_to m_student_path(stu) do %>
     <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+    <% end %>
   </div>
   <div class="ui-list-info">
     <h4 class="ui-nowrap">
