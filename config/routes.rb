@@ -90,6 +90,7 @@ Rails.application.routes.draw do
     root 'dashboard#index'
     namespace :dashboard do
       get '/' => :index
+      post '/logout' => :logout
     end
     resources :intentions
     resources :students do

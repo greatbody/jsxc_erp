@@ -17,4 +17,14 @@
       <p class="ui-nowrap">查询学员，跟进学员信息</p>
     </div>
   </li>
+  <% if user_signed_in? %>
+  <li class="ui-border-t log-out">
+    <div class="ui-list-img">
+      <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
+    </div>
+    <div class="ui-list-info">
+      <h4 class="ui-nowrap">退出登陆</h4>
+    </div>
+  </li>
+  <% end %>
 </ul>

@@ -42,5 +42,13 @@
   tab.on('beforeScrollStart', function(fromIndex, toIndex) {
         console.log(fromIndex,toIndex);// from 为当前页，to 为下一页
       });
+  $('.log-out').on('click', function() {
+    $.post('/m/dashboard/logout', {
+    }).success(function(data) {
+      location.href = '/m';
+    }).error(function(data) {
+      location.href = '/m';
+    });
+  });
 })();
 </script>
