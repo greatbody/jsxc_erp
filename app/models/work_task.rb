@@ -1,4 +1,5 @@
 class WorkTask < ActiveRecord::Base
+  resourcify
   has_many :work_task_steps
 
   enum task_type: [:other, :activity, :free_try, :request_pay]

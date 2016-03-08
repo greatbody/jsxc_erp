@@ -94,6 +94,9 @@ Rails.application.routes.draw do
     resources :intentions
     resources :students do
       resources :contact_logs
+      member do
+        get 'set_to_me' => :set_to_me
+      end
       collection do
         post 'query' => :query
       end

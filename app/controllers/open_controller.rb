@@ -42,7 +42,7 @@ class OpenController < ApplicationController
   end
 
   def students
-    @students = Student.where(signed_at: nil)
+    @students = Student.where.not(signed_at: nil)
   end
 
   def coaches

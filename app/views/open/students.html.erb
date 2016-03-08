@@ -1,16 +1,46 @@
 <table>
-  <tr>
-    <td>Name</td>
-    <td>Phone</td>
-    <td>Status</td>
-    <td>LastContact</td>
-  </tr>
-  <% @students.each_with_index do |student, index| %>
-  <tr>
-    <td><%= student.name %></td>
-    <td><%= student.phone %></td>
-    <td><%= student.contact_logs.last.current_status if student.contact_logs.count > 0 %></td>
-    <td><%= student.contact_logs.last.contact_log if student.contact_logs.count > 0 %></td>
-  </tr>
-  <% end %>
+  <thead>
+    <tr>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>联系电话</th>
+      <th>状态</th>
+      <th>进度</th>
+      <th>报名日期</th>
+      <th>教练</th>
+      <th>来源</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @students.each do |st| %>
+    <tr>
+      <td><%= st.name %></td>
+      <td><%= st.gender %></td>
+      <td><%= st.phone %></td>
+      <td><%= st.intention.current_status_text %></td>
+      <td><%= st.process_text %></td>
+      <td>
+        <% if st.signed_at.present? %>
+        <%= "#{st.signed_at.to_date.to_s(:db)}" %>
+        <% else %>
+        暂无
+        <% end %>
+      </td>
+      <td>
+        <% if st.coach.present? %>
+        <%= "#{st.coach.name} [ #{st.coach.phone} ]" %>
+        <% else %>
+        暂无
+        <% end %>
+      </td>
+      <td>
+        <% if st.intention.student_source.present? %>
+          <%= st.intention.student_source.name %>
+        <% else %>
+          <%= st.intention.source %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>

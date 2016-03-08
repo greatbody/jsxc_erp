@@ -38,7 +38,9 @@
     <ul class="ui-tab-nav ui-border-b">
       <li class="current">我的任务</li>
       <li>已完成</li>
+      <% unless current_user.has_role?(:school_ceo) %>
       <li>他人任务</li>
+      <% end %>
     </ul>
     <ul class="ui-tab-content" style="width:300%">
       <li>
@@ -47,9 +49,11 @@
       <li>
         <%= render 'index_done_task' %>
       </li>
+      <% unless current_user.has_role?(:school_ceo) %>
       <li>
         <%= render 'index_other_task' %>
       </li>
+      <% end %>
     </ul>
   </div>
 </div>

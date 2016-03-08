@@ -18,6 +18,10 @@ class Ability
       can [:search, :daily_sign], :service
     end
 
+    if user.has_role? :school_ceo
+      can [:manage], [Intention, ContactLog, WorkTask, WorkTaskStep]
+    end
+
     # 校园CEO管理：刘犇
     if user.has_role? :manage_student_source
 

@@ -12,7 +12,6 @@
       <a style="padding-left: 5px;" href="tel:<%= stu.phone %>">拨打电话</a>
       <% end %>
     </span>
-
   </div>
   <div class="ui-form-item ui-form-item-show ui-border-b">
     <label>性别</label>
@@ -46,4 +45,11 @@
     <label>单位</label>
     <input type="text" value="<%= stu.unit %>" readonly>
   </div>
+  <% if stu.user.nil? %>
+  <div class="ui-btn-wrap">
+    <%= link_to set_to_me_m_student_path(@student.id) do %>
+    <button class="ui-btn-lg ui-btn-primary">我认领了</button>
+    <% end %>
+  </div>
+  <% end %>
 </div>
