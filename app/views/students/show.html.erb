@@ -80,7 +80,8 @@
         <td>
           <div class="ui image label">
             <img src="/flash-loding.gif">
-            <%= @student.user.name %>
+            <%= @student.user.name if @student.user.present? %>
+            <%= "待认领" if @student.user.nil? %>
             <i class="delete icon"></i>
           </div>
         </td>
