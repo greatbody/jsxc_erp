@@ -23,6 +23,8 @@ class ApiController < ApplicationController
         appointment(content[:data])
       when 'reg_student'
         reg_student(content[:data])
+      when 'update_student'
+        update_student(content[:data])
       end
     end
   end
@@ -50,6 +52,15 @@ class ApiController < ApplicationController
     end
   end
 
+  def update_student(data)
+    student = Student.find_by_phone(data[:phone])
+    if student.present? && student.update(update_student_params(data))
+      { error_code: '0', error_message: '' }
+    else
+      { error_code: '3', error_message: 'update error' }
+    end
+  end
+
   def intention_params(data)
     {
       source: '线上系统预约',
@@ -65,6 +76,12 @@ class ApiController < ApplicationController
   end
 
   def reg_student_params(data)
+    {
+      phone: data[:phone], name: data[:name]
+    }
+  end
+
+  def update_student_params(data)
     {
       phone: data[:phone], name: data[:name]
     }
