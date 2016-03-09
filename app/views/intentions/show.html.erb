@@ -29,7 +29,7 @@
           单位：<%= @student.unit %>
         </div>
         <div class="column">
-          对接人：<%= @intention.user.name %>
+          对接人：<%= @intention.user.present? ? @intention.user.name : '-' %>
         </div>
         <div class="column">
           下次联系：<%= render partial: 'show_next_contact_date' %>

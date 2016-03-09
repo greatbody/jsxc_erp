@@ -21,12 +21,26 @@ class ApiController < ApplicationController
       case content[:job]
       when 'appointment'
         appointment(content[:data])
+      when 'reg_student'
+        reg_student(content[:data])
       end
     end
   end
 
   def appointment(data)
     student = Student.new(student_params(data))
+    intention = Intention.new(intention_params(data))
+    intention.student = student
+    if student.save && intention.save
+      { error_code: '0', error_message: '' }
+    else
+      { error_code: '3', error_message: 'update error' }
+    end
+  end
+
+  def reg_student(data)
+    student = Student.find_by_phone(data[:phone])
+    student = Student.new(reg_student_params(data)) if student.nil?
     intention = Intention.new(intention_params(data))
     intention.student = student
     if student.save && intention.save
@@ -45,6 +59,12 @@ class ApiController < ApplicationController
   end
 
   def student_params(data)
+    {
+      phone: data[:phone], name: data[:name]
+    }
+  end
+
+  def reg_student_params(data)
     {
       phone: data[:phone], name: data[:name]
     }
