@@ -6,6 +6,20 @@
       <i class="edit icon"></i>
     </div>
   <% end %>
+  <div class="ui segment">
+    <div class="ui grid">
+      <div class="ui row">
+        <div class="eight wide column">
+          <div class="ui toggle checkbox">
+            <input type="checkbox" name="gift" tabindex="0" class="hidden">
+            <label>可以预约科目一</label>
+          </div>
+        </div>
+        <div class="eight wide column">
+        </div>
+      </div>
+    </div>
+  </div>
   <h4 class="ui horizontal divider header">
     <i class="tag icon"></i>
     基本资料
@@ -223,7 +237,6 @@
     });
   }
 
-
   function _resize_img() {
     $('.card-preview img').each(function() {
       pages.common.setImgCenter(this);
@@ -236,6 +249,11 @@
 
   //绑定按钮打开model
   (function() {
+    <% if @student.need_book_km1 %>
+    $('.ui.checkbox').checkbox('set checked');
+    <% else %>
+    $('.ui.checkbox').checkbox();
+    <% end %>
     $('.btn-id-card').on('click', function() {
       pages.common.setImgCenter($('#id_card_preview img')[0]);
       $('.ui.modal.id-card').modal({
@@ -270,9 +288,31 @@
       _notify_get_rc();
     });
 
+    $('.ui.checkbox').checkbox({
+      onChecked: function() {
+        update_book(1);
+      },
+      onUnchecked: function() {
+        update_book(0);
+      }
+    });
+
     _bind_file_select();
     _bind_form_submit();
   })();
+
+  function update_book(value) {
+    $.post('/students/<%= @student.id %>/update_need_book_km1', {
+      need_book: value
+    }).success(function(data) {
+      if (data && data.msg_code == 'success') {
+      } else {
+        alert('更新错误，请联系管理员！');
+      }
+    }).error(function(data) {
+      alert('更新错误，请联系管理员！');
+    });
+  }
   window.onload = function() {
     _resize_img();
   }

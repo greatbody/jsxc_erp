@@ -54,6 +54,7 @@ class WelcomeController < PcApplicationController
   def colleact_messages
     messages = []
     messages += birthday_messages
+    messages += book_km1_messages
   end
 
   def birthday_messages
@@ -61,6 +62,14 @@ class WelcomeController < PcApplicationController
     Student.where("birthday is not null and signed_at is not null").each do |student|
       days_before_birthday = student.birthday.days_before_birthday
       messages << "<a target='_blank' href='/students/#{student.id}'>#{student.name}</a> #{days_before_birthday} 天后过生日" if days_before_birthday < 10
+    end
+    messages
+  end
+
+  def book_km1_messages
+    messages = []
+    Student.where(need_book_km1: true).each do |student|
+      messages << "<a target='_blank' href='/students/#{student.id}'>#{student.name}</a> 可以预约科目一"
     end
     messages
   end

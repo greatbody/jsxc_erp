@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class StudentsController < PcApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card]
+  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card, :update_need_book_km1]
   load_and_authorize_resource
   def index
     @students = Student.all.order(signed_at: :desc)
@@ -116,6 +116,15 @@ class StudentsController < PcApplicationController
   def update_evaluation
     student = Student.find(params[:id])
     if student.update(evaluation: params[:evaluation], last_evaluation_by: current_user.name)
+      render json: { msg_code: 'success' }
+    else
+      render json: { msg_code: 'error', msg_text: '更新错误，请联系18771024287！' }
+    end
+  end
+
+  def update_need_book_km1
+    value = (params[:need_book] == '1')
+    if @student.update(need_book_km1: value)
       render json: { msg_code: 'success' }
     else
       render json: { msg_code: 'error', msg_text: '更新错误，请联系18771024287！' }
