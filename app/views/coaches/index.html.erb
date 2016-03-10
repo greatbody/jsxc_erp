@@ -36,7 +36,7 @@
             <% end %>
           </div>
         </td>
-        <td class="middle aligned number"><%= coach.students.count %></td>
+        <td class="middle aligned number"><%= coach.students.count.to_s.rjust(3, '0') %></td>
         <td class="middle aligned">
           <%= link_to '详情', coach_path(coach), { class: 'small-button' } %>
           <%= link_to '编辑', edit_coach_path(coach), { class: 'small-button' } %>
