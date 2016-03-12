@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     get '/students' => :students
     get '/coaches' => :coaches
     get '/student_sources' => :student_sources
+    # for exe
+    get '/km1' => :km1
   end
 
   namespace :contact_logs do

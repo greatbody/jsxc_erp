@@ -52,4 +52,14 @@ class OpenController < ApplicationController
   def student_sources
     @student_sources = StudentSource.all
   end
+
+  def km1
+    infos = []
+    Student.where(process: 1).each do |student|
+      unless student.id_card.blank? || student.name.blank?
+        infos << student.name + ',' + student.id_card
+      end
+    end
+    render plain: infos.join(';')
+  end
 end
