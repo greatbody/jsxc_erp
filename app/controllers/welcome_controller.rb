@@ -68,7 +68,7 @@ class WelcomeController < PcApplicationController
 
   def book_km1_messages
     messages = []
-    Student.where(need_book_km1: true).each do |student|
+    Student.where(km1_status: Student.km1_statuses['can_order']).each do |student|
       messages << "<a target='_blank' href='/students/#{student.id}'>#{student.name}</a> 可以预约科目一"
     end
     messages

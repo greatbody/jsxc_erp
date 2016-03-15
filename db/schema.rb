@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315024459) do
+ActiveRecord::Schema.define(version: 20160315075611) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -216,8 +216,8 @@ ActiveRecord::Schema.define(version: 20160315024459) do
     t.string   "id_card",                       limit: 255
     t.string   "address",                       limit: 255
     t.string   "unit",                          limit: 255
-    t.datetime "created_at",                                                                          null: false
-    t.datetime "updated_at",                                                                          null: false
+    t.datetime "created_at",                                                                      null: false
+    t.datetime "updated_at",                                                                      null: false
     t.integer  "user_id",                       limit: 4
     t.integer  "coach_id",                      limit: 4
     t.string   "avatar_file_name",              limit: 255
@@ -244,9 +244,6 @@ ActiveRecord::Schema.define(version: 20160315024459) do
     t.string   "last_evaluation_by",            limit: 255
     t.string   "qq",                            limit: 255
     t.string   "weixin",                        limit: 255
-    t.boolean  "need_book_km1",                                                       default: false
-    t.boolean  "booked_km1",                                                          default: false
-    t.boolean  "passed_km1",                                                          default: false
     t.integer  "km1_status",                    limit: 4,                             default: 0
   end
 

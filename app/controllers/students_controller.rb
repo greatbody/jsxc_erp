@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class StudentsController < PcApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card, :update_need_book_km1]
+  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card, :update_km1]
   load_and_authorize_resource
   def index
     @students = Student.all.order(signed_at: :desc)
