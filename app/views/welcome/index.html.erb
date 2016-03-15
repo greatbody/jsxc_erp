@@ -145,6 +145,22 @@
           </div>
         </div>
       </div>
+      <div class="twelve wide column">
+        <div class="ui raised text segment">
+          <div class="ui header thin">需预约学员信息</div>
+          <div class="ui divider thin"></div>
+          <div class="ui list">
+            <% Student.where(km1_status: Student.km1_statuses['need_order']).each do |student| %>
+            <div class="item">
+              <i class="mail icon"></i>
+              <div class="content">
+                <%= "#{student.name} #{student.id_card}" %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
     <% if current_user.has_role?(:superadmin) || current_user.has_role?(:user) %>
     <div class="ui row">
