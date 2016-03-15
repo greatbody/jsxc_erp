@@ -77,3 +77,4 @@ zh-CN:
       ordered: '已预约'
       passed: '已通过'
       failed: '挂了'
+      need_order: '需预约'
