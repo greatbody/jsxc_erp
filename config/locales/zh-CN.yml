@@ -71,3 +71,9 @@ zh-CN:
       km3: '03-科三中'
       km4: '04-科四中'
       lingzheng: '05-已领证'
+    km1_status:
+      wait_order: '待定'
+      can_order: '可预约'
+      ordered: '已预约'
+      passed: '已通过'
+      failed: '挂了'

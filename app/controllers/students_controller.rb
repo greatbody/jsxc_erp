@@ -122,9 +122,9 @@ class StudentsController < PcApplicationController
     end
   end
 
-  def update_need_book_km1
-    value = (params[:need_book] == '1')
-    if @student.update(need_book_km1: value)
+  def update_km1
+    value = params[:km1_status]
+    if @student.update(km1_status: value)
       render json: { msg_code: 'success' }
     else
       render json: { msg_code: 'error', msg_text: '更新错误，请联系18771024287！' }

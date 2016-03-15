@@ -8,6 +8,14 @@ namespace :process do
     end
     p "done"
   end
+
+  task :km1 => :environment do
+    Student.where(need_book_km1: 1).each do |student|
+      p "updating #{student.name} ..."
+      student.update(km1_status: Student.km1_statuses['can_order'])
+      p "#{student.name} updated"
+    end
+  end
   # 调用实例
   # bundle exec rake fix:add_role role_name='trys'
   # task :add_role => :environment do |t, args|

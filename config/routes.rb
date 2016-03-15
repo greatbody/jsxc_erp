@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     resources :residence_cards
     resources :contact_logs
     member do
-      post 'update_need_book_km1' => :update_need_book_km1
+      post 'update_km1' => :update_km1
     end
     collection do
       post 'get_student_status' => :get_student_status

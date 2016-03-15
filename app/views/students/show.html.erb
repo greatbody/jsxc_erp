@@ -10,10 +10,8 @@
     <div class="ui grid">
       <div class="ui row">
         <div class="eight wide column">
-          <div class="ui toggle checkbox">
-            <input type="checkbox" name="gift" tabindex="0" class="hidden">
-            <label>可以预约科目一</label>
-          </div>
+        <%= label_tag :km1_status, "科目一状态" %>
+        <%= select_tag :km1_status, options_for_select(Student.km1_status_for_select, Student.km1_statuses[@student.km1_status]), class: "ui dropdown km1-status" %>
         </div>
         <div class="eight wide column">
         </div>
@@ -249,11 +247,15 @@
 
   //绑定按钮打开model
   (function() {
-    <% if @student.need_book_km1 %>
-    $('.ui.checkbox').checkbox('set checked');
-    <% else %>
-    $('.ui.checkbox').checkbox();
-    <% end %>
+    $('.ui.dropdown.km1-status').dropdown({
+      onChange: function(value, text, $selectedItem) {
+        // custom action
+        update_km1(value);
+        $selectedItem = value;
+        return true;
+      }
+    });
+
     $('.btn-id-card').on('click', function() {
       pages.common.setImgCenter($('#id_card_preview img')[0]);
       $('.ui.modal.id-card').modal({
@@ -288,22 +290,13 @@
       _notify_get_rc();
     });
 
-    $('.ui.checkbox').checkbox({
-      onChecked: function() {
-        update_book(1);
-      },
-      onUnchecked: function() {
-        update_book(0);
-      }
-    });
-
     _bind_file_select();
     _bind_form_submit();
   })();
 
-  function update_book(value) {
-    $.post('/students/<%= @student.id %>/update_need_book_km1', {
-      need_book: value
+  function update_km1(value) {
+    $.post('/students/<%= @student.id %>/update_km1', {
+      km1_status: value
     }).success(function(data) {
       if (data && data.msg_code == 'success') {
       } else {
