@@ -36,6 +36,7 @@ class IntentionsController < PcApplicationController
       if can_update_last_contact
         @student.intention.update(next_contact_at: contact_log_entity.next_contact_at, current_status: contact_log_entity.current_status)
         @student.update(signed_at: Date.today) if params_of_contact_log_in_student[:current_status] == 'signed_up' && @student.signed_at.nil?
+        @student.update(signed_at: nil) if params_of_contact_log_in_student[:current_status] == 'canceled'
       else
         @student.intention.update(next_contact_at: Date.today, current_status: 0)
       end

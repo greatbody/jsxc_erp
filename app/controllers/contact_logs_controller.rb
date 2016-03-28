@@ -29,6 +29,7 @@ class ContactLogsController < PcApplicationController
       contact_log.student.intention.update(next_contact_at: contact_log.next_contact_at, current_status: contact_log.current_status)
 
       contact_log.student.update(signed_at: new_contact_params[:created_at]) if new_contact_params[:current_status] == 'signed_up' && contact_log.student.signed_at.nil?
+      contact_log.student.update(signed_at: nil) if new_contact_params[:current_status] == 'canceled'
 
       notify = {
         operator: user.name,
