@@ -1,7 +1,12 @@
+# encoding: UTF-8
 require 'rails_helper'
 
-RSpec.describe M::IntentionController, type: :controller do
-
+RSpec.describe M::IntentionsController, type: :controller do
+  before :each do
+    @user ||= FactoryGirl.create :user
+    sign_in @user
+  end
+  
   describe "GET #index" do
     it "returns http success" do
       get :index
@@ -18,14 +23,14 @@ RSpec.describe M::IntentionController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      get :show
+      get :show, :id => @user.id
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #edit" do
     it "returns http success" do
-      get :edit
+      get :edit, :id => @user.id
       expect(response).to have_http_status(:success)
     end
   end
