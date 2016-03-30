@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe WorkTasksController, type: :controller do
-
+  before :each do
+    @user ||= FactoryGirl.create :user
+    sign_in @user
+  end
+  
   describe "GET #index" do
     it "returns http success" do
       get :index
@@ -18,14 +22,16 @@ RSpec.describe WorkTasksController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      get :show
+      @work_task ||= FactoryGirl.create :work_task
+      get :show, id: @work_task.id
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #edit" do
     it "returns http success" do
-      get :edit
+      @work_task ||= FactoryGirl.create :work_task
+      get :edit, id: @work_task.id
       expect(response).to have_http_status(:success)
     end
   end
