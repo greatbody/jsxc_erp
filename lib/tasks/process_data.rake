@@ -8,6 +8,13 @@ namespace :process do
     end
     p "done"
   end
+
+  task :student_status => :environment do
+    p "开始更新数据..."
+    Student.where.not(signed_at: nil).where(process: 0).update_all(process: 1)
+    p "已完成，所有已报名且原进度为等待状态的学员均已设置为科目一"
+    # Book.where('title LIKE ?', '%Rails%').update_all(author: 'David')
+  end
   # 调用实例
   # bundle exec rake fix:add_role role_name='trys'
   # task :add_role => :environment do |t, args|
