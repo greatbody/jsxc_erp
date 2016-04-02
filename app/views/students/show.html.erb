@@ -1,4 +1,6 @@
 <% content_for :title, "#{@student.name} - 极速学车ERP系统" %>
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <div class="student">
   <%= link_to edit_student_path(@student) do %>
     <div class="ui teal labeled icon button">
@@ -6,14 +8,48 @@
       <i class="edit icon"></i>
     </div>
   <% end %>
-  <div class="ui segment">
-    <div class="ui grid">
+  <div class="ui segment form">
+    <div class="ui grid grid-km1" data-examrecord = "<%= @km1.id %>">
       <div class="ui row">
-        <div class="eight wide column">
-        <%= label_tag :km1_status, "科目一状态" %>
-        <%= select_tag :km1_status, options_for_select(Student.km1_status_for_select, Student.km1_statuses[@student.km1_status]), class: "ui dropdown km1-status" %>
+        <div class="two wide column field">
+          <%= label_tag :kemu, "科目" %>
+          <%= text_field_tag(:kemu, '一', readonly: true) %>
         </div>
-        <div class="eight wide column">
+        <div class="four wide column field">
+          <%= label_tag :kc_names, "目标考场" %>
+          <%= text_field_tag(:kc_names, @km1.kc_names) %>
+        </div>
+        <div class="five wide column field">
+          <%= label_tag :begin_match_at, '预约日期从' %>
+          <%= text_field_tag :begin_match_at, safe_show(@km1.begin_match_at, 'date_str'), class: 'datepicker' %>
+        </div>
+        <div class="five wide column field">
+          <%= label_tag :end_match_at, '到' %>
+          <%= text_field_tag :end_match_at, safe_show(@km1.end_match_at, 'date_str'), class: 'datepicker' %>
+        </div>
+      </div>
+      <div class="ui row">
+        <div class="four wide column field">
+          <%= label_tag :kc_name, "考场名称" %>
+          <%= text_field_tag(:kc_name, @km1.kc_name) %>
+        </div>
+        <div class="four wide column field">
+          <%= label_tag :ks_at, '考试日期' %>
+          <%= text_field_tag :ks_at, safe_show(@km1.ks_at, 'date_str'), class: 'datepicker' %>
+        </div>
+        <div class="three wide column field">
+        <%= label_tag :ks_cc, "场次" %>
+        <%= select_tag :ks_cc, options_for_select(ExamRecord.ks_cc_for_select, @km1.ks_cc), class: "ui dropdown" %>
+        </div>
+        <div class="three wide column field">
+        <%= label_tag :status, "状态" %>
+        <%= select_tag :status, options_for_select(ExamRecord.status_for_select, @km1.status), class: "ui dropdown" %>
+        </div>
+        <div class="two wide column field">
+          <%= label_tag :command, "操作" %>
+          <div class="fluid ui teal button btn-save" data-km = "1">
+            保存
+          </div>
         </div>
       </div>
     </div>
@@ -175,7 +211,8 @@
       setTimeout('_resize_img()', 500);
     }
   };
-
+</script>
+<script type="text/javascript">
   function _bind_file_select() {
     //id card
     $('#id_card_pic').on('click', function() {
@@ -245,16 +282,30 @@
     });
   }
 
+  function saveExamRecord(data) {
+    $.post('/students/<%= @student.id %>/update_km', {
+      data
+    }).success(function(data) {
+      if (data && data.msg_code == 'success') {
+      } else {
+        alert('更新错误，请联系管理员！');
+      }
+    }).error(function(data) {
+      alert('更新错误，请联系管理员！');
+    });
+  }
+
+  function collectData() {
+    var id = '';
+  }
+</script>
+<script type="text/javascript">
   //绑定按钮打开model
   (function() {
-    $('.ui.dropdown.km1-status').dropdown({
-      onChange: function(value, text, $selectedItem) {
-        // custom action
-        update_km1(value);
-        $selectedItem = value;
-        return true;
-      }
-    });
+    $('.ui.dropdown').dropdown();
+
+    //启用日期输入
+    $('.datepicker').pickadate();
 
     $('.btn-id-card').on('click', function() {
       pages.common.setImgCenter($('#id_card_preview img')[0]);
@@ -290,22 +341,27 @@
       _notify_get_rc();
     });
 
+    $(document).delegate('.btn-save', 'click', function() {
+      var examType = $(this).data("km");
+      var jForm = $('.grid-km' + examType);
+      var data = {
+        id: jForm.data('examrecord'),
+        kemu: examType,
+        kc_names: $('#kc_names').val(),
+        begin_match_at: $('#begin_match_at').val(),
+        end_match_at: $('#end_match_at').val(),
+        kc_name: $('#kc_name').val(),
+        ks_at: $('#ks_at').val(),
+        ks_cc: $('#ks_cc').val(),
+        status: $('#status').val()
+      };
+      saveExamRecord(data);
+    });
+
     _bind_file_select();
     _bind_form_submit();
   })();
 
-  function update_km1(value) {
-    $.post('/students/<%= @student.id %>/update_km1', {
-      km1_status: value
-    }).success(function(data) {
-      if (data && data.msg_code == 'success') {
-      } else {
-        alert('更新错误，请联系管理员！');
-      }
-    }).error(function(data) {
-      alert('更新错误，请联系管理员！');
-    });
-  }
   window.onload = function() {
     _resize_img();
   }

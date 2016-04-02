@@ -17,4 +17,10 @@ class Date
   def days_before_birthday
     (next_birthday - Date.today).to_i
   end
+
+  def date_str
+    unless self.nil?
+      self.to_s(:db)
+    end
+  end
 end

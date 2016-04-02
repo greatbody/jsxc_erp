@@ -78,3 +78,17 @@ zh-CN:
       passed: '已通过'
       failed: '挂了'
       need_order: '需预约'
+  exam_record:
+    kemu:
+      km1: '科目一'
+      km2: '科目二'
+      km3: '科目三'
+      km4: '科目四'
+    status:
+      wait: '未预约'
+      booked: '已预约'
+      failed: '考挂了'
+      passed: '通过'
+    ks_cc:
+      morning: '上午'
+      afternoon: '下午'

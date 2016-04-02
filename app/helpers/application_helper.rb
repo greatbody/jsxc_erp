@@ -60,4 +60,13 @@ module ApplicationHelper
       ['壮族', '壮族']
     ]
   end
+
+  def safe_show(value, attr_name, nil_word = '')
+    nil_word = '' if nil_word.nil?
+    if value.nil?
+      nil_word
+    else
+      eval('value.' + attr_name)
+    end
+  end
 end

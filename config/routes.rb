@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     resources :contact_logs
     member do
       post 'update_km1' => :update_km1
+      post 'update_km' => :update_km
     end
     collection do
       post 'get_student_status' => :get_student_status
