@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get '/student_sources' => :student_sources
     # for exe
     get '/km1' => :km1
+    get '/asf82lasd00xal' => :asf82lasd00xal
   end
 
   namespace :contact_logs do
@@ -49,6 +50,7 @@ Rails.application.routes.draw do
     resources :contact_logs
     member do
       post 'update_km1' => :update_km1
+      post 'update_km' => :update_km
     end
     collection do
       post 'get_student_status' => :get_student_status

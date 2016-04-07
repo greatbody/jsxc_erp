@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315075611) do
+ActiveRecord::Schema.define(version: 20160401080545) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -81,6 +81,25 @@ ActiveRecord::Schema.define(version: 20160315075611) do
   end
 
   add_index "daily_signs", ["user_id"], name: "index_daily_signs_on_user_id", using: :btree
+
+  create_table "exam_records", force: :cascade do |t|
+    t.integer  "kemu",           limit: 4
+    t.string   "kc_names",       limit: 255
+    t.string   "kc_name",        limit: 255
+    t.date     "begin_match_at"
+    t.date     "end_match_at"
+    t.date     "ks_at"
+    t.integer  "ks_cc",          limit: 4
+    t.integer  "grade",          limit: 4
+    t.integer  "status",         limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "student_id",     limit: 4
+    t.boolean  "need_book"
+    t.boolean  "can_book"
+  end
+
+  add_index "exam_records", ["student_id"], name: "index_exam_records_on_student_id", using: :btree
 
   create_table "intentions", force: :cascade do |t|
     t.string   "source",            limit: 255
@@ -350,6 +369,7 @@ ActiveRecord::Schema.define(version: 20160315075611) do
   add_foreign_key "contact_logs", "students"
   add_foreign_key "contact_logs", "users"
   add_foreign_key "daily_signs", "users"
+  add_foreign_key "exam_records", "students"
   add_foreign_key "intentions", "student_sources"
   add_foreign_key "intentions", "students"
   add_foreign_key "intentions", "users"

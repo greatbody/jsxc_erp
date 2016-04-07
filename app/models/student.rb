@@ -18,6 +18,7 @@ class Student < ActiveRecord::Base
   belongs_to :train_service
   has_many :contact_logs
   has_many :residence_cards
+  has_many :exam_records
 
   has_attached_file :avatar, styles: { medium: '300x300>', thumb: '80x80>' }, default_url: '/80x80.png'
   has_attached_file :id_card_pic, styles: { medium: '500x300>', thumb: '250x150>' }, default_url: '/500x300.png'
@@ -59,4 +60,16 @@ class Student < ActiveRecord::Base
       [I18n.t("sexs.#{sex}"), sex]
     end
   end
+
+  def current_km1
+    valid_km1s = exam_records.where(kemu: 1).where.not(status: 2)
+    if valid_km1s.count > 0
+      km1 = valid_km1s.first
+    else
+      km1 = exam_records.build(kemu: 1, status: 0, need_book: false, can_book: false)
+      km1.save
+    end
+    km1
+  end
+
 end

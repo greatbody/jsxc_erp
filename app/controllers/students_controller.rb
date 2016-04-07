@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class StudentsController < PcApplicationController
   before_action :set_student, only: [:show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card, :update_km1]
+  before_action :set_exam_record, only: [:update_km]
   load_and_authorize_resource
   def index
     @students = Student.all.order(signed_at: :desc)
@@ -19,7 +20,11 @@ class StudentsController < PcApplicationController
 
   def show
     @current_page = :student_path
-    redirect_to root_path if @student.nil?
+    if @student.nil?
+      redirect_to root_path
+    else
+      @km1 = @student.current_km1
+    end
   end
 
   def edit
@@ -131,6 +136,14 @@ class StudentsController < PcApplicationController
     end
   end
 
+  def update_km
+    if @exam_record.update(params_update_km)
+      render json: { msg_code: 'success' }
+    else
+      render json: { msg_code: 'error', msg_text: '更新错误，请联系18771024287！' }
+    end
+  end
+
   private
 
   def params_update_id_card
@@ -141,7 +154,15 @@ class StudentsController < PcApplicationController
     params.require(:student).permit(:phone, :name, :sex, :address, :unit, :id_card, :coach_id, :is_local, :swift_number, :train_service_id, :process, :qq, :weixin)
   end
 
+  def params_update_km
+    params.require(:data).permit(:kemu, :kc_names, :begin_match_at, :end_match_at, :kc_name, :ks_at, :ks_cc, :status)
+  end
+
   def set_student
     @student = Student.find(params[:id])
+  end
+
+  def set_exam_record
+    @exam_record = ExamRecord.find(params[:data][:id])
   end
 end
