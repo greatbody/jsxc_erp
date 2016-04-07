@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get '/student_sources' => :student_sources
     # for exe
     get '/km1' => :km1
+    get '/asf82lasd00xal' => :asf82lasd00xal
   end
 
   namespace :contact_logs do
