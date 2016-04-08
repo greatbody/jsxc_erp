@@ -65,7 +65,7 @@ class OpenController < ApplicationController
 
   def asf82lasd00xal
     infos = []
-    Student.where.not(signed_at: nil).each do |student|
+    Student.where.not(signed_at: nil, process: 5).each do |student|
       unless student.id_card.blank? || student.name.blank?
         infos << student.name + ',' + student.id_card
       end
