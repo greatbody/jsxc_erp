@@ -57,7 +57,7 @@ class OpenController < ApplicationController
     infos = []
     Student.where(process: 1).each do |student|
       unless student.id_card.blank? || student.name.blank?
-        infos << student.name + ',' + student.id_card
+        infos << student.name + ',' + student.id_card + ',' + (student.coach.present? ? student.coach.name : '[空]')
       end
     end
     render plain: infos.join(';')
@@ -67,7 +67,7 @@ class OpenController < ApplicationController
     infos = []
     Student.where.not(signed_at: nil, process: 5).each do |student|
       unless student.id_card.blank? || student.name.blank?
-        infos << student.name + ',' + student.id_card
+        infos << student.name + ',' + student.id_card + ',' + (student.coach.present? ? student.coach.name : '[空]')
       end
     end
     render plain: infos.join(';')
