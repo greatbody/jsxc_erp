@@ -53,7 +53,7 @@ class OpenController < ApplicationController
     @student_sources = StudentSource.all
   end
 
-  def km1
+  def lakldnfhw
     infos = []
     Student.where(process: 1).each do |student|
       unless student.id_card.blank? || student.name.blank?
@@ -63,7 +63,7 @@ class OpenController < ApplicationController
     render plain: infos.join(';')
   end
 
-  def asf82lasd00xal
+  def mxl82wepoasdm
     infos = []
     Student.where.not(signed_at: nil, process: 5).each do |student|
       unless student.id_card.blank? || student.name.blank?
