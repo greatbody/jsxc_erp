@@ -69,6 +69,40 @@
         <td><%= @student.gender %></td>
       </tr>
       <tr>
+        <td class="two wide column">常用信息</td>
+        <td>
+          <% if @student.id_card.present? %>
+          <table class="ui striped definition table">
+            <tr>
+              <td　style="width: 150px;">一维单名称</td>
+              <td>
+                <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-一维单" %>' />
+              </td>
+            </tr>
+            <tr>
+              <td　style="width: 150px;">身份证正面</td>
+              <td>
+                <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-身份证－正面" %>' />
+              </td>
+            </tr>
+            <tr>
+              <td　style="width: 150px;">身份证反面</td>
+              <td>
+                <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-身份证－正面" %>' />
+              </td>
+            </tr>
+            <tr>
+              <td　style="width: 150px;">流水单（待办单）</td>
+              <td>
+                <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-待办单" %>' />
+              </td>
+            </tr>
+          </table>
+          <% else %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
         <td class="two wide column">户籍类型</td>
         <td><%= @student.is_local > 0 ? '本地' : '外地' %></td>
       </tr>
