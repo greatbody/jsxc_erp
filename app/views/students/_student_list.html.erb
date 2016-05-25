@@ -15,7 +15,11 @@
     <tbody>
       <% @students.each do |st| %>
       <tr class="<%= st.intention.current_status %>">
+        <% if st.id_card.present? %>
         <td class="middle aligned"><%= st.name %></td>
+        <% else %>
+        <td class="middle aligned" style="color: red;"><%= st.name %></td>
+        <% end %>
         <td class="middle center aligned"><%= st.gender %></td>
         <td class="middle center aligned"><%= st.phone %></td>
         <td class="middle center aligned"><%= st.intention.current_status_text %></td>
