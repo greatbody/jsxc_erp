@@ -15,6 +15,13 @@
     <%= f.text_field :phone %>
   </div>
   <div class="field">
+    <%= f.label :is_local_phone, '号码归属' %><br>
+    <%= f.radio_button :is_local_phone, true %>
+    <%= f.label :is_local_phone_true, '本地', { style: 'display: inline-block;width: 10%;' } %>
+    <%= f.radio_button :is_local_phone, false %>
+    <%= f.label :is_local_phone_false, '外地', { style: 'display: inline-block;width: 10%;' } %>
+  </div>
+  <div class="field">
     <%= f.label :name, '姓名' %><br>
     <%= f.text_field :name %>
   </div>

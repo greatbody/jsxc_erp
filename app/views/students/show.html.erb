@@ -126,7 +126,14 @@
       </tr>
       <tr>
         <td class="two wide column">手机</td>
-        <td><%= @student.phone %></td>
+        <td>
+          <span><%= @student.phone %></span>
+          <% if @student.is_local_phone? %>
+          <span>[本地]</span>
+          <% else %>
+          <span>[外地]</span>
+          <% end %>
+        </td>
       </tr>
       <tr>
         <td class="two wide column">身份证号</td>

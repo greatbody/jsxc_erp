@@ -21,7 +21,9 @@
         <td class="middle aligned" style="color: red;"><%= st.name %></td>
         <% end %>
         <td class="middle center aligned"><%= st.gender %></td>
-        <td class="middle center aligned"><%= st.phone %></td>
+        <td class="middle center aligned" <%= st.is_local_phone? ? '' : 'style="red;"' %>>
+          <%= st.phone %>
+        </td>
         <td class="middle center aligned"><%= st.intention.current_status_text %></td>
         <td class="middle center aligned"><%= st.process_text %></td>
         <td class="middle center aligned">

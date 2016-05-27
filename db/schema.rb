@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401080545) do
+ActiveRecord::Schema.define(version: 20160527144206) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -235,8 +235,8 @@ ActiveRecord::Schema.define(version: 20160401080545) do
     t.string   "id_card",                       limit: 255
     t.string   "address",                       limit: 255
     t.string   "unit",                          limit: 255
-    t.datetime "created_at",                                                                      null: false
-    t.datetime "updated_at",                                                                      null: false
+    t.datetime "created_at",                                                                         null: false
+    t.datetime "updated_at",                                                                         null: false
     t.integer  "user_id",                       limit: 4
     t.integer  "coach_id",                      limit: 4
     t.string   "avatar_file_name",              limit: 255
@@ -264,6 +264,7 @@ ActiveRecord::Schema.define(version: 20160401080545) do
     t.string   "qq",                            limit: 255
     t.string   "weixin",                        limit: 255
     t.integer  "km1_status",                    limit: 4,                             default: 0
+    t.boolean  "is_local_phone",                                                      default: true
   end
 
   add_index "students", ["coach_id"], name: "index_students_on_coach_id", using: :btree
