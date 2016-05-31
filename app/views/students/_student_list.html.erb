@@ -1,3 +1,12 @@
+<style type="text/css">
+  span.slow {
+    padding: 2px;
+    background-color: coral;
+    color: white;
+    border-radius: 6px;
+    margin-left: 3px;
+  }
+</style>
 <div class="ui segment student-source">
   <table class="ui teal sortable celled table">
     <thead>
@@ -20,7 +29,7 @@
         <% else %>
         <td class="middle aligned" style="color: red;"><%= st.name %></td>
         <% end %>
-        <td class="middle center aligned"><%= st.gender %></td>
+        <td class="middle center aligned"><%= st.gender %><% if st.is_slow? %><span class="slow">慢</span><% end %></td>
         <td class="middle center aligned" <%= st.is_local_phone? ? '' : 'style=color:red;' %>>
           <%= st.phone %>
         </td>
