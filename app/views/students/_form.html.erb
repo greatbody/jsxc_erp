@@ -22,6 +22,13 @@
     <%= f.label :is_local_phone_false, '外地', { style: 'display: inline-block;width: 10%;' } %>
   </div>
   <div class="field">
+    <%= f.label :is_slow, '是否太慢' %><br>
+    <%= f.radio_button :is_slow, true %>
+    <%= f.label :is_slow_true, '是', { style: 'display: inline-block;width: 10%;' } %>
+    <%= f.radio_button :is_slow, false %>
+    <%= f.label :is_slow_false, '否', { style: 'display: inline-block;width: 10%;' } %>
+  </div>
+  <div class="field">
     <%= f.label :name, '姓名' %><br>
     <%= f.text_field :name %>
   </div>

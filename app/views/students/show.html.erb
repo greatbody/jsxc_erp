@@ -69,6 +69,16 @@
         <td><%= @student.gender %></td>
       </tr>
       <tr>
+        <td class="two wide column">学习速度</td>
+        <td>
+          <% if @student.is_slow? %>
+          慢，注意督促
+          <% else %>
+          正常
+          <% end %>
+        </td>
+      </tr>
+      <tr>
         <td class="two wide column">常用信息</td>
         <td>
           <% if @student.id_card.present? %>
