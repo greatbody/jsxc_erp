@@ -6,6 +6,23 @@
     border-radius: 6px;
     margin-left: 3px;
   }
+  span.unlocked {
+    padding: 2px;
+    background-color: red;
+    color: white;
+    border-radius: 6px;
+    margin-left: 3px;
+  }
+  span.trained {
+    padding: 2px;
+    background-color: red;
+    color: white;
+    border-radius: 6px;
+    margin-left: 3px;
+  }
+  span.unlocked.done, span.trained.done {
+    background-color: green;
+  }
 </style>
 <div class="ui segment student-source">
   <table class="ui teal sortable celled table">
@@ -33,7 +50,11 @@
         <td class="middle center aligned" <%= st.is_local_phone? ? '' : 'style=color:red;' %>>
           <%= st.phone %>
         </td>
-        <td class="middle center aligned"><%= st.intention.current_status_text %></td>
+        <td class="middle center aligned">
+          <%= st.intention.current_status_text %>
+          <span class="unlocked<%= st.is_unlocked? ? ' done' : '' %>">锁</span>
+          <span class="trained<%= st.is_trained? ? ' done' : '' %>">消</span>
+        </td>
         <td class="middle center aligned"><%= st.process_text %></td>
         <td class="middle center aligned">
           <% if st.signed_at.present? %>
@@ -44,7 +65,7 @@
         </td>
         <td class="middle aligned">
           <% if st.coach.present? %>
-          <%= "#{st.coach.name} [ #{st.coach.phone} ]" %>
+          <%= "#{st.coach.name}[#{st.coach.phone}]" %>
           <% else %>
           暂无
           <% end %>

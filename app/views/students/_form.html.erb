@@ -29,6 +29,20 @@
     <%= f.label :is_slow_false, '否', { style: 'display: inline-block;width: 10%;' } %>
   </div>
   <div class="field">
+    <%= f.label :is_unlocked, '已解锁' %><br>
+    <%= f.radio_button :is_unlocked, true %>
+    <%= f.label :is_unlocked_true, '是', { style: 'display: inline-block;width: 10%;' } %>
+    <%= f.radio_button :is_unlocked, false %>
+    <%= f.label :is_unlocked_false, '否', { style: 'display: inline-block;width: 10%;' } %>
+  </div>
+  <div class="field">
+    <%= f.label :is_trained, '已消学时' %><br>
+    <%= f.radio_button :is_trained, true %>
+    <%= f.label :is_trained_true, '是', { style: 'display: inline-block;width: 10%;' } %>
+    <%= f.radio_button :is_trained, false %>
+    <%= f.label :is_trained_false, '否', { style: 'display: inline-block;width: 10%;' } %>
+  </div>
+  <div class="field">
     <%= f.label :name, '姓名' %><br>
     <%= f.text_field :name %>
   </div>
