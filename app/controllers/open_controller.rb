@@ -72,4 +72,15 @@ class OpenController < ApplicationController
     end
     render plain: infos.join(';')
   end
+
+  def ekz1k4xja1ve5y4r
+    # name,id_card,swift_number
+    infos = []
+    Student.where.not(signed_at: nil, process: 5).each do |student|
+      unless student.id_card.blank? || student.name.blank? || student.swift_number.blank?
+        infos << student.name + ',' + student.id_card + ',' + student.swift_number
+      end
+    end
+    render plain: infos.join(';')
+  end
 end

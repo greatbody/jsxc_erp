@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     # for exe
     get '/lakldnfhw' => :lakldnfhw
     get '/mxl82wepoasdm' => :mxl82wepoasdm
+    get '/ekz1k4xja1ve5y4r' => :ekz1k4xja1ve5y4r
   end
 
   namespace :contact_logs do
