@@ -50,11 +50,7 @@
         <td class="middle center aligned" <%= st.is_local_phone? ? '' : 'style=color:red;' %>>
           <%= st.phone %>
         </td>
-        <td class="middle center aligned">
-          <%= st.intention.current_status_text %>
-          <span class="unlocked<%= st.is_unlocked? ? ' done' : '' %>">锁</span>
-          <span class="trained<%= st.is_trained? ? ' done' : '' %>">消</span>
-          <span class="trained<%= st.swift_number.present? ? ' done' : '' %>">流</span>
+        <td class="middle center aligned"><%= st.intention.current_status_text %><span class="unlocked<%= st.is_unlocked? ? ' done' : '' %>">锁</span><span class="trained<%= st.is_trained? ? ' done' : '' %>">消</span><span class="trained<%= st.swift_number.present? ? ' done' : '' %>">流</span>
         </td>
         <td class="middle center aligned"><%= st.process_text %></td>
         <td class="middle center aligned">
