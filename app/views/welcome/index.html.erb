@@ -161,6 +161,13 @@
     </div>
     <% if current_user.has_role?(:superadmin) || current_user.has_role?(:user) %>
     <div class="ui row">
+      <div class="sixteen wide column">
+        <div id="chartStudentDist" style="width: 100%;height: 500px;"></div>
+      </div>
+      <div class="eight wide column">
+      </div>
+    </div>
+    <div class="ui row">
       <div class="eight wide column">
         <div id="chartSigned" style="width: 100%;height: 300px;"></div>
       </div>
@@ -176,6 +183,7 @@
   (function() {
     var signedUpChart = echarts.init($('#chartSigned')[0]);
     var studentContactLogChart = echarts.init($('#chartStudentContact')[0])
+    var studentDistChart = echarts.init($('#chartStudentDist')[0]);
 
     var signedUpOption = {
       title: {
@@ -265,9 +273,49 @@
         data: <%= @student_contact_logs.to_json.html_safe %>
       }]
     };
+    var studentDistChartOption = {
+      title : {
+        text: '极速学车学员分布表',
+        subtext: '<%= Date.today.to_s(:db) %>',
+        x:'center'
+      },
+      tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['等待','科一','科二','科三','科四','已拿证']
+      },
+      series : [
+      {
+        name: '访问来源',
+        type: 'pie',
+        radius : '55%',
+        center: ['50%', '60%'],
+        data:[
+        {value:<%= @stu_wait.count %>, name:'等待'},
+        {value:<%= @stu_km1.count %>, name:'科一'},
+        {value:<%= @stu_km2.count %>, name:'科二'},
+        {value:<%= @stu_km3.count %>, name:'科三'},
+        {value:<%= @stu_km4.count %>, name:'科四'},
+        {value:<%= @stu_lz.count %>, name:'已拿证'}
+        ],
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+      ]
+    };
 
     signedUpChart.setOption(signedUpOption);
     studentContactLogChart.setOption(studentContactLogOption);
+    studentDistChart.setOption(studentDistChartOption);
   })();
 </script>
 <% end %>

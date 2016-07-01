@@ -28,6 +28,13 @@ class WelcomeController < PcApplicationController
     end
   # for message display
     @messages = colleact_messages
+    @students = Student.joins(:intention).where(intentions: {current_status: 4}).order(signed_at: :desc)
+    @stu_wait = @students.where(process: 0)
+    @stu_km1 = @students.where(process: 1)
+    @stu_km2 = @students.where(process: 2)
+    @stu_km3 = @students.where(process: 3)
+    @stu_km4 = @students.where(process: 4)
+    @stu_lz = @students.where(process: 5)
   end
 
   def demo
