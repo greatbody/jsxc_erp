@@ -71,7 +71,7 @@
           <%= link_to '意向', intention_path(st.intention), { class: 'small-button', target: '_blank' } %>
           <%= link_to '资料', student_path(st), { class: 'small-button', target: '_blank' } %>
           <%= link_to '编辑', edit_student_path(st), { class: 'small-button', target: '_blank' } %>
-          <% if st.qq.nil? %>
+          <% unless st.qq.present? %>
           <span style="color:red;">QQ</span>
           <% end %>
         </td>
