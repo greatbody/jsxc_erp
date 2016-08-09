@@ -9,6 +9,10 @@ class IntentionsController < PcApplicationController
   def index
     @current_page = :intentions_path
     @intentions = Intention.all.order(updated_at: :desc, next_contact_at: :asc)
+    if current_user.has_role? :jby
+      @intentions = @intentions.joins(:student).where(students: { identity: 2 })
+    end
+    @today_intentions = @intentions.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 4 and current_status != 5)', Date.today)
   end
 
   def new
@@ -22,6 +26,9 @@ class IntentionsController < PcApplicationController
     user = User.find(user_id)
     @student = user.students.build(params_of_student)
     @student.intention.user = @student.user
+    if current_user.has_role? :jby
+      @student.jby!
+    end
     can_update_last_contact = (params[:student][:contact_log][:has_contact_log] == '1')
     student_source_id = params[:student][:student_source][:id]
     if can_update_last_contact
@@ -75,21 +82,22 @@ class IntentionsController < PcApplicationController
   def get_intention_list
     current_status = params[:current_status]
     @intentions = Intention.all
+    if current_user.has_role? :jby
+      @intentions = @intentions.joins(:student).where(students: { identity: 2 })
+    end
     case current_status.downcase
-    when 'all'
-      @intentions = Intention.all
     when 'wait_call'
-      @intentions = Intention.wait_call
+      @intentions = @intentions.wait_call
     when 'contacting'
-      @intentions = Intention.contacting
+      @intentions = @intentions.contacting
     when 'booking'
-      @intentions = Intention.booking
+      @intentions = @intentions.booking
     when 'wait_pay'
-      @intentions = Intention.wait_pay
+      @intentions = @intentions.wait_pay
     when 'signed_up'
-      @intentions = Intention.signed_up
+      @intentions = @intentions.signed_up
     when 'should_contact'
-      @intentions = Intention.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 4 and current_status != 5)', Date.today)
+      @intentions = @intentions.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 4 and current_status != 5)', Date.today)
     end
     @intentions = @intentions.order(updated_at: :desc, next_contact_at: :asc)
     render '_index_card_intention_list', layout: false

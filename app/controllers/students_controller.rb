@@ -5,14 +5,23 @@ class StudentsController < PcApplicationController
   load_and_authorize_resource
   def index
     @students = Student.all.order(signed_at: :desc)
+    if current_user.has_role? :jby
+      @students = @students.jby
+    end
   end
 
   def signed_up
     @students = Student.joins(:intention).where(intentions: {current_status: 4}).order(signed_at: :desc)
+    if current_user.has_role? :jby
+      @students = @students.jby
+    end
   end
 
   def wait_pay
     @students = Student.joins(:intention).where(intentions: {current_status: 3}).order(signed_at: :desc)
+    if current_user.has_role? :jby
+      @students = @students.jby
+    end
   end
 
   def new

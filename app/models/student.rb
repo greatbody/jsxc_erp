@@ -3,6 +3,7 @@ class Student < ActiveRecord::Base
   enum sex: [:female, :male, :unknown]
   enum process: [:wait, :km1, :km2, :km3, :km4, :lingzheng]
   enum km1_status: [:wait_order, :can_order, :ordered, :passed, :failed, :need_order]
+  enum identity: [:jsxc, :fangsheng, :jby]
 
   validates :phone, uniqueness: { message: '手机号码重复.' }, presence: { message: '请输入手机号码.'}, format: { with: /\A1\d{10}\z/, message: '手机号码格式不正确.' }
   validates :name, presence: { message: '请输入姓名' }
