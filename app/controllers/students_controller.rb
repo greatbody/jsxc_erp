@@ -24,6 +24,13 @@ class StudentsController < PcApplicationController
     end
   end
 
+  def need_contact
+    @students = Student.joins(:intention).where(intentions: {current_status: 0..3}).order(created_at: :asc)
+    if current_user.has_role? :jby
+      @students = @students.jby
+    end
+  end
+
   def new
   end
 
