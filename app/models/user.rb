@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :student_sources
   has_many :daily_signs
 
+  scope :normal, -> { where(is_active: true) }
+
   def before_add_method(role)
     # do something before it gets added
   end
