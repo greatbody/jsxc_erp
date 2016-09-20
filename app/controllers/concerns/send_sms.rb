@@ -29,6 +29,21 @@ module SendSms
     send_sms(student.phone, '20701', [user.name, content])
   end
 
+  def send_adver_sms(student)
+    #发送短信给已毕业学员
+    send_sms(student.phone, '28616', [student.name])
+  end
+
+  def send_adver_unget(student)
+    #发送短信给尚未毕业的学员
+    send_sms(student.phone, '28625', [student.name])
+  end
+
+  def send_activateceo_sms(source)
+    #发送短信给校园CEO
+    send_sms(source.phone, '28640', [source.name])
+  end
+
   protected
 
   def send_sms(phone, template_id, *params)
