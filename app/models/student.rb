@@ -32,6 +32,16 @@ class Student < ActiveRecord::Base
     '【未填写】'
   end
 
+  def phone_divided
+    if phone.length == 11
+      '<span class="pre-phone">' + phone[0..3] + '</span>' +
+      '<span class="mid-phone">' + phone[4..7] + '</span>' +
+      '<span class="end-phone">' + phone[8..10] + '</span>'
+    else
+      phone
+    end
+  end
+
   def self.process_for_select
     processes.map do |process, _|
       [I18n.t("student.process.#{process}"), process]

@@ -23,6 +23,10 @@
   span.unlocked.done, span.trained.done {
     background-color: green;
   }
+  span.mid-phone {
+    background-color: green;
+    color: white;
+  }
 </style>
 <div class="ui segment student-source">
   <table class="ui teal sortable celled table">
@@ -48,7 +52,7 @@
         <% end %>
         <td class="middle center aligned"><%= st.gender %><% if st.is_slow? %><span class="slow">慢</span><% end %></td>
         <td class="middle center aligned" <%= st.is_local_phone? ? '' : 'style=color:red;' %>>
-          <%= st.phone %>
+          <%= st.phone_divided.html_safe %>
         </td>
         <td class="middle center aligned"><%= st.intention.current_status_text %><span class="unlocked<%= st.is_unlocked? ? ' done' : '' %>">锁</span><span class="trained<%= st.is_trained? ? ' done' : '' %>">消</span><span class="trained<%= st.swift_number.present? ? ' done' : '' %>">流</span>
         </td>
