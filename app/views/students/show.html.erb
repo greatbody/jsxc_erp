@@ -1,6 +1,15 @@
 <% content_for :title, "#{@student.name} - 极速学车ERP系统" %>
 <link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
 <link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
+<style type="text/css">
+  span.mid-phone {
+    margin: 0 3px;
+    background-color: #678;
+    color: #fff;
+    padding: 2px;
+    border-radius: 3px;
+  }
+</style>
 <div class="student">
   <%= link_to edit_student_path(@student) do %>
     <div class="ui teal labeled icon button">
@@ -143,7 +152,7 @@
       <tr>
         <td class="two wide column">手机</td>
         <td>
-          <span><%= @student.phone %></span>
+          <span><%= @student.phone_divided.html_safe %></span>
           <% if @student.is_local_phone? %>
           <span>[本地]</span>
           <% else %>
