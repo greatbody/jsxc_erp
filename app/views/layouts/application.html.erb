@@ -155,6 +155,9 @@
           });
           return response;
         },
+        onFailure: function() {
+          $('.ui.search').trigger('click');
+        },
         url: '/service/search?q={query}'
       }
     });
