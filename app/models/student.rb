@@ -34,9 +34,9 @@ class Student < ActiveRecord::Base
 
   def phone_divided
     if phone.length == 11
-      '<span class="pre-phone">' + phone[0..3] + '</span>' +
-      '<span class="mid-phone">' + phone[4..7] + '</span>' +
-      '<span class="end-phone">' + phone[8..10] + '</span>'
+      '<span class="pre-phone">' + phone[0..2] + '</span>' +
+      '<span class="mid-phone">' + phone[3..6] + '</span>' +
+      '<span class="end-phone">' + phone[7..10] + '</span>'
     else
       phone
     end

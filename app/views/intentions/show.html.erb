@@ -15,7 +15,7 @@
       </div>
       <div class="ui three column middle aligned very relaxed stackable grid">
         <div class="column">
-          手机：<%= PhoneExt.format_phone(@student.phone) %>
+          手机：<%= @student.phone_divided.html_safe %>
         </div>
         <div class="column">
           身份证：<%= @student.id_card %>
