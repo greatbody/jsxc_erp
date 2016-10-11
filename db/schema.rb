@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161011071900) do
+ActiveRecord::Schema.define(version: 20161011073545) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -106,8 +106,10 @@ ActiveRecord::Schema.define(version: 20161011071900) do
     t.integer  "fee_type",   limit: 4
     t.text     "remark",     limit: 65535
     t.integer  "student_id", limit: 4
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+    t.integer  "fee_mode",   limit: 4,                             default: 0
+    t.boolean  "is_done",                                          default: false
   end
 
   add_index "fees", ["student_id"], name: "index_fees_on_student_id", using: :btree
