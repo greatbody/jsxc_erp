@@ -124,6 +124,12 @@
         <td class="two wide column">户籍类型</td>
         <td><%= @student.is_local > 0 ? '本地' : '外地' %></td>
       </tr>
+      <% if @student.qq.present? %>
+      <tr>
+        <td class="two wide column">QQ</td>
+        <td><%= @student.qq %></td>
+      </tr>
+      <% end %>
       <tr>
         <td class="two wide column">录入时间</td>
         <td><%= @student.created_at.localtime.to_s(:db) %></td>
