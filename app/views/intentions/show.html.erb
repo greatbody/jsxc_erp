@@ -10,7 +10,7 @@
           性别：<%= t("sexs.#{@student.sex}") %>
         </div>
         <div class="column">
-          年龄：未实现功能
+          年龄：<%= ExtCalc.age_from_idcard(@student.id_card) %>
         </div>
       </div>
       <div class="ui three column middle aligned very relaxed stackable grid">

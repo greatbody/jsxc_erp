@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class IntentionsController < PcApplicationController
   require 'phone_ext'
+  require 'ext_calc'
   include SendSms
   include SendNotifications
 
