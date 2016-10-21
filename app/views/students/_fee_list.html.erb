@@ -12,6 +12,7 @@
   <tbody>
     <% @fees.each do |fee| %>
     <% fee_rate = fee.total_paid * 100 / fee.amount %>
+    <% disp_rate = (0..100).include?(fee_rate) ? fee_rate : 100 %>
     <tr>
       <td style="text-align: right;<%= "color: #fff;background-color: #4faf4f;" if fee.is_done? %>">
         <%= number_to_currency(fee.amount, precision: 2, unit: "") %>
@@ -29,7 +30,7 @@
             <%= "#{number_to_currency(fee_rate, precision: 2, unit: '')}%" %>
             <% end %>
           </div>
-          <div class="prog-bar<%= ' warning' if !(0..100).include?(fee_rate) %>" style="width: <%= fee_rate %> %>%;">
+          <div class="prog-bar<%= ' warning' if !(0..100).include?(fee_rate) %>" style="width: <%= disp_rate %>%;">
           </div>
         </div>
       </td>
