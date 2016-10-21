@@ -1,0 +1,49 @@
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th data-width="2" class="two wide center" style="text-align: right;">款项金额</th>
+      <th data-width="2" class="two wide center" style="text-align: right;">完成金额</th>
+      <th data-width="2" class="two wide center">类型</th>
+      <th data-width="4" class="four wide center">状态</th>
+      <th data-width="4" class="four wide center">备注</th>
+      <th data-width="2" class="two wide center">缴纳</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @fees.each do |fee| %>
+    <% fee_rate = fee.total_paid * 100 / fee.amount %>
+    <tr>
+      <td style="text-align: right;<%= "color: #fff;background-color: #4faf4f;" if fee.is_done? %>">
+        <%= number_to_currency(fee.amount, precision: 2, unit: "") %>
+      </td>
+      <td style="text-align: right;<%= "color: #fff;background-color: #4faf4f;" if fee.is_done? %>">
+        <%= number_to_currency(fee.total_paid, precision: 2, unit: "") %>
+      </td>
+      <td><%= "#{fee.fee_mode_name} - #{fee.fee_type_name}" %></td>
+      <td>
+        <div class="prog-container">
+          <div class="prog-text<%= ' warning' if !(0..100).include?(fee_rate) %>">
+            <% if fee.amount == fee.total_paid %>
+            100%
+            <% else %>
+            <%= "#{number_to_currency(fee_rate, precision: 2, unit: '')}%" %>
+            <% end %>
+          </div>
+          <div class="prog-bar<%= ' warning' if !(0..100).include?(fee_rate) %>" style="width: <%= fee_rate %> %>%;">
+          </div>
+        </div>
+      </td>
+      <td><%= fee.remark %></td>
+      <td>
+        <% if fee.is_done? || (fee.total_paid > fee.amount) %>
+          <div class="ui disabled button">缴纳</div>
+        <% else %>
+          <%= link_to new_student_fee_payment_path(@student, fee), remote: true do %>
+            <div class="ui teal button">缴纳</div>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

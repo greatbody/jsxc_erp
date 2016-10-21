@@ -1,0 +1,104 @@
+<div class="ui segment form">
+  <div class="inline fields">
+    <div class="sixteen wide column field">
+      <%= text_field_tag :name, @name, placeholder: '款项详情，比如：“张三补交学费3000元”' %>
+    </div>
+  </div>
+  <% if @fee.shouru? %>
+  <div class="inline fields">
+    <div class="six wide field">
+      <%= label_tag :pay_mode, '付款方', style: 'white-space: nowrap;' %>
+      <%= select_tag(:pay_mode, options_for_select(Payment.pay_modes_for_select, 0)) %>
+    </div>
+    <div class="ten wide field">
+      <%= text_field_tag :pay_account, @student.phone, placeholder: '账号、卡号等' %>
+    </div>
+  </div>
+  <div class="inline fields">
+    <div class="six wide column field">
+      <%= label_tag :get_mode, '收款方', style: 'white-space: nowrap;' %>
+      <%= select_tag(:get_mode, options_for_select(Payment.get_modes_for_select, 0)) %>
+    </div>
+    <div class="ten wide column field">
+      <%= text_field_tag :get_account, 'dev@jisuxueche.com', placeholder: '账号、卡号等' %>
+    </div>
+  </div>
+  <% else %>
+  <div class="inline fields">
+    <div class="six wide field">
+      <%= label_tag :pay_mode, '付款方', style: 'white-space: nowrap;' %>
+      <%= select_tag(:pay_mode, options_for_select(Payment.pay_modes_for_select, 0)) %>
+    </div>
+    <div class="ten wide field">
+      <%= text_field_tag :pay_account, 'dev@jisuxueche.com', placeholder: '账号、卡号等' %>
+    </div>
+  </div>
+  <div class="inline fields">
+    <div class="six wide column field">
+      <%= label_tag :get_mode, '收款方', style: 'white-space: nowrap;' %>
+      <%= select_tag(:get_mode, options_for_select(Payment.get_modes_for_select, 0)) %>
+    </div>
+    <div class="ten wide column field">
+      <%= text_field_tag :get_account, @student.phone, placeholder: '账号、卡号等' %>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="inline fields">
+    <div class="sixteen wide column field">
+      <%= label_tag :amount, '金额', style: 'white-space: nowrap;' %>
+      <%= number_field(:payment, :amount) %>
+    </div>
+  </div>
+  <%= hidden_field_tag(:total_paid, @fee.total_paid) %>
+  <%= hidden_field_tag(:student_id, @student_id) %>
+  <%= hidden_field_tag(:fee_id, @student_id) %>
+</div>
+<script type="text/javascript">
+  var maxPay = <%= @fee.amount %>;
+  function  saveFeePayment() {
+    var amount = parseFloat($('#payment_amount').val());
+    var total_paid = parseFloat($('#total_paid').val());
+    var name = $('#name').val(),
+        pay_mode = $('#pay_mode').val(),
+        pay_account = $('#pay_account').val(),
+        get_mode = $('#get_mode').val(),
+        get_account = $('#get_account').val();
+    if ( amount > maxPay - total_paid ) {
+      alert('过账金额超过费用额（' + (maxPay - total_paid) + '元），请重新调整');
+      return;
+    }
+    $.post('/students/<%= @student_id %>/fees/<%= @fee_id %>/payments', {
+      'name': name,
+      'pay_mode': pay_mode,
+      'pay_account': pay_account,
+      'get_mode': get_mode,
+      'get_account': get_account,
+      'amount': parseFloat(amount),
+      'fee_id': <%= @fee_id %>,
+      'student_id': <%= @student_id %>
+    }).success(function(data) {
+      if (data && data.error_code && data.error_code == '0') {
+        $('.ui.modal.fee-payment').modal('hide');
+        //整个更新
+        setTimeout(_getFeeList, 100);
+      } else {
+        alert('保存出错，请联系管理员！');
+      }
+    }).error(function(data) {
+      alert('保存出错，请联系管理员！');
+    });
+  }
+
+  function _getFeeList() {
+    $.post('/students/<%= @student_id %>/fee_list', {
+    }).success(function(data) {
+      if (!data) {
+        alert('请求数据错误！');
+      } else {
+        $('#fee_list').html(data);
+      }
+    });
+  }
+</script>
+

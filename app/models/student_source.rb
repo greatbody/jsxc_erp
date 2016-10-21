@@ -1,6 +1,4 @@
 class StudentSource < ActiveRecord::Base
-  resourcify
-
   enum gender: { unknown: 2, male: 1, female: 0 }
   enum source_type: { student: 0, employee: 1, shareholder: 2 }
 

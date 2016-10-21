@@ -1,0 +1,14 @@
+$('#fee_payment').html("<%= j render('form') %>");
+$('.ui.modal.fee-payment')
+  .modal({
+    closable  : false,
+    onDeny    : function(){
+      //window.alert('Wait not yet!');
+      //return false;
+    },
+    onApprove : function() {
+      saveFeePayment();
+      return false;
+    }
+  })
+  .modal('show');

@@ -1,5 +1,4 @@
 class Coach < ActiveRecord::Base
-  resourcify
   include ApiService
   include SendNotifications
   enum gender: [:female, :male]

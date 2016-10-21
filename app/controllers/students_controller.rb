@@ -1,6 +1,8 @@
 # encoding: UTF-8
 class StudentsController < PcApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card, :update_km1]
+  before_action :set_student, only: [
+    :show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card, 
+    :update_km1, :fee_list]
   before_action :set_exam_record, only: [:update_km]
   load_and_authorize_resource
   def index
@@ -40,6 +42,7 @@ class StudentsController < PcApplicationController
       redirect_to root_path
     else
       @km1 = @student.current_km1
+      @fees = @student.fees
     end
   end
 
@@ -158,6 +161,11 @@ class StudentsController < PcApplicationController
     else
       render json: { msg_code: 'error', msg_text: '更新错误，请联系18771024287！' }
     end
+  end
+
+  def fee_list
+    @fees = @student.fees
+    render :partial => "fee_list"
   end
 
   private

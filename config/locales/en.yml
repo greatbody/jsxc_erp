@@ -66,6 +66,13 @@ en:
     gender:
       male: '男'
       female: '女'
+  payment:
+    p_alipay: '支付宝'
+    g_alipay: '支付宝'
+    p_bank: '银行卡'
+    g_bank: '银行卡'
+    p_cash: '现金'
+    g_cash: '现金'
   application:
     menus:
       wait_call: '未联系'

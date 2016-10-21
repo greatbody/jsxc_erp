@@ -1,5 +1,4 @@
 class WorkTaskStep < ActiveRecord::Base
-  resourcify
   belongs_to :work_task
 
   enum operation: [:close_task, :create_task, :finish_task, :transfer_task]

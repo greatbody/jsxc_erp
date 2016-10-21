@@ -1,0 +1,56 @@
+<div class="ui segment form">
+  <div class="ui grid">
+    <div class="ui row">
+      <div class="five wide column field">
+        <%= label_tag :amount, "费用金额" %>
+        <%= number_field(:fee, :price) %>
+      </div>
+      <div class="six wide column field">
+        <%= label_tag :fee_type, "费用类型" %>
+        <%= select_tag(:fee_type, options_for_select(Fee.fee_types_for_select, 0)) %>
+      </div>
+      <div class="five wide column field">
+        <%= label_tag :fee_mode, "收支类型" %>
+        <%= select_tag(:fee_mode, options_for_select(Fee.fee_modes_for_select, 0)) %>
+      </div>
+    </div>
+    <div class="ui row">
+      <div class="sixteen wide column field">
+        <%= label_tag :remark, '备注' %>
+        <%= text_field_tag :remark, nil %>
+      </div>
+      <%= hidden_field_tag(:student_id, @student_id) %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function  saveFee() {
+    $.post('/students/<%= @student_id %>/fees', {
+      'amount': $('#fee_price').val(),
+      'fee_type': $('#fee_type').val(),
+      'fee_mode': $('#fee_mode').val(),
+      'remark': $('#remark').val()
+    }).success(function(data) {
+      if (data && data.error_code && data.error_code == '0') {
+        $('.ui.modal.fee-new').modal('hide');
+        //整个更新
+        setTimeout(_getFeeList, 100);
+      } else {
+        alert('保存出错，请联系管理员！');
+      }
+    }).error(function(data) {
+      alert('保存出错，请联系管理员！');
+    });
+  }
+
+  function _getFeeList() {
+    $.post('/students/<%= @student_id %>/fee_list', {
+    }).success(function(data) {
+      if (!data) {
+        alert('请求数据错误！');
+      } else {
+        $('#fee_list').html(data);
+      }
+    });
+  }
+</script>

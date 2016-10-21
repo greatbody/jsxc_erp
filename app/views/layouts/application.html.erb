@@ -66,6 +66,20 @@
         </div>
       </div>
       <div class="ui simple dropdown item">
+        <%= link_to(fees_path, class: 'black') do %>
+          <i class="sign in icon"></i>费用管理
+        <% end %>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <%= link_to(fees_path, class: 'item') do %>
+            <i class="browser icon"></i>费用详表
+          <% end %>
+          <%= link_to(new_source_contact_student_sources_path, class: 'item') do %>
+            <i class="add icon"></i>联系渠道
+          <% end %>
+        </div>
+      </div>
+      <div class="ui simple dropdown item">
         更多操作
         <i class="dropdown icon"></i>
         <div class="menu">

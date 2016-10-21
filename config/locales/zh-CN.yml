@@ -92,3 +92,21 @@ zh-CN:
     ks_cc:
       morning: '上午'
       afternoon: '下午'
+  fee:
+    fee_type:
+      baoming: '报名'
+      tijian: '体检'
+      kaoshi: '考试费'
+      qita: '其它'
+    fee_mode:
+      shouru: '收入'
+      zhichu: '支出'
+  payment:
+    pay_mode:
+      p_alipay: '支付宝'
+      p_bank: '银行卡'
+      p_cash: '现金'
+    get_mode:
+      g_alipay: '支付宝'
+      g_bank: '银行卡'
+      g_cash: '现金'

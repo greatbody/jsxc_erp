@@ -46,12 +46,18 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :fees, only: [:index]
+
   resources :students do
     resources :residence_cards
     resources :contact_logs
+    resources :fees do
+      resources :payments
+    end
     member do
       post 'update_km1' => :update_km1
       post 'update_km' => :update_km
+      post 'fee_list' => :fee_list
     end
     collection do
       post 'get_student_status' => :get_student_status
@@ -65,6 +71,9 @@ Rails.application.routes.draw do
       post 'update_evaluation' => :update_evaluation
       post 'peek_before_evaluation' => :peek_before_evaluation
     end
+  end
+
+  resources :fees do
   end
 
   resources :student_sources do

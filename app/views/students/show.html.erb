@@ -54,6 +54,22 @@
       </div>
     </div>
   </div>
+  <div class="ui segment form">
+    <div class="ui grid grid-fee" data-student-id = "<%= @student.id %>">
+      <div class="ui row">
+        <div class="four wide column field">
+          <%= link_to new_student_fee_path(@student), remote: true do %>
+          <div class="ui teal button">新建费用</div>
+          <% end %>
+        </div>
+      </div>
+      <div class="ui row">
+        <div class="sixteen wide column field" id="fee_list">
+        <%= render 'fee_list' %>
+        </div>
+      </div>
+    </div>
+  </div>
   <h4 class="ui horizontal divider header">
     <i class="tag icon"></i>
     基本资料
@@ -247,6 +263,40 @@
       <% end %>
     </tbody>
   </table>
+</div>
+<div class="ui modal fee-new">
+  <i class="close icon"></i>
+  <div class="header">
+    新增费用
+  </div>
+  <div class="content" id="fee">
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      取消
+    </div>
+    <div class="ui positive right labeled icon button">
+      保存
+      <i class="checkmark icon save-fee"></i>
+    </div>
+  </div>
+</div>
+<div class="ui modal fee-payment">
+  <i class="close icon"></i>
+  <div class="header">
+    新增付款
+  </div>
+  <div class="content" id="fee_payment">
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      取消
+    </div>
+    <div class="ui positive right labeled icon button">
+      保存
+      <i class="checkmark icon save-fee-payment"></i>
+    </div>
+  </div>
 </div>
 <%= render 'upload_id_card' %>
 <script type="text/javascript">

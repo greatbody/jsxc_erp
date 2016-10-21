@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161011073545) do
+ActiveRecord::Schema.define(version: 20161019150646) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20161011073545) do
     t.datetime "updated_at",                                                       null: false
     t.integer  "fee_mode",   limit: 4,                             default: 0
     t.boolean  "is_done",                                          default: false
+    t.decimal  "total_paid",               precision: 8, scale: 2, default: 0.0
   end
 
   add_index "fees", ["student_id"], name: "index_fees_on_student_id", using: :btree
@@ -128,6 +129,24 @@ ActiveRecord::Schema.define(version: 20161011073545) do
   add_index "intentions", ["student_id"], name: "index_intentions_on_student_id", using: :btree
   add_index "intentions", ["student_source_id"], name: "index_intentions_on_student_source_id", using: :btree
   add_index "intentions", ["user_id"], name: "index_intentions_on_user_id", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "pay_mode",    limit: 255,                         default: "0"
+    t.string   "pay_account", limit: 255
+    t.string   "get_mode",    limit: 255,                         default: "0"
+    t.string   "get_account", limit: 255
+    t.decimal  "amount",                  precision: 8, scale: 2
+    t.integer  "user_id",     limit: 4
+    t.integer  "fee_id",      limit: 4
+    t.integer  "student_id",  limit: 4
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+  end
+
+  add_index "payments", ["fee_id"], name: "index_payments_on_fee_id", using: :btree
+  add_index "payments", ["student_id"], name: "index_payments_on_student_id", using: :btree
+  add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
 
   create_table "residence_cards", force: :cascade do |t|
     t.string   "card_id",               limit: 255
@@ -393,6 +412,9 @@ ActiveRecord::Schema.define(version: 20161011073545) do
   add_foreign_key "intentions", "student_sources"
   add_foreign_key "intentions", "students"
   add_foreign_key "intentions", "users"
+  add_foreign_key "payments", "fees"
+  add_foreign_key "payments", "students"
+  add_foreign_key "payments", "users"
   add_foreign_key "residence_cards", "students"
   add_foreign_key "source_contacts", "student_sources"
   add_foreign_key "source_contracts", "student_sources"

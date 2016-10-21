@@ -35,7 +35,7 @@ class Ability
       can :manage, [TrainService, Coach, TrainField]
     end
     # 驾本易专用
-    if user.has_role? :jby_admin
+    if user.has_role? :jby
       can [:create, :read, :update, :get_intention_list], [Intention]
       can [:create, :read], [ContactLog]
       can [:create, :read, :signed_up, :wait_pay], [Student]

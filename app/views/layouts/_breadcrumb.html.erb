@@ -189,6 +189,12 @@
   <i class="right angle icon divider"></i>
   <div class="active section">录入服务</div>
 </div>
+<% when :fees_path %>
+<div class="ui breadcrumb breadcrumb-pad">
+  <%= link_to "首页", root_path, class: 'section' %>
+  <i class="right angle icon divider"></i>
+  <div class="active section">费用详表</div>
+</div>
 <% else %>
 <div class="ui breadcrumb breadcrumb-pad">
   <%= link_to "首页", root_path, class: 'section' %>

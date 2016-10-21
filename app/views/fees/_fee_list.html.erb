@@ -1,0 +1,76 @@
+<style type="text/css">
+  span.slow {
+    padding: 2px;
+    background-color: coral;
+    color: white;
+    border-radius: 6px;
+    margin-left: 3px;
+  }
+  span.unlocked {
+    padding: 2px;
+    background-color: red;
+    color: white;
+    border-radius: 6px;
+    margin-left: 3px;
+  }
+  span.trained {
+    padding: 2px;
+    background-color: red;
+    color: white;
+    border-radius: 6px;
+    margin-left: 3px;
+  }
+  span.unlocked.done, span.trained.done {
+    background-color: green;
+  }
+</style>
+<div class="ui segment student-source">
+  <table class="ui selectable teal sortable celled table">
+    <thead>
+      <tr>
+        <th data-width="3" class="three wide center sorted ascending">姓名</th>
+        <th data-width="7" class="seven wide center aligned">费用说明</th>
+        <th data-width="2" class="two wide center aligned">款项金额</th>
+        <th data-width="4" class="four wide center aligned">状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @fees.each do |fee| %>
+      <% fee_rate = fee.total_paid * 100 / fee.amount %>
+      <tr class="<%= fee.student.intention.current_status %>">
+        <% if fee.student.id_card.present? %>
+        <td class="middle aligned">
+            <%= link_to fee.student.name, student_path(fee.student), target: '_blank' %>
+        </td>
+        <% else %>
+        <td class="middle aligned" style="color: red;">
+          <%= link_to fee.student.name, student_path(fee.student), target: '_blank' %>
+        </td>
+        <% end %>
+
+        <td class="middle aligned">
+          <%= fee.remark %>
+        </td>
+        <td class="middle right aligned"><%= number_to_currency(fee.amount, precision: 2, unit: '') %></td>
+        <td class="middle center aligned">
+          <div class="prog-container">
+            <div class="prog-text<%= ' warning' if !(0..100).include?(fee_rate) %>">
+              <% if fee.amount == fee.total_paid %>
+              100%
+              <% else %>
+              <%= "#{number_to_currency(fee_rate, precision: 2, unit: '')}%" %>
+              <% end %>
+            </div>
+            <div class="prog-bar<%= ' warning' if !(0..100).include?(fee_rate) %>" style="width: <%= fee_rate > 100 ? '100' : fee_rate.round(0) %>%;">
+            </div>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $('table').tablesort();
+</script>
