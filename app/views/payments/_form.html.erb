@@ -1,3 +1,4 @@
+<div style="" id="data_park"></div>
 <div class="ui segment form">
   <div class="inline fields">
     <div class="sixteen wide column field">
@@ -43,7 +44,12 @@
     </div>
   </div>
   <% end %>
-
+  <div class="inline fields">
+    <div class="sixteen wide column field">
+      <%= label_tag :done_at, '日期', style: 'white-space: nowrap;' %>
+      <%= text_field_tag :done_at, Date.today, placeholder: '实际发生收支日期', class: 'datepicker' %>
+    </div>
+  </div>
   <div class="inline fields">
     <div class="sixteen wide column field">
       <%= label_tag :amount, '金额', style: 'white-space: nowrap;' %>
@@ -55,6 +61,9 @@
   <%= hidden_field_tag(:fee_id, @student_id) %>
 </div>
 <script type="text/javascript">
+  $('.datepicker').pickadate({
+    container: '#data_park'
+  });
   var maxPay = <%= @fee.amount %>;
   function  saveFeePayment() {
     var amount = parseFloat($('#payment_amount').val());
@@ -63,6 +72,7 @@
         pay_mode = $('#pay_mode').val(),
         pay_account = $('#pay_account').val(),
         get_mode = $('#get_mode').val(),
+        done_at = $('#done_at').val(),
         get_account = $('#get_account').val();
     if ( amount > maxPay - total_paid ) {
       alert('过账金额超过费用额（' + (maxPay - total_paid) + '元），请重新调整');
@@ -76,7 +86,8 @@
       'get_account': get_account,
       'amount': parseFloat(amount),
       'fee_id': <%= @fee_id %>,
-      'student_id': <%= @student_id %>
+      'student_id': <%= @student_id %>,
+      'done_at': done_at
     }).success(function(data) {
       if (data && data.error_code && data.error_code == '0') {
         $('.ui.modal.fee-payment').modal('hide');

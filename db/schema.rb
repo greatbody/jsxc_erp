@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019150646) do
+ActiveRecord::Schema.define(version: 20161021131032) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 20161019150646) do
     t.integer  "student_id",  limit: 4
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
+    t.date     "done_at"
   end
 
   add_index "payments", ["fee_id"], name: "index_payments_on_fee_id", using: :btree
