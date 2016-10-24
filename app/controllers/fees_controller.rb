@@ -13,6 +13,20 @@ class FeesController < ApplicationController
     end
   end
 
+  def new_exams
+    @student_id = params[:student_id]
+    @student = Student.find(@student_id)
+
+    @student.fees.build({ amount: 120, fee_type: 'kaoshi', fee_mode: 'zhichu', remark: "#{@student.name} 的科目一考试费" }).save
+    @student.fees.build({ amount: 150, fee_type: 'kaoshi', fee_mode: 'zhichu', remark: "#{@student.name} 的科目二考试费" }).save
+    @student.fees.build({ amount: 240, fee_type: 'kaoshi', fee_mode: 'zhichu', remark: "#{@student.name} 的科目三及制证费" }).save
+
+    @fees = @student.fees
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
     @student = Student.find(params[:student_id])
     @fee = @student.fees.build(fee_params)

@@ -62,6 +62,11 @@
           <div class="ui teal button">新建费用</div>
           <% end %>
         </div>
+        <div class="four wide column field">
+          <%= link_to new_exams_student_fees_path(@student), remote: true do %>
+          <div class="ui teal button">新建考试费用</div>
+          <% end %>
+        </div>
       </div>
       <div class="ui row">
         <div class="sixteen wide column field" id="fee_list">

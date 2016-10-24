@@ -53,6 +53,9 @@ Rails.application.routes.draw do
     resources :contact_logs
     resources :fees do
       resources :payments
+      collection do
+        get 'new_exams' => :new_exams
+      end
     end
     member do
       post 'update_km1' => :update_km1
