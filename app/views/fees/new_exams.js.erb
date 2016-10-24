@@ -1,1 +1,9 @@
-$('#fee_list').html("<%= j render('fee_list') %>");
+(function() {
+  $.post('/students/<%= @student_id %>/fee_list', {}).success(function(data) {
+    if (!data) {
+      alert('请求数据错误！');
+    } else {
+      $('#fee_list').html(data);
+    }
+  });
+})();
