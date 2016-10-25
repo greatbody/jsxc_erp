@@ -12,7 +12,7 @@
       <%= select_tag(:pay_mode, options_for_select(Payment.pay_modes_for_select, 0)) %>
     </div>
     <div class="ten wide field">
-      <%= text_field_tag :pay_account, @student.phone, placeholder: '账号、卡号等' %>
+      <%= text_field_tag :pay_account, @pay_account, placeholder: '账号、卡号等' %>
     </div>
   </div>
   <div class="inline fields">
@@ -21,7 +21,7 @@
       <%= select_tag(:get_mode, options_for_select(Payment.get_modes_for_select, 0)) %>
     </div>
     <div class="ten wide column field">
-      <%= text_field_tag :get_account, 'dev@jisuxueche.com', placeholder: '账号、卡号等' %>
+      <%= text_field_tag :get_account, @get_account, placeholder: '账号、卡号等' %>
     </div>
   </div>
   <% else %>
@@ -31,7 +31,7 @@
       <%= select_tag(:pay_mode, options_for_select(Payment.pay_modes_for_select, 0)) %>
     </div>
     <div class="ten wide field">
-      <%= text_field_tag :pay_account, 'dev@jisuxueche.com', placeholder: '账号、卡号等' %>
+      <%= text_field_tag :pay_account, @pay_account, placeholder: '账号、卡号等' %>
     </div>
   </div>
   <div class="inline fields">
@@ -40,7 +40,7 @@
       <%= select_tag(:get_mode, options_for_select(Payment.get_modes_for_select, 0)) %>
     </div>
     <div class="ten wide column field">
-      <%= text_field_tag :get_account, '', placeholder: '账号、卡号等' %>
+      <%= text_field_tag :get_account, @get_account, placeholder: '账号、卡号等' %>
     </div>
   </div>
   <% end %>
