@@ -25,7 +25,11 @@
         <div class="ui raised text segment" style="margin-top: 10px;margin-top: 10px;height: 300px;overflow-y: scroll;">
           <div class="ui header thin">待支付费用</div>
           <div class="ui divider thin"></div>
+          <% if current_user.has_role?(:superadmin) || current_user.has_role?(:user) %>
           <%= render 'fee_list' %>
+          <% else %>
+          无权限
+          <% end %>
         </div>
       </div>
     </div>
