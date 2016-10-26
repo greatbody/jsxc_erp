@@ -52,20 +52,27 @@
       // `tablesort:start` callback. Also avoids locking up the browser too much.
       setTimeout(function() {
         self.$sortCells.removeClass(self.settings.asc + ' ' + self.settings.desc);
-        for (var i = 0, length = unsortedValues.length; i < length; i++) {
-        	var currV = unsortedValues[i].replace(/,/g,'').trim();
-        	if (!isNaN(currV)) {
-        		currV = parseFloat(currV);
-        	}	else {
-        		currV = unsortedValues[i];
-        	}
-          sortedMap.push({
-            index: i,
-            cell: cells[i],
-            row: rows[i],
-            value: currV
-          });
-        }
+      	if (th.attr('data-sort') && th.attr('data-sort').toLowerCase() == 'num') {
+	        for (var i = 0, length = unsortedValues.length; i < length; i++) {
+	        	var currV = unsortedValues[i].replace(/,/g,'').trim();
+	        	currV = parseFloat(currV);
+	          sortedMap.push({
+	            index: i,
+	            cell: cells[i],
+	            row: rows[i],
+	            value: currV
+	          });
+	        }
+      	} else {
+	        for (var i = 0, length = unsortedValues.length; i < length; i++) {
+	          sortedMap.push({
+	            index: i,
+	            cell: cells[i],
+	            row: rows[i],
+	            value: currV
+	          });
+	        }
+      	}
 
         sortedMap.sort(function(a, b) {
           if (a.value > b.value) {
