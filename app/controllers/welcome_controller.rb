@@ -26,7 +26,7 @@ class WelcomeController < PcApplicationController
       # 插入每天的联系记录数据
       @student_contact_logs << ContactLog.where("date(created_at) = ?", start).count
     end
-  # for message display
+    # for message display
     @messages = colleact_messages
     @students = Student.joins(:intention).where(intentions: {current_status: 4}).order(signed_at: :desc)
     @stu_wait = @students.where(process: 0)
@@ -35,6 +35,8 @@ class WelcomeController < PcApplicationController
     @stu_km3 = @students.where(process: 3)
     @stu_km4 = @students.where(process: 4)
     @stu_lz = @students.where(process: 5)
+    # pays
+    @fees = Fee.joins(:student).where(students: { identity: 0}).where(fees: { fee_mode: 1 }).where("fees.amount > fees.total_paid")
   end
 
   def demo
