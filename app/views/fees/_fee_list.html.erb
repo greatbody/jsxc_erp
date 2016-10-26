@@ -28,7 +28,9 @@
   <table class="ui selectable teal sortable celled table">
     <thead>
       <tr>
-        <th data-width="3" class="three wide center sorted ascending">姓名</th>
+        <th data-width="1" class="one wide center sorted ascending">姓名</th>
+        <th data-width="1" class="one wide center aligned">出入</th>
+        <th data-width="1" class="one wide center aligned">类别</th>
         <th data-width="7" class="seven wide center aligned">费用说明</th>
         <th data-width="2" class="two wide center aligned">款项金额</th>
         <th data-width="4" class="four wide center aligned">状态</th>
@@ -38,6 +40,7 @@
       <% @fees.each do |fee| %>
       <% fee_rate = fee.total_paid * 100 / fee.amount %>
       <tr class="<%= fee.student.intention.current_status %>">
+        <!-- 姓名 -->
         <% if fee.student.id_card.present? %>
         <td class="middle aligned">
             <%= link_to fee.student.name, student_path(fee.student), target: '_blank' %>
@@ -47,7 +50,19 @@
           <%= link_to fee.student.name, student_path(fee.student), target: '_blank' %>
         </td>
         <% end %>
-
+        <!-- 出入 -->
+        <td class="middle center aligned">
+          <% if fee.shouru? %>
+          <i class="add icon" style="color: green;"></i>
+          <% else %>
+          <i class="minus icon" style="color: red;"></i>
+          <% end %>
+        </td>
+        <!-- 类别 -->
+        <td class="middle center aligned">
+          <%= fee.fee_type_name %>
+        </td>
+        <!-- 备注 -->
         <td class="middle aligned">
           <%= fee.remark %>
         </td>

@@ -21,6 +21,18 @@ class Fee < ActiveRecord::Base
     end
   end
 
+  def fee_mode_ico
+    if fee_mode.nil?
+      ''
+    else
+      if shouru?
+        '+'
+      else
+        '-'
+      end
+    end
+  end
+
   def self.fee_types_for_select
     fee_types.map do |fee_type, _|
       [I18n.t("fee.fee_type.#{fee_type}"), fee_type]

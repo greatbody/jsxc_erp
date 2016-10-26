@@ -1,11 +1,12 @@
 <table class="ui celled table">
   <thead>
     <tr>
-      <th data-width="2" class="two wide center" style="text-align: right;">款项金额</th>
-      <th data-width="2" class="two wide center" style="text-align: right;">完成金额</th>
+      <th data-width="1" class="one wide center" style="text-align: right;">应结</th>
+      <th data-width="1" class="one wide center" style="text-align: right;">已结</th>
+      <th data-width="1" class="one wide center">出入</th>
       <th data-width="2" class="two wide center">类型</th>
       <th data-width="4" class="four wide center">状态</th>
-      <th data-width="4" class="four wide center">备注</th>
+      <th data-width="5" class="five wide center">备注</th>
       <th data-width="2" class="two wide center">缴纳</th>
     </tr>
   </thead>
@@ -14,13 +15,23 @@
     <% fee_rate = fee.total_paid * 100 / fee.amount %>
     <% disp_rate = (0..100).include?(fee_rate) ? fee_rate : 100 %>
     <tr>
+      <!-- 应结 -->
       <td style="text-align: right;<%= "color: #fff;background-color: #4faf4f;" if fee.is_done? %>">
         <%= number_to_currency(fee.amount, precision: 2, unit: "") %>
       </td>
+      <!-- 已结 -->
       <td style="text-align: right;<%= "color: #fff;background-color: #4faf4f;" if fee.is_done? %>">
         <%= number_to_currency(fee.total_paid, precision: 2, unit: "") %>
       </td>
-      <td><%= "#{fee.fee_mode_name} - #{fee.fee_type_name}" %></td>
+      <!-- 出入 -->
+      <td class="middle center aligned">
+        <% if fee.shouru? %>
+        <i class="add icon" style="color: green;"></i>
+        <% else %>
+        <i class="minus icon" style="color: red;"></i>
+        <% end %>
+      </td>
+      <td><%= fee.fee_type_name %></td>
       <td>
         <div class="prog-container">
           <div class="prog-text<%= ' warning' if !(0..100).include?(fee_rate) %>">
