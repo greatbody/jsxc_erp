@@ -69,7 +69,7 @@
 	            index: i,
 	            cell: cells[i],
 	            row: rows[i],
-	            value: currV
+	            value: unsortedValues[i]
 	          });
 	        }
       	}
