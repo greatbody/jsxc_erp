@@ -65,7 +65,7 @@
     container: '#data_park'
   });
   var maxPay = <%= @fee.amount %>;
-  function  saveFeePayment() {
+  function  saveFeePayment(contaxt) {
     var amount = parseFloat($('#payment_amount').val());
     var total_paid = parseFloat($('#total_paid').val());
     var name = $('#name').val(),
@@ -89,6 +89,8 @@
       'student_id': <%= @student_id %>,
       'done_at': done_at
     }).success(function(data) {
+      $(contaxt).find('.actions').removeAttr('status');
+      window.flash.hide();
       if (data && data.error_code && data.error_code == '0') {
         $('.ui.modal.fee-payment').modal('hide');
         //整个更新
@@ -97,6 +99,8 @@
         alert('保存出错，请联系管理员！');
       }
     }).error(function(data) {
+      $(contaxt).find('.actions').removeAttr('status');
+      window.flash.hide();
       alert('保存出错，请联系管理员！');
     });
   }
