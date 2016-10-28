@@ -58,8 +58,8 @@
     <div class="ui grid grid-fee" data-student-id = "<%= @student.id %>">
       <div class="ui row">
         <div class="four wide column field">
-          <%= link_to new_student_fee_path(@student), remote: true do %>
-          <div class="ui teal button">新建费用</div>
+          <%= link_to new_student_fee_path(@student), remote: true, class: 'btn-link' do %>
+          <div class="ui teal button" style="margin-right: 0;">新建费用</div>
           <% end %>
         </div>
         <div class="four wide column field">
