@@ -38,7 +38,13 @@
   </thead>
   <tbody>
     <% @fees.each do |fee| %>
-    <% fee_rate = fee.total_paid * 100 / fee.amount %>
+    <%
+      if fee.total_paid == fee.amount
+        fee_rate = 100
+      else
+        fee_rate = fee.total_paid * 100 / fee.amount
+      end
+    %>
     <tr class="<%= fee.student.intention.current_status %>">
       <!-- 姓名 -->
       <% if fee.student.id_card.present? %>

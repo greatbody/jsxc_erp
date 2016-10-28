@@ -12,7 +12,13 @@
   </thead>
   <tbody>
     <% @fees.each do |fee| %>
-    <% fee_rate = fee.total_paid * 100 / fee.amount %>
+    <%
+      if fee.total_paid == fee.amount
+        fee_rate = 100
+      else
+        fee_rate = fee.total_paid * 100 / fee.amount
+      end
+    %>
     <% disp_rate = (0..100).include?(fee_rate) ? fee_rate : 100 %>
     <tr>
       <!-- 应结 -->
