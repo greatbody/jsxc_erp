@@ -7,7 +7,14 @@ $('.ui.modal.fee-new')
       //return false;
     },
     onApprove : function() {
-      saveFee();
+      if ($(this).find('.actions').attr('status') == 'submitting') {
+        //not close not moving on
+        return false;
+      }
+      $(this).find('.actions').attr('status', 'submitting');
+      console.log((new Date));
+      window.flash.show('正在处理...');
+      saveFee(this);
       return false;
     }
   })

@@ -24,13 +24,15 @@
   </div>
 </div>
 <script type="text/javascript">
-  function  saveFee() {
+  function saveFee(contaxt) {
     $.post('/students/<%= @student_id %>/fees', {
       'amount': $('#fee_price').val(),
       'fee_type': $('#fee_type').val(),
       'fee_mode': $('#fee_mode').val(),
       'remark': $('#remark').val()
     }).success(function(data) {
+      $(contaxt).find('.actions').removeAttr('status');
+      window.flash.hide();
       if (data && data.error_code && data.error_code == '0') {
         $('.ui.modal.fee-new').modal('hide');
         //整个更新
@@ -39,6 +41,8 @@
         alert('保存出错，请联系管理员！');
       }
     }).error(function(data) {
+      $(contaxt).find('.actions').removeAttr('status');
+      window.flash.hide();
       alert('保存出错，请联系管理员！');
     });
   }

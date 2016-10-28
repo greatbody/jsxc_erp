@@ -42,7 +42,7 @@ window.setTimeout = function(callback, timeout, param)　　 {　　
         'tagName': 'div',
         'attributes': {
           'id': id,
-          'style': 'display: none;z-index: 999;position: fixed;left: ' + left + 'px;top: ' + top + 'px;background-color: #a6a6a6;opacity: 0.9;width: ' + width + 'px;height: ' + height + 'px;border-radius: 5px;'
+          'style': 'display: none;z-index: 9999;position: fixed;left: ' + left + 'px;top: ' + top + 'px;background-color: #a6a6a6;opacity: 0.9;width: ' + width + 'px;height: ' + height + 'px;border-radius: 5px;'
         },
         'children': [{
           'tagName': 'img',

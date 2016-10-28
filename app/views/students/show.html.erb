@@ -305,6 +305,24 @@
 </div>
 <%= render 'upload_id_card' %>
 <script type="text/javascript">
+  (function() {
+    window.flash = pages.common.showFlashText('loading');
+    window.flash.hide();
+    $("[data-remote='true']").bind('ajax:before', function() {
+      if ($(this).attr('disabled') == 'disabled') {
+        return false;
+      }
+      $(this).attr('disabled', 'disabled');
+      window.flash.show('正在加载...');
+    }).bind('ajax:success', function(){
+      window.flash.hide();
+      $(this).removeAttr("disabled");
+    }).bind('ajax:after', function(){
+      window.flash.hide();
+      $(this).removeAttr("disabled");
+    });
+  })();
+
   var pageOperation = {
     current_card: '',
     releaseModel: function(img_url) {
