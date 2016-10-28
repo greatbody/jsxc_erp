@@ -5,6 +5,10 @@ class Fee < ActiveRecord::Base
   belongs_to :student
   has_many :payments
 
+  validates :amount, numericality: true, presence: true
+  validates :fee_type, inclusion: { in: ['baoming', 'tijian', 'kaoshi', 'qita'] }
+  validates :fee_mode, inclusion: { in: ['shouru', 'zhichu'] }
+
   def fee_type_name
     if fee_type.nil?
       ''
