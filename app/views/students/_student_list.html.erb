@@ -1,3 +1,6 @@
+<script type="text/javascript">
+  window.flash.show('正在载入...');
+</script>
 <style type="text/css">
   span.slow {
     padding: 2px;
@@ -25,34 +28,85 @@
   }
 </style>
 <div class="ui segment student-source">
-  <table class="ui teal sortable celled table">
+  <table class="ui fixed teal sortable celled table student-table">
     <thead>
       <tr>
-        <th class="one wide center sorted ascending">姓名</th>
-        <th class="one wide center aligned">性别</th>
-        <th class="two wide center aligned">联系电话</th>
-        <th class="two wide center aligned">状态</th>
-        <th class="two wide center aligned">进度</th>
-        <th class="two wide center aligned">报名日期</th>
-        <th class="three wide center aligned">教练</th>
-        <th class="three wide center aligned">操作</th>
+        <th data-width="1" class="one wide center sorted ascending">姓名</th>
+        <th data-width="1" class="one wide center aligned">性别</th>
+        <th data-width="2" class="two wide center aligned">联系电话</th>
+        <th data-width="1" class="one wide center aligned">进度</th>
+        <th data-width="4" class="four wide center aligned">费项</th>
+        <th data-width="2" class="two wide center aligned">报名日期</th>
+        <th data-width="2" class="two wide center aligned">教练</th>
+        <th data-width="3" class="three wide center aligned">操作</th>
       </tr>
     </thead>
     <tbody>
       <% @students.each do |st| %>
       <tr class="<%= st.intention.current_status %>">
+        <!-- 姓名 -->
         <% if st.id_card.present? %>
         <td class="middle aligned"><%= st.name %></td>
         <% else %>
         <td class="middle aligned" style="color: red;"><%= st.name %></td>
         <% end %>
-        <td class="middle center aligned"><%= st.gender %><% if st.is_slow? %><span class="slow">慢</span><% end %></td>
+        <!-- 性别 -->
+        <td class="middle center aligned">
+          <%= st.gender %><% if st.is_slow? %><span class="slow">慢</span><% end %>
+        </td>
+        <!-- 联系电话 -->
         <td class="middle center aligned" <%= st.is_local_phone? ? '' : 'style=color:red;' %>>
           <%= st.phone_divided.html_safe %>
         </td>
-        <td class="middle center aligned"><%= st.intention.current_status_text %><span class="unlocked<%= st.is_unlocked? ? ' done' : '' %>">锁</span><span class="trained<%= st.is_trained? ? ' done' : '' %>">消</span><span class="trained<%= st.swift_number.present? ? ' done' : '' %>">流</span>
+        <!-- 进度 -->
+        <td class="middle center aligned"><%= Student.processes[st.process] %></td>
+        <!-- 费项 -->
+        <td class="middle center aligned fee-details-td">
+          <div style="display: block;max-height: 120px;overflow-y: auto;" class="fee-details">
+            <% st.fees.each do |fee| %>
+            <%
+            if fee.total_paid == fee.amount
+              fee_rate = 100
+            else
+              fee_rate = fee.total_paid * 100 / fee.amount
+            end
+            %>
+            <% disp_rate = (0..100).include?(fee_rate) ? fee_rate : 100 %>
+            <div style="padding: 2px;">
+              <div style="display: table-cell;vertical-align: middle;">
+              <% if fee.shouru? %>
+              <i class="add icon" style="color: green;"></i>
+              <% else %>
+              <i class="minus icon" style="color: red;"></i>
+              <% end %>
+              </div>
+              <div style="width: 20%;display: table-cell;vertical-align: middle;">
+                <%= fee.fee_type_name %>
+              </div>
+              <div style="width: 80%;display: table-cell;vertical-align: middle;">
+                <div class="prog-container">
+                  <div class="prog-text<%= ' warning' if !(0..100).include?(fee_rate) %>">
+                    <% if fee.amount == fee.total_paid %>
+                    100%
+                    <% else %>
+                    <%= "#{number_to_currency(fee_rate, precision: 2, unit: '')}%" %>
+                    <% end %>
+                  </div>
+                  <div class="prog-bar<%= ' warning' if !(0..100).include?(fee_rate) %>" style="width: <%= disp_rate %>%;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <div style="background-color: #ccc;display: none;cursor: pointer;" class="pointer down">
+            <i class="angle down icon"></i>
+          </div>
+          <div style="background-color: #ccc;display: none;cursor: pointer;" class="pointer up">
+            <i class="angle up icon"></i>
+          </div>
         </td>
-        <td class="middle center aligned"><%= st.process_text %></td>
+        <!-- 报名日期 -->
         <td class="middle center aligned">
           <% if st.signed_at.present? %>
           <%= "#{st.signed_at.to_date.to_s(:db)}" %>
@@ -60,13 +114,16 @@
           暂无
           <% end %>
         </td>
+        <!-- 教练 -->
         <td class="middle aligned">
           <% if st.coach.present? %>
-          <%= "#{st.coach.name}[#{st.coach.phone}]" %>
+          <i class="text telephone icon" data-content="<%= st.coach.phone %>"></i>
+          <%= st.coach.name %>
           <% else %>
           暂无
           <% end %>
         </td>
+        <!-- 操作 -->
         <td class="middle aligned">
           <%= link_to '意向', intention_path(st.intention), { class: 'small-button', target: '_blank' } %>
           <%= link_to '资料', student_path(st), { class: 'small-button', target: '_blank' } %>
@@ -84,5 +141,26 @@
 </div>
 
 <script type="text/javascript">
-  $('table').tablesort();
+  $('table.student-table').tablesort();
+  $('.telephone').popup();
+  setTimeout(function() {
+    $('td.fee-details-td').each(function() {
+      var td = this;
+      var fee_details = $(td).find('.fee-details')[0];
+      if(fee_details && (fee_details.scrollHeight > fee_details.clientHeight || fee_details.offsetHeight > fee_details.clientHeight)) {
+        $(td).find('.pointer.down').show();
+      }
+    });
+    window.flash.hide();
+  }, 100);
+  $('.pointer.down').on('click', function() {
+    this.previousElementSibling.style.removeProperty('max-height');
+    $(this).hide();
+    $(this.nextElementSibling).show();
+  });
+  $('.pointer.up').on('click', function() {
+    this.previousElementSibling.previousElementSibling.style.maxHeight = '120px';
+    $(this).hide();
+    $(this.previousElementSibling).show();
+  });
 </script>
