@@ -59,7 +59,6 @@ Rails.application.routes.draw do
     end
     member do
       post 'update_km1' => :update_km1
-      post 'update_km' => :update_km
       post 'fee_list' => :fee_list
     end
     collection do

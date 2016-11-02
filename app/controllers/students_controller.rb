@@ -3,7 +3,6 @@ class StudentsController < PcApplicationController
   before_action :set_student, only: [
     :show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card, 
     :update_km1, :fee_list]
-  before_action :set_exam_record, only: [:update_km]
   load_and_authorize_resource
   def index
     @students = Student.all.order(signed_at: :desc)
@@ -155,14 +154,6 @@ class StudentsController < PcApplicationController
     end
   end
 
-  def update_km
-    if @exam_record.update(params_update_km)
-      render json: { msg_code: 'success' }
-    else
-      render json: { msg_code: 'error', msg_text: '更新错误，请联系18771024287！' }
-    end
-  end
-
   def fee_list
     @fees = @student.fees
     render :partial => "fee_list"
@@ -175,11 +166,7 @@ class StudentsController < PcApplicationController
   end
 
   def params_student
-    params.require(:student).permit(:phone, :name, :sex, :address, :unit, :id_card, :coach_id, :is_local, :swift_number, :train_service_id, :process, :qq, :weixin, :is_local_phone, :is_slow, :is_unlocked, :is_trained)
-  end
-
-  def params_update_km
-    params.require(:data).permit(:kemu, :kc_names, :begin_match_at, :end_match_at, :kc_name, :ks_at, :ks_cc, :status)
+    params.require(:student).permit(:phone, :name, :sex, :address, :unit, :id_card, :coach_id, :is_local, :swift_number, :train_service_id, :process, :qq, :weixin, :is_local_phone, :is_slow, :is_unlocked, :is_trained, :remarks)
   end
 
   def set_student
