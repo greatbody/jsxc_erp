@@ -62,8 +62,11 @@
 </div>
 <script type="text/javascript">
   $('.datepicker').pickadate({
-    container: '#data_park'
+    container: '#data_park',
+    selectMonths: true,
+    selectYears: true
   });
+
   var maxPay = <%= @fee.amount %>;
   function  saveFeePayment(contaxt) {
     var amount = parseFloat($('#payment_amount').val());
