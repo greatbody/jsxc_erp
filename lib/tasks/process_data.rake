@@ -63,13 +63,39 @@ namespace :process do
     end
   end
 
+  task :build_pay_units => :environment do
+    p '开始处理数据'
+    Student.where.not(signed_at: nil).each do |student|
+      unless PayUnit.find_by_phone(student.phone)
+        p "处理 #{student.name} ( #{student.phone} )"
+        pay_unit = PayUnit.create(
+          name: student.name + ' 的支付宝',
+          remarks: '系统创建的学员账户',
+          phone: student.phone,
+          student: student,
+          unit_type: 't_student'
+        )
+        pay_account = PayAccount.create(
+          name: student.name,
+          account: student.phone,
+          host_by: '支付宝',
+          account_type: 't_net',
+          student: student
+        )
+        pay_unit.pay_accounts << pay_account
+      end
+    end
+    p '处理完成'
+  end
+
   # 调用实例
-  # bundle exec rake fix:add_role role_name='trys'
+  # bundle exec rake process:add_role role_name='trys'
   # task :add_role => :environment do |t, args|
   #   role_name = ENV['role_name']
   #   Role.create(name: role_name)
   #   p "#{role_name} 添加完成"
   # end
+  #
 
   # task :update_student_birthday => :environment do |t, args|
   #   Student.where("LENGTH(id_card) = 18 and birthday is null").each do |student|
