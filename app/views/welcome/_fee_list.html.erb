@@ -48,11 +48,11 @@
     <tr class="<%= fee.student.intention.current_status %>">
       <!-- 姓名 -->
       <% if fee.student.id_card.present? %>
-      <td class="middle aligned" title="<%= fee.student %>">
+      <td class="middle aligned" title="<%= fee.student.name %>">
           <%= link_to fee.student.name, student_path(fee.student), target: '_blank' %>
       </td>
       <% else %>
-      <td class="middle aligned" style="color: red;" title="<%= fee.student %>">
+      <td class="middle aligned" style="color: red;" title="<%= fee.student.name %>">
         <%= link_to fee.student.name, student_path(fee.student), target: '_blank' %>
       </td>
       <% end %>
