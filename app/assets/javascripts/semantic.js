@@ -4714,6 +4714,7 @@ $.fn.dropdown = function(parameters) {
         },
 
         filter: function(query) {
+          //下拉框search的核心
           var
             searchTerm = (query !== undefined)
               ? query
@@ -4750,6 +4751,7 @@ $.fn.dropdown = function(parameters) {
             return;
           }
           if(settings.apiSettings) {
+            //如果是api搜索，则
             if( module.can.useAPI() ) {
               module.queryRemote(searchTerm, function() {
                 afterFiltered();
@@ -4807,7 +4809,8 @@ $.fn.dropdown = function(parameters) {
               : module.get.query(),
             results          =  null,
             escapedTerm      = module.escape.regExp(searchTerm),
-            beginsWithRegExp = new RegExp('^' + escapedTerm, 'igm')
+            //beginsWithRegExp = new RegExp('^' + escapedTerm, 'igm')
+            beginsWithRegExp = new RegExp(escapedTerm, 'igm')
           ;
           // avoid loop if we're matching nothing
           if( module.has.query() ) {
@@ -7521,6 +7524,9 @@ $.fn.dropdown.settings.templates = {
     }
     html += '<div class="menu">';
     $.each(select.values, function(index, option) {
+      if (!option.value) {
+        option.name = '&nbsp;';
+      }
       html += (option.disabled)
         ? '<div class="disabled item" data-value="' + option.value + '">' + option.name + '</div>'
         : '<div class="item" data-value="' + option.value + '">' + option.name + '</div>'
