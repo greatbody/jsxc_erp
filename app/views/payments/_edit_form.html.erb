@@ -53,8 +53,8 @@
         get_mode = $('#get_mode').val(),
         done_at = $('#done_at').val(),
         get_account = $('#get_account').val(),
-        get_unit_id = $('#pay_unit_id').val(),
-        pay_unit_id = $('#get_unit_id').val();
+        pay_unit_id = $('#pay_unit_id').val(),
+        get_unit_id = $('#get_unit_id').val();
     if ( amount > maxPay - total_paid ) {
       alert('过账金额超过费用额（' + (maxPay - total_paid) + '元），请重新调整');
       window.flash.hide();
