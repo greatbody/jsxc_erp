@@ -110,3 +110,15 @@ zh-CN:
       g_alipay: '支付宝'
       g_bank: '银行卡'
       g_cash: '现金'
+  pay_unit:
+    unit_type:
+      t_student: '学员'
+      t_coach: '教练'
+      t_staff: '职工'
+      t_company: '单位'
+      t_gov: '政府'
+  pay_account:
+    account_type:
+      t_net: '网络账户'
+      t_bank: '银行账户'
+      t_cash: '现金账户'

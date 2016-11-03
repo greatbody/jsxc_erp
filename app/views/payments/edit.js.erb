@@ -1,5 +1,5 @@
-$('#fee_payment').html("<%= j render('form') %>");
-$('.ui.modal.fee-payment')
+$('#fee_payment_edit').html("<%= j render('edit_form') %>");
+$('.ui.modal.fee-payment-edit')
   .modal({
     closable  : false,
     onDeny    : function(){
@@ -14,7 +14,7 @@ $('.ui.modal.fee-payment')
       $(this).find('.actions').attr('status', 'submitting');
       console.log((new Date));
       window.flash.show('正在处理...');
-      saveFeePayment(this);
+      updateFeePayment(this);
       return false;
     }
   })

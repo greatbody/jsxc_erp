@@ -5,6 +5,8 @@ class Payment < ActiveRecord::Base
   belongs_to :user
   belongs_to :student
   belongs_to :fee
+  belongs_to :pay_unit, class_name: 'PayUnit'
+  belongs_to :get_unit, class_name: 'PayUnit'
 
   def self.pay_modes_for_select
     pay_modes.map do |pay_mode, _|

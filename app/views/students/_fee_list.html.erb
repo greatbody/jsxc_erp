@@ -1,12 +1,12 @@
 <table class="ui fixed celled table">
   <thead>
     <tr>
-      <th data-width="2" class="two wide center" style="text-align: right;">应结</th>
-      <th data-width="2" class="two wide center" style="text-align: right;">已结</th>
+      <th data-width="1" class="one wide center" style="text-align: right;">应结</th>
+      <th data-width="1" class="one wide center" style="text-align: right;">已结</th>
       <th data-width="1" class="one wide center">出入</th>
       <th data-width="1" class="one wide center">类型</th>
       <th data-width="3" class="three wide center">状态</th>
-      <th data-width="5" class="five wide center">备注</th>
+      <th data-width="7" class="seven wide center">备注</th>
       <th data-width="2" class="two wide center">缴纳</th>
     </tr>
   </thead>
@@ -22,11 +22,11 @@
     <% disp_rate = (0..100).include?(fee_rate) ? fee_rate : 100 %>
     <tr>
       <!-- 应结 -->
-      <td style="text-align: right;<%= "color: #fff;background-color: #4faf4f;" if fee.is_done? %>">
+      <td style="text-align: right;<%= "color: #fff;background-color: #4faf4f;" if fee.is_done? %>;padding-right: 5px;padding-left: 5px;">
         <%= number_to_currency(fee.amount, precision: 2, unit: "") %>
       </td>
       <!-- 已结 -->
-      <td style="text-align: right;<%= "color: #fff;background-color: #4faf4f;" if fee.is_done? %>">
+      <td style="text-align: right;<%= "color: #fff;background-color: #4faf4f;" if fee.is_done? %>;padding-right: 5px;padding-left: 5px;">
         <%= number_to_currency(fee.total_paid, precision: 2, unit: "") %>
       </td>
       <!-- 出入 -->
@@ -37,7 +37,9 @@
         <i class="minus icon" style="color: red;"></i>
         <% end %>
       </td>
+      <!-- 类型 -->
       <td><%= fee.fee_type_name %></td>
+      <!-- 总缴纳进度 -->
       <td>
         <div class="prog-container">
           <div class="prog-text<%= ' warning' if !(0..100).include?(fee_rate) %>">
@@ -51,7 +53,31 @@
           </div>
         </div>
       </td>
-      <td title="<%= fee.remark %>"><%= fee.remark %></td>
+      <!-- 备注 -->
+      <td title="<%= fee.remark %>">
+        <%= fee.remark %>
+        <table class="ui fixed celled table">
+          <tbody>
+            <% if fee.payments.count > 0 %>
+              <% fee.payments.each do |payment| %>
+              <tr>
+                <td class="ten wide center"><%= payment.name %></td>
+                <td class="six wide center">
+                  <%= link_to edit_student_fee_payment_path(@student, fee, payment), remote: true do %>
+                    <div class="ui teal button">更改</div>
+                  <% end %>
+                </td>
+              </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td class="sixteen wide center">无支付记录</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </td>
       <td>
         <% if fee.is_done? || (fee.total_paid > fee.amount) %>
           <div class="ui disabled button">缴纳</div>

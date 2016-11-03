@@ -52,7 +52,9 @@ Rails.application.routes.draw do
     resources :residence_cards
     resources :contact_logs
     resources :fees do
-      resources :payments
+      resources :payments do
+        post 'update_post' => :update_post
+      end
       collection do
         get 'new_exams' => :new_exams
       end

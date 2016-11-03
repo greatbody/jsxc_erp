@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  before_action :set_payment, only: [:show, :edit, :update_post]
+
   def index
   end
 
@@ -61,11 +63,47 @@ class PaymentsController < ApplicationController
   end
 
   def edit
+    @payment = Payment.find(params[:id])
+    @fee = Fee.find(params[:fee_id])
+    @student_id = params[:student_id]
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update_post
+    @fee = Fee.find(params[:fee_id])
+    @old_payment = Payment.find(params[:id])
+    @payment.update(payment_params)
+    begin
+      ActiveRecord::Base.transaction do
+        @fee.total_paid = @fee.total_paid - @old_payment.amount
+        if @fee.amount - @fee.total_paid == @payment.amount
+          @fee.is_done = true
+        else
+          @fee.is_done = false
+        end
+        @fee.total_paid = @fee.total_paid + @payment.amount
+        raise ActiveRecord::Rollback if !@fee.save
+        raise ActiveRecord::Rollback if !@payment.save
+      end
+      respond_to do |format|
+        format.json { render json: { error_code: '0' } }
+      end
+    rescue Exception => e
+      respond_to do |format|
+        format.json { render json: { error_code: '1' } }
+      end
+    end
   end
 
   private
 
   def payment_params
-    params.permit(:name, :pay_mode, :pay_account, :get_mode, :get_account, :amount, :fee_id, :student_id, :done_at)
+    params.permit(:name, :pay_mode, :pay_account, :get_mode, :get_account, :amount, :fee_id, :student_id, :done_at, :pay_unit_id, :get_unit_id)
+  end
+
+  def set_payment
+    @payment = Payment.find(params[:id])
   end
 end

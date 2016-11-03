@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102062534) do
+ActiveRecord::Schema.define(version: 20161103013602) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -130,6 +130,32 @@ ActiveRecord::Schema.define(version: 20161102062534) do
   add_index "intentions", ["student_source_id"], name: "index_intentions_on_student_source_id", using: :btree
   add_index "intentions", ["user_id"], name: "index_intentions_on_user_id", using: :btree
 
+  create_table "pay_accounts", force: :cascade do |t|
+    t.string   "name",         limit: 255, default: ""
+    t.string   "account",      limit: 255
+    t.string   "host_by",      limit: 255
+    t.integer  "account_type", limit: 4
+    t.integer  "pay_unit_id",  limit: 4
+    t.integer  "student_id",   limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "pay_accounts", ["pay_unit_id"], name: "index_pay_accounts_on_pay_unit_id", using: :btree
+  add_index "pay_accounts", ["student_id"], name: "index_pay_accounts_on_student_id", using: :btree
+
+  create_table "pay_units", force: :cascade do |t|
+    t.string   "name",       limit: 255,   default: ""
+    t.text     "remarks",    limit: 65535
+    t.string   "phone",      limit: 255,   default: ""
+    t.integer  "student_id", limit: 4
+    t.integer  "unit_type",  limit: 4,     default: 0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "pay_units", ["student_id"], name: "index_pay_units_on_student_id", using: :btree
+
   create_table "payments", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "pay_mode",    limit: 255,                         default: "0"
@@ -143,6 +169,8 @@ ActiveRecord::Schema.define(version: 20161102062534) do
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
     t.date     "done_at"
+    t.integer  "pay_unit_id", limit: 4
+    t.integer  "get_unit_id", limit: 4
   end
 
   add_index "payments", ["fee_id"], name: "index_payments_on_fee_id", using: :btree
@@ -414,6 +442,9 @@ ActiveRecord::Schema.define(version: 20161102062534) do
   add_foreign_key "intentions", "student_sources"
   add_foreign_key "intentions", "students"
   add_foreign_key "intentions", "users"
+  add_foreign_key "pay_accounts", "pay_units"
+  add_foreign_key "pay_accounts", "students"
+  add_foreign_key "pay_units", "students"
   add_foreign_key "payments", "fees"
   add_foreign_key "payments", "students"
   add_foreign_key "payments", "users"
