@@ -1,0 +1,168 @@
+<script type="text/javascript">
+(function() {
+  window.flash = pages.common.showFlashText('loading');
+  window.flash.hide();
+  $("[data-remote='true']").bind('ajax:before', function() {
+    if ($(this).attr('disabled') == 'disabled') {
+      return false;
+    }
+    $(this).attr('disabled', 'disabled');
+    window.flash.show('正在加载...');
+  }).bind('ajax:success', function() {
+    window.flash.hide();
+    $(this).removeAttr("disabled");
+  }).bind('ajax:after', function() {
+    window.flash.hide();
+    $(this).removeAttr("disabled");
+  });
+})();
+
+var pageOperation = {
+  current_card: '',
+  releaseModel: function(img_url) {
+    switch (this.current_card) {
+      case 'id_card':
+        {
+          $('.ui.modal.id-card').modal('hide');
+          if (!img_url) break;
+          $('#id_card_preview .img').attr('src', img_url);
+          $('#id_card_preview .img').attr('onload', 'pages.common.setImgCenter(this);');
+          $('.id-card .img').attr('src', img_url);
+          break;
+        }
+      case 'id_card_back':
+        {
+          $('.ui.modal.id-card-back').modal('hide');
+          if (!img_url) break;
+          $('#id_card_back_preview .img').attr('src', img_url);
+          $('#id_card_back_preview .img').attr('onload', 'pages.common.setImgCenter(this);');
+          $('.id-card-back .img').attr('src', img_url);
+          break;
+        }
+    }
+    setTimeout('_resize_img()', 500);
+  }
+};
+
+function _bind_file_select() {
+  //id card
+  $('#id_card_pic').on('click', function() {
+    $('#student_id_card_pic').click();
+  });
+  pages.common.imgView('student_id_card_pic', 'id_card_preview', function(img, div) {
+    pages.common.setImgCenter(img, div);
+  });
+  //id card back
+  $('#id_card_back_pic').on('click', function() {
+    $('#student_id_card_back_pic').click();
+  });
+  pages.common.imgView('student_id_card_back_pic', 'id_card_back_preview', function(img, div) {
+    pages.common.setImgCenter(img, div);
+  });
+}
+
+function _notify_rc() {
+  var student = $('#student_student_id').val();
+  $.post('/students/notify_got_number', {
+    'id': student
+  }).success(function(data) {
+    if (data.msg_code == 'success') {
+      alert('通知短信发送成功！');
+    } else {
+      alert(data.msg_text);
+    }
+  }).error(function(data) {
+    alert('发送失败，请稍后重试！');
+  });
+}
+
+function _notify_get_rc() {
+  var student = $('#student_student_id').val();
+  $.post('/students/notify_got_card', {
+    'id': student
+  }).success(function(data) {
+    if (data.msg_code == 'success') {
+      alert('取卡短信发送成功！');
+    } else {
+      alert(data.msg_text);
+    }
+  }).error(function(data) {
+    alert('发送失败，请稍后重试！');
+  });
+}
+
+function _bind_form_submit() {
+  $('.submit-id-card').on('click', function() {
+    pageOperation.current_card = 'id_card';
+    return true;
+  });
+
+  $('.submit-id-card-back').on('click', function() {
+    pageOperation.current_card = 'id_card_back';
+    return true;
+  });
+}
+
+function _resize_img() {
+  $('.card-preview img').each(function() {
+    pages.common.setImgCenter(this);
+  });
+
+  $('#id_card_back_preview img').each(function() {
+    pages.common.setImgCenter(this);
+  });
+}
+
+function collectData() {
+  var id = '';
+}
+
+//绑定按钮打开model
+(function() {
+  $('.ui.dropdown').dropdown();
+
+  //启用日期输入
+  $('.datepicker').pickadate();
+
+  $('.btn-id-card').on('click', function() {
+    pages.common.setImgCenter($('#id_card_preview img')[0]);
+    $('.ui.modal.id-card').modal({
+      closable: true,
+      onDeny: function() {
+        return true;
+      },
+      onApprove: function() {
+        return true;
+      }
+    }).modal('show');
+  });
+
+  $('.btn-id-card-back').on('click', function() {
+    pages.common.setImgCenter($('#id_card_back_preview img')[0]);
+    $('.ui.modal.id-card-back').modal({
+      closable: true,
+      onDeny: function() {
+        return true;
+      },
+      onApprove: function() {
+        return true;
+      }
+    }).modal('show');
+  });
+  // 下发居住证信息事件
+  $(document).delegate('.notify-rc-info', 'click', function() {
+    _notify_rc();
+  });
+
+  $(document).delegate('.notify-fetch-rc', 'click', function() {
+    _notify_get_rc();
+  });
+
+  _bind_file_select();
+  _bind_form_submit();
+})();
+
+window.onload = function() {
+  _resize_img();
+}
+</script>
