@@ -3,6 +3,7 @@ class PayUnit < ActiveRecord::Base
 
   belongs_to :student
   has_many :pay_accounts
+  has_many :payments, ->(pay_unit) { unscope(where: :pay_unit_id).where("get_unit_id = ? OR pay_unit_id = ?", pay_unit.id, pay_unit.id) }, class_name: 'Payment'
 
   def self.units_for_select
     units = [['', '']]
