@@ -3,7 +3,9 @@ class PayUnit < ActiveRecord::Base
 
   belongs_to :student
   has_many :pay_accounts
-  has_many :payments, ->(pay_unit) { unscope(where: :pay_unit_id).where("get_unit_id = ? OR pay_unit_id = ?", pay_unit.id, pay_unit.id) }, class_name: 'Payment'
+  # has_many :payments, ->(pay_unit) { unscope(where: :pay_unit_id).where("get_unit_id = ? OR pay_unit_id = ?", pay_unit.id, pay_unit.id) }, class_name: 'Payment'
+  has_many :pay_record, class_name: 'Payment', foreign_key: 'pay_unit_id'
+  has_many :get_record, class_name: 'Payment', foreign_key: 'get_unit_id'
 
   def self.units_for_select
     units = [['', '']]
@@ -11,5 +13,9 @@ class PayUnit < ActiveRecord::Base
       units << ["#{payunit.name} (#{payunit.phone})", payunit.id]
     end
     units
+  end
+
+  def all_payments
+    Payment.where("pay_unit_id = ? OR get_unit_id = ?", id)
   end
 end
