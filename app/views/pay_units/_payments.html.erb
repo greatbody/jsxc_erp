@@ -28,7 +28,7 @@
       </td>
       <!-- 出入 -->
       <td class="middle center aligned">
-        <% if payment.get_unit.id == @pay_unit_id %>
+        <% if payment.get_unit.id == @pay_unit_id.to_i %>
         <i class="add icon" style="color: green;"></i>
         <% else %>
         <i class="minus icon" style="color: red;"></i>
