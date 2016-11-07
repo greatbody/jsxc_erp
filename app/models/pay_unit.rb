@@ -16,6 +16,6 @@ class PayUnit < ActiveRecord::Base
   end
 
   def all_payments
-    Payment.where("pay_unit_id = ? OR get_unit_id = ?", id)
+    Payment.where("pay_unit_id = :id OR get_unit_id = :id", id: id)
   end
 end

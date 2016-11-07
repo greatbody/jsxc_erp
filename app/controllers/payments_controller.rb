@@ -71,6 +71,15 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def report_edit
+    @payment = Payment.find(params[:payment_id])
+    @fee = Fee.find(params[:fee_id])
+    @student_id = params[:student_id]
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def update_post
     @fee = Fee.find(params[:fee_id])
     @old_payment = Payment.find(params[:id])

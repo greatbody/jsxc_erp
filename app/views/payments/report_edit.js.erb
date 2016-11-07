@@ -1,0 +1,22 @@
+$('#fee_payment_edit').html("<%= j render('edit_report_form') %>");
+$('.ui.modal.fee-payment-edit')
+  .modal({
+    closable  : false,
+    onDeny    : function(){
+      //window.alert('Wait not yet!');
+      //return false;
+    },
+    onApprove : function() {
+      if ($(this).find('.actions').attr('status') == 'submitting') {
+        //not close not moving on
+        return false;
+      }
+      $(this).find('.actions').attr('status', 'submitting');
+      console.log((new Date));
+      window.flash.show('正在处理...');
+      updateFeePayment(this);
+      return false;
+    }
+  })
+  .modal('show');
+$('select.dropdown').dropdown();

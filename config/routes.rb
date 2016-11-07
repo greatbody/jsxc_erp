@@ -49,7 +49,12 @@ Rails.application.routes.draw do
   resources :fees, only: [:index] do
     collection do
       get 'should_pay' => :should_pay
+      get 'report' => :report
     end
+  end
+
+  resources :pay_units do
+    get 'payments' => :payments
   end
 
   resources :students do
@@ -58,6 +63,7 @@ Rails.application.routes.draw do
     resources :fees do
       resources :payments do
         post 'update_post' => :update_post
+        get 'report_edit' => :report_edit
       end
       collection do
         get 'new_exams' => :new_exams

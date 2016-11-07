@@ -1,0 +1,4 @@
+<% @pay_units.each_with_index do |unit, index| %>
+<a class="teal item pay-unit<%= ' active' if index == 0 %>" data-pay-unit-id="<%= unit.id %>"><%= unit.name %> <div class="ui teal left pointing label"><%= unit.all_payments.count %></div>
+</a>
+<% end %>

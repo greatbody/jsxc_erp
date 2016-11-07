@@ -53,6 +53,10 @@ class FeesController < ApplicationController
     }
   end
 
+  def report
+    @pay_units = PayUnit.joins("LEFT JOIN payments on payments.pay_unit_id = pay_units.id OR payments.get_unit_id = pay_units.id").where.not(payments: { id: nil }).distinct
+  end
+
   private
 
   def fee_params
