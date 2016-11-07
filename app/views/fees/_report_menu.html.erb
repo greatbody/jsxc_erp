@@ -2,3 +2,5 @@
 <a class="teal item pay-unit<%= ' active' if index == 0 %>" data-pay-unit-id="<%= unit.id %>"><%= unit.name %> <div class="ui teal left pointing label"><%= unit.all_payments.count %></div>
 </a>
 <% end %>
+<a class="teal item pay-unit" data-pay-unit-id="-1">未归类 <div class="ui teal left pointing label"><%= Payment.where("get_unit_id is null or pay_unit_id is null").count %></div>
+</a>
