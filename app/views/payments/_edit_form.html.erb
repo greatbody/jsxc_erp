@@ -3,6 +3,12 @@
   .ui.form .inline.fields .field > .selection.dropdown {
     width: 100%;
   }
+
+  .ui.form .inline.fields .field.old-data {
+    border: solid 1px #ccc;
+    color: #ccc;
+    padding: 4px;
+  }
 </style>
 <div class="ui segment form">
   <div class="inline fields">
@@ -17,9 +23,19 @@
     </div>
   </div>
   <div class="inline fields">
+    <div class="sixteen wide field old-data">
+      <b>原数据：</b><%= @payment.pay_account %>
+    </div>
+  </div>
+  <div class="inline fields">
     <div class="sixteen wide field">
       <%= label_tag :get_unit_id, '收款方', style: 'white-space: nowrap;' %>
       <%= select_tag(:get_unit_id, options_for_select(PayUnit.units_for_select, @payment.get_unit_id), class: 'ui fluid search dropdown') %>
+    </div>
+  </div>
+  <div class="inline fields">
+    <div class="sixteen wide field old-data">
+      <b>原数据：</b><%= @payment.get_account %>
     </div>
   </div>
   <div class="inline fields">

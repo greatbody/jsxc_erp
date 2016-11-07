@@ -22,45 +22,6 @@
       <%= select_tag(:get_unit_id, options_for_select(PayUnit.units_for_select, 0), class: 'ui fluid search dropdown') %>
     </div>
   </div>
-  <% if @fee.shouru? %>
-  <div class="inline fields">
-    <div class="six wide field">
-      <%= label_tag :pay_mode, '付款方', style: 'white-space: nowrap;' %>
-      <%= select_tag(:pay_mode, options_for_select(Payment.pay_modes_for_select, 0)) %>
-    </div>
-    <div class="ten wide field">
-      <%= text_field_tag :pay_account, @pay_account, placeholder: '账号、卡号等' %>
-    </div>
-  </div>
-  <div class="inline fields">
-    <div class="six wide column field">
-      <%= label_tag :get_mode, '收款方', style: 'white-space: nowrap;' %>
-      <%= select_tag(:get_mode, options_for_select(Payment.get_modes_for_select, 0)) %>
-    </div>
-    <div class="ten wide column field">
-      <%= text_field_tag :get_account, @get_account, placeholder: '账号、卡号等' %>
-    </div>
-  </div>
-  <% else %>
-  <div class="inline fields">
-    <div class="six wide field">
-      <%= label_tag :pay_mode, '付款方', style: 'white-space: nowrap;' %>
-      <%= select_tag(:pay_mode, options_for_select(Payment.pay_modes_for_select, 0)) %>
-    </div>
-    <div class="ten wide field">
-      <%= text_field_tag :pay_account, @pay_account, placeholder: '账号、卡号等' %>
-    </div>
-  </div>
-  <div class="inline fields">
-    <div class="six wide column field">
-      <%= label_tag :get_mode, '收款方', style: 'white-space: nowrap;' %>
-      <%= select_tag(:get_mode, options_for_select(Payment.get_modes_for_select, 0)) %>
-    </div>
-    <div class="ten wide column field">
-      <%= text_field_tag :get_account, @get_account, placeholder: '账号、卡号等' %>
-    </div>
-  </div>
-  <% end %>
   <div class="inline fields">
     <div class="sixteen wide column field">
       <%= label_tag :done_at, '日期', style: 'white-space: nowrap;' %>
