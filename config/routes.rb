@@ -46,7 +46,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :fees, only: [:index]
+  resources :fees, only: [:index] do
+    collection do
+      get 'should_pay' => :should_pay
+    end
+  end
 
   resources :students do
     resources :residence_cards

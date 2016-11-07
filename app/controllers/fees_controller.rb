@@ -47,6 +47,12 @@ class FeesController < ApplicationController
   def edit
   end
 
+  def should_pay
+    @fees = Fee.where(is_done: false).zhichu.kaoshi.select { |fee|
+      fee.remark.index(fee.student.process_text)
+    }
+  end
+
   private
 
   def fee_params
