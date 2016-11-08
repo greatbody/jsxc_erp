@@ -21,6 +21,7 @@ class Student < ActiveRecord::Base
   has_many :residence_cards
   has_many :exam_records
   has_many :fees
+  has_one :pay_unit
 
   has_attached_file :avatar, styles: { medium: '300x300>', thumb: '80x80>' }, default_url: '/80x80.png'
   has_attached_file :id_card_pic, styles: { medium: '500x300>', thumb: '250x150>' }, default_url: '/500x300.png'
