@@ -10,7 +10,17 @@ class PayUnit < ActiveRecord::Base
   def self.units_for_select
     units = [['', '']]
     PayUnit.all.each do |payunit|
-      units << ["#{payunit.name} (#{payunit.phone})", payunit.id]
+      if payunit.t_company?
+        units << ["<i class='copyright icon'></i>&nbsp;#{payunit.name}", payunit.id]
+      elsif payunit.t_coach?
+        units << ["<i class='male icon'></i>&nbsp;#{payunit.name}", payunit.id]
+      elsif payunit.t_gov?
+        units << ["<i class='university icon'></i>&nbsp;#{payunit.name}", payunit.id]
+      elsif payunit.t_staff?
+        units << ["<i class='users icon'></i>&nbsp;#{payunit.name}", payunit.id]
+      else
+        units << ["<i class='student icon'></i>&nbsp;#{payunit.name}", payunit.id]
+      end
     end
     units
   end

@@ -19,7 +19,7 @@
   <div class="inline fields">
     <div class="sixteen wide field">
       <%= label_tag :pay_unit_id, '付款方', style: 'white-space: nowrap;' %>
-      <%= select_tag(:pay_unit_id, options_for_select(PayUnit.units_for_select, @payment.pay_unit_id), class: 'ui fluid search dropdown') %>
+      <%= select_tag(:pay_unit_id, options_for_select(PayUnit.units_for_select, @payment.pay_unit_id).html_safe, class: 'ui fluid search dropdown') %>
     </div>
   </div>
   <div class="inline fields">

@@ -5720,9 +5720,10 @@ $.fn.dropdown = function(parameters) {
             $module
               .find('option')
                 .each(function() {
+                  //debugger;
                   var
                     $option  = $(this),
-                    name     = $option.html(),
+                    name     = $option.text(),
                     disabled = $option.attr('disabled'),
                     value    = ( $option.attr('value') !== undefined )
                       ? $option.attr('value')
