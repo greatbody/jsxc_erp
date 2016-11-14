@@ -5,8 +5,12 @@ class Payment < ActiveRecord::Base
   belongs_to :user
   belongs_to :student
   belongs_to :fee
+  belongs_to :pay_account, class_name: 'PayAccount'
+  belongs_to :get_account, class_name: 'PayAccount'
   belongs_to :pay_unit, class_name: 'PayUnit'
   belongs_to :get_unit, class_name: 'PayUnit'
+
+  scope :unclassified, -> { where( "get_unit_id is null or pay_unit_id is null or pay_account_id is null or get_account_id is null" ) }
 
   def self.pay_modes_for_select
     pay_modes.map do |pay_mode, _|

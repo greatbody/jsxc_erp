@@ -17,25 +17,33 @@
     </div>
   </div>
   <div class="inline fields">
-    <div class="sixteen wide field">
+    <div class="eight wide field">
       <%= label_tag :pay_unit_id, '付款方', style: 'white-space: nowrap;' %>
-      <%= select_tag(:pay_unit_id, options_for_select(PayUnit.units_for_select, @payment.pay_unit_id).html_safe, class: 'ui fluid search dropdown') %>
+      <%= select_tag(:pay_unit_id, options_for_select(PayUnit.units_for_select, @payment.pay_unit_id).html_safe, class: 'ui fluid search dropdown pay-unit-id') %>
+    </div>
+    <div class="eight wide field">
+      <%= label_tag :pay_account_id, '账户', style: 'white-space: nowrap;' %>
+      <%= select_tag(:pay_account_id, @payment.pay_account_id, class: 'ui fluid search dropdown pay-account-id') %>
     </div>
   </div>
   <div class="inline fields">
     <div class="sixteen wide field old-data">
-      <b>原数据：</b><%= @payment.pay_account %>
+      <b>原数据：</b><%= @payment.pay_account_desc %>
     </div>
   </div>
   <div class="inline fields">
-    <div class="sixteen wide field">
+    <div class="eight wide field">
       <%= label_tag :get_unit_id, '收款方', style: 'white-space: nowrap;' %>
-      <%= select_tag(:get_unit_id, options_for_select(PayUnit.units_for_select, @payment.get_unit_id), class: 'ui fluid search dropdown') %>
+      <%= select_tag(:get_unit_id, options_for_select(PayUnit.units_for_select, @payment.get_unit_id), class: 'ui fluid search dropdown get-unit-id') %>
+    </div>
+    <div class="eight wide field">
+      <%= label_tag :get_account_id, '账户', style: 'white-space: nowrap;' %>
+      <%= select_tag(:get_account_id, @payment.get_account_id, class: 'ui fluid search dropdown get-account-id') %>
     </div>
   </div>
   <div class="inline fields">
     <div class="sixteen wide field old-data">
-      <b>原数据：</b><%= @payment.get_account %>
+      <b>原数据：</b><%= @payment.get_account_desc %>
     </div>
   </div>
   <div class="inline fields">
@@ -65,12 +73,14 @@
     var total_paid = parseFloat($('#total_paid').val());
     var name = $('#name').val(),
         pay_mode = $('#pay_mode').val(),
-        pay_account = $('#pay_account').val(),
+        pay_account_desc = $('#pay_account_desc').val(),
         get_mode = $('#get_mode').val(),
         done_at = $('#done_at').val(),
-        get_account = $('#get_account').val(),
+        get_account_desc = $('#get_account_desc').val(),
         pay_unit_id = $('#pay_unit_id').val(),
-        get_unit_id = $('#get_unit_id').val();
+        get_unit_id = $('#get_unit_id').val(),
+        pay_account_id = $('#pay_account_id').val(),
+        get_account_id = $('#get_account_id').val();
     if ( amount > maxPay - total_paid ) {
       alert('过账金额超过费用额（' + (maxPay - total_paid) + '元），请重新调整');
       window.flash.hide();
@@ -79,15 +89,17 @@
     $.post('/students/<%= @student_id %>/fees/<%= @fee.id %>/payments/<%= @payment.id %>/update_post', {
       'name': name,
       'pay_mode': pay_mode,
-      'pay_account': pay_account,
+      'pay_account_desc': pay_account_desc,
       'get_mode': get_mode,
-      'get_account': get_account,
+      'get_account_desc': get_account_desc,
       'amount': parseFloat(amount),
       'fee_id': <%= @fee.id %>,
       'student_id': <%= @student_id %>,
       'done_at': done_at,
       'pay_unit_id': pay_unit_id,
       'get_unit_id': get_unit_id,
+      'pay_account_id': pay_account_id,
+      'get_account_id': get_account_id,
       'id': <%= @payment.id %>
     }).success(function(data) {
       $(contaxt).find('.actions').removeAttr('status');

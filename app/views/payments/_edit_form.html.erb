@@ -24,7 +24,7 @@
   </div>
   <div class="inline fields">
     <div class="sixteen wide field old-data">
-      <b>原数据：</b><%= @payment.pay_account %>
+      <b>原数据：</b><%= @payment.pay_account_desc %>
     </div>
   </div>
   <div class="inline fields">
@@ -35,7 +35,7 @@
   </div>
   <div class="inline fields">
     <div class="sixteen wide field old-data">
-      <b>原数据：</b><%= @payment.get_account %>
+      <b>原数据：</b><%= @payment.get_account_desc %>
     </div>
   </div>
   <div class="inline fields">
@@ -65,10 +65,10 @@
     var total_paid = parseFloat($('#total_paid').val());
     var name = $('#name').val(),
         pay_mode = $('#pay_mode').val(),
-        pay_account = $('#pay_account').val(),
+        pay_account_desc = $('#pay_account_desc').val(),
         get_mode = $('#get_mode').val(),
         done_at = $('#done_at').val(),
-        get_account = $('#get_account').val(),
+        get_account_desc = $('#get_account_desc').val(),
         pay_unit_id = $('#pay_unit_id').val(),
         get_unit_id = $('#get_unit_id').val();
     if ( amount > maxPay - total_paid ) {
@@ -79,9 +79,9 @@
     $.post('/students/<%= @student_id %>/fees/<%= @fee.id %>/payments/<%= @payment.id %>/update_post', {
       'name': name,
       'pay_mode': pay_mode,
-      'pay_account': pay_account,
+      'pay_account_desc': pay_account_desc,
       'get_mode': get_mode,
-      'get_account': get_account,
+      'get_account_desc': get_account_desc,
       'amount': parseFloat(amount),
       'fee_id': <%= @fee.id %>,
       'student_id': <%= @student_id %>,

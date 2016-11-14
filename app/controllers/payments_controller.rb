@@ -11,8 +11,8 @@ class PaymentsController < ApplicationController
     @fee = Fee.find(@fee_id)
     # 收入学员费用
     if @fee.shouru?
-      @pay_account = @student.phone
-      @get_account = 'dev@jisuxueche.com'
+      @pay_account_desc = @student.phone
+      @get_account_desc = 'dev@jisuxueche.com'
       if @fee.baoming?
         @name = "收入#{@student.name}报名费（#{@fee.amount - @fee.total_paid}）"
       elsif @fee.kaoshi?
@@ -23,12 +23,12 @@ class PaymentsController < ApplicationController
     else
       if @fee.kaoshi?
         @name = "支出#{@student.name}的考试费（#{@fee.amount - @fee.total_paid}）"
-        @pay_account = '公司建行卡'
-        @get_account = '武汉市交管局'
+        @pay_account_desc = '公司建行卡'
+        @get_account_desc = '武汉市交管局'
       else
         @name = "支出#{@student.name}的费用（#{@fee.amount - @fee.total_paid}）"
-        @pay_account = 'dev@jisuxueche.com'
-        @get_account = ''
+        @pay_account_desc = 'dev@jisuxueche.com'
+        @get_account_desc = ''
       end
     end
     respond_to do |format|
@@ -109,7 +109,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.permit(:name, :pay_mode, :pay_account, :get_mode, :get_account, :amount, :fee_id, :student_id, :done_at, :pay_unit_id, :get_unit_id)
+    params.permit(:name, :pay_mode, :pay_account_desc, :get_mode, :get_account_desc, :amount, :fee_id, :student_id, :done_at, :pay_unit_id, :get_unit_id, :pay_account_id, :get_account_id)
   end
 
   def set_payment

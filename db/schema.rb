@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103013602) do
+ActiveRecord::Schema.define(version: 20161114141434) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -157,20 +157,22 @@ ActiveRecord::Schema.define(version: 20161103013602) do
   add_index "pay_units", ["student_id"], name: "index_pay_units_on_student_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "pay_mode",    limit: 255,                         default: "0"
-    t.string   "pay_account", limit: 255
-    t.string   "get_mode",    limit: 255,                         default: "0"
-    t.string   "get_account", limit: 255
-    t.decimal  "amount",                  precision: 8, scale: 2
-    t.integer  "user_id",     limit: 4
-    t.integer  "fee_id",      limit: 4
-    t.integer  "student_id",  limit: 4
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+    t.string   "name",             limit: 255
+    t.string   "pay_mode",         limit: 255,                         default: "0"
+    t.string   "pay_account_desc", limit: 255
+    t.string   "get_mode",         limit: 255,                         default: "0"
+    t.string   "get_account_desc", limit: 255
+    t.decimal  "amount",                       precision: 8, scale: 2
+    t.integer  "user_id",          limit: 4
+    t.integer  "fee_id",           limit: 4
+    t.integer  "student_id",       limit: 4
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
     t.date     "done_at"
-    t.integer  "pay_unit_id", limit: 4
-    t.integer  "get_unit_id", limit: 4
+    t.integer  "pay_unit_id",      limit: 4
+    t.integer  "get_unit_id",      limit: 4
+    t.integer  "pay_account_id",   limit: 4
+    t.integer  "get_account_id",   limit: 4
   end
 
   add_index "payments", ["fee_id"], name: "index_payments_on_fee_id", using: :btree

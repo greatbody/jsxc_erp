@@ -1,0 +1,15 @@
+<select name="pay_account_id" id="pay_account_id">
+  <option value="44">44</option>
+  <% @pay_accounts.each do |pay_account| %>
+  <option value="<%= pay_account.id %>"><%= pay_account.name %></option>
+  <% end %>
+</select>
+<i class="dropdown icon"></i>
+<div class="default text">&nbsp;</div>
+<input class="search" autocomplete="off" tabindex="0">
+<div class="menu" tabindex="-1">
+  <div class="item" data-value="">&nbsp;</div>
+  <% @pay_accounts.each do |pay_account| %>
+  <div class="item" data-value="<%= pay_account.id %>"><%= pay_account.name %></div>
+  <% end %>
+</div>

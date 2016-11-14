@@ -5,7 +5,7 @@ class PayUnitsController < ApplicationController
   def payments
     @pay_unit_id = params[:pay_unit_id]
     if @pay_unit_id.to_i == -1
-      @payments = Payment.where("get_unit_id is null or pay_unit_id is null").order(done_at: :desc)
+      @payments = Payment.unclassified.order(done_at: :desc)
       @total_paid = 0
       @total_get = 0
     else
@@ -15,5 +15,15 @@ class PayUnitsController < ApplicationController
       @total_get = pay_unit.get_record.sum(:amount)
     end
     render :partial => 'payments'
+  end
+
+  def pay_accounts_select
+    @pay_accounts = PayUnit.find(params[:id]).pay_accounts
+    render partial: 'pay_accounts_select'
+  end
+
+  def get_accounts_select
+    @pay_accounts = PayUnit.find(params[:id]).pay_accounts
+    render partial: 'get_accounts_select'
   end
 end

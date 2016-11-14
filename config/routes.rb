@@ -55,6 +55,10 @@ Rails.application.routes.draw do
 
   resources :pay_units do
     get 'payments' => :payments
+    member do
+      get 'pay_accounts_select' => :pay_accounts_select
+      get 'get_accounts_select' => :get_accounts_select
+    end
   end
 
   resources :students do
