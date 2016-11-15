@@ -36,8 +36,13 @@
         </div>
       </div>
       <div class="ui row">
-        <div class="sixteen wide column field" id="fee_list">
-        <%= render 'fee_list' %>
+        <div class="sixteen wide column field">
+          <div class="ui styled accordion" style="width: 100%;">
+            <div class="title"><i class="dropdown icon"></i> 费用详情 </div>
+            <div class="content" id="fee_list">
+              <%= render 'fee_list' %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
