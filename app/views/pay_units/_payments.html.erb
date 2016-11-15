@@ -1,5 +1,5 @@
 <div>
-  总收入：<%= number_to_currency(@total_get, precision: 2, unit: "") %> ， 总支出：<%= number_to_currency(@total_paid, precision: 2, unit: "") %>
+  总收入：<%= number_to_currency(@total_get, precision: 2, unit: "") %> ， 总支出：<%= number_to_currency(@total_paid, precision: 2, unit: "") %>，总利润：<%= number_to_currency(@total_get - @total_paid, precision: 2, unit: "") %>
 </div>
 <table class="ui fixed celled table">
   <thead>
