@@ -11,15 +11,23 @@
     </div>
   </div>
   <div class="inline fields">
-    <div class="sixteen wide field">
+    <div class="eight wide field">
       <%= label_tag :pay_unit_id, '付款方', style: 'white-space: nowrap;' %>
-      <%= select_tag(:pay_unit_id, options_for_select(PayUnit.units_for_select, 0), class: 'ui fluid search dropdown') %>
+      <%= select_tag(:pay_unit_id, options_for_select(PayUnit.units_for_select, nil).html_safe, class: 'ui fluid search dropdown pay-unit-id') %>
+    </div>
+    <div class="eight wide field">
+      <%= label_tag :pay_account_id, '账户', style: 'white-space: nowrap;' %>
+      <%= select_tag(:pay_account_id, nil, class: 'ui fluid search dropdown pay-account-id') %>
     </div>
   </div>
   <div class="inline fields">
-    <div class="sixteen wide field">
+    <div class="eight wide field">
       <%= label_tag :get_unit_id, '收款方', style: 'white-space: nowrap;' %>
-      <%= select_tag(:get_unit_id, options_for_select(PayUnit.units_for_select, 0), class: 'ui fluid search dropdown') %>
+      <%= select_tag(:get_unit_id, options_for_select(PayUnit.units_for_select, nil), class: 'ui fluid search dropdown get-unit-id') %>
+    </div>
+    <div class="eight wide field">
+      <%= label_tag :get_account_id, '账户', style: 'white-space: nowrap;' %>
+      <%= select_tag(:get_account_id, nil, class: 'ui fluid search dropdown get-account-id') %>
     </div>
   </div>
   <div class="inline fields">
@@ -54,9 +62,12 @@
         done_at = $('#done_at').val(),
         get_account_desc = $('#get_account_desc').val(),
         pay_unit_id = $('#pay_unit_id').val(),
-        get_unit_id = $('#get_unit_id').val();
+        get_unit_id = $('#get_unit_id').val(),
+        pay_account_id = $('#pay_account_id').val(),
+        get_account_id = $('#get_account_id').val();
     if ( amount > maxPay - total_paid ) {
       alert('过账金额超过费用额（' + (maxPay - total_paid) + '元），请重新调整');
+      window.flash.hide();
       return;
     }
     $.post('/students/<%= @student_id %>/fees/<%= @fee_id %>/payments', {
@@ -70,7 +81,9 @@
       'student_id': <%= @student_id %>,
       'done_at': done_at,
       'pay_unit_id': pay_unit_id,
-      'get_unit_id': get_unit_id
+      'get_unit_id': get_unit_id,
+      'pay_account_id': pay_account_id,
+      'get_account_id': get_account_id
     }).success(function(data) {
       $(contaxt).find('.actions').removeAttr('status');
       window.flash.hide();

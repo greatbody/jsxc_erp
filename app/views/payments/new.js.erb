@@ -1,10 +1,10 @@
 $('#fee_payment').html("<%= j render('form') %>");
+
 $('.ui.modal.fee-payment')
   .modal({
     closable  : false,
     onDeny    : function(){
-      //window.alert('Wait not yet!');
-      //return false;
+      $('#fee_payment').html('');
     },
     onApprove : function() {
       if ($(this).find('.actions').attr('status') == 'submitting') {
@@ -19,4 +19,43 @@ $('.ui.modal.fee-payment')
     }
   })
   .modal('show');
-$('select.dropdown').dropdown();
+
+
+$('select.dropdown.pay-unit-id').dropdown({
+  onChange: function(value, text, $choice) {
+    _get_accounts_select({
+      'value': value,
+      'select_type': 'pay-account-id',
+      'select_path': 'pay_accounts_select'
+    });
+  }
+});
+
+$('select.dropdown.get-unit-id').dropdown({
+  onChange: function(value, text, $choice) {
+    _get_accounts_select({
+      'value': value,
+      'select_type': 'get-account-id',
+      'select_path': 'get_accounts_select'
+    });
+  }
+});
+
+$('select.dropdown.pay-account-id, select.dropdown.get-account-id').dropdown();
+
+function _get_accounts_select(options, value) {
+  options = $.extend({
+    'value': '1',
+    'select_type': 'get-account-id',
+    'select_path': 'get_accounts_select'
+  }, options);
+  $.get('/pay_units/' + options['value'] + '/' + options['select_path'], {
+  }).success(function(data) {
+    $('.' + options['select_type']).html(data);
+    $('.ui.dropdown.' + options['select_type']).dropdown();
+    if (value) {
+      $('.ui.dropdown.' + options['select_type']).dropdown('set selected', value);
+    }
+  }).error(function(data) {
+  });
+}
