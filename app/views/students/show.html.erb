@@ -45,201 +45,207 @@
           </div>
         </div>
       </div>
+      <div class="ui row" style="padding-top: 0;">
+        <div class="sixteen wide column field">
+          <div class="ui styled accordion" style="width: 100%;">
+            <div class="title active"><i class="dropdown icon"></i> 基本资料 </div>
+            <div class="content active">
+              <table class="ui striped definition table">
+                <tbody>
+                  <tr>
+                    <td class="two wide column">姓名</td>
+                    <td><%= @student.name %></td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">性别</td>
+                    <td><%= @student.gender %></td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">学习速度</td>
+                    <td>
+                      <% if @student.is_slow? %>
+                      慢，注意督促
+                      <% else %>
+                      正常
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">常用信息</td>
+                    <td>
+                      <% if @student.id_card.present? %>
+                      <table class="ui striped definition table">
+                        <tbody>
+                        <tr>
+                          <td style="width: 150px;">一维单名称</td>
+                          <td>
+                            <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-一维单" %>'>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 150px;">身份证正面</td>
+                          <td>
+                            <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-身份证-正面" %>' />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 150px;">身份证反面</td>
+                          <td>
+                            <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-身份证-反面" %>' />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 150px;">流水单（待办单）</td>
+                          <td>
+                            <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-待办单" %>' />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 150px;">手机号</td>
+                          <td>
+                            <input type="text" style="width:100%;" value='<%= "#{@student.phone}" %>' />
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                      <% else %>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">户籍类型</td>
+                    <td><%= @student.is_local > 0 ? '本地' : '外地' %></td>
+                  </tr>
+                  <% if @student.qq.present? %>
+                  <tr>
+                    <td class="two wide column">QQ</td>
+                    <td><%= @student.qq %></td>
+                  </tr>
+                  <% end %>
+                  <tr>
+                    <td class="two wide column">录入时间</td>
+                    <td><%= @student.created_at.localtime.to_s(:db) %></td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">更新时间</td>
+                    <td><%= @student.updated_at.localtime.to_s(:db) %></td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">流水号</td>
+                    <td><%= @student.swift_number %></td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">当前进度</td>
+                    <td><%= @student.process_text %></td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">手机</td>
+                    <td>
+                      <span><%= @student.phone_divided.html_safe %></span>
+                      <% if @student.is_local_phone? %>
+                      <span>[本地]</span>
+                      <% else %>
+                      <span>[外地]</span>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">身份证号</td>
+                    <td><%= @student.id_card %></td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">学校/单位</td>
+                    <td><%= @student.unit %></td>
+                  </tr>
+                  <% if @student.coach.present? %>
+                  <tr>
+                    <td class="two wide column">教练</td>
+                    <td><%= link_to "#{@student.coach.name}", coach_path(@student.coach), { target: '_blank' } %></td>
+                  </tr>
+                  <% end %>
+                  <tr>
+                    <td class="two wide column">身份证</td>
+                    <td>
+                      <div class="card">
+                        <div class="card-preview id-card">
+                          <%= image_tag @student.id_card_pic.url, class: 'img' %>
+                        </div>
+                        <div class="ui button select-btn btn-id-card">身份证正</div>
+                      </div>
+                      <div class="card">
+                        <div class="card-preview id-card-back">
+                          <%= image_tag @student.id_card_back_pic.url, class: 'img' %>
+                        </div>
+                        <div class="ui button select-btn btn-id-card-back">身份证反</div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="two wide column">创建人</td>
+                    <td>
+                      <div class="ui image label">
+                        <img src="/flash-loding.gif">
+                        <%= @student.user.name if @student.user.present? %>
+                        <%= "待认领" if @student.user.nil? %>
+                        <i class="delete icon"></i>
+                      </div>
+                    </td>
+                  </tr>
+                  <% unless @student.is_local == 1 %>
+                  <tr>
+                    <td class="two wide column">居住证信息</td>
+                    <% if @student.residence_cards.count > 0 %>
+                    <% @residence_card = @student.residence_cards.last %>
+                    <td>
+                      <table class="ui striped definition table">
+                        <tbody>
+                          <tr>
+                            <td class="two wide column">身份证号</td>
+                            <td><%= @residence_card.id_card %></td>
+                          </tr>
+                          <tr>
+                            <td class="two wide column">居住证号</td>
+                            <td><%= @residence_card.card_id %></td>
+                          </tr>
+                          <tr>
+                            <td class="two wide column">现居住证地址</td>
+                            <td><%= @residence_card.current_address %></td>
+                          </tr>
+                          <tr>
+                            <td class="two wide column">办理状态</td>
+                            <td><%= I18n.t("residence_card.current_status.#{@residence_card.current_status}") %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="two wide column">操作</td>
+                            <td>
+                              <%= render partial: 'show_rc_operation' %>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <% else %>
+                    <td>
+                      <%= link_to new_student_residence_card_path(@student) do %>
+                        <div class="ui teal labeled icon button">
+                          办居住证
+                          <i class="add icon"></i>
+                        </div>
+                      <% end %>
+                    </td>
+                    <% end %>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <h4 class="ui horizontal divider header">
-    <i class="tag icon"></i>
-    基本资料
-  </h4>
-  <table class="ui striped definition table">
-    <tbody>
-      <tr>
-        <td class="two wide column">姓名</td>
-        <td><%= @student.name %></td>
-      </tr>
-      <tr>
-        <td class="two wide column">性别</td>
-        <td><%= @student.gender %></td>
-      </tr>
-      <tr>
-        <td class="two wide column">学习速度</td>
-        <td>
-          <% if @student.is_slow? %>
-          慢，注意督促
-          <% else %>
-          正常
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td class="two wide column">常用信息</td>
-        <td>
-          <% if @student.id_card.present? %>
-          <table class="ui striped definition table">
-            <tbody>
-            <tr>
-              <td style="width: 150px;">一维单名称</td>
-              <td>
-                <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-一维单" %>'>
-              </td>
-            </tr>
-            <tr>
-              <td style="width: 150px;">身份证正面</td>
-              <td>
-                <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-身份证-正面" %>' />
-              </td>
-            </tr>
-            <tr>
-              <td style="width: 150px;">身份证反面</td>
-              <td>
-                <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-身份证-反面" %>' />
-              </td>
-            </tr>
-            <tr>
-              <td style="width: 150px;">流水单（待办单）</td>
-              <td>
-                <input type="text" style="width:100%;" value='<%= "#{@student.id_card}-#{@student.name}-待办单" %>' />
-              </td>
-            </tr>
-            <tr>
-              <td style="width: 150px;">手机号</td>
-              <td>
-                <input type="text" style="width:100%;" value='<%= "#{@student.phone}" %>' />
-              </td>
-            </tr>
-            </tbody>
-          </table>
-          <% else %>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td class="two wide column">户籍类型</td>
-        <td><%= @student.is_local > 0 ? '本地' : '外地' %></td>
-      </tr>
-      <% if @student.qq.present? %>
-      <tr>
-        <td class="two wide column">QQ</td>
-        <td><%= @student.qq %></td>
-      </tr>
-      <% end %>
-      <tr>
-        <td class="two wide column">录入时间</td>
-        <td><%= @student.created_at.localtime.to_s(:db) %></td>
-      </tr>
-      <tr>
-        <td class="two wide column">更新时间</td>
-        <td><%= @student.updated_at.localtime.to_s(:db) %></td>
-      </tr>
-      <tr>
-        <td class="two wide column">流水号</td>
-        <td><%= @student.swift_number %></td>
-      </tr>
-      <tr>
-        <td class="two wide column">当前进度</td>
-        <td><%= @student.process_text %></td>
-      </tr>
-      <tr>
-        <td class="two wide column">手机</td>
-        <td>
-          <span><%= @student.phone_divided.html_safe %></span>
-          <% if @student.is_local_phone? %>
-          <span>[本地]</span>
-          <% else %>
-          <span>[外地]</span>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td class="two wide column">身份证号</td>
-        <td><%= @student.id_card %></td>
-      </tr>
-      <tr>
-        <td class="two wide column">学校/单位</td>
-        <td><%= @student.unit %></td>
-      </tr>
-      <% if @student.coach.present? %>
-      <tr>
-        <td class="two wide column">教练</td>
-        <td><%= link_to "#{@student.coach.name}", coach_path(@student.coach), { target: '_blank' } %></td>
-      </tr>
-      <% end %>
-      <tr>
-        <td class="two wide column">身份证</td>
-        <td>
-          <div class="card">
-            <div class="card-preview id-card">
-              <%= image_tag @student.id_card_pic.url, class: 'img' %>
-            </div>
-            <div class="ui button select-btn btn-id-card">身份证正</div>
-          </div>
-          <div class="card">
-            <div class="card-preview id-card-back">
-              <%= image_tag @student.id_card_back_pic.url, class: 'img' %>
-            </div>
-            <div class="ui button select-btn btn-id-card-back">身份证反</div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="two wide column">创建人</td>
-        <td>
-          <div class="ui image label">
-            <img src="/flash-loding.gif">
-            <%= @student.user.name if @student.user.present? %>
-            <%= "待认领" if @student.user.nil? %>
-            <i class="delete icon"></i>
-          </div>
-        </td>
-      </tr>
-      <% unless @student.is_local == 1 %>
-      <tr>
-        <td class="two wide column">居住证信息</td>
-        <% if @student.residence_cards.count > 0 %>
-        <% @residence_card = @student.residence_cards.last %>
-        <td>
-          <table class="ui striped definition table">
-            <tbody>
-              <tr>
-                <td class="two wide column">身份证号</td>
-                <td><%= @residence_card.id_card %></td>
-              </tr>
-              <tr>
-                <td class="two wide column">居住证号</td>
-                <td><%= @residence_card.card_id %></td>
-              </tr>
-              <tr>
-                <td class="two wide column">现居住证地址</td>
-                <td><%= @residence_card.current_address %></td>
-              </tr>
-              <tr>
-                <td class="two wide column">办理状态</td>
-                <td><%= I18n.t("residence_card.current_status.#{@residence_card.current_status}") %>
-                </td>
-              </tr>
-              <tr>
-                <td class="two wide column">操作</td>
-                <td>
-                  <%= render partial: 'show_rc_operation' %>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-        <% else %>
-        <td>
-          <%= link_to new_student_residence_card_path(@student) do %>
-            <div class="ui teal labeled icon button">
-              办居住证
-              <i class="add icon"></i>
-            </div>
-          <% end %>
-        </td>
-        <% end %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+
 </div>
 <%= render 'form_dialogs' %>
 <%= render 'upload_id_card' %>
