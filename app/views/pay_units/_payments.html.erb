@@ -31,12 +31,14 @@
       </td>
       <!-- 出入 -->
       <td class="middle center aligned">
-        <% if payment.get_unit.present? %>
+        <% if payment.get_unit.present? && @pay_unit_id != '-1' %>
           <% if payment.get_unit.id == @pay_unit_id.to_i %>
           <i class="add icon" style="color: green;"></i>
           <% else %>
           <i class="minus icon" style="color: red;"></i>
           <% end %>
+        <% else %>
+        <i class="wait icon" style="color: red;"></i>
         <% end %>
       </td>
       <!-- 类型 -->
