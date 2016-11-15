@@ -11,8 +11,6 @@ class PaymentsController < ApplicationController
     @fee = Fee.find(@fee_id)
     # 收入学员费用
     if @fee.shouru?
-      @pay_account_desc = @student.phone
-      @get_account_desc = 'dev@jisuxueche.com'
       if @fee.baoming?
         @name = "收入#{@student.name}报名费（#{@fee.amount - @fee.total_paid}）"
       elsif @fee.kaoshi?
@@ -23,12 +21,8 @@ class PaymentsController < ApplicationController
     else
       if @fee.kaoshi?
         @name = "支出#{@student.name}的考试费（#{@fee.amount - @fee.total_paid}）"
-        @pay_account_desc = '公司建行卡'
-        @get_account_desc = '武汉市交管局'
       else
         @name = "支出#{@student.name}的费用（#{@fee.amount - @fee.total_paid}）"
-        @pay_account_desc = 'dev@jisuxueche.com'
-        @get_account_desc = ''
       end
     end
     respond_to do |format|
