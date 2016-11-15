@@ -1,6 +1,43 @@
-<% @pay_units.each_with_index do |unit, index| %>
-<a class="teal item pay-unit<%= ' active' if index == 0 %>" data-pay-unit-id="<%= unit.id %>"><%= unit.name %> <div class="ui teal left pointing label"><%= unit.all_payments.count %></div>
-</a>
-<% end %>
 <a class="teal item pay-unit" data-pay-unit-id="-1">未归类 <div class="ui teal left pointing label"><%= Payment.unclassified.count %></div>
 </a>
+<div class="ui styled accordion" style="width: 100%;">
+  <div class="title active"><i class="dropdown icon"></i> 员工 </div>
+  <div class="content active">
+    <% @pay_units.t_staff.each do |unit| %>
+    <a class="teal item pay-unit" data-pay-unit-id="<%= unit.id %>"><%= unit.name %> <div class="ui teal left pointing label"><%= unit.all_payments.count %></div>
+    </a>
+    <% end %>
+  </div>
+  <div class="title active"><i class="dropdown icon"></i> 教练 </div>
+  <div class="content active">
+    <% @pay_units.t_coach.each do |unit| %>
+    <a class="teal item pay-unit" data-pay-unit-id="<%= unit.id %>"><%= unit.name %> <div class="ui teal left pointing label"><%= unit.all_payments.count %></div>
+    </a>
+    <% end %>
+  </div>
+  <div class="title active"><i class="dropdown icon"></i> 单位 </div>
+  <div class="content active">
+    <% @pay_units.t_company.each do |unit| %>
+    <a class="teal item pay-unit" data-pay-unit-id="<%= unit.id %>"><%= unit.name %> <div class="ui teal left pointing label"><%= unit.all_payments.count %></div>
+    </a>
+    <% end %>
+  </div>
+  <div class="title active"><i class="dropdown icon"></i> 政府部门 </div>
+  <div class="content active">
+    <% @pay_units.t_gov.each do |unit| %>
+    <a class="teal item pay-unit" data-pay-unit-id="<%= unit.id %>"><%= unit.name %> <div class="ui teal left pointing label"><%= unit.all_payments.count %></div>
+    </a>
+    <% end %>
+  </div>
+  <div class="title"><i class="dropdown icon"></i> 学员 </div>
+  <div class="content">
+    <% @pay_units.t_student.each do |unit| %>
+    <a class="teal item pay-unit" data-pay-unit-id="<%= unit.id %>"><%= unit.name %> <div class="ui teal left pointing label"><%= unit.all_payments.count %></div>
+    </a>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.ui.accordion').accordion();
+</script>
