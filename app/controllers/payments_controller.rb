@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update_post]
+  before_action :authenticate_user!
 
   def index
   end
@@ -98,6 +99,11 @@ class PaymentsController < ApplicationController
         format.json { render json: { error_code: '1' } }
       end
     end
+  end
+
+  def report_line
+    @payment = Payment.find(params[:payment_id])
+    render partial: 'fee_report_line'
   end
 
   private

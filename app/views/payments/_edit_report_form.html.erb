@@ -80,12 +80,17 @@
         pay_unit_id = $('#pay_unit_id').val(),
         get_unit_id = $('#get_unit_id').val(),
         pay_account_id = $('#pay_account_id').val(),
-        get_account_id = $('#get_account_id').val();
+        get_account_id = $('#get_account_id').val(),
+        payment_id = "<%= @payment.id %>";
     if ( amount > maxPay - total_paid ) {
       alert('过账金额超过费用额（' + (maxPay - total_paid) + '元），请重新调整');
       window.flash.hide();
       return;
     }
+    var $payment_row = $('tr[data-payment-id = "' + payment_id + '"]');
+    var old_row_html = $payment_row.html();
+    //todo: give row about to update a shadow
+    $payment_row.html('<td colspan="8">加载中...</td>');
     $.post('/students/<%= @student_id %>/fees/<%= @fee.id %>/payments/<%= @payment.id %>/update_post', {
       'name': name,
       'pay_mode': pay_mode,
@@ -100,7 +105,7 @@
       'get_unit_id': get_unit_id,
       'pay_account_id': pay_account_id,
       'get_account_id': get_account_id,
-      'id': <%= @payment.id %>
+      'id': payment_id
     }).success(function(data) {
       $(contaxt).find('.actions').removeAttr('status');
       window.flash.hide();
@@ -108,13 +113,14 @@
         $('.ui.modal.fee-payment-edit').modal('hide');
         $('#fee_payment_edit').html('');
         //整个更新
-        setTimeout(_refreshReport, 100);
+        setTimeout(_refreshLine, 100, payment_id);
       } else {
         alert('保存出错，请联系管理员！');
       }
       window.flash.hide();
     }).error(function(data) {
       $(contaxt).find('.actions').removeAttr('status');
+      $payment_row.html(old_row_html);
       window.flash.hide();
       alert('保存出错，请联系管理员！');
     });
@@ -122,5 +128,18 @@
 
   function _refreshReport() {
     _getByPayUnit($('.pay-unit.active').first());
+  }
+
+  function _refreshLine(payment_id) {
+    var that = $('tr[data-payment-id = "' + payment_id + '"]')
+    window.flash.show('加载中...');
+    // ajax
+    $.get('/payments/' + payment_id + '/report_line', {
+    }).success(function(data) {
+      that.html(data);
+      window.flash.hide();
+    }).error(function(data) {
+      window.flash.hide();
+    });
   }
 </script>

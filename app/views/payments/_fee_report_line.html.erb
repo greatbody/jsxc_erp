@@ -1,0 +1,39 @@
+<!-- 发生日期 -->
+<td class="middle center aligned">
+  <%= @payment.done_at.to_s(:db) %>
+</td>
+<!-- 支付方 -->
+<td>
+  <%= @payment.pay_unit.present? ? @payment.pay_unit.name : '-' %>
+</td>
+<!-- 收款方 -->
+<td>
+  <%= @payment.get_unit.present? ? @payment.get_unit.name : '-' %>
+</td>
+<!-- 出入 -->
+<td class="middle center aligned">
+  <% if @payment.get_unit.present? && @pay_unit_id != '-1' %>
+    <% if @payment.get_unit.id == @pay_unit_id.to_i %>
+    <i class="add icon" style="color: green;"></i>
+    <% else %>
+    <i class="minus icon" style="color: red;"></i>
+    <% end %>
+  <% else %>
+  <i class="wait icon" style="color: red;"></i>
+  <% end %>
+</td>
+<!-- 类型 -->
+<td class="middle center aligned"><%= @payment.fee.fee_type_name %></td>
+<!-- 金额 -->
+<td class="middle right aligned">
+  <%= number_to_currency(@payment.amount, precision: 2, unit: "") %>
+</td>
+<!-- 备注 -->
+<td>
+  <%= @payment.name %>
+</td>
+<td class="middle right aligned">
+  <%= link_to student_fee_payment_report_edit_path(@payment.student, @payment.fee, @payment), remote: true do %>
+    <div class="ui teal button" style="display: block;">更改</div>
+  <% end %>
+</td>

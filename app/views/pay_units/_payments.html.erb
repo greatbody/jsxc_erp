@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <% @payments.each do |payment| %>
-    <tr>
+    <tr data-payment-id="<%= payment.id %>">
       <!-- 发生日期 -->
       <td class="middle center aligned">
         <%= payment.done_at.to_s(:db) %>

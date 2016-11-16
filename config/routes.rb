@@ -61,6 +61,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :payments do
+    get 'report_line' => :report_line
+  end
+
   resources :students do
     resources :residence_cards
     resources :contact_logs
