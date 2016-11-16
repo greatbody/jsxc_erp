@@ -13,6 +13,13 @@
 <div class="ui segment form">
   <div class="inline fields">
     <div class="sixteen wide column field">
+      <label style='white-space: nowrap;'>费用说明</label>
+      <input placeholder="Read Only" readonly="" type="text" value="<%= @payment.fee.remark %>" />
+    </div>
+  </div>
+  <div class="inline fields">
+    <div class="sixteen wide column field">
+      <%= label_tag :name, '款项名称', style: 'white-space: nowrap;' %>
       <%= text_field_tag :name, @payment.name, placeholder: '款项详情，比如：“张三补交学费3000元”' %>
     </div>
   </div>
