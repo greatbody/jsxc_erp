@@ -9,12 +9,17 @@
     color: #ccc;
     padding: 4px;
   }
+  .unit-suggest {
+    padding-right: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 </style>
 <div class="ui segment form">
   <div class="inline fields">
     <div class="sixteen wide column field">
       <label style='white-space: nowrap;'>费用说明</label>
-      <input placeholder="Read Only" readonly="" type="text" value="<%= @payment.fee.remark %>" />
+      <input placeholder="费用说明" readonly="" type="text" value="<%= @payment.fee.remark %>" />
     </div>
   </div>
   <div class="inline fields">
@@ -33,6 +38,16 @@
       <%= select_tag(:pay_account_id, @payment.pay_account_id, class: 'ui fluid search dropdown pay-account-id') %>
     </div>
   </div>
+  <% if @suggest_units.count > 0 %>
+  <div class="inline fields">
+    <div class="sixteen wide field old-data">
+      <label style='white-space: nowrap;'>候选项</label>
+      <% @suggest_units.each do |suggest_unit| %>
+      <a class="unit-suggest pay-unit-suggest" data-unit-id="<%= suggest_unit.id %>"><%= suggest_unit.name %></a>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
   <div class="inline fields">
     <div class="sixteen wide field old-data">
       <b>原数据：</b><%= @payment.pay_account_desc %>
@@ -48,6 +63,16 @@
       <%= select_tag(:get_account_id, @payment.get_account_id, class: 'ui fluid search dropdown get-account-id') %>
     </div>
   </div>
+  <% if @suggest_units.count > 0 %>
+  <div class="inline fields">
+    <div class="sixteen wide field old-data">
+      <label style='white-space: nowrap;'>候选项</label>
+      <% @suggest_units.each do |suggest_unit| %>
+      <a class="unit-suggest get-unit-suggest" data-unit-id="<%= suggest_unit.id %>"><%= suggest_unit.name %></a>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
   <div class="inline fields">
     <div class="sixteen wide field old-data">
       <b>原数据：</b><%= @payment.get_account_desc %>

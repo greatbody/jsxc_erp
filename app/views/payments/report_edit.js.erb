@@ -78,3 +78,13 @@ if (get_unit_id) {
     'select_path': 'get_accounts_select'
   }, get_account_id);
 }
+
+$('.pay-unit-suggest').on('click', function() {
+  $this = $(this);
+  $('.ui.dropdown.pay-unit-id').dropdown('set selected', $this.data('unit-id'));
+});
+
+$('.get-unit-suggest').on('click', function() {
+  $this = $(this);
+  $('.ui.dropdown.get-unit-id').dropdown('set selected', $this.data('unit-id'));
+});

@@ -70,6 +70,9 @@ class PaymentsController < ApplicationController
     @payment = Payment.find(params[:payment_id])
     @fee = Fee.find(params[:fee_id])
     @student_id = params[:student_id]
+    @suggest_units = PayUnit.joins("INNER JOIN payments ON payments.pay_unit_id = pay_units.id OR payments.get_unit_id = pay_units.id")
+      .where(payments: { student_id: @student_id })
+      .distinct
     respond_to do |format|
       format.js
     end
