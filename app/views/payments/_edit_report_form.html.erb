@@ -38,18 +38,17 @@
       <%= select_tag(:pay_account_id, @payment.pay_account_id, class: 'ui fluid search dropdown pay-account-id') %>
     </div>
   </div>
-  <% if @suggest_units.count > 0 %>
+
   <div class="inline fields">
-    <div class="sixteen wide field old-data">
+    <% if @suggest_units.count > 0 %>
+    <div class="eight wide field old-data">
       <label style='white-space: nowrap;'>候选项</label>
       <% @suggest_units.each do |suggest_unit| %>
       <a class="unit-suggest pay-unit-suggest" data-unit-id="<%= suggest_unit.id %>"><%= suggest_unit.name %></a>
       <% end %>
     </div>
-  </div>
-  <% end %>
-  <div class="inline fields">
-    <div class="sixteen wide field old-data">
+    <% end %>
+    <div class="<%= @suggest_units.count > 0 ? 'eight' : 'sixteen' %> wide field old-data">
       <b>原数据：</b><%= @payment.pay_account_desc %>
     </div>
   </div>
@@ -63,29 +62,26 @@
       <%= select_tag(:get_account_id, @payment.get_account_id, class: 'ui fluid search dropdown get-account-id') %>
     </div>
   </div>
-  <% if @suggest_units.count > 0 %>
+
   <div class="inline fields">
-    <div class="sixteen wide field old-data">
+    <% if @suggest_units.count > 0 %>
+    <div class="eight wide field old-data">
       <label style='white-space: nowrap;'>候选项</label>
       <% @suggest_units.each do |suggest_unit| %>
       <a class="unit-suggest get-unit-suggest" data-unit-id="<%= suggest_unit.id %>"><%= suggest_unit.name %></a>
       <% end %>
     </div>
-  </div>
-  <% end %>
-  <div class="inline fields">
-    <div class="sixteen wide field old-data">
+    <% end %>
+    <div class="<%= @suggest_units.count > 0 ? 'eight' : 'sixteen' %> wide field old-data">
       <b>原数据：</b><%= @payment.get_account_desc %>
     </div>
   </div>
   <div class="inline fields">
-    <div class="sixteen wide column field">
+    <div class="eight wide column field">
       <%= label_tag :done_at, '日期', style: 'white-space: nowrap;' %>
       <%= text_field_tag :done_at, @payment.done_at, placeholder: '实际发生收支日期', class: 'datepicker' %>
     </div>
-  </div>
-  <div class="inline fields">
-    <div class="sixteen wide column field">
+    <div class="eight wide column field">
       <%= label_tag :amount, '金额', style: 'white-space: nowrap;' %>
       <%= number_field_tag('payment_amount', @payment.amount) %>
     </div>
