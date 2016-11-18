@@ -1,4 +1,7 @@
+<link rel="stylesheet" href="/datetimepicker/themes/classic.css" id="theme_base">
+<link rel="stylesheet" href="/datetimepicker/themes/classic.date.css" id="theme_date">
 <script type="text/javascript">
+  window.flash = pages.common.showFlashText('loading');
   window.flash.show('正在载入...');
 </script>
 <style type="text/css">
@@ -37,8 +40,9 @@
         <th data-width="1" class="one wide center aligned">进度</th>
         <th data-width="4" class="four wide center aligned">费项</th>
         <th data-width="2" class="two wide center aligned">报名日期</th>
-        <th data-width="2" class="two wide center aligned">教练</th>
-        <th data-width="3" class="three wide center aligned">操作</th>
+        <th data-width="2" class="two wide center aligned">领证日期</th>
+        <th data-width="1" class="one wide center aligned">教练</th>
+        <th data-width="2" class="two wide center aligned">操作</th>
       </tr>
     </thead>
     <tbody>
@@ -114,6 +118,9 @@
           暂无
           <% end %>
         </td>
+        <td class="middle center aligned">
+          <input type="text" class="datepicker" data-student-id="<%= st.id %>" value="<%= st.lz_at.to_s(:db) if st.lz_at.present? %>">
+        </td>
         <!-- 教练 -->
         <td class="middle aligned">
           <% if st.coach.present? %>
@@ -162,5 +169,18 @@
     this.previousElementSibling.previousElementSibling.style.maxHeight = '120px';
     $(this).hide();
     $(this.previousElementSibling).show();
+  });
+  //启用日期输入
+  $('.datepicker').pickadate({
+    onSet: function(context) {
+      var id = this.$node.data('student-id');
+      $.post('/students/' + id + '/update_lz', {
+        'lz_at': this.$node.val()
+      }).success(function(data) {
+      }).error(function(data) {
+      });
+    },
+    selectMonths: true,
+    selectYears: true
   });
 </script>

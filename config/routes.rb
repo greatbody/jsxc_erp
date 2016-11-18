@@ -80,6 +80,7 @@ Rails.application.routes.draw do
     member do
       post 'update_km1' => :update_km1
       post 'fee_list' => :fee_list
+      post 'update_lz' => :update_lz
     end
     collection do
       post 'get_student_status' => :get_student_status

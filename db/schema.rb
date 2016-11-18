@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114141434) do
+ActiveRecord::Schema.define(version: 20161118095402) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "phone",                             limit: 255
@@ -333,6 +333,7 @@ ActiveRecord::Schema.define(version: 20161114141434) do
     t.boolean  "is_trained",                                                          default: true
     t.integer  "identity",                      limit: 4,                             default: 0
     t.text     "remarks",                       limit: 65535
+    t.date     "lz_at"
   end
 
   add_index "students", ["coach_id"], name: "index_students_on_coach_id", using: :btree
