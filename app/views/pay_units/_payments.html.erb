@@ -4,11 +4,12 @@
 <table class="ui fixed celled table">
   <thead>
     <tr>
+      <th data-width="1" class="one wide center aligned">序号</th>
       <th data-width="2" class="two wide center aligned">发生日期</th>
       <th data-width="2" class="two wide center aligned">支付方</th>
       <th data-width="2" class="two wide center aligned">收款方</th>
       <th data-width="1" class="one wide center aligned">出入</th>
-      <th data-width="2" class="two wide center aligned">类型</th>
+      <th data-width="1" class="one wide center aligned">类型</th>
       <th data-width="2" class="two wide center aligned">金额</th>
       <th data-width="3" class="three wide center aligned">备注</th>
       <th data-width="2" class="two wide center aligned">操作</th>
@@ -17,6 +18,10 @@
   <tbody>
     <% @payments.each do |payment| %>
     <tr data-payment-id="<%= payment.id %>">
+      <!--序号-->
+      <td class="middle center aligned">
+        <%= payment.id %>
+      </td>
       <!-- 发生日期 -->
       <td class="middle center aligned">
         <%= payment.done_at.to_s(:db) %>
