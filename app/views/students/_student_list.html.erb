@@ -30,6 +30,7 @@
     background-color: green;
   }
 </style>
+<div style="" id="data_park"></div>
 <div class="ui segment student-source">
   <table class="ui fixed teal sortable celled table student-table">
     <thead>
@@ -119,7 +120,11 @@
           <% end %>
         </td>
         <td class="middle center aligned">
-          <input type="text" class="datepicker" data-student-id="<%= st.id %>" value="<%= st.lz_at.to_s(:db) if st.lz_at.present? %>">
+          <div class="ui form">
+            <div class="field">
+              <input type="text" class="datepicker" data-student-id="<%= st.id %>" value="<%= st.lz_at.to_s(:db) if st.lz_at.present? %>">
+            </div>
+          </div>
         </td>
         <!-- 教练 -->
         <td class="middle aligned">
@@ -181,6 +186,7 @@
       });
     },
     selectMonths: true,
-    selectYears: true
+    selectYears: true,
+    container: '#data_park'
   });
 </script>
