@@ -177,6 +177,13 @@
   });
   //启用日期输入
   $('.datepicker').pickadate({
+    onOpen: function() {
+      $offset = this.$node.offset();
+      $data_park = $('#data_park');
+      $data_park.css('position', 'relative');
+      $data_park.css('left', $offset.left - 480);
+      $data_park.css('top', $offset.top - 180);
+    },
     onSet: function(context) {
       var id = this.$node.data('student-id');
       $.post('/students/' + id + '/update_lz', {
