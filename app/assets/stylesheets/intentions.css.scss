@@ -7,6 +7,14 @@
       padding-left: 0;
       .intention-card {
         text-align: initial;
+        .description {
+          &.box {
+            border: solid 1px #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            min-height: 30px;
+          }
+        }
       }
     }
   }

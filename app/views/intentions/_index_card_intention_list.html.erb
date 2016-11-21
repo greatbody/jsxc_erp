@@ -26,11 +26,13 @@
           <span class="date">教练：<%= student.coach.name %>[ <%= PhoneExt.format_phone(student.coach.phone) %> ]</span>
           <% end %>
         </div>
-        <% unless last_contact.nil? %>
-        <div class="description three-line" title="<%= last_contact.contact_log %>">
-          <%= last_contact.contact_log %>
-        </div>
+        <div class="description box">
+        <% if student.remarks.nil? %>
+        <span style="color: #ccc;">【暂无备注】</span>
+        <% else %>
+        <%= student.remarks.gsub(/\n/, '<br>').html_safe %>
         <% end %>
+        </div>
       </div>
       <div class="extra content">
         <a>
