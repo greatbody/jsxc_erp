@@ -19826,12 +19826,12 @@ ol.ui.horizontal.list li:before,
 }
 
 .ui.menu .ui.dropdown .menu > .item:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
+  background: rgba(0, 0, 0, 0.12) !important;
   color: rgba(0, 0, 0, 0.95) !important;
 }
 
 .ui.menu .ui.dropdown .menu > .selected.item {
-  background: rgba(0, 0, 0, 0.05) !important;
+  background: rgba(0, 0, 0, 0.15) !important;
   color: rgba(0, 0, 0, 0.95) !important;
 }
 
@@ -28692,7 +28692,7 @@ select.ui.dropdown {
 
 .ui.dropdown.selected,
 .ui.dropdown .menu .selected.item {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.13);
   color: rgba(0, 0, 0, 0.95);
 }
 
