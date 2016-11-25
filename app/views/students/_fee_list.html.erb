@@ -61,7 +61,10 @@
             <% if fee.payments.count > 0 %>
               <% fee.payments.each do |payment| %>
               <tr>
-                <td class="ten wide center"><%= payment.name %></td>
+                <td class="ten wide center"><span style="padding: 2px;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    margin-right: 3px;"><%= payment.id %></span><%= payment.name %></td>
                 <td class="six wide center">
                   <%= link_to edit_student_fee_payment_path(@student, fee, payment), remote: true do %>
                     <div class="ui teal button">更改</div>
