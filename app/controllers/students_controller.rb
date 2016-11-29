@@ -172,7 +172,7 @@ class StudentsController < PcApplicationController
   def student_xlsx
     Axlsx::Package.new do |p|
       p.workbook.add_worksheet(:name => "学员列表") do |sheet|
-        sheet.add_row ["姓名", "原教练", "现教练"]
+        sheet.add_row ["姓名", "状态", "报名日期", "原教练", "现教练"]
         sheet.sheet_view.pane do |pane|
           pane.top_left_cell = "A1"
           pane.state = :frozen_split
@@ -181,7 +181,9 @@ class StudentsController < PcApplicationController
           pane.active_pane = :bottom_right
         end
         Student.where.not(coach_id: nil).each do |student|
-          sheet.add_row [ student.name, "", student.coach.present? ? student.coach.name : "" ]
+          signed_at = student.signed_at.present? ? student.signed_at.to_s(:db) : ""
+          coach_name = student.coach.present? ? student.coach.name : ""
+          sheet.add_row [ student.name, student.intention.current_status_text, signed_at, "", coach_name ]
         end
       end
       p.serialize("#{Rails.root}/public/files/simple.xlsx")
