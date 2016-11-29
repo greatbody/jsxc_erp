@@ -32,6 +32,13 @@
           <%= link_to(need_contact_students_path, class: 'item') do %>
             <i class="browser icon"></i>需要联系的
           <% end %>
+          <div class="ui dropdown item">数据导出 <i class="dropdown icon"></i>
+            <div class="menu">
+              <%= link_to(student_xlsx_students_path, class: 'item') do %>
+                <i class="download icon"></i>学员列表
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
       <div class="ui simple dropdown item">

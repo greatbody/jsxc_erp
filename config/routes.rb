@@ -93,6 +93,7 @@ Rails.application.routes.draw do
       get 'need_contact' => :need_contact
       post 'update_evaluation' => :update_evaluation
       post 'peek_before_evaluation' => :peek_before_evaluation
+      get 'student_xlsx' => :student_xlsx
     end
   end
 

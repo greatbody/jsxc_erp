@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class StudentsController < PcApplicationController
+  before_action :authenticate_user!
   before_action :set_student, only: [
     :show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card, 
     :update_km1, :fee_list]
@@ -166,6 +167,26 @@ class StudentsController < PcApplicationController
   def fee_list
     @fees = @student.fees
     render :partial => "fee_list"
+  end
+
+  def student_xlsx
+    Axlsx::Package.new do |p|
+      p.workbook.add_worksheet(:name => "学员列表") do |sheet|
+        sheet.add_row ["姓名", "原教练", "现教练"]
+        sheet.sheet_view.pane do |pane|
+          pane.top_left_cell = "A1"
+          pane.state = :frozen_split
+          pane.y_split = 1
+          pane.x_split = 0
+          pane.active_pane = :bottom_right
+        end
+        Student.where.not(coach_id: nil).each do |student|
+          sheet.add_row [ student.name, "", student.coach.present? ? student.coach.name : "" ]
+        end
+      end
+      p.serialize("#{Rails.root}/public/files/simple.xlsx")
+      send_file "#{Rails.root}/public/files/simple.xlsx"
+    end
   end
 
   private
