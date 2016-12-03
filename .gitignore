@@ -15,4 +15,4 @@
 # Upload images
 /public/system
 # files generated
-/public/files
+/public/files/*
