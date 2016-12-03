@@ -94,6 +94,7 @@ Rails.application.routes.draw do
       post 'update_evaluation' => :update_evaluation
       post 'peek_before_evaluation' => :peek_before_evaluation
       get 'student_xlsx' => :student_xlsx
+      get 'students_process_list' => :students_process_list
     end
   end
 

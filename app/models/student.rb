@@ -12,6 +12,7 @@ class Student < ActiveRecord::Base
   validates :unit, length: { maximum: 255, message: '单位名称超出长度限制' }
 
   scope :normal, -> { joins(:intention).where(intentions: { current_status: 0 }) }
+  scope :signed, -> { where.not(signed_at: nil) }
 
   belongs_to :user
   belongs_to :coach

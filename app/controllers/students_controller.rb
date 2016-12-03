@@ -171,8 +171,17 @@ class StudentsController < PcApplicationController
 
   def student_xlsx
     Axlsx::Package.new do |p|
-      p.workbook.add_worksheet(:name => "学员列表") do |sheet|
-        sheet.add_row ["姓名", "状态", "报名日期", "原教练", "现教练"]
+      wb = p.workbook
+      ns = wb.styles.add_style :b => false, :sz => 9,  :font_name => '宋体', :alignment => {
+        :horizontal => :left,
+        :vertical => :center,
+        :wrap_text => false
+      }
+      wb.add_worksheet(:name => "学员列表") do |sheet|
+        sheet.column_widths 10, nil, nil, nil, nil
+        sheet.add_row ["姓名", "状态", "报名日期", "原教练", "现教练"], :style => [
+          ns, ns, ns, ns, ns
+        ]
         sheet.sheet_view.pane do |pane|
           pane.top_left_cell = "A1"
           pane.state = :frozen_split
@@ -183,11 +192,64 @@ class StudentsController < PcApplicationController
         Student.where.not(coach_id: nil).each do |student|
           signed_at = student.signed_at.present? ? student.signed_at.to_s(:db) : ""
           coach_name = student.coach.present? ? student.coach.name : ""
-          sheet.add_row [ student.name, student.intention.current_status_text, signed_at, "", coach_name ]
+          sheet.add_row [
+            student.name,
+            student.intention.current_status_text,
+            signed_at,
+            "",
+            coach_name
+          ], :style => [
+            ns, ns, ns, ns, ns
+          ]
         end
       end
       p.serialize("#{Rails.root}/public/files/simple.xlsx")
       send_file "#{Rails.root}/public/files/simple.xlsx"
+    end
+  end
+
+  def students_process_list
+    Axlsx::Package.new do |p|
+      wb = p.workbook
+      ns = wb.styles.add_style :b => false, :sz => 9,  :font_name => '宋体', :alignment => {
+        :horizontal => :left,
+        :vertical => :center,
+        :wrap_text => false
+      }
+      wb.add_worksheet(:name => "学员列表") do |sheet|
+        sheet.add_row ["姓名", "状态", "现科目", "报名日期", "领证日期", "缺费用", "备注"]
+        sheet.sheet_view.pane do |pane|
+          pane.top_left_cell = "A1"
+          pane.state = :frozen_split
+          pane.y_split = 1
+          pane.x_split = 0
+          pane.active_pane = :bottom_right
+        end
+        Student.signed.each do |student|
+          signed_at = student.signed_at.present? ? student.signed_at.to_s(:db) : ""
+          coach_name = student.coach.present? ? student.coach.name : ""
+          current_process = student.process_text
+          sheet.add_row [
+            student.name,   # 姓名
+            student.intention.current_status_text, # 状态
+            current_process, # 现科目
+            signed_at, # 报名日期
+            nil, # 领证日期
+            nil, # 缺费用
+            "" # 备注
+          ], :style => [
+            ns,   # 姓名
+            ns, # 状态
+            ns, # 现科目
+            ns, # 报名日期
+            ns, # 领证日期
+            ns, # 缺费用
+            ns # 备注
+          ]
+        end
+      end
+      p.serialize("#{Rails.root}/public/files/students_process_list.xlsx")
+      send_file "#{Rails.root}/public/files/students_process_list.xlsx"
     end
   end
 
