@@ -13,7 +13,7 @@ class IntentionsController < PcApplicationController
     if current_user.has_role? :jby
       @intentions = @intentions.joins(:student).where(students: { identity: 2 })
     end
-    @today_intentions = @intentions.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 5)', Date.today)
+    @today_intentions = @intentions.where('next_contact_at <= ? and current_status != 5', Date.today)
   end
 
   def new
@@ -98,7 +98,7 @@ class IntentionsController < PcApplicationController
     when 'signed_up'
       @intentions = @intentions.signed_up
     when 'should_contact'
-      @intentions = @intentions.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 5)', Date.today)
+      @intentions = @intentions.where('next_contact_at <= ? and current_status != 5', Date.today)
     end
     @intentions = @intentions.order(updated_at: :desc, next_contact_at: :asc)
     render '_index_card_intention_list', layout: false

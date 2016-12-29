@@ -27,11 +27,22 @@
           <% end %>
         </div>
         <div class="description box">
-        <% if student.remarks.nil? %>
-        <span style="color: #ccc;">【暂无备注】</span>
-        <% else %>
-        <%= student.remarks.gsub(/\n/, '<br>').html_safe %>
-        <% end %>
+          <div style="border-bottom: solid 1px #ccc;">备注</div>
+          <div>
+            <% if student.remarks.nil? %>
+            <span style="color: #ccc;">【暂无备注】</span>
+            <% else %>
+            <%= student.remarks.gsub(/\n/, '<br>').html_safe %>
+            <% end %>
+          </div>
+          <div style="border-bottom: solid 1px #ccc;">上次联系</div>
+          <div>
+            <% if student.remarks.nil? %>
+            <span style="color: #ccc;">【暂无备注】</span>
+            <% else %>
+            <%= student.remarks.gsub(/\n/, '<br>').html_safe %>
+            <% end %>
+          </div>
         </div>
       </div>
       <div class="extra content">
