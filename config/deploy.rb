@@ -3,7 +3,7 @@
 lock '3.4.0'
 
 set :application, 'jisuxueche_erp'
-set :repo_url, 'git@git.coding.net:tkin1992/jisuxueche_erp.git'
+set :repo_url, 'git@git.coding.net:great-ruby/jsxc-erp.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
