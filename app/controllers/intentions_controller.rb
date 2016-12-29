@@ -13,7 +13,7 @@ class IntentionsController < PcApplicationController
     if current_user.has_role? :jby
       @intentions = @intentions.joins(:student).where(students: { identity: 2 })
     end
-    @today_intentions = @intentions.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 4 and current_status != 5)', Date.today)
+    @today_intentions = @intentions.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 5)', Date.today)
   end
 
   def new
