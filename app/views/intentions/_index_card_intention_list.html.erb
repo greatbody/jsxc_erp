@@ -27,22 +27,26 @@
           <% end %>
         </div>
         <div class="description box">
-          <div style="border-bottom: solid 1px #ccc;">备注</div>
-          <div>
+          <div style="border-bottom: solid 1px #ccc;padding: 5px;background-color: #eee;">备注</div>
+          <div style="border-bottom: solid 1px #ccc;padding: 5px;">
             <% if student.remarks.nil? %>
             <span style="color: #ccc;">【暂无备注】</span>
             <% else %>
             <%= student.remarks.gsub(/\n/, '<br>').html_safe %>
             <% end %>
           </div>
-          <div style="border-bottom: solid 1px #ccc;">上次联系</div>
-          <div>
-            <% if student.remarks.nil? %>
-            <span style="color: #ccc;">【暂无备注】</span>
-            <% else %>
-            <%= student.remarks.gsub(/\n/, '<br>').html_safe %>
+          <%
+          contact_logs = student.contact_logs.order(created_at: :desc)
+          contact_log = contact_logs.first if contact_logs.count > 0
+          %>
+          <% if contact_logs.count > 0 %>
+          <div style="border-bottom: solid 1px #ccc;padding: 5px;background-color: #eee;">上次联系</div>
+          <div style="padding: 5px;max-height: 150px;overflow-y: auto;">
+            <% if contact_log.present? %>
+            <%= contact_log.contact_log.gsub(/\n/, '<br>').html_safe %>
             <% end %>
           </div>
+          <% end %>
         </div>
       </div>
       <div class="extra content">
