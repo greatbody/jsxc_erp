@@ -98,7 +98,7 @@ class IntentionsController < PcApplicationController
     when 'signed_up'
       @intentions = @intentions.signed_up
     when 'should_contact'
-      @intentions = @intentions.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 4 and current_status != 5)', Date.today)
+      @intentions = @intentions.where('(next_contact_at <= ? or next_contact_at is null) and (current_status != 5)', Date.today)
     end
     @intentions = @intentions.order(updated_at: :desc, next_contact_at: :asc)
     render '_index_card_intention_list', layout: false
