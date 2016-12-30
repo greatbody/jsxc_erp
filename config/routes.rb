@@ -81,6 +81,7 @@ Rails.application.routes.draw do
       post 'update_km1' => :update_km1
       post 'fee_list' => :fee_list
       post 'update_lz' => :update_lz
+      post 'has_contact_task' => :has_contact_task
     end
     collection do
       post 'get_student_status' => :get_student_status

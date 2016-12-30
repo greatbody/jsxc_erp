@@ -6,7 +6,7 @@ if ((typeof pages) == 'undefined') {
   pages = {};
 }
 
-var __sto = setTimeout;　　
+var __sto = setTimeout;
 window.setTimeout = function(callback, timeout, param)　　 {　　
   var args = Array.prototype.slice.call(arguments, 2);　　
   var _cb = function()　　 {　　

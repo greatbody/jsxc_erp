@@ -51,9 +51,15 @@
       <tr class="<%= st.intention.current_status %>">
         <!-- 姓名 -->
         <% if st.id_card.present? %>
-        <td class="middle aligned"><%= st.name %></td>
+        <td class="middle aligned">
+          <div><%= st.name %></div>
+          <div style="border: solid 1px #ccc;padding: 2px;text-align: center;background-color: #eee;display:none;" class="contact-box" data-id="<%= st.id %>"></div>
+        </td>
         <% else %>
-        <td class="middle aligned" style="color: red;"><%= st.name %></td>
+        <td class="middle aligned" style="color: red;">
+          <div><%= st.name %></div>
+          <div style="border: solid 1px #ccc;padding: 2px;text-align: center;background-color: #eee;display:none;" class="contact-box" data-id="<%= st.id %>"></div>
+        </td>
         <% end %>
         <!-- 性别 -->
         <td class="middle center aligned">
@@ -197,3 +203,4 @@
     container: '#data_park'
   });
 </script>
+<script src="/javascripts/pages/student_list.js" data-turbolinks-track="false"></script>

@@ -2,8 +2,8 @@
 class StudentsController < PcApplicationController
   before_action :authenticate_user!
   before_action :set_student, only: [
-    :show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card, 
-    :update_km1, :fee_list]
+    :show, :edit, :update, :get_student_status, :notify_got_number, :notify_got_card,
+    :update_km1, :fee_list, :has_contact_task]
   load_and_authorize_resource
   def index
     @students = Student.all.order(signed_at: :desc)
@@ -30,6 +30,16 @@ class StudentsController < PcApplicationController
     @students = Student.joins(:intention).where(intentions: {current_status: 0..3}).order(created_at: :asc)
     if current_user.has_role? :jby
       @students = @students.jby
+    end
+  end
+
+  def has_contact_task
+    contact_logs = @student.contact_logs.order(created_at: :desc)
+    contact_log = contact_logs.first if contact_logs.count > 0
+    if contact_log.present? && contact_log.next_contact_at.present?
+      render json: { msg_code: 'success', msg_text: '计划' }
+    else
+      render json: { msg_code: 'success', msg_text: '' }
     end
   end
 
