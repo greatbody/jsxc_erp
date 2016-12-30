@@ -39,7 +39,7 @@
           <div class="ui header thin">进度慢的学员</div>
           <div class="ui divider thin"></div>
           <div class="ui list">
-            <% Student.where(is_slow: true).each do |stu| %>
+            <% Student.signed.where(is_slow: true).each do |stu| %>
             <div class="item">
               <i class="mail icon"></i>
               <div class="content">
