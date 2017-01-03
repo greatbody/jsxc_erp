@@ -36,7 +36,7 @@
             <% end %>
           </div>
           <%
-          contact_logs = student.contact_logs.order(created_at: :desc)
+          contact_logs = student.contact_logs.order(updated_at: :desc)
           contact_log = contact_logs.first if contact_logs.count > 0
           %>
           <% if contact_logs.count > 0 %>
