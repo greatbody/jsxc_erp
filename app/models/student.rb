@@ -58,6 +58,10 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def self.lz
+    Student.joins(:intention).where(intentions: {current_status: 4}).order(signed_at: :desc).where(process: 5).count
+  end
+
   def process_text
     I18n.t("student.process.#{process}")
   end
