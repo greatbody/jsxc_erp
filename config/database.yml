@@ -50,4 +50,4 @@ production:
   <<: *default
   database: jisuxueche_erp_production
   username: root
-  password: KQq38EkYvHAl
+  password: j5sYMqYOuRDF
