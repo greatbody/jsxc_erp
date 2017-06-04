@@ -16,9 +16,9 @@
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
 
-role :app, 'jisuxueche_aliyun'
-role :web, 'jisuxueche_aliyun'
-role :db,  'jisuxueche_aliyun'
+role :app, 'new'
+role :web, 'new'
+role :db,  'new'
 
 # Configuration
 # =============
